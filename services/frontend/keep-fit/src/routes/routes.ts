@@ -3,6 +3,8 @@ import Login from "./login/Login";
 import Register from "./register/Register";
 import RouterModel from "../types/RouterModel";
 import Recipes from "./recipes/Recipes";
+import MealPlan from "./mealplan/MealPlan";
+import Welcome from "./welcome/Welcome";
 
 const routes: RouterModel[] = [
     {
@@ -24,6 +26,16 @@ const routes: RouterModel[] = [
         url: "/recipes",
         component: Recipes,
         name:"Recipes",
+    },
+    {
+        url: "/mealplan",
+        component: MealPlan,
+        name:"My meal plan",
+    },
+    {
+        url: "/",
+        component: Welcome,
+        name:"Welcome page",
     },
 ];
 

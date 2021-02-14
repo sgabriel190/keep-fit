@@ -3,36 +3,40 @@ import React from "react";
 import {Nav, Navbar} from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import routes from "../../routes/routes";
+import { Link } from "react-router-dom";
 
 class Header extends React.Component<any, any>{
     render() {
         return(
             <Navbar bg={"dark"} variant={"dark"} className={"sticky-top"}>
-                    <Navbar.Brand href="/">
+                <Navbar.Brand>
+                    <Link
+                        className={"text-link-decoration px-3 py-2 mx-1"}
+                        to={"/"}
+                    >
                         Keep Fit
-                    </Navbar.Brand>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav>
-                            {
-                                routes.map( (token, idx) => {
-                                    return(
-                                        <Nav.Item
+                    </Link>
+                </Navbar.Brand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav>
+                        {
+                            routes.map( (token, idx) => {
+                                return(
+                                    token.url !== "/" ?
+                                        <Link
+                                            className={"text-link-decoration px-3 py-2 mx-1"}
+                                            to={token.url}
                                             key={idx}
                                         >
-                                            <Nav.Link
-                                                key={idx*10}
-                                                href={token.url}
-                                                className={"mx-3 px-2"}
-                                            >
-                                                {token.name}
-                                            </Nav.Link>
-                                        </Nav.Item>
-                                    );
-                                })
-                            }
-                        </Nav>
-                    </Navbar.Collapse>
+                                            {token.name}
+                                        </Link> :
+                                        null
+                                );
+                            })
+                        }
+                    </Nav>
+                </Navbar.Collapse>
             </Navbar>
         );
     }
