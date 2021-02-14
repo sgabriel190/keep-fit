@@ -5,29 +5,32 @@ import reportWebVitals from './reportWebVitals';
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Header from "./shared/header/Header";
 import routes from "./routes/routes";
+import NotFound from "./routes/notfound/NotFound";
 
 ReactDOM.render(
-    <div>
+    <Router>
         <Header/>
-        <Router>
-            <Switch>
-                {
-                    routes.map( (token, idx) => {
-                            return(
-                                <Route
-                                    key={idx}
-                                    path={token.url}
-                                    exact={true}
-                                    component={token.component}
-                                />
-                            );
-                        }
-                    )
-                }
-            </Switch>
-        </Router>
-    </div>
-,
+        <Switch>
+            {
+                routes.map( (token, idx) => {
+                        return(
+                            <Route
+                                key={idx}
+                                path={token.url}
+                                exact={true}
+                                component={token.component}
+                            />
+                        );
+                    }
+                )
+            }
+            <Route
+                path={"*"}
+                component={NotFound}
+            />
+        </Switch>
+    </Router>
+    ,
     document.getElementById('root')
 );
 

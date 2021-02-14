@@ -10,7 +10,6 @@ class Login extends React.Component<any, any>{
                 <h1>Login works!</h1>
                 <h1>Login works!</h1>
                 <h1>Login works!</h1>
-                v
                 <h1>Login works!</h1>
                 <h1>Login works!</h1>
                 <h1>Login works!</h1>
@@ -19,12 +18,10 @@ class Login extends React.Component<any, any>{
                 <h1>Login works!</h1>
                 <h1>Login works!</h1>
                 <h1>Login works!</h1>
-                v
                 <h1>Login works!</h1>
                 <h1>Login works!</h1>
                 <h1>Login works!</h1>
                 <h1>Login works!</h1>
-                v
                 <h1>Login works!</h1>
                 <h1>Login works!</h1>
                 <h1>Login works!</h1>
