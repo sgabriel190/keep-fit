@@ -1,40 +1,38 @@
-import Dashboard from "./dashboard/Dashboard";
-import Login from "./login/Login";
-import Register from "./register/Register";
+import loadable from '@loadable/component';
 import RouterModel from "../types/RouterModel";
-import Recipes from "./recipes/Recipes";
-import MealPlan from "./mealplan/MealPlan";
-import Welcome from "./welcome/Welcome";
+import Recipes from "../components/recipes/Recipes";
+import MealPlan from "../components/mealplan/MealPlan";
+import Welcome from "../components/welcome/Welcome";
 
 const routes: RouterModel[] = [
     {
         url: "/dashboard",
-        component: Dashboard,
+        component: loadable(() => import("../components/dashboard/Dashboard")),
         name:"Dashboard",
     },
     {
         url: "/login",
-        component: Login,
+        component: loadable(() => import("../components/login/Login")),
         name:"Login",
     },
     {
         url: "/register",
-        component: Register,
+        component: loadable(() => import("../components/register/Register")),
         name:"Register",
     },
     {
         url: "/recipes",
-        component: Recipes,
+        component: loadable(() => import("../components/recipes/Recipes")),
         name:"Recipes",
     },
     {
         url: "/mealplan",
-        component: MealPlan,
+        component: loadable(() => import("../components/mealplan/MealPlan")),
         name:"My meal plan",
     },
     {
         url: "/",
-        component: Welcome,
+        component: loadable(() => import("../components/welcome/Welcome")),
         name:"Welcome page",
     },
 ];
