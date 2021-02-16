@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 class Header extends React.Component<any, any>{
     render() {
         return(
-            <Navbar bg={"dark"} variant={"dark"} className={"sticky-top"}>
+            <Navbar bg={"dark"} variant={"dark"} className={"sticky-top header-custom"}>
                 <Navbar.Brand>
                     <Link
                         className={"text-link-decoration px-3 py-2 mx-1"}

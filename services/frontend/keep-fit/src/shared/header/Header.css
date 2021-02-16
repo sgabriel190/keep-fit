@@ -9,3 +9,8 @@
     border-radius: 10px;
     background-color: rgba(52, 174, 235, .3);
 }
+
+.header-custom{
+    background-color: #0D1B1E !important;
+}
+
