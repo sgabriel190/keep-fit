@@ -1,19 +1,6 @@
-.container-custom{
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    align-content: stretch;
-    background-color: inherit;
-    height: auto;
-}
-
 .container-notfound{
-    background-color: #7798AB;
-    border-radius: 10px;
     width: 60vw;
     height: 60vh;
-    color: rgba(255,255,255, 0.9);
     display: flex;
     justify-content: center;
     align-items: center;
