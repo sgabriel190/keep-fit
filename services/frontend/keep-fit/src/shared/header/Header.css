@@ -1,0 +1,23 @@
+.text-link-decoration {
+    text-decoration: inherit !important;
+    color: rgba(255,255,255, .8) !important;
+    transition: 0.3s;
+}
+
+.text-link-decoration:hover {
+    color: rgba(255,255,255, 1) !important;
+    border-radius: 10px;
+    background-color: rgba(52, 174, 235, .3);
+}
+
+.header-custom{
+    background-color: #0D1B1E !important;
+    
+}
+
+.login-icon{
+    color: #FFFFFF;
+    font-size: 40px;
+    margin-right: 5px;
+}
+
