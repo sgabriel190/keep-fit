@@ -1,0 +1,21 @@
+.container-custom{
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: stretch;
+    background-color: inherit;
+    height: auto;
+}
+
+.container-main{
+    background-color: #7798AB;
+    border-radius: 10px;
+    color: rgba(255,255,255, 0.9);
+}
+
+.text-container-title{
+    font-size: 30px;
+    text-align: center;
+}
