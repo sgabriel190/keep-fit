@@ -11,10 +11,16 @@ class Header extends React.Component<any, any>{
             <Navbar bg={"dark"} variant={"dark"} className={"sticky-top header-custom"}>
                 <Navbar.Brand>
                     <Link
-                        className={"text-link-decoration px-3 py-2 mx-1"}
+                        className={"px-3 py-2 mx-1"}
                         to={"/"}
                     >
-                        Keep Fit
+                        <img
+                            alt=""
+                            src="/logo-navbar.png"
+                            width="120"
+                            height="50"
+                            className="d-inline-block align-top text-link-decoration"
+                        />
                     </Link>
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
