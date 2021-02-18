@@ -15,10 +15,10 @@ class Header extends React.Component<any, any>{
                         to={"/"}
                     >
                         <img
-                            alt="logo"
+                            alt=""
                             src="/logo-navbar.png"
-                            width="150"
-                            height="70"
+                            width="120"
+                            height="50"
                             className="d-inline-block align-top text-link-decoration"
                         />
                     </Link>
