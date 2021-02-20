@@ -1,16 +1,11 @@
-# This is a basic workflow to help you get started with Actions
-
 name: Merge frontend changes to main frontend branch
 
-# Controls when the action will run. 
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [ frontend-kf-1.1-login,frontend-kf-1.2-register, frontend-kf-1.3-navbar ]
+    branches: 'frontend-kf-1.[0-9]+-*'
   pull_request:
-    branches: [ frontend-kf-1.1-login,frontend-kf-1.2-register, frontend-kf-1.3-navbar ]
+    branches: 'frontend-kf-1.[0-9]+-*'
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   merge-branch:
     runs-on: ubuntu-latest
