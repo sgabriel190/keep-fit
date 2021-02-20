@@ -3,8 +3,6 @@ name: Merge frontend changes to main frontend branch
 on:
   push:
     branches: 'frontend-kf-1..+'
-  pull_request:
-    branches: 'frontend-kf-1..+'
 
 jobs:
   merge-branch:
