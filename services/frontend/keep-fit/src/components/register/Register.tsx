@@ -3,6 +3,8 @@ import './Register.css';
 import {Container, Form, InputGroup, Row} from "react-bootstrap";
 import {Envelope, Person, ShieldLock} from "react-bootstrap-icons";
 import { motion } from "framer-motion"
+import {Link} from 'react-router-dom';
+import '../../shared/styles/autentication/styles-authentication.css';
 
 class Register extends React.Component<any, any>{
     render() {
@@ -83,6 +85,16 @@ class Register extends React.Component<any, any>{
                             >
                                 Register
                             </button>
+                        </Row>
+                        <Row className={"pt-2"}>
+                            <Link
+                                className={"link-text-inherit"}
+                                to={"/login"}
+                            >
+                                <span className={"span-clickable-form"} onClick={() => {console.log("clicked back to login")}}>
+                                    Go back to log in.
+                                </span>
+                            </Link>
                         </Row>
                     </Form>
                 </motion.div>
