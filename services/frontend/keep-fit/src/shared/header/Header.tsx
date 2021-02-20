@@ -2,7 +2,7 @@ import "./Header.css";
 import React from "react";
 import {Button, Form, FormControl, Nav, Navbar} from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import routes from "../../routes/routes";
+import navbarRoutes from "../../routes/navbar-routes";
 import { Link } from "react-router-dom";
 import {BoxArrowInRight} from "react-bootstrap-icons";
 
@@ -26,17 +26,15 @@ class Header extends React.Component<any, any>{
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav>
                         {
-                            routes.map( (token, idx) => {
+                            navbarRoutes.map( (token, idx) => {
                                 return(
-                                    token.url !== "/" ?
-                                        <Link
-                                            className={"text-link-decoration px-3 py-3 mx-2"}
-                                            to={token.url}
-                                            key={idx}
-                                        >
-                                            {token.name}
-                                        </Link> :
-                                        null
+                                    <Link
+                                        className={"text-link-decoration px-3 py-3 mx-2"}
+                                        to={token.url}
+                                        key={idx}
+                                    >
+                                        {token.name}
+                                    </Link>
                                 );
                             })
                         }
