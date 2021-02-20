@@ -1,6 +1,7 @@
 import React from 'react';
 import './Login.css';
 import '../../shared/styles/shared.css';
+import '../../shared/styles/autentication/styles-authentication.css';
 import {Container, Form, InputGroup, Row} from 'react-bootstrap';
 import {Person, ShieldLock} from "react-bootstrap-icons";
 import {Link} from 'react-router-dom';
@@ -69,7 +70,7 @@ class Login extends React.Component<any, any>{
                             </Link>
                         </Row>
                         <Row className={"pt-2"}>
-                                <span className={"span-forgot-password"} onClick={() => {console.log("clicked forgot password")}}>
+                                <span className={"span-clickable-form"} onClick={() => {console.log("clicked forgot password")}}>
                                     I have forgot my password.
                                 </span>
                         </Row>
