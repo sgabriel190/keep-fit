@@ -10,29 +10,6 @@
     align-items: center;
 }
 
-.button-form{
-    background-color: #E87461;
-    border: 1px solid rgba(232, 116, 97, .9);
-    padding: 10px 20px;
-    width: 7vw;
-    border-radius: 7px;
-    color: #FFFFFF;
-    font-family: inherit;
-    font-size: 20px;
-    transition: .3s;
-}
-
-.button-form:hover{
-    background-color: rgba(232, 116, 97, .8);
-    border: 1px solid rgba(232, 116, 97, .5);
-    box-shadow: 0 0 5px #8B2635;
-}
-
-.row, .col{
-    display: flex !important;
-    justify-content: center !important;
-}
-
 .form-group{
     width: 90%;
 }
