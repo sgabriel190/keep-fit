@@ -1,5 +1,7 @@
 import sys
-from helper_functions import create_webdriver, read_url_to_scrape, filter_duplicate_urls, reduce_url_files, extract_data_bbc
+from helper_functions import create_webdriver, read_url_to_scrape, filter_duplicate_urls, reduce_url_files, \
+    extract_data_bbc
+from helper_functions import MeasureTime
 
 from time import sleep
 from selenium.webdriver.common.action_chains import ActionChains
@@ -70,12 +72,12 @@ def scrape_data_from_bbcgoodfood() -> None:
 
 
 if __name__ == "__main__":
-    import time
-    s = time.perf_counter()
+    mt = MeasureTime.MeasureTime()
+    mt.start()
     scrape_data_from_ambitiouskitchen()
     scrape_data_from_bbcgoodfood()
     filter_duplicate_urls()
     reduce_url_files()
-    elapsed = (time.perf_counter() - s) / 60
-    print(f"[INFO] - script executed in {elapsed:0.2f} minutes.")
+    mt.stop()
+    print(f"[INFO] - script executed in {mt.get_minutes():0.2f} minutes.")
     sys.exit(0)

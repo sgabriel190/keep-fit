@@ -13,4 +13,8 @@ node_modules/
 log_extract_data.info
 log_scraper.info
 bulk_data.json
+filtered_data.json
+__pycache__/
+*.pyo
+*.pyc
 urls_input*.txt

@@ -3,6 +3,7 @@ import multiprocessing
 import sys
 
 from recipe_scrapers import scrape_me
+from helper_functions import MeasureTime
 
 
 def get_data(url: str, send_end):
@@ -36,9 +37,9 @@ def main():
 
 
 if __name__ == "__main__":
-    import time
-    s = time.perf_counter()
+    mt = MeasureTime.MeasureTime()
+    mt.start()
     main()
-    elapsed = (time.perf_counter() - s) / 60
-    print(f"[INFO] - script executed in {elapsed:0.2f} minutes.")
+    mt.stop()
+    print(f"[INFO] - script executed in {mt.get_minutes():0.2f} minutes.")
     sys.exit(0)
