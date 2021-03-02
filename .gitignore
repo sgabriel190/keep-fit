@@ -17,3 +17,4 @@ __pycache__/
 *.pyo
 *.pyc
 urls_input*.txt
+recipe_web_scraper/images/

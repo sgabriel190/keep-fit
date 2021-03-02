@@ -19,8 +19,10 @@ def filter_dict(dict_: Dict) -> Dict:
                      'recipeIngredients', 'recipeInstructions', 'recipeCategory', 'keywords', 'nutrition', '@id']
     tmp = {token: dict_[token] for token in searched_keys if token in dict_}
     tmp['nutrition'].pop('@type')
+    if isinstance(tmp['image'], dict):
+        tmp['image'] = [tmp['image']['url']]
     tmp['recipeInstructions'] = list(map(lambda x: x.pop('text'), tmp['recipeInstructions']))
-    tmp['id'] = tmp['@id']
+    tmp['source'] = tmp['@id']
     tmp.pop('@id')
     return tmp
 
