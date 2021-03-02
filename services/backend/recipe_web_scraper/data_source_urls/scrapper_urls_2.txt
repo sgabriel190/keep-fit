@@ -1,0 +1,5 @@
+https://www.bbcgoodfood.com/search/recipes/?sort=-date&meal-type=soup
+https://www.bbcgoodfood.com/search/recipes/?sort=-date&meal-type=buffet
+https://www.bbcgoodfood.com/search/recipes/?sort=-date&meal-type=dinner
+https://www.bbcgoodfood.com/search/recipes/?sort=-date&meal-type=fish-course
+https://www.bbcgoodfood.com/search/recipes/?sort=-date&meal-type=snack
