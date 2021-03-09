@@ -10,11 +10,13 @@ create_tables_list = [
     'saturated_fats integer NOT NULL, '
     'fiber integer NOT NULL, '
     'sugar integer NOT NULL)',
+
     'CREATE TABLE IF NOT EXISTS time_total('
     'ID integer PRIMARY KEY AUTOINCREMENT, '
     'prep_time integer NOT NULL, '
     'cook_time integer NOT NULL, '
     'total_time integer NOT NULL)',
+
     'CREATE TABLE IF NOT EXISTS recipes('
     'ID integer PRIMARY KEY AUTOINCREMENT, '
     'ID_nutrients integer NOT NULL, '
@@ -26,18 +28,22 @@ create_tables_list = [
     'instructions text NOT NULL, '
     'FOREIGN KEY(ID_nutrients) REFERENCES nutrients(ID), '
     'FOREIGN KEY(ID_time_total) REFERENCES time_total(ID) )',
+
     'CREATE TABLE IF NOT EXISTS diet_plan('
     'ID integer PRIMARY KEY AUTOINCREMENT, '
     'from_date text NOT NULL, '
     'to_date text NOT NULL, '
     'target_calories integer NOT NULL)',
+
     'CREATE TABLE IF NOT EXISTS user_diets('
     'ID integer PRIMARY KEY AUTOINCREMENT, '
     'calories integer NOT NULL, '
     'bmi integer NOT NULL)',
+
     'CREATE TABLE IF NOT EXISTS activity_type('
     'ID integer PRIMARY KEY AUTOINCREMENT, '
     'name text NOT NULL)',
+
     'CREATE TABLE IF NOT EXISTS user_details('
     'ID integer PRIMARY KEY AUTOINCREMENT, '
     'ID_activity_type integer NOT NULL, '
