@@ -13,9 +13,9 @@ create_tables_list = [
 
     'CREATE TABLE IF NOT EXISTS time_total('
     'ID integer PRIMARY KEY AUTOINCREMENT, '
-    'prep_time integer NOT NULL, '
-    'cook_time integer NOT NULL, '
-    'total_time integer NOT NULL)',
+    'prep_time integer, '
+    'cook_time integer, '
+    'total_time integer)',
 
     'CREATE TABLE IF NOT EXISTS recipes('
     'ID integer PRIMARY KEY AUTOINCREMENT, '
