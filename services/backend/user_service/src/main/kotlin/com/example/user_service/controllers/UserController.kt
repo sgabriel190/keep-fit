@@ -11,9 +11,27 @@ import org.springframework.web.bind.annotation.ResponseBody
 @RequestMapping("/api/users")
 class UserController {
 
-    @RequestMapping("/login", method=[RequestMethod.GET])
+    @RequestMapping("/login", method=[RequestMethod.POST])
     @ResponseBody
     fun login(): ResponseEntity<String>{
         return ResponseEntity.status(HttpStatus.OK).body("Login")
+    }
+
+    @RequestMapping("/register", method=[RequestMethod.POST])
+    @ResponseBody
+    fun register(): ResponseEntity<String>{
+        return ResponseEntity.status(HttpStatus.OK).body("Register")
+    }
+
+    @RequestMapping("/logout", method=[RequestMethod.POST])
+    @ResponseBody
+    fun logout(): ResponseEntity<String>{
+        return ResponseEntity.status(HttpStatus.OK).body("Log out")
+    }
+
+    @RequestMapping("/delete_user", method=[RequestMethod.DELETE])
+    @ResponseBody
+    fun deleteUser(): ResponseEntity<String>{
+        return ResponseEntity.status(HttpStatus.OK).body("Delete user")
     }
 }
