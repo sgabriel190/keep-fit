@@ -8,14 +8,14 @@ from Logger import Logger
 logger = Logger()
 
 
-def drop_table(connection: Connection) -> None:
-    file = open('sql_scripts/delete_tables.sql', 'r')
+def drop_table(connection: Connection, input_file: str) -> None:
+    file = open(input_file, 'r')
     connection.executescript(file.read())
     file.close()
 
 
-def create_tables(connection: Connection) -> None:
-    file = open('sql_scripts/create_tables.sql', 'r')
+def create_tables(connection: Connection, input_file: str) -> None:
+    file = open(input_file, 'r')
     connection.executescript(file.read())
     file.close()
 
