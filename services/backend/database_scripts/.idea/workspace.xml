@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="2980abcb-0aa4-4b9d-b9c8-c6433d4e5abf" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/create-databases.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sql_scripts/plan/create_tables_plan.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sql_scripts/plan/delete_tables_plan.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sql_scripts/user/create_tables_user.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sql_scripts/user/delete_tables_user.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../documentation/keep-fit-diagrams.drawio" beforeDir="false" afterPath="$PROJECT_DIR$/../../../documentation/keep-fit-diagrams.drawio" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/create-database-nutrition.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database_connector/sqlite_connector_methods.py" beforeDir="false" afterPath="$PROJECT_DIR$/database_connector/sqlite_connector_methods.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logger/log.info" beforeDir="false" afterPath="$PROJECT_DIR$/logger/log.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nutrition.db" beforeDir="false" afterPath="$PROJECT_DIR$/nutrition.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sql_scripts/create_tables.sql" beforeDir="false" afterPath="$PROJECT_DIR$/sql_scripts/nutrition/create_tables_nutrition.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sql_scripts/delete_tables.sql" beforeDir="false" afterPath="$PROJECT_DIR$/sql_scripts/nutrition/delete_tables_nutrition.sql" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="FlaskConsoleOptions" custom-start-script="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))">
+    <envs>
+      <env key="FLASK_APP" value="app" />
+    </envs>
+    <option name="myCustomStartScript" value="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))" />
+    <option name="myEnvs">
+      <map>
+        <entry key="FLASK_APP" value="app" />
+      </map>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="ProjectId" id="1pEtIfBHmGIFkEvxpSnWnpkebh0" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/sql_scripts/nutrition" />
+      <recent name="$PROJECT_DIR$/sql_scripts/user" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="create-databases" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="database_scripts" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/create-databases.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.create-databases" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2980abcb-0aa4-4b9d-b9c8-c6433d4e5abf" name="Default Changelist" comment="" />
+      <created>1614760003149</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1614760003149</updated>
+      <workItem from="1614760006261" duration="10298000" />
+      <workItem from="1615277285540" duration="3057000" />
+      <workItem from="1615470800251" duration="6763000" />
+      <workItem from="1615899689393" duration="1246000" />
+      <workItem from="1616328881107" duration="3509000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="PythonConfigurationType">
+        <watch expression="logger" language="Python" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/database_scripts$create_database_nutrition.coverage" NAME="create-databases Coverage Results" MODIFIED="1616339618191" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/database_scripts$create_database.coverage" NAME="create-database Coverage Results" MODIFIED="1614776108029" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+</project>
