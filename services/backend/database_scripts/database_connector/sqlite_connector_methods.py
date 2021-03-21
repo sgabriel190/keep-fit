@@ -1,25 +1,23 @@
 from sqlite3 import Connection
 from typing import List, Dict
 
-import dateutil
 import isodate
 
 from Logger import Logger
-from database_metadata import create_tables_list, delete_tables_list
 
 logger = Logger()
 
 
 def drop_table(connection: Connection) -> None:
-    for sql_query in delete_tables_list:
-        connection.execute(sql_query)
-        connection.commit()
+    file = open('sql_scripts/delete_tables.sql', 'r')
+    connection.executescript(file.read())
+    file.close()
 
 
 def create_tables(connection: Connection) -> None:
-    for sql_query in create_tables_list:
-        connection.execute(sql_query)
-        connection.commit()
+    file = open('sql_scripts/create_tables.sql', 'r')
+    connection.executescript(file.read())
+    file.close()
 
 
 def insert_values(connection: Connection, values: tuple) -> None:
