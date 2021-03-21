@@ -10,13 +10,18 @@ sugar integer NOT NULL);
 
 CREATE TABLE IF NOT EXISTS time_total(
 ID integer PRIMARY KEY,
-prep_time integer,
-cook_time integer,
-total_time integer);
+prep_time text,
+cook_time text,
+total_time text);
+
+CREATE TABLE IF NOT EXISTS images(
+ID integer PRIMARY KEY,
+image_path text NOT NULL);
 
 CREATE TABLE IF NOT EXISTS recipes(
 ID integer PRIMARY KEY ,
 ID_nutrients integer NOT NULL,
+ID_image integer NOT NULL,
 ID_time_total integer NOT NULL,
 name text NOT NULL,
 description text NOT NULL,
@@ -24,6 +29,7 @@ image blob NOT NULL,
 keywords text NOT NULL,
 instructions text NOT NULL,
 FOREIGN KEY(ID_nutrients) REFERENCES nutrients(ID),
+FOREIGN KEY(ID_image) REFERENCES images(ID),
 FOREIGN KEY(ID_time_total) REFERENCES time_total(ID) );
 
 CREATE TABLE IF NOT EXISTS diet_plan(
