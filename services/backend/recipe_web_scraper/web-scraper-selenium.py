@@ -23,7 +23,7 @@ def scrape_data_from_ambitiouskitchen() -> None:
             driver.find_element_by_class_name('solo-button').click()
             driver.switch_to.default_content()
             WebDriverWait(driver, 10).until(
-                EC.element_to_be_clickable((By.CLASS_NAME, "popup-click-close-trigger-5")))
+                EC.element_to_be_clickable((By.CLASS_NAME, "popup-click-close-trigger-6")))
             ActionChains(driver).move_by_offset(0, 0).click().perform()
             fresh_start = False
         WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.CLASS_NAME, "adthrive-close")))
@@ -61,6 +61,8 @@ def scrape_data_from_bbcgoodfood() -> None:
                 .until(EC.element_to_be_clickable((By.CLASS_NAME, "ad-banner-dismiss")))
             if len(driver.find_elements_by_class_name("ad-banner-dismiss")):
                 driver.find_element_by_class_name("ad-banner-dismiss").click()
+            WebDriverWait(driver, 20) \
+                .until(EC.presence_of_element_located((By.ID, "optimize-modal-closebtn"))).click()
         while len(driver.find_elements_by_xpath("//a[@aria-label='Next Page']")):
             extract_data_bbc(file, driver)
             WebDriverWait(driver, 20) \
