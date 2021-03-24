@@ -1,6 +1,7 @@
 package com.example.user_service.presentation.controllers
 
 import com.example.user_service.business.interfaces.UserServiceInterface
+import com.example.user_service.persistence.data_values.models.UserModel
 import com.example.user_service.persistence.data_values.requests.LoginRequest
 import com.example.user_service.persistence.data_values.requests.LogoutRequest
 import com.example.user_service.persistence.data_values.requests.RegisterRequest
@@ -10,10 +11,7 @@ import com.example.user_service.persistence.data_values.responses.RegisterRespon
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestMethod
-import org.springframework.web.bind.annotation.ResponseBody
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api/users")
@@ -27,6 +25,14 @@ class UserController {
     fun login(data: LoginRequest): ResponseEntity<LoginResponse>{
         return ResponseEntity.status(HttpStatus.OK).body(LoginResponse(idUser = 10))
     }
+
+    @RequestMapping("/test/{id}", method=[RequestMethod.GET])
+    @ResponseBody
+    fun test(@PathVariable id: Int): ResponseEntity<UserModel>{
+        val result = userService.test(id)
+        return ResponseEntity.status(HttpStatus.OK).body(result)
+    }
+
 
     @RequestMapping("/register", method=[RequestMethod.POST])
     @ResponseBody
