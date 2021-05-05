@@ -1,15 +1,17 @@
 package com.example.user_service.persistence.repositories
 
 import com.example.user_service.persistence.entities.UserEntity
-import com.example.user_service.persistence.data_values.models.UserModel
+import com.example.user_service.persistence.models.UserModel
 import com.example.user_service.persistence.interfaces.RepositoryInterface
+import com.example.user_service.persistence.interfaces.UserRepositoryInterface
 import com.example.user_service.persistence.row_mappers.UserRowMapper
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.jdbc.core.JdbcTemplate
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource
 import org.springframework.stereotype.Repository
 
 @Repository
-class UserRepository: RepositoryInterface<UserEntity, UserModel> {
+class UserRepository: RepositoryInterface<UserEntity, UserModel>, UserRepositoryInterface {
 
     @Autowired
     private lateinit var jdbcTemplate: JdbcTemplate
@@ -58,5 +60,19 @@ class UserRepository: RepositoryInterface<UserEntity, UserModel> {
             println("Error Delete!")
             false
         }
+    }
+
+    override fun getByUsername(username: String): UserEntity? {
+        val sqlQueryGetByName = "SELECT * FROM users WHERE name = :name"
+        return jdbcTemplate.queryForObject(sqlQueryGetByName,
+            UserRowMapper(),
+            MapSqlParameterSource().addValue("name", username))
+    }
+
+    override fun getByEmail(email: String): UserEntity? {
+        val sqlQueryGetByEmail = "SELECT * FROM users WHERE email = :email"
+        return jdbcTemplate.queryForObject(sqlQueryGetByEmail,
+            UserRowMapper(),
+            MapSqlParameterSource().addValue("email", email))
     }
 }

@@ -1,13 +1,14 @@
 package com.example.user_service.presentation.controllers
 
 import com.example.user_service.business.interfaces.UserServiceInterface
-import com.example.user_service.persistence.data_values.models.UserModel
-import com.example.user_service.persistence.data_values.requests.LoginRequest
-import com.example.user_service.persistence.data_values.requests.LogoutRequest
-import com.example.user_service.persistence.data_values.requests.RegisterRequest
-import com.example.user_service.persistence.data_values.responses.LoginResponse
-import com.example.user_service.persistence.data_values.responses.LogoutResponse
-import com.example.user_service.persistence.data_values.responses.RegisterResponse
+import com.example.user_service.persistence.models.UserModel
+import com.example.user_service.presentation.requests.LoginRequest
+import com.example.user_service.presentation.requests.LogoutRequest
+import com.example.user_service.presentation.requests.RegisterRequest
+import com.example.user_service.presentation.responses.HTTPResponse
+import com.example.user_service.presentation.responses.LoginResponse
+import com.example.user_service.presentation.responses.LogoutResponse
+import com.example.user_service.presentation.responses.RegisterResponse
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -23,21 +24,32 @@ class UserController {
     @RequestMapping("/login", method=[RequestMethod.POST])
     @ResponseBody
     fun login(data: LoginRequest): ResponseEntity<LoginResponse>{
+
         return ResponseEntity.status(HttpStatus.OK).body(LoginResponse(idUser = 10))
     }
 
     @RequestMapping("/test/{id}", method=[RequestMethod.GET])
     @ResponseBody
-    fun test(@PathVariable id: Int): ResponseEntity<UserModel>{
+    fun test(@PathVariable id: Int): ResponseEntity<HTTPResponse>{
         val result = userService.test(id)
-        return ResponseEntity.status(HttpStatus.OK).body(result)
+        return ResponseEntity
+            .status(HttpStatus.OK)
+            .body(HTTPResponse(true, HttpStatus.OK.value()))
     }
 
-
-    @RequestMapping("/register", method=[RequestMethod.POST])
+    @RequestMapping("/register", method=[RequestMethod.PUT])
     @ResponseBody
-    fun register(data: RegisterRequest): ResponseEntity<RegisterResponse>{
-        return ResponseEntity.status(HttpStatus.OK).body(RegisterResponse(idUser = 10))
+    fun register(data: RegisterRequest): ResponseEntity<HTTPResponse>{
+        val userData = UserModel(
+            username = data.username,
+            password = data.password,
+            email = data.email
+        )
+        val result = userService.register(userData)
+        val responseCode = if(result) HttpStatus.CREATED else HttpStatus.BAD_REQUEST
+        return ResponseEntity
+            .status(responseCode)
+            .body(HTTPResponse(result, responseCode.value()))
     }
 
     @RequestMapping("/logout", method=[RequestMethod.POST])

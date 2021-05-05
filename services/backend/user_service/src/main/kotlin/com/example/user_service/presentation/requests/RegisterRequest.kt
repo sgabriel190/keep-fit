@@ -1,4 +1,4 @@
-package com.example.user_service.persistence.data_values.requests
+package com.example.user_service.presentation.requests
 
 data class RegisterRequest(
     val username: String,

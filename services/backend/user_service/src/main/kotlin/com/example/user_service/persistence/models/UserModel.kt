@@ -1,9 +1,9 @@
-package com.example.user_service.persistence.data_values.models
+package com.example.user_service.persistence.models
 
 data class UserModel(
     val username: String,
     val password: String,
     val email: String,
-    val idUserDetails: Int,
-    val idDietPlan: Int
+    val idUserDetails: Int = -1,
+    val idDietPlan: Int = -1
 )
