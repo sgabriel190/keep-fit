@@ -1,0 +1,8 @@
+DROP TABLE IF EXISTS nutrients;
+DROP TABLE IF EXISTS images;
+DROP TABLE IF EXISTS time_total;
+DROP TABLE IF EXISTS recipes;
+DROP TABLE IF EXISTS diet_plan;
+DROP TABLE IF EXISTS user_diets;
+DROP TABLE IF EXISTS activity_type;
+DROP TABLE IF EXISTS user_details;
