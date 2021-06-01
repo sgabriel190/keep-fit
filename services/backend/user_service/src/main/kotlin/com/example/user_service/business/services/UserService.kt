@@ -1,9 +1,7 @@
 package com.example.user_service.business.services
 
-import com.example.user_service.persistence.entities.UserEntity
 import com.example.user_service.business.interfaces.UserServiceInterface
 import com.example.user_service.persistence.models.UserModel
-import com.example.user_service.persistence.interfaces.RepositoryInterface
 import com.example.user_service.persistence.repositories.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service

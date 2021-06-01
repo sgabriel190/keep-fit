@@ -28,13 +28,12 @@ class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(LoginResponse(idUser = 10))
     }
 
-    @RequestMapping("/test/{id}", method=[RequestMethod.GET])
+    @RequestMapping("/ping", method=[RequestMethod.GET])
     @ResponseBody
-    fun test(@PathVariable id: Int): ResponseEntity<HTTPResponse>{
-        val result = userService.test(id)
+    fun ping(): ResponseEntity<HTTPResponse>{
         return ResponseEntity
             .status(HttpStatus.OK)
-            .body(HTTPResponse(true, HttpStatus.OK.value()))
+            .body(HTTPResponse(true, HttpStatus.OK.value(), data=null))
     }
 
     @RequestMapping("/register", method=[RequestMethod.PUT])
