@@ -31,8 +31,8 @@ class UserRepository: RepositoryInterface<UserEntity, UserModel>, UserRepository
         this.jdbcTemplate.update(sqlQuery, "test", "test", "test", 1, 1)
         return UserEntity(
             id = 1,
-            username = "test",
-            password = "test",
+            userName = "test",
+            passWord = "test",
             email = "test",
             idUserDetails = 1,
             idDietPlan = 1
@@ -63,16 +63,16 @@ class UserRepository: RepositoryInterface<UserEntity, UserModel>, UserRepository
     }
 
     override fun getByUsername(username: String): UserEntity? {
-        val sqlQueryGetByName = "SELECT * FROM users WHERE name = :name"
+        val sqlQueryGetByName = "SELECT * FROM users WHERE username = ?"
         return jdbcTemplate.queryForObject(sqlQueryGetByName,
             UserRowMapper(),
-            MapSqlParameterSource().addValue("name", username))
+            username)
     }
 
     override fun getByEmail(email: String): UserEntity? {
-        val sqlQueryGetByEmail = "SELECT * FROM users WHERE email = :email"
+        val sqlQueryGetByEmail = "SELECT * FROM users WHERE email = ?"
         return jdbcTemplate.queryForObject(sqlQueryGetByEmail,
             UserRowMapper(),
-            MapSqlParameterSource().addValue("email", email))
+            email)
     }
 }

@@ -34,14 +34,4 @@ class UserService: UserServiceInterface {
         TODO("Not yet implemented")
     }
 
-    override fun test(id: Int): UserModel {
-        val result = userRepository.getById(id)
-        return UserModel(
-            username = result.username,
-            password = result.password,
-            email = result.email,
-            idUserDetails = result.idUserDetails,
-            idDietPlan = result.idDietPlan
-        )
-    }
 }

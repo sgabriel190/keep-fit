@@ -1,5 +1,6 @@
 package com.example.user_service.presentation.controllers
 
+import com.example.user_service.business.interfaces.AuthenticationServiceInterface
 import com.example.user_service.business.interfaces.UserServiceInterface
 import com.example.user_service.persistence.models.UserModel
 import com.example.user_service.presentation.requests.LoginRequest
@@ -12,6 +13,7 @@ import com.example.user_service.presentation.responses.RegisterResponse
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -21,11 +23,14 @@ class UserController {
     @Autowired
     private lateinit var userService: UserServiceInterface
 
-    @RequestMapping("/login", method=[RequestMethod.POST])
-    @ResponseBody
-    fun login(data: LoginRequest): ResponseEntity<LoginResponse>{
+    @Autowired
+    private lateinit var authenticationServiceInterface: AuthenticationServiceInterface
 
-        return ResponseEntity.status(HttpStatus.OK).body(LoginResponse(idUser = 10))
+    @RequestMapping("/logIn", method=[RequestMethod.POST])
+    @ResponseBody
+    fun login(@RequestBody data: LoginRequest): ResponseEntity<HTTPResponse>{
+        val response = authenticationServiceInterface.signIn(data.username, data.password)
+        return ResponseEntity.status(response.code).body(response)
     }
 
     @RequestMapping("/ping", method=[RequestMethod.GET])
@@ -38,7 +43,7 @@ class UserController {
 
     @RequestMapping("/register", method=[RequestMethod.PUT])
     @ResponseBody
-    fun register(data: RegisterRequest): ResponseEntity<HTTPResponse>{
+    fun register(@RequestBody data: RegisterRequest): ResponseEntity<HTTPResponse>{
         val userData = UserModel(
             username = data.username,
             password = data.password,
@@ -53,7 +58,7 @@ class UserController {
 
     @RequestMapping("/logout", method=[RequestMethod.POST])
     @ResponseBody
-    fun logout(data: LogoutRequest): ResponseEntity<LogoutResponse>{
+    fun logout(@RequestBody data: LogoutRequest): ResponseEntity<LogoutResponse>{
         return ResponseEntity.status(HttpStatus.OK).body(LogoutResponse(idUser = 10))
     }
 
