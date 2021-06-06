@@ -20,8 +20,10 @@ class Logger:
         current_time = datetime.now().strftime("%H:%M:%S")
         if is_error:
             cls.__file.write('{} - [ERROR] - {}\n'.format(current_time, info))
+            print('{} - [ERROR] - {}'.format(current_time, info))
         else:
             cls.__file.write('{} - [INFO] - {}\n'.format(current_time, info))
+            print('{} - [INFO] - {}'.format(current_time, info))
 
     @classmethod
     def __del__(cls):

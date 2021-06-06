@@ -1,16 +1,16 @@
 CREATE TABLE IF NOT EXISTS macronutrients(
                                              ID integer PRIMARY KEY,
-                                             carbohydrates integer NOT NULL,
-                                             proteins integer NOT NULL,
-                                             fats integer NOT NULL,
-                                             saturated_fats integer NOT NULL,
-                                             fiber integer NOT NULL,
-                                             sugar integer NOT NULL
+                                             carbohydrates text,
+                                             proteins text,
+                                             fats text,
+                                             saturated_fats text,
+                                             fibers text,
+                                             sugars text
 );
 
 CREATE TABLE IF NOT EXISTS nutrients(
                                         ID integer PRIMARY KEY,
-                                        calories integer NOT NULL,
+                                        calories text NOT NULL,
                                         ID_macronutrients integer NOT NULL,
                                         FOREIGN KEY (ID_macronutrients) references macronutrients(ID)
 );
@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS time_total(
 CREATE TABLE IF NOT EXISTS recipes(
                                       ID integer PRIMARY KEY ,
                                       ID_nutrients integer NOT NULL,
-                                      ID_time_total integer NOT NULL,
+                                      ID_time_total integer,
                                       name text NOT NULL,
                                       description text NOT NULL,
                                       keywords text NOT NULL,

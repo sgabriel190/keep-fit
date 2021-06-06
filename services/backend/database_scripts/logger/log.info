@@ -1,8 +1,16 @@
-11:11:04 - [INFO] - Connected to the NUTRITION database successfully.
-11:11:04 - [INFO] - Create activity types.
-11:11:04 - [INFO] - Insert data into tables.
-11:11:04 - [INFO] - Closed the NUTRITION database connection successfully.
-11:11:04 - [INFO] - Connected to the USER database successfully.
-11:11:04 - [INFO] - Closed the USER database connection successfully.
-11:11:04 - [INFO] - Connected to the PLAN database successfully.
-11:11:04 - [INFO] - Closed the PLAN database connection successfully.
+15:54:42 - [INFO] - Connected to the NUTRITION database successfully.
+15:54:42 - [INFO] - Deleted successfully all the tables in database NUTRITION.
+15:54:43 - [INFO] - Created successfully all the tables in database NUTRITION.
+15:54:43 - [INFO] - Create activity types.
+15:54:43 - [INFO] - Insert data into tables.
+15:54:43 - [INFO] - Inserted successfully data in tables in database NUTRITION.
+15:54:43 - [INFO] - Closed the NUTRITION database connection successfully.
+15:54:43 - [INFO] - Connected to the USER database successfully.
+15:54:43 - [INFO] - Deleted successfully all the tables in database USER.
+15:54:43 - [INFO] - Created successfully all the tables in database USER.
+15:54:43 - [INFO] - Inserted successfully data in tables in database USER.
+15:54:43 - [INFO] - Closed the USER database connection successfully.
+15:54:43 - [INFO] - Connected to the PLAN database successfully.
+15:54:43 - [INFO] - Deleted successfully all the tables in database PLAN.
+15:54:43 - [INFO] - Created successfully all the tables in database PLAN.
+15:54:43 - [INFO] - Closed the PLAN database connection successfully.
