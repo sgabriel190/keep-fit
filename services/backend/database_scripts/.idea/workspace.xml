@@ -2,15 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2980abcb-0aa4-4b9d-b9c8-c6433d4e5abf" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logger.py" beforeDir="false" afterPath="$PROJECT_DIR$/Logger.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/create-databases.py" beforeDir="false" afterPath="$PROJECT_DIR$/create-databases.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database_connector/sqlite_connector_methods.py" beforeDir="false" afterPath="$PROJECT_DIR$/database_connector/sqlite_connector_methods.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logger/log.info" beforeDir="false" afterPath="$PROJECT_DIR$/logger/log.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nutrition.db" beforeDir="false" afterPath="$PROJECT_DIR$/nutrition.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plan.db" beforeDir="false" afterPath="$PROJECT_DIR$/plan.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sql_scripts/nutrition/create_tables_nutrition.sql" beforeDir="false" afterPath="$PROJECT_DIR$/sql_scripts/nutrition/create_tables_nutrition.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user.db" beforeDir="false" afterPath="$PROJECT_DIR$/user.db" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../nutrition_service/src/main/kotlin/com/example/nutrition_service/persistence/repositories/NutritionDAO.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../nutrition_service/src/main/kotlin/com/example/nutrition_service/persistence/tables/ActivityType.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../nutrition_service/src/main/kotlin/com/example/nutrition_service/persistence/tables/Categories.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../nutrition_service/src/main/kotlin/com/example/nutrition_service/persistence/tables/Images.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../nutrition_service/src/main/kotlin/com/example/nutrition_service/persistence/tables/Instructions.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../nutrition_service/src/main/kotlin/com/example/nutrition_service/persistence/tables/Macronutrients.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../nutrition_service/src/main/kotlin/com/example/nutrition_service/persistence/tables/Nutrients.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../nutrition_service/src/main/kotlin/com/example/nutrition_service/persistence/tables/RecipeToCategories.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../nutrition_service/src/main/kotlin/com/example/nutrition_service/persistence/tables/Recipes.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../nutrition_service/src/main/kotlin/com/example/nutrition_service/persistence/tables/TimeTotal.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../nutrition_service/src/main/kotlin/com/example/nutrition_service/persistence/tables/UserDetails.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../nutrition_service/src/main/kotlin/com/example/nutrition_service/presentation/RecipesController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../documentation/keep-fit-diagrams.drawio" beforeDir="false" afterPath="$PROJECT_DIR$/../../../documentation/keep-fit-diagrams.drawio" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../nutrition_service/build.gradle.kts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,6 +107,7 @@
       <workItem from="1616328881107" duration="3509000" />
       <workItem from="1622910543929" duration="2622000" />
       <workItem from="1622963331889" duration="11712000" />
+      <workItem from="1622992897121" duration="423000" />
     </task>
     <servers />
   </component>
