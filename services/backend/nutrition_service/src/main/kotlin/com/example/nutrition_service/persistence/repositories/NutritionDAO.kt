@@ -1,24 +1,27 @@
 package com.example.nutrition_service.persistence.repositories
 
-import com.example.nutrition_service.persistence.tables.Macronutrients
-import org.jetbrains.exposed.sql.*
+import com.example.nutrition_service.persistence.interfaces.NutritionDAOInterface
+import org.jetbrains.exposed.sql.Database
+import org.jetbrains.exposed.sql.StdOutSqlLogger
+import org.jetbrains.exposed.sql.addLogger
 import org.jetbrains.exposed.sql.transactions.TransactionManager
 import org.jetbrains.exposed.sql.transactions.transaction
+import org.springframework.stereotype.Repository
 import java.sql.Connection
 
-class NutritionDAO {
+@Repository
+class NutritionDAO: NutritionDAOInterface {
     init {
         Database.connect("jdbc:sqlite:nutrition.db", "org.sqlite.JDBC")
         TransactionManager.manager.defaultIsolationLevel = Connection.TRANSACTION_SERIALIZABLE
     }
 
-    fun getMacronutrientsById(id: Int) {
-        transaction {
+    override fun <T> executeQuery(block: () -> T): T {
+        return transaction {
             addLogger(StdOutSqlLogger)
-            val queryResult = Macronutrients.select{ Macronutrients.id eq id}
-            queryResult.forEach {
-                print(it)
-            }
+            block()
         }
     }
+
+
 }

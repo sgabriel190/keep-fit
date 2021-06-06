@@ -9,5 +9,5 @@ object UserDetails: IntIdTable() {
     val weight: Column<Int> = integer("weight")
     val calories: Column<Int> = integer("calories")
     val bmi: Column<Int> = integer("bmi")
-    val idActivityType = reference("ID", ActivityType)
+    val idActivityType = reference("ID", ActivityTypes)
 }

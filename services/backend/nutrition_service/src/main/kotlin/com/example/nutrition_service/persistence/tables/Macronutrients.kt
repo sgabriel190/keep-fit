@@ -7,7 +7,8 @@ object Macronutrients: IntIdTable() {
     val carbohydrates: Column<String> = text("carbohydrates")
     val proteins: Column<String> = text("proteins")
     val fats: Column<String> = text("fats")
-    val saturated_fats: Column<String> = text("saturated_fats")
+    val saturatedFats: Column<String> = text("saturated_fats")
     val fibers: Column<String> = text("fibers")
     val sugars: Column<String> = text("sugars")
+    override val tableName: String = "macronutrients"
 }
