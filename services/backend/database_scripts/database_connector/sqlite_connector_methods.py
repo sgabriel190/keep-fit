@@ -8,13 +8,7 @@ from Logger import Logger
 logger = Logger()
 
 
-def drop_table(connection: Connection, input_file: str) -> None:
-    file = open(input_file, 'r')
-    connection.executescript(file.read())
-    file.close()
-
-
-def create_tables(connection: Connection, input_file: str) -> None:
+def execute_script_on_table(connection: Connection, input_file: str) -> None:
     file = open(input_file, 'r')
     connection.executescript(file.read())
     file.close()
@@ -37,9 +31,13 @@ def create_activities(connection: Connection) -> None:
 
 def insert_data(connection: Connection, data: List[Dict]) -> None:
     logger.log('Insert data into tables.')
+    idx = 1
+    list_categories = []
     for item in data:
-        query_list = []
-        table_list = []
+        ok_time = True
+        # Create queries
+        query_list = [idx]
+        table_list = ['ID']
         if 'prepTime' in item:
             query_list.append(str(isodate.parse_duration(item['prepTime'])))
             table_list.append('prep_time')
@@ -50,8 +48,97 @@ def insert_data(connection: Connection, data: List[Dict]) -> None:
             table_list.append('total_time')
             query_list.append(str(isodate.parse_duration(item['totalTime'])))
         if len(query_list) == 0:
+            ok_time = False
+        # Total time TABLE
+        sql_query_time_total = 'INSERT INTO time_total{} VALUES({})' \
+            .format(str(tuple(table_list) if len(table_list) > 1 else "(" + table_list[0] + ")"),
+                    ("?, " * len(query_list))[:-2])
+        sql_parameters_time_total = tuple(query_list)
+
+        query_list = [idx]
+        table_list = ['ID']
+        if 'nutrition' not in item:
             continue
-        sql_query = 'INSERT INTO time_total{} VALUES({})'\
-            .format(str(tuple(table_list) if len(table_list) > 1 else "(" + table_list[0] + ")"), ("?, " * len(query_list))[:-2])
-        connection.execute(sql_query, tuple(query_list))
+        temp_data = item['nutrition']
+        if 'fatContent' in temp_data:
+            table_list.append('fats')
+            query_list.append(temp_data['fatContent'])
+        if 'proteinContent' in temp_data:
+            table_list.append('proteins')
+            query_list.append(temp_data['proteinContent'])
+        if 'carbohydrateContent' in temp_data:
+            table_list.append('carbohydrates')
+            query_list.append(temp_data['carbohydrateContent'])
+        if 'saturatedFatContent' in temp_data:
+            table_list.append('saturated_fats')
+            query_list.append(temp_data['saturatedFatContent'])
+        if 'fiberContent' in temp_data:
+            table_list.append('fibers')
+            query_list.append(temp_data['fiberContent'])
+        if 'sugarContent' in temp_data:
+            table_list.append('sugars')
+            query_list.append(temp_data['sugarContent'])
+        # Macronutrients TABLE
+        sql_query_macronutrients = 'INSERT INTO macronutrients{} VALUES({})' \
+            .format(str(tuple(table_list) if len(table_list) > 1 else "(" + table_list[0] + ")"),
+                    ("?, " * len(query_list))[:-2])
+        sql_parameters_macronutrients = tuple(query_list)
+
+        # Nutrients TABLE
+        if 'calories' in temp_data:
+            sql_query_nutrients = 'INSERT INTO nutrients(ID, calories, ID_macronutrients) VALUES(?, ?, ?)'
+            sql_parameters_nutrients = (idx, temp_data['calories'], idx)
+        else:
+            continue
+
+        # Recipes TABLE
+        if ok_time:
+            sql_query_recipes = 'INSERT INTO recipes(ID, ID_nutrients, ID_time_total, name, description, keywords) ' \
+                                'VALUES(?, ?, ?, ?, ?, ?)'
+            sql_parameters_recipes = (idx, idx, idx, item['name'], item['description'], item['keywords'])
+        else:
+            sql_query_recipes = 'INSERT INTO recipes(ID, ID_nutrients, name, description, keywords) ' \
+                                'VALUES(?, ?, ?, ?, ?, ?)'
+            sql_parameters_recipes = (idx, idx, item['name'], item['description'], item['keywords'])
+
+        # Execute queries
+        if ok_time:
+            connection.execute(sql_query_time_total, sql_parameters_time_total)
+        connection.execute(sql_query_macronutrients, sql_parameters_macronutrients)
+        connection.execute(sql_query_nutrients, sql_parameters_nutrients)
+        connection.execute(sql_query_recipes, sql_parameters_recipes)
+
+        # Images TABLE
+        for token in item['image']:
+            sql_query_image = 'INSERT INTO images(image_path, ID_recipe) ' \
+                              'VALUES(?, ?)'
+            sql_parameters_image = (item['name'] + "/" + token.split("/")[-1], idx)
+            connection.execute(sql_query_image, sql_parameters_image)
+
+        # Instructions TABLE
+        for token in item['recipeInstructions']:
+            sql_query_instruction = 'INSERT INTO instructions(instruction, ID_recipe) ' \
+                                    'VALUES(?, ?)'
+            sql_parameters_instruction = (token, idx)
+            connection.execute(sql_query_instruction, sql_parameters_instruction)
+        # Categories TABLE
+        if type(item['recipeCategory']) == list:
+            tmp_cat = item['recipeCategory']
+        else:
+            tmp_cat = list(map(lambda x: x.strip(), item['recipeCategory'].split(",")))
+        for token in tmp_cat:
+            if token in list_categories:
+                idx_cat = list_categories.index(token)
+            else:
+                list_categories.append(token)
+                idx_cat = len(list_categories)
+                sql_query_category = 'INSERT INTO categories(ID, category) VALUES (?, ?)'
+                sql_parameters_category = (idx_cat, token)
+                connection.execute(sql_query_category, sql_parameters_category)
+
+            sql_query_recipe_to_cat = 'INSERT INTO recipe_to_category(ID_recipe, ID_category) VALUES(?, ?)'
+            sql_parameters_recipe_to_cat = (idx, idx_cat)
+            connection.execute(sql_query_recipe_to_cat, sql_parameters_recipe_to_cat)
+
+        idx += 1
     connection.commit()

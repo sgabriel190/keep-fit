@@ -1,8 +1,16 @@
-17:13:38 - [INFO] - Connected to the NUTRITION database successfully.
-17:13:38 - [INFO] - Create activity types.
-17:13:38 - [INFO] - Insert data into tables.
-17:13:39 - [INFO] - Closed the NUTRITION database connection successfully.
-17:13:39 - [INFO] - Connected to the USER database successfully.
-17:13:39 - [INFO] - Closed the USER database connection successfully.
-17:13:39 - [INFO] - Connected to the PLAN database successfully.
-17:13:39 - [ERROR] - [Errno 2] No such file or directory: './sql_scripts/plan/delete_tables_user.sql'
+15:54:42 - [INFO] - Connected to the NUTRITION database successfully.
+15:54:42 - [INFO] - Deleted successfully all the tables in database NUTRITION.
+15:54:43 - [INFO] - Created successfully all the tables in database NUTRITION.
+15:54:43 - [INFO] - Create activity types.
+15:54:43 - [INFO] - Insert data into tables.
+15:54:43 - [INFO] - Inserted successfully data in tables in database NUTRITION.
+15:54:43 - [INFO] - Closed the NUTRITION database connection successfully.
+15:54:43 - [INFO] - Connected to the USER database successfully.
+15:54:43 - [INFO] - Deleted successfully all the tables in database USER.
+15:54:43 - [INFO] - Created successfully all the tables in database USER.
+15:54:43 - [INFO] - Inserted successfully data in tables in database USER.
+15:54:43 - [INFO] - Closed the USER database connection successfully.
+15:54:43 - [INFO] - Connected to the PLAN database successfully.
+15:54:43 - [INFO] - Deleted successfully all the tables in database PLAN.
+15:54:43 - [INFO] - Created successfully all the tables in database PLAN.
+15:54:43 - [INFO] - Closed the PLAN database connection successfully.
