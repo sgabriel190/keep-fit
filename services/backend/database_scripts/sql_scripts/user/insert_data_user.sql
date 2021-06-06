@@ -1,12 +1,10 @@
-INSERT INTO users(username, password, email, ID_user_details, ID_diet_plan)
-VALUES('gabriel', 'strilciuc', 'gabriel.strilciuc@gmail.com', 6, 6);
-INSERT INTO users(username, password, email, ID_user_details, ID_diet_plan)
-VALUES('alex', 'muraru', 'alex.muraru@gmail.com', 2, 2);
-INSERT INTO users(username, password, email, ID_user_details, ID_diet_plan)
-VALUES('alex', 'ilioi', 'alex.ilioi@gmail.com', 3, 3);
-INSERT INTO users(username, password, email, ID_user_details, ID_diet_plan)
-VALUES('vasile', 'enachi', 'vasile.enachi@gmail.com', 4, 4);
-INSERT INTO users(username, password, email, ID_user_details, ID_diet_plan)
-VALUES('bogdan', 'cojocariu', 'bogdan.cojocariu@gmail.com', 5, 5);
-
-SELECT * FROM users;
+INSERT INTO users(username, password, email, ID_user_details, target_calories)
+VALUES('gabriel', 'strilciuc', 'gabriel.strilciuc@gmail.com', null, 1800);
+INSERT INTO users(username, password, email, ID_user_details, target_calories)
+VALUES('alex', 'muraru', 'alex.muraru@gmail.com', null, 2600);
+INSERT INTO users(username, password, email, ID_user_details, target_calories)
+VALUES('alex', 'ilioi', 'alex.ilioi@gmail.com', null, 2100);
+INSERT INTO users(username, password, email, ID_user_details, target_calories)
+VALUES('vasile', 'enachi', 'vasile.enachi@gmail.com', null, 2000);
+INSERT INTO users(username, password, email, ID_user_details, target_calories)
+VALUES('bogdan', 'cojocariu', 'bogdan.cojocariu@gmail.com', null, 1900);
