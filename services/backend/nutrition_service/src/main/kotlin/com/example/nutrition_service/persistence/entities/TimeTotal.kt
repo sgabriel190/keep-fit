@@ -16,8 +16,8 @@ class TimeTotal(id: EntityID<Int>): IntEntity(id) {
 fun TimeTotal.toTimeTotalModel(): TimeTotalModel{
     return TimeTotalModel(
         id = this.id.value,
-        prepTime = this.prepTime,
-        cookTime = this.cookTime,
-        totalTime = this.totalTime
+        prepTime = this.prepTime ?: "",
+        cookTime = this.cookTime ?: "",
+        totalTime = this.totalTime ?: ""
     )
 }
