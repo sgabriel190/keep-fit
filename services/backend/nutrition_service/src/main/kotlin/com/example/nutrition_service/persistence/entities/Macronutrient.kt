@@ -18,7 +18,6 @@ class Macronutrient(id: EntityID<Int>): IntEntity(id) {
 
 fun Macronutrient.toMacronutrientModel(): MacronutrientModel {
     return MacronutrientModel(
-        id = this.id.value,
         carbohydrates = this.carbohydrates,
         proteins = this.proteins,
         fats = this.fats,

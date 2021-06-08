@@ -1,7 +1,6 @@
 package com.example.nutrition_service.persistence.pojos
 
 data class UserDetailModel(
-    val id: Int,
     val age: Int,
     val height: Int,
     val weight: Int,

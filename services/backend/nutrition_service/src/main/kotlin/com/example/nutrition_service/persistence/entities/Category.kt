@@ -14,7 +14,6 @@ class Category(id: EntityID<Int>): IntEntity(id) {
 
 fun Category.toCategoryModel(): CategoryModel{
     return CategoryModel(
-        id = this.id.value,
         category = this.category
     )
 }

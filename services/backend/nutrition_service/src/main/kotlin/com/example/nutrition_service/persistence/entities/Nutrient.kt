@@ -15,7 +15,6 @@ class Nutrient(id: EntityID<Int>): IntEntity(id) {
 
 fun Nutrient.toNutrientModel(): NutrientModel {
     return NutrientModel(
-        id = this.id.value,
         calories = this.calories,
         macronutrients = this.macronutrients.toMacronutrientModel()
     )

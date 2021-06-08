@@ -12,23 +12,13 @@ import javax.websocket.server.PathParam
 
 @RestController
 @RequestMapping("/api/nutrition")
-class RecipesController {
+class NutritionController {
     @Autowired
     lateinit var nutritionService: NutritionServiceInterface
 
     @RequestMapping(value = ["/ping"], method = [RequestMethod.GET])
     fun ping(): ResponseEntity<Any> {
         return ResponseEntity.status(HttpStatus.OK).body(null)
-    }
-
-    @RequestMapping(value = ["/macronutrient/{id}"], method = [RequestMethod.GET])
-    fun getMacronutrient(@PathVariable id: Int): ResponseEntity<Any> {
-        val response = nutritionService.getMacronutrient(id)
-        return if (response.successfulOperation) {
-            ResponseEntity.status(response.code).body(response)
-        } else {
-            ResponseEntity.status(response.code).body(MyError(response.code, response.error, response.message))
-        }
     }
 
     @RequestMapping(value = ["/instruction/{id}"], method = [RequestMethod.GET])

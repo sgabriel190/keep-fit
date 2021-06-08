@@ -1,6 +1,8 @@
 package com.example.nutrition_service.persistence.entities
 
+import com.example.nutrition_service.persistence.pojos.RecipeLiteModel
 import com.example.nutrition_service.persistence.pojos.RecipeModel
+import com.example.nutrition_service.persistence.tables.Images
 import com.example.nutrition_service.persistence.tables.Instructions
 import com.example.nutrition_service.persistence.tables.RecipeToCategories
 import com.example.nutrition_service.persistence.tables.Recipes
@@ -20,8 +22,19 @@ class Recipe(id: EntityID<Int>): IntEntity(id) {
 
 fun Recipe.toRecipeModel(): RecipeModel{
     return RecipeModel(
-        id = this.id.value,
         nutrients = this.nutrients.toNutrientModel(),
+        timeTotal = this.timeTotal.toTimeTotalModel(),
+        name = this.name,
+        description = this.description,
+        keywords = this.keywords,
+        categories = this.categories.toList().map { it.toCategoryModel() },
+        images = null,
+        instructions = null
+    )
+}
+
+fun Recipe.toRecipeLiteModel(): RecipeLiteModel {
+    return RecipeLiteModel(
         timeTotal = this.timeTotal.toTimeTotalModel(),
         name = this.name,
         description = this.description,

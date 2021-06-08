@@ -18,7 +18,6 @@ class UserDetail(id: EntityID<Int>): IntEntity(id) {
 
 fun UserDetail.toUserDetailModel(): UserDetailModel{
     return UserDetailModel(
-        id = this.id.value,
         age = this.age,
         height = this.height,
         weight = this.weight,

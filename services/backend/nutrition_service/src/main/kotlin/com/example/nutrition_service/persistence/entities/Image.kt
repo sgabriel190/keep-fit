@@ -9,13 +9,10 @@ import org.jetbrains.exposed.dao.id.EntityID
 class Image(id: EntityID<Int>): IntEntity(id) {
     companion object: IntEntityClass<Image>(Images)
     var imagePath   by Images.imagePath
-    var idRecipe    by Images.idRecipe
 }
 
 fun Image.toImageModel(): ImageModel{
     return ImageModel(
-        id = this.id.value,
-        imagePath = this.imagePath,
-        idRecipe = this.idRecipe.value
+        imagePath = this.imagePath
     )
 }
