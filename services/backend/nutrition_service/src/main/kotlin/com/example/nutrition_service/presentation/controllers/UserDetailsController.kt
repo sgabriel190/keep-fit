@@ -1,6 +1,7 @@
 package com.example.nutrition_service.presentation
 
 import com.example.nutrition_service.business.interfaces.UserDetailsServiceInterface
+import com.example.nutrition_service.presentation.business_models.CreateUserDetails
 import com.example.nutrition_service.presentation.http.MyError
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
@@ -42,10 +43,9 @@ class UserDetailsController {
         }
     }
 
-    @RequestMapping(value = ["/{id}"], method = [RequestMethod.POST])
-    fun addUserDetails(@PathVariable id: Int,
-                       @RequestParam(required = true) idActivityType: Int): ResponseEntity<Any> {
-        val response = userDetailsServiceInterface.addUserDetails(id, idActivityType)
+    @RequestMapping(value = [""], method = [RequestMethod.POST])
+    fun addUserDetails(@RequestBody data: CreateUserDetails): ResponseEntity<Any> {
+        val response = userDetailsServiceInterface.addUserDetails(data)
         return if (response.successfulOperation) {
             ResponseEntity.status(response.code).body(response)
         } else {

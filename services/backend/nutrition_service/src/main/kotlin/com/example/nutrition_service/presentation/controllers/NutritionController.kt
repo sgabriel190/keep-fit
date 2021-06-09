@@ -1,4 +1,4 @@
-package com.example.nutrition_service.presentation
+package com.example.nutrition_service.presentation.controllers
 
 import com.example.nutrition_service.business.interfaces.NutritionServiceInterface
 import com.example.nutrition_service.persistence.repositories.NutritionDAO
