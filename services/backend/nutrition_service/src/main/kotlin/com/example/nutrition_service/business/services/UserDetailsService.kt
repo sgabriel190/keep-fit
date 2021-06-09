@@ -8,6 +8,7 @@ import com.example.nutrition_service.persistence.entities.toUserDetailModel
 import com.example.nutrition_service.persistence.interfaces.NutritionDAOInterface
 import com.example.nutrition_service.persistence.pojos.ActivityTypeModel
 import com.example.nutrition_service.persistence.pojos.UserDetailModel
+import com.example.nutrition_service.presentation.business_models.CreateUserDetails
 import com.example.nutrition_service.presentation.http.Response
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -50,19 +51,18 @@ class UserDetailsService: UserDetailsServiceInterface {
         }
     }
 
-    override fun addUserDetails(id: Int, idActivityType: Int): Response<Any> {
+    override fun addUserDetails(data: CreateUserDetails): Response<Any> {
         try {
             val resultActivityType = nutritionDAO.executeQuery {
-                ActivityType.findById(idActivityType)!!
+                ActivityType.findById(data.idActivityType)!!
             }
             nutritionDAO.executeQuery {
-                UserDetail.new {
-                    this.age = 10
-                    this.height = 10
-                    this.weight = 10
-                    this.weight = 10
-                    this.calories = 2000
-                    this.bmi = 1700
+                UserDetail.new(data.id) {
+                    this.age = data.age
+                    this.height = data.height
+                    this.weight = data.weight
+                    this.calories = data.calories
+                    this.bmi = data.bmi
                     this.idActivityType = resultActivityType
                 }
             }
