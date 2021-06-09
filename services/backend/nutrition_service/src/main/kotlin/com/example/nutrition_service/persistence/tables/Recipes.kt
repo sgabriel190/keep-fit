@@ -4,9 +4,10 @@ import org.jetbrains.exposed.dao.id.IntIdTable
 import org.jetbrains.exposed.sql.Column
 
 object Recipes: IntIdTable() {
-    val idNutrients                 = reference("ID", Nutrients)
-    val idTimeTotal                 = reference("ID", TimeTotals)
-    val name: Column<String>        = text("name")
-    val description: Column<String> = text("description")
-    val keywords: Column<String>    = text("keywords")
+    val idNutrients                 = reference("ID_nutrients", Nutrients)
+    val timeTotal                   = reference("ID_time_total", TimeTotals)
+    val name                        = text("name")
+    val description                 = text("description")
+    val keywords                    = text("keywords")
+    override val tableName: String  = "recipes"
 }

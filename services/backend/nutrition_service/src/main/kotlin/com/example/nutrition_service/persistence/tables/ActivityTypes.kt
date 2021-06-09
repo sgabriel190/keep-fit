@@ -4,5 +4,6 @@ import org.jetbrains.exposed.dao.id.IntIdTable
 import org.jetbrains.exposed.sql.Column
 
 object ActivityTypes: IntIdTable() {
-    val name: Column<String> = text("name")
+    val name: Column<String>        = text("name")
+    override val tableName: String  = "activity_type"
 }

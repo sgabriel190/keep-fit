@@ -14,8 +14,6 @@ class Instruction(id: EntityID<Int>): IntEntity(id) {
 
 fun Instruction.toInstructionModel(): InstructionModel{
     return InstructionModel(
-        id = this.id.value,
-        instruction = this.instruction,
-        idRecipe = this.idRecipe.value
+        instruction = this.instruction
     )
 }

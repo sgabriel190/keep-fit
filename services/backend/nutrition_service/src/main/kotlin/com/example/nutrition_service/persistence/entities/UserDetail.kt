@@ -13,17 +13,16 @@ class UserDetail(id: EntityID<Int>): IntEntity(id) {
     var weight by UserDetails.weight
     var calories by UserDetails.calories
     var bmi by UserDetails.bmi
-    var idActivityType by UserDetails.idActivityType
+    var idActivityType by ActivityType referencedOn UserDetails.idActivityType
 }
 
 fun UserDetail.toUserDetailModel(): UserDetailModel{
     return UserDetailModel(
-        id = this.id.value,
         age = this.age,
         height = this.height,
         weight = this.weight,
         calories = this.calories,
         bmi = this.bmi,
-        idActivityType = this.idActivityType.value
+        idActivityType = this.idActivityType.toActivityTypeModel()
     )
 }

@@ -5,5 +5,6 @@ import org.jetbrains.exposed.sql.Column
 
 object Instructions: IntIdTable() {
     val instruction: Column<String> = text("instruction")
-    val idRecipe = reference("ID", Recipes)
+    val idRecipe                    = reference("ID_recipe", Recipes)
+    override val tableName          = "instructions"
 }

@@ -13,7 +13,6 @@ class ActivityType(id: EntityID<Int>): IntEntity(id) {
 
 fun ActivityType.toActivityTypeModel(): ActivityTypeModel{
     return ActivityTypeModel(
-        id = this.id.value,
         name = this.name
     )
 }
