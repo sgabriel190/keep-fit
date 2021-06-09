@@ -19,87 +19,138 @@ class NutritionService: NutritionServiceInterface {
 
     // Instructions CRUD operations
     override fun getInstruction(id: Int): Response<InstructionModel> {
-        val result = nutritionDAO.executeQuery {
-            Instruction.findById(id)!!.toInstructionModel()
+        return try {
+            val result = nutritionDAO.executeQuery {
+                Instruction.findById(id)!!.toInstructionModel()
+            }
+            Response(data = result, code = 200, successfulOperation = true)
+        } catch (t: Throwable){
+            Response(successfulOperation = false, data = null, code = 400, error = t.toString())
         }
-        return Response(data = result, code = 200, successfulOperation = true)
     }
 
     override fun getInstructions(idRecipe: Int): Response<List<InstructionModel>> {
-        val result = nutritionDAO.executeQuery {
-            Instruction.find { Instructions.idRecipe eq idRecipe }.toList().map { it.toInstructionModel() }
+        return try {
+            val result = nutritionDAO.executeQuery {
+                Instruction.find { Instructions.idRecipe eq idRecipe }.toList().map { it.toInstructionModel() }
+            }
+            Response(data = result, code = 200, successfulOperation = true)
+        } catch (t: Throwable){
+            Response(successfulOperation = false, data = null, code = 400, error = t.toString())
         }
-        return Response(data = result, code = 200, successfulOperation = true)
     }
 
     // Recipes CRUD operations
     override fun getRecipe(id: Int): Response<RecipeModel> {
-        val recipeResult = nutritionDAO.executeQuery {
-            Recipe.findById(id)!!.toRecipeModel()
+        try {
+            val recipeResult = nutritionDAO.executeQuery {
+                Recipe.findById(id)!!.toRecipeModel()
+            }
+            val imageResult = nutritionDAO.executeQuery {
+                Image.find { Images.idRecipe eq id }.toList().map { it.toImageModel() }
+            }
+            val instructionResult = nutritionDAO.executeQuery {
+                Instruction.find { Instructions.idRecipe eq id }.toList().map { it.toInstructionModel() }
+            }
+            val result = RecipeModel(
+                nutrients = recipeResult.nutrients,
+                timeTotal = recipeResult.timeTotal,
+                name = recipeResult.name,
+                description = recipeResult.description,
+                keywords = recipeResult.keywords,
+                categories = recipeResult.categories,
+                images = imageResult,
+                instructions = instructionResult
+            )
+            return Response(data = result, code = 200, successfulOperation = true)
         }
-        val imageResult = nutritionDAO.executeQuery {
-            Image.find { Images.idRecipe eq id }.toList().map { it.toImageModel() }
+        catch (t: Throwable){
+            return Response(successfulOperation = false, data = null, code = 400, error = t.toString())
         }
-        val instructionResult = nutritionDAO.executeQuery {
-            Instruction.find { Instructions.idRecipe eq id }.toList().map { it.toInstructionModel() }
-        }
-        val result = RecipeModel(
-            nutrients = recipeResult.nutrients,
-            timeTotal = recipeResult.timeTotal,
-            name = recipeResult.name,
-            description = recipeResult.description,
-            keywords = recipeResult.keywords,
-            categories = recipeResult.categories,
-            images = imageResult,
-            instructions = instructionResult
-        )
-        return Response(data = result, code = 200, successfulOperation = true)
     }
 
     override fun getRecipes(pag: Int, items: Int): Response<List<RecipeLiteModel>> {
-        val result = nutritionDAO.executeQuery {
-            Recipe.all().limit(items, ((pag - 1)  * items).toLong()).toList().map { it.toRecipeLiteModel() }
+        return try {
+            val result = nutritionDAO.executeQuery {
+                Recipe.all().limit(items, ((pag - 1) * items).toLong()).toList().map { it.toRecipeLiteModel() }
+            }
+            Response(data = result, code = 200, successfulOperation = true)
+        } catch (t: Throwable){
+            Response(successfulOperation = false, data = null, code = 400, error = t.toString())
         }
-        return Response(data = result, code = 200, successfulOperation = true)
     }
 
-    override fun getRecipeByCategoryId(idCategory: Int): Response<List<RecipeLiteModel>> {
-        /*
-        val resultCategory = nutritionDAO.executeQuery {
-            Category.findById(idCategory)!!.toCategoryModel()
+    override fun getRecipeByCategoryId(idCategory: Int, pag: Int, items: Int): Response<List<RecipeLiteModel>> {
+        try {
+            val result = nutritionDAO.executeQuery {
+                Recipes.innerJoin(RecipeToCategories)
+                    .select { RecipeToCategories.idCategory eq idCategory }
+                    .limit(items, ((pag - 1) * items).toLong())
+                    .let { Recipe.wrapRows(it) }
+                    .toList()
+                    .map {
+                        it.toRecipeLiteModel()
+                    }
+            }
+            return Response(data = result, code = 200, successfulOperation = true)
         }
-        val recipeCategory = nutritionDAO.executeQuery {
-
+        catch (t: Throwable){
+            return Response(successfulOperation = false, data = null, code = 400, error = t.toString())
         }
-        return Response(data = result, code = 200, successfulOperation = true)
-        */
-        TODO("Not yet implemented")
     }
 
-    override fun getRecipeByCategoryName(idName: String): Response<List<RecipeLiteModel>> {
-        TODO("Not yet implemented")
+    override fun getRecipeByCategoryName(nameCategory: String, pag: Int, items: Int): Response<List<RecipeLiteModel>> {
+        try {
+            val result = nutritionDAO.executeQuery {
+                Recipes.innerJoin(RecipeToCategories)
+                    .innerJoin(Categories)
+                    .select { RecipeToCategories.idCategory eq Categories.id and(Categories.category eq nameCategory)}
+                    .limit(items, ((pag - 1)  * items).toLong())
+                    .let { Recipe.wrapRows(it) }
+                    .toList()
+                    .map {
+                        it.toRecipeLiteModel()
+                    }
+            }
+            return Response(data = result, code = 200, successfulOperation = true)
+        }
+        catch (t: Throwable){
+            return Response(successfulOperation = false, data = null, code = 400, error = t.toString())
+        }
     }
 
     // Images CRUD operations
     override fun getImages(idRecipe: Int): Response<List<ImageModel>> {
-        val result = nutritionDAO.executeQuery {
-            Image.find { Images.idRecipe eq idRecipe }.toList().map { it.toImageModel() }
+        return try{
+            val result = nutritionDAO.executeQuery {
+                Image.find { Images.idRecipe eq idRecipe }.toList().map { it.toImageModel() }
+            }
+            Response(data = result, code = 200, successfulOperation = true)
+        } catch (t: Throwable){
+            Response(successfulOperation = false, data = null, code = 400, error = t.toString())
         }
-        return Response(data = result, code = 200, successfulOperation = true)
     }
 
     // Categories CRUD operations
     override fun getCategories(): Response<List<CategoryModel>> {
-        val result = nutritionDAO.executeQuery {
-            Category.all().toList().map { it.toCategoryModel() }
+        return try {
+            val result = nutritionDAO.executeQuery {
+                Category.all().toList().map { it.toCategoryModel() }
+            }
+            Response(data = result, code = 200, successfulOperation = true)
+        } catch (t: Throwable){
+            Response(successfulOperation = false, data = null, code = 400, error = t.toString())
         }
-        return Response(data = result, code = 200, successfulOperation = true)
     }
 
     override fun getCategory(id: Int): Response<CategoryModel> {
-        val result = nutritionDAO.executeQuery {
-            Category.findById(id)!!.toCategoryModel()
+        return try {
+            val result = nutritionDAO.executeQuery {
+                Category.findById(id)!!.toCategoryModel()
+            }
+            Response(data = result, code = 200, successfulOperation = true)
+        } catch (t: Throwable){
+            Response(successfulOperation = false, data = null, code = 400, error = t.toString())
         }
-        return Response(data = result, code = 200, successfulOperation = true)
     }
 }

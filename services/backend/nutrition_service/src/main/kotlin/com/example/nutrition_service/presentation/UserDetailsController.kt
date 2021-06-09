@@ -4,10 +4,7 @@ import com.example.nutrition_service.business.interfaces.UserDetailsServiceInter
 import com.example.nutrition_service.presentation.http.MyError
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestMethod
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api/nutrition/userDetails")
@@ -28,6 +25,27 @@ class UserDetailsController {
     @RequestMapping(value = ["/activityType/{id}"], method = [RequestMethod.GET])
     fun getActivityType(@PathVariable id: Int): ResponseEntity<Any> {
         val response = userDetailsServiceInterface.getActivityType(id)
+        return if (response.successfulOperation) {
+            ResponseEntity.status(response.code).body(response)
+        } else {
+            ResponseEntity.status(response.code).body(MyError(response.code, response.error, response.message))
+        }
+    }
+
+    @RequestMapping(value = ["/{id}"], method = [RequestMethod.GET])
+    fun getUserDetails(@PathVariable id: Int): ResponseEntity<Any> {
+        val response = userDetailsServiceInterface.getUserDetails(id)
+        return if (response.successfulOperation) {
+            ResponseEntity.status(response.code).body(response)
+        } else {
+            ResponseEntity.status(response.code).body(MyError(response.code, response.error, response.message))
+        }
+    }
+
+    @RequestMapping(value = ["/{id}"], method = [RequestMethod.POST])
+    fun addUserDetails(@PathVariable id: Int,
+                       @RequestParam(required = true) idActivityType: Int): ResponseEntity<Any> {
+        val response = userDetailsServiceInterface.addUserDetails(id, idActivityType)
         return if (response.successfulOperation) {
             ResponseEntity.status(response.code).body(response)
         } else {

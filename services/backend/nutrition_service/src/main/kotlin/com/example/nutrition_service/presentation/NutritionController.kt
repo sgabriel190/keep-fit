@@ -87,11 +87,11 @@ class NutritionController {
                           @RequestParam(required = false) pagNumber: Int?,
                           @RequestParam(required = false) pagSize: Int?): ResponseEntity<Any> {
         val response =  if(categoryId != null){
-            nutritionService.getRecipeByCategoryId(categoryId)
+            nutritionService.getRecipeByCategoryId(categoryId, pag = pagNumber ?: 1, items = pagSize ?: 10)
         }
         else {
             if(categoryName != null){
-                nutritionService.getRecipeByCategoryName(categoryName)
+                nutritionService.getRecipeByCategoryName(categoryName, pag = pagNumber ?: 1, items = pagSize ?: 10)
             }
             else{
                 nutritionService.getRecipes(pag = pagNumber ?: 1, items = pagSize ?: 10)

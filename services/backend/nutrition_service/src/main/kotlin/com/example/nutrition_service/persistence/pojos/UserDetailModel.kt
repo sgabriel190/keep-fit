@@ -6,5 +6,5 @@ data class UserDetailModel(
     val weight: Int,
     val calories: Int,
     val bmi: Int,
-    val idActivityType: Int,
+    val idActivityType: ActivityTypeModel
 )

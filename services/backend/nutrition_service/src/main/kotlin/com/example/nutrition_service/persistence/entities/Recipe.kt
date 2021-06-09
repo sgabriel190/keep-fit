@@ -35,6 +35,7 @@ fun Recipe.toRecipeModel(): RecipeModel{
 
 fun Recipe.toRecipeLiteModel(): RecipeLiteModel {
     return RecipeLiteModel(
+        id = this.id.value,
         timeTotal = this.timeTotal.toTimeTotalModel(),
         name = this.name,
         description = this.description,
