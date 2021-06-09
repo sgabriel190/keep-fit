@@ -1,4 +1,4 @@
-package com.example.nutrition_service.presentation
+package com.example.nutrition_service.presentation.controllers
 
 import com.example.nutrition_service.business.interfaces.ImageServiceInterface
 import com.example.nutrition_service.presentation.http.MyError
