@@ -1,16 +1,18 @@
 package com.example.plan_service.persistence.pojo;
 
+import com.example.plan_service.persistence.entities.MealEntity;
+
 public final class MealRecipeModel {
-    private final Integer idMeal;
+    private final MealModel meal;
     private final Integer idRecipe;
 
-    public MealRecipeModel(Integer idMeal, Integer idRecipe){
-        this.idMeal = idMeal;
+    public MealRecipeModel(MealModel meal, Integer idRecipe){
+        this.meal = meal;
         this.idRecipe = idRecipe;
     }
 
-    public Integer getIdMeal() {
-        return idMeal;
+    public MealModel getMeal() {
+        return meal;
     }
 
     public Integer getIdRecipe() {

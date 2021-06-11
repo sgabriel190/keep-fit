@@ -1,12 +1,11 @@
 package com.example.plan_service.persistence.entities;
 
-import com.example.plan_service.persistence.pojo.MealRecipeModel;
 import com.example.plan_service.persistence.pojo.MenuModel;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "menu")
@@ -16,7 +15,11 @@ public class MenuEntity {
     private Integer id;
 
     @Column(name = "ID_plan", nullable = false)
-    private Integer idPlan;
+    private Integer planId;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "ID_menu")
+    private List<MealEntity> meals = new ArrayList<>();
 
     @Column(name = "day", nullable = false)
     private String day;
@@ -30,11 +33,11 @@ public class MenuEntity {
     }
 
     public Integer getIdPlan() {
-        return idPlan;
+        return planId;
     }
 
     public void setIdPlan(Integer idPlan) {
-        this.idPlan = idPlan;
+        this.planId = idPlan;
     }
 
     public String getDay() {
@@ -46,6 +49,10 @@ public class MenuEntity {
     }
 
     public MenuModel toMenuModel() {
-        return new MenuModel(this.idPlan, this.day);
+        return new MenuModel(
+                this.meals.stream()
+                        .map(MealEntity::toMealModel)
+                        .collect(Collectors.toList()),
+                this.day);
     }
 }

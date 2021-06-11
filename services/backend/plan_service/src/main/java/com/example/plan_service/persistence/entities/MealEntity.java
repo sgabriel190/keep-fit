@@ -2,28 +2,25 @@ package com.example.plan_service.persistence.entities;
 
 import com.example.plan_service.persistence.pojo.MealModel;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "meal")
 public class MealEntity {
     @Id
-    @Column(name = "ID", nullable = false)
+    @Column(name = "ID")
     private Integer id;
 
-    @Column(name = "ID_menu", nullable = false)
-    private Integer idMenu;
+    @Column(name = "ID_menu")
+    private Integer menuId;
 
-    @Column(name = "time_of_day", nullable = false)
+    @Column(name = "time_of_day")
     private String timeOfDay;
 
-    public MealEntity(Integer id, Integer idMenu, String timeOfDay){
+    public MealEntity(Integer id, Integer menuId, String timeOfDay){
         super();
         this.id = id;
-        this.idMenu = idMenu;
+        this.menuId = menuId;
         this.timeOfDay = timeOfDay;
     }
 
@@ -39,12 +36,12 @@ public class MealEntity {
         return id;
     }
 
-    public void setIdMenu(Integer id) {
-        this.idMenu = id;
+    public void setIdMenu(Integer menuId) {
+        this.menuId = menuId;
     }
 
     public Integer getIdMenu() {
-        return this.idMenu;
+        return this.menuId;
     }
 
     public void setTime(String timeOfDay) {
@@ -56,6 +53,6 @@ public class MealEntity {
     }
 
     public MealModel toMealModel(){
-        return new MealModel(this.idMenu, this.timeOfDay);
+        return new MealModel(this.menuId, this.timeOfDay);
     }
 }

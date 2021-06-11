@@ -1,16 +1,18 @@
 package com.example.plan_service.persistence.pojo;
 
+import java.util.List;
+
 public final class MenuModel {
-    private final Integer idPlan;
+    private final List<MealModel> meals;
     private final String day;
 
-    public MenuModel(Integer idPlan, String day){
-        this.idPlan = idPlan;
+    public MenuModel(List<MealModel> meals, String day){
+        this.meals = meals;
         this.day = day;
     }
 
-    public Integer getIdPlan() {
-        return idPlan;
+    public List<MealModel> getPlans() {
+        return meals;
     }
 
     public String getDay() {
