@@ -7,7 +7,7 @@ import javax.persistence.ManyToOne;
 import java.io.Serializable;
 
 @Embeddable
-class MealRecipeEntityPK implements Serializable {
+public class MealRecipeEntityPK implements Serializable {
     @ManyToOne
     @JoinColumn(name = "ID_meal")
     private MealEntity meal;

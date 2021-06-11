@@ -11,7 +11,7 @@ public final class MenuModel {
         this.day = day;
     }
 
-    public List<MealModel> getPlans() {
+    public List<MealModel> getMeals() {
         return meals;
     }
 

@@ -3,6 +3,9 @@ package com.example.plan_service.persistence.entities;
 import com.example.plan_service.persistence.pojo.MealModel;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "meal")
@@ -17,16 +20,9 @@ public class MealEntity {
     @Column(name = "time_of_day")
     private String timeOfDay;
 
-    public MealEntity(Integer id, Integer menuId, String timeOfDay){
-        super();
-        this.id = id;
-        this.menuId = menuId;
-        this.timeOfDay = timeOfDay;
-    }
-
-    public MealEntity() {
-        super();
-    }
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "ID_meal")
+    private final List<MealRecipeEntity> recipes = new ArrayList<>();
 
     public void setId(Integer id) {
         this.id = id;
@@ -53,6 +49,11 @@ public class MealEntity {
     }
 
     public MealModel toMealModel(){
-        return new MealModel(this.menuId, this.timeOfDay);
+        return new MealModel(
+                this.recipes.stream()
+                        .map(MealRecipeEntity::toMealRecipeModel)
+                        .collect(Collectors.toList()),
+                this.timeOfDay
+        );
     }
 }

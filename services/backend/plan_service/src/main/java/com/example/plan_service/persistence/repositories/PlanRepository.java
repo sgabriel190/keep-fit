@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PlanRepository extends JpaRepository<PlanEntity, Integer> {
+    PlanEntity getByIdUser(Integer idUser);
 }

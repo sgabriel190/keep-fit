@@ -2,10 +2,10 @@ package com.example.plan_service.persistence.entities;
 
 import com.example.plan_service.persistence.pojo.PlanModel;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "plan")
@@ -22,6 +22,10 @@ public class PlanEntity {
 
     @Column(name = "description", nullable = false)
     private String description;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "ID_plan")
+    private final List<MenuEntity> menus = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -56,6 +60,13 @@ public class PlanEntity {
     }
 
     public PlanModel toPlanModel() {
-        return new PlanModel(this.idUser, this. planDays, this.description);
+        return new PlanModel(
+                this.idUser,
+                this.planDays,
+                this.description,
+                this.menus.stream()
+                        .map(MenuEntity::toMenuModel)
+                        .collect(Collectors.toList())
+        );
     }
 }

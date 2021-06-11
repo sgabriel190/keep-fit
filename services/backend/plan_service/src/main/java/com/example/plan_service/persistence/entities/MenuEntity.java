@@ -19,7 +19,7 @@ public class MenuEntity {
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "ID_menu")
-    private List<MealEntity> meals = new ArrayList<>();
+    private final List<MealEntity> meals = new ArrayList<>();
 
     @Column(name = "day", nullable = false)
     private String day;
