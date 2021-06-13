@@ -7,20 +7,19 @@ import javax.persistence.ManyToOne;
 import java.io.Serializable;
 
 @Embeddable
-class MealRecipeEntityPK implements Serializable {
-    @ManyToOne
-    @JoinColumn(name = "ID_meal")
-    private MealEntity meal;
+public class MealRecipeEntityPK implements Serializable {
+    @Column(name = "ID_meal")
+    private Integer mealId;
 
     @Column(name = "ID_recipe")
     private Integer idRecipe;
 
-    public MealEntity getMeal() {
-        return meal;
+    public Integer getMealId() {
+        return mealId;
     }
 
-    public void setMeal(MealEntity meal) {
-        this.meal = meal;
+    public void setMealId(Integer meal) {
+        this.mealId = meal;
     }
 
     public Integer getIdRecipe() {

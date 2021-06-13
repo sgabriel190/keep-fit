@@ -11,17 +11,18 @@ import java.util.stream.Collectors;
 @Table(name = "menu")
 public class MenuEntity {
     @Id
-    @Column(name = "ID", nullable = false)
+    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "ID_plan", nullable = false)
+    @Column(name = "ID_plan")
     private Integer planId;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "ID_menu")
-    private List<MealEntity> meals = new ArrayList<>();
+    private final List<MealEntity> meals = new ArrayList<>();
 
-    @Column(name = "day", nullable = false)
+    @Column(name = "day")
     private String day;
 
     public Integer getId() {
@@ -46,6 +47,10 @@ public class MenuEntity {
 
     public void setDay(String day) {
         this.day = day;
+    }
+
+    public void addMeal(MealEntity mealEntity) {
+        meals.add(mealEntity);
     }
 
     public MenuModel toMenuModel() {

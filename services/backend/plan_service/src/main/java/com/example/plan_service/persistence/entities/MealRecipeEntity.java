@@ -14,6 +14,10 @@ public class MealRecipeEntity {
     private MealRecipeEntityPK id;
 
     public MealRecipeModel toMealRecipeModel() {
-        return new MealRecipeModel(this.id.getMeal().toMealModel(), this.id.getIdRecipe());
+        return new MealRecipeModel(this.id.getMealId(), this.id.getIdRecipe());
+    }
+
+    public void setId(MealRecipeEntityPK id) {
+        this.id = id;
     }
 }

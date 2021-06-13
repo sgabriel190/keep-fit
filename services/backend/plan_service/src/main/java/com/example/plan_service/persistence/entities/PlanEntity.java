@@ -2,26 +2,31 @@ package com.example.plan_service.persistence.entities;
 
 import com.example.plan_service.persistence.pojo.PlanModel;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "plan")
 public class PlanEntity {
     @Id
-    @Column(name = "ID", nullable = false)
+    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "ID_user", nullable = false)
+    @Column(name = "ID_user")
     private Integer idUser;
 
-    @Column(name = "plan_days", nullable = false)
+    @Column(name = "plan_days")
     private Integer planDays;
 
-    @Column(name = "description", nullable = false)
+    @Column(name = "description")
     private String description;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "ID_plan")
+    private final List<MenuEntity> menus = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -55,7 +60,18 @@ public class PlanEntity {
         this.description = description;
     }
 
+    public void addMenu(MenuEntity menuEntity) {
+        menus.add(menuEntity);
+    }
+
     public PlanModel toPlanModel() {
-        return new PlanModel(this.idUser, this. planDays, this.description);
+        return new PlanModel(
+                this.idUser,
+                this.planDays,
+                this.description,
+                this.menus.stream()
+                        .map(MenuEntity::toMenuModel)
+                        .collect(Collectors.toList())
+        );
     }
 }
