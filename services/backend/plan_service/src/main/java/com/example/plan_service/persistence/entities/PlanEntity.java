@@ -11,16 +11,17 @@ import java.util.stream.Collectors;
 @Table(name = "plan")
 public class PlanEntity {
     @Id
-    @Column(name = "ID", nullable = false)
+    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "ID_user", nullable = false)
+    @Column(name = "ID_user")
     private Integer idUser;
 
-    @Column(name = "plan_days", nullable = false)
+    @Column(name = "plan_days")
     private Integer planDays;
 
-    @Column(name = "description", nullable = false)
+    @Column(name = "description")
     private String description;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
@@ -57,6 +58,10 @@ public class PlanEntity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void addMenu(MenuEntity menuEntity) {
+        menus.add(menuEntity);
     }
 
     public PlanModel toPlanModel() {

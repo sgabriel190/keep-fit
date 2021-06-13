@@ -11,9 +11,11 @@ import com.example.plan_service.persistence.repositories.MealRepository;
 import com.example.plan_service.persistence.repositories.MenuRepository;
 import com.example.plan_service.persistence.repositories.PlanRepository;
 import com.example.plan_service.presentation.http.Response;
+import com.example.plan_service.presentation.requests.RecipeRequest;
 import com.example.plan_service.presentation.requests.UserPlanRequest;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -112,8 +114,8 @@ public class PlanService implements PlanServiceInterface {
     @Override
     public Response<PlanModel> createUserPlan(Integer idUser, UserPlanRequest data) {
         try{
-            if (data.getRecipes().size() != 3 * data.getPlanDays()){
-                throw new Exception("The number of recipes for the plan is insufficient.");
+            if (data.getMenus().size() != data.getPlanDays()){
+                throw new Exception("The number of menus for the plan is insufficient.");
             }
             PlanEntity planEntity = new PlanEntity();
             planEntity.setIdUser(idUser);
@@ -124,22 +126,28 @@ public class PlanService implements PlanServiceInterface {
             for(int day = 0; day < data.getPlanDays(); day++){
                 MenuEntity menuEntity = new MenuEntity();
                 menuEntity.setIdPlan(planEntity.getId());
-                menuEntity.setDay("Day " + (day + 1));
+                menuEntity.setDay("Day " + data.getMenus().get(day).getDay());
                 menuRepository.save(menuEntity);
                 for (int token = 0; token < timeOfDay.size(); token ++) {
+                    if (data.getMenus().get(day).getRecipes().size() != 3){
+                        throw new Exception("The number of menus for the plan is insufficient.");
+                    }
+                    RecipeRequest tmp = data.getMenus().get(day).getRecipes().get(token);
                     MealEntity mealEntity = new MealEntity();
                     mealEntity.setIdMenu(menuEntity.getId());
                     mealEntity.setTime(timeOfDay.get(token));
                     mealRepository.save(mealEntity);
 
                     MealRecipeEntityPK mealRecipeEntityPK = new MealRecipeEntityPK();
-                    mealRecipeEntityPK.setIdRecipe(data.getRecipes().get(token).getIdRecipe());
-                    mealRecipeEntityPK.setMeal(mealEntity);
+                    mealRecipeEntityPK.setIdRecipe(tmp.getIdRecipe());
+                    mealRecipeEntityPK.setMealId(mealEntity.getId());
                     MealRecipeEntity mealRecipeEntity = new MealRecipeEntity();
                     mealRecipeEntity.setId(mealRecipeEntityPK);
+                    mealRecipeRepository.save(mealRecipeEntity);
                 }
             }
-            return new Response<>(true, 201, planEntity.toPlanModel(), "", "");
+            PlanModel result = planRepository.findById(planEntity.getId()).get().toPlanModel();
+            return new Response<>(true, 201, result, "", "");
         }
         catch (Throwable t){
             return new Response<>(false, 400, null, "", t.toString());

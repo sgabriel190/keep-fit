@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 public class MealEntity {
     @Id
     @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "ID_menu")
@@ -28,7 +29,7 @@ public class MealEntity {
         this.id = id;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

@@ -5,12 +5,13 @@ import java.util.List;
 public final class UserPlanRequest {
     private final String description;
     private final Integer planDays;
-    private final List<RecipeRequest> recipes;
+    private final List<DailyMenuRequest> menus;
 
-    public UserPlanRequest(String description, Integer planDays, List<RecipeRequest> recipes){
+
+    public UserPlanRequest(String description, Integer planDays, List<DailyMenuRequest> menus){
         this.description = description;
         this.planDays = planDays;
-        this.recipes = recipes;
+        this.menus = menus;
     }
 
     public String getDescription() {
@@ -21,7 +22,7 @@ public final class UserPlanRequest {
         return planDays;
     }
 
-    public List<RecipeRequest> getRecipes() {
-        return recipes;
+    public List<DailyMenuRequest> getMenus() {
+        return menus;
     }
 }

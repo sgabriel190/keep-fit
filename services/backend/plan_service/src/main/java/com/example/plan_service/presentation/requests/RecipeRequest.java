@@ -1,7 +1,11 @@
 package com.example.plan_service.presentation.requests;
 
 public final class RecipeRequest {
-    private final Integer idRecipe;
+    private Integer idRecipe;
+
+    public RecipeRequest() {
+
+    }
 
     public RecipeRequest(Integer idRecipe) {
         this.idRecipe = idRecipe;
@@ -9,5 +13,9 @@ public final class RecipeRequest {
 
     public Integer getIdRecipe() {
         return idRecipe;
+    }
+
+    public void setIdRecipe(Integer idRecipe) {
+        this.idRecipe = idRecipe;
     }
 }
