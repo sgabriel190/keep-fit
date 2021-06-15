@@ -11,8 +11,8 @@ class UserRowMapper: RowMapper<UserEntity?> {
     override fun mapRow(resultSet: ResultSet, rowNum: Int):UserEntity{
         return UserEntity(
             id = resultSet.getString("ID")!!.toInt(),
-            userName = resultSet.getString("username"),
-            passWord = resultSet.getString("password"),
+            username = resultSet.getString("username"),
+            password = resultSet.getString("password"),
             email = resultSet.getString("email"),
             idUserDetails = resultSet.getString("ID_user_details")!!.toInt(),
             idDietPlan = resultSet.getString("ID_diet_plan")!!.toInt()

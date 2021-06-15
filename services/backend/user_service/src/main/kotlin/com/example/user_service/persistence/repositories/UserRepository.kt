@@ -1,17 +1,15 @@
 package com.example.user_service.persistence.repositories
 
 import com.example.user_service.persistence.entities.UserEntity
-import com.example.user_service.persistence.models.UserModel
-import com.example.user_service.persistence.interfaces.RepositoryInterface
 import com.example.user_service.persistence.interfaces.UserRepositoryInterface
+import com.example.user_service.persistence.models.UserModel
 import com.example.user_service.persistence.row_mappers.UserRowMapper
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.jdbc.core.JdbcTemplate
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource
 import org.springframework.stereotype.Repository
 
 @Repository
-class UserRepository: RepositoryInterface<UserEntity, UserModel>, UserRepositoryInterface {
+class UserRepository: UserRepositoryInterface {
 
     @Autowired
     private lateinit var jdbcTemplate: JdbcTemplate
@@ -31,8 +29,8 @@ class UserRepository: RepositoryInterface<UserEntity, UserModel>, UserRepository
         this.jdbcTemplate.update(sqlQuery, "test", "test", "test", 1, 1)
         return UserEntity(
             id = 1,
-            userName = "test",
-            passWord = "test",
+            username = "test",
+            password = "test",
             email = "test",
             idUserDetails = 1,
             idDietPlan = 1

@@ -2,18 +2,14 @@ package com.example.user_service.presentation.controllers
 
 import com.example.user_service.business.interfaces.AuthenticationServiceInterface
 import com.example.user_service.business.interfaces.UserServiceInterface
-import com.example.user_service.persistence.models.UserModel
-import com.example.user_service.presentation.requests.LoginRequest
-import com.example.user_service.presentation.requests.LogoutRequest
-import com.example.user_service.presentation.requests.RegisterRequest
-import com.example.user_service.presentation.responses.HTTPResponse
-import com.example.user_service.presentation.responses.LoginResponse
-import com.example.user_service.presentation.responses.LogoutResponse
-import com.example.user_service.presentation.responses.RegisterResponse
+import com.example.user_service.presentation.http.MyError
+import com.example.user_service.presentation.http.Response
+import com.example.user_service.presentation.business_models.LoginRequest
+import com.example.user_service.presentation.business_models.LogoutRequest
+import com.example.user_service.presentation.business_models.RegisterRequest
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -28,43 +24,47 @@ class UserController {
 
     @RequestMapping("/logIn", method=[RequestMethod.POST])
     @ResponseBody
-    fun login(@RequestBody data: LoginRequest): ResponseEntity<HTTPResponse>{
+    fun login(@RequestBody data: LoginRequest): ResponseEntity<Any>{
         val response = authenticationServiceInterface.signIn(data.username, data.password)
         return ResponseEntity.status(response.code).body(response)
     }
 
     @RequestMapping("/ping", method=[RequestMethod.GET])
     @ResponseBody
-    fun ping(): ResponseEntity<HTTPResponse>{
+    fun ping(): ResponseEntity<Any>{
         return ResponseEntity
             .status(HttpStatus.OK)
-            .body(HTTPResponse(true, HttpStatus.OK.value(), data=null))
+            .body(Response(successfulOperation = true, code = 200, data = null))
     }
 
     @RequestMapping("/register", method=[RequestMethod.PUT])
     @ResponseBody
-    fun register(@RequestBody data: RegisterRequest): ResponseEntity<HTTPResponse>{
-        val userData = UserModel(
-            username = data.username,
-            password = data.password,
-            email = data.email
-        )
-        val result = userService.register(userData)
-        val responseCode = if(result) HttpStatus.CREATED else HttpStatus.BAD_REQUEST
-        return ResponseEntity
-            .status(responseCode)
-            .body(HTTPResponse(result, responseCode.value()))
+    fun register(@RequestBody data: RegisterRequest): ResponseEntity<Any>{
+        val result = userService.register(data)
+        return if ( result.successfulOperation ){
+            ResponseEntity
+                .status(result.code)
+                .body(result)
+        } else {
+            ResponseEntity
+                .status(result.code)
+                .body(MyError(code = result.code, error = result.error, info = result.message))
+        }
     }
 
     @RequestMapping("/logout", method=[RequestMethod.POST])
     @ResponseBody
-    fun logout(@RequestBody data: LogoutRequest): ResponseEntity<LogoutResponse>{
-        return ResponseEntity.status(HttpStatus.OK).body(LogoutResponse(idUser = 10))
+    fun logout(@RequestBody data: LogoutRequest): ResponseEntity<Any>{
+        return ResponseEntity
+            .status(HttpStatus.OK)
+            .body(Response(successfulOperation = true, code = 204, data = null))
     }
 
-    @RequestMapping("/delete_user", method=[RequestMethod.DELETE])
+    @RequestMapping("/user/{id}", method=[RequestMethod.DELETE])
     @ResponseBody
-    fun deleteUser(): ResponseEntity<String>{
-        return ResponseEntity.status(HttpStatus.OK).body("Delete user")
+    fun deleteUser(@PathVariable id: Int): ResponseEntity<Any>{
+        return ResponseEntity
+            .status(HttpStatus.OK)
+            .body(Response(successfulOperation = true, code = 204, data = null))
     }
 }
