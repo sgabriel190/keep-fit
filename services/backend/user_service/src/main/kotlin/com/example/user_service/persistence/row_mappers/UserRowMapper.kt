@@ -11,11 +11,11 @@ class UserRowMapper: RowMapper<UserEntity?> {
     override fun mapRow(resultSet: ResultSet, rowNum: Int):UserEntity{
         return UserEntity(
             id = resultSet.getString("ID")!!.toInt(),
-            username = resultSet.getString("username"),
-            password = resultSet.getString("password"),
+            userName = resultSet.getString("username").toString(),
+            passWord = resultSet.getString("password").toString(),
             email = resultSet.getString("email"),
-            idUserDetails = resultSet.getString("ID_user_details")!!.toInt(),
-            idDietPlan = resultSet.getString("ID_diet_plan")!!.toInt()
+            idUserDetails = resultSet.getString("ID_user_details")?.toInt(),
+            targetCalories = resultSet.getString("target_calories")!!.toInt()
         )
     }
 }

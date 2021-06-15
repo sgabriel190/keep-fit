@@ -14,63 +14,46 @@ class UserRepository: UserRepositoryInterface {
     @Autowired
     private lateinit var jdbcTemplate: JdbcTemplate
 
-    override fun getById(id: Int): UserEntity {
+    override fun getById(id: Int): UserEntity? {
         val sqlQuery = "SELECT * " +
                 "FROM users " +
                 "WHERE ID = $id"
-        val result = this.jdbcTemplate.queryForObject(sqlQuery, UserRowMapper())
-        return result!!
+        return jdbcTemplate.queryForObject(sqlQuery, UserRowMapper())
     }
 
-    override fun updateById(id: Int): UserEntity {
+    override fun updateById(id: Int, data: UserModel): UserEntity? {
         val sqlQuery = "UPDATE users " +
-                "SET username = ?, password = ?, email = ?, ID_user_details, ID_diet_plan = ? " +
+                "SET username = ?, password = ?, email = ?, ID_user_details, target_calories = ? " +
                 "WHERE ID = $id"
-        this.jdbcTemplate.update(sqlQuery, "test", "test", "test", 1, 1)
-        return UserEntity(
-            id = 1,
-            username = "test",
-            password = "test",
-            email = "test",
-            idUserDetails = 1,
-            idDietPlan = 1
-        )
+        this.jdbcTemplate.update(sqlQuery, data.username, data.password, data.email, data.idUserDetails, data.targetCalories)
+        return this.getById(id)
     }
 
-    override fun insertData(data: UserModel): Boolean {
-        return try{
-            val sqlQuery = "INSERT INTO users(username, password, email) VALUES (?, ?, ?)"
-            jdbcTemplate.update(sqlQuery, data.username, data.password, data.email)
-            true
-        } catch (e: Throwable){
-            println("Error Insert!")
-            false
-        }
+    override fun insertData(data: UserModel) {
+        val sqlQuery = "INSERT INTO users(username, password, email, target_calories) VALUES (?, ?, ?, ?)"
+        jdbcTemplate.update(sqlQuery, data.username, data.password, data.email, data.targetCalories)
     }
 
-    override fun deleteById(id: Int): Boolean {
-        return try{
-            val sqlQueryDelete = "DELETE FROM users WHERE ID = ?"
-            jdbcTemplate.update(sqlQueryDelete, id)
-            true
-        }
-        catch (e: Throwable){
-            println("Error Delete!")
-            false
-        }
+    override fun deleteById(id: Int) {
+        val sqlQueryDelete = "DELETE FROM users WHERE ID = ?"
+        jdbcTemplate.update(sqlQueryDelete, id)
     }
 
     override fun getByUsername(username: String): UserEntity? {
         val sqlQueryGetByName = "SELECT * FROM users WHERE username = ?"
-        return jdbcTemplate.queryForObject(sqlQueryGetByName,
+        return jdbcTemplate.queryForObject(
+            sqlQueryGetByName,
             UserRowMapper(),
-            username)
+            username
+        )
     }
 
     override fun getByEmail(email: String): UserEntity? {
         val sqlQueryGetByEmail = "SELECT * FROM users WHERE email = ?"
-        return jdbcTemplate.queryForObject(sqlQueryGetByEmail,
+        return jdbcTemplate.queryForObject(
+            sqlQueryGetByEmail,
             UserRowMapper(),
-            email)
+            email
+        )
     }
 }
