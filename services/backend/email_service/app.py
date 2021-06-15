@@ -22,9 +22,11 @@ def send_email():
     data: dict = request.json
     if data is None:
         raise Exception("No data sent to the operation.")
-    if 'message' not in data or 'to' not in data:
+    if 'message' not in data or \
+            'to' not in data or \
+            'subject' not in data:
         raise Exception("The data is not formatted correctly.")
-    smtp_connection.send_email(data["to"], data["message"])
+    smtp_connection.send_email(data["to"], data["message"], data["subject"])
     return jsonify(None), 204
 
 
@@ -38,5 +40,6 @@ def handle_exception(err):
 if __name__ == '__main__':
     try:
         app.run()
+        smtp_connection.close_connection()
     except Exception as exc:
         smtp_connection.close_connection()
