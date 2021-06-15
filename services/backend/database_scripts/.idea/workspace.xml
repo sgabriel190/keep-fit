@@ -2,18 +2,39 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2980abcb-0aa4-4b9d-b9c8-c6433d4e5abf" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../plan_service/src/main/java/com/example/plan_service/presentation/requests/DailyMenuRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plan_service/plan.db" beforeDir="false" afterPath="$PROJECT_DIR$/../plan_service/plan.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plan_service/src/main/java/com/example/plan_service/business/services/PlanService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../plan_service/src/main/java/com/example/plan_service/business/services/PlanService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plan_service/src/main/java/com/example/plan_service/persistence/entities/MealEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../plan_service/src/main/java/com/example/plan_service/persistence/entities/MealEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plan_service/src/main/java/com/example/plan_service/persistence/entities/MealRecipeEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../plan_service/src/main/java/com/example/plan_service/persistence/entities/MealRecipeEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plan_service/src/main/java/com/example/plan_service/persistence/entities/MealRecipeEntityPK.java" beforeDir="false" afterPath="$PROJECT_DIR$/../plan_service/src/main/java/com/example/plan_service/persistence/entities/MealRecipeEntityPK.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plan_service/src/main/java/com/example/plan_service/persistence/entities/MenuEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../plan_service/src/main/java/com/example/plan_service/persistence/entities/MenuEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plan_service/src/main/java/com/example/plan_service/persistence/entities/PlanEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../plan_service/src/main/java/com/example/plan_service/persistence/entities/PlanEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plan_service/src/main/java/com/example/plan_service/persistence/pojo/MealRecipeModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../plan_service/src/main/java/com/example/plan_service/persistence/pojo/MealRecipeModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plan_service/src/main/java/com/example/plan_service/persistence/repositories/MealRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../plan_service/src/main/java/com/example/plan_service/persistence/repositories/MealRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plan_service/src/main/java/com/example/plan_service/presentation/requests/RecipeRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../plan_service/src/main/java/com/example/plan_service/presentation/requests/RecipeRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plan_service/src/main/java/com/example/plan_service/presentation/requests/UserPlanRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../plan_service/src/main/java/com/example/plan_service/presentation/requests/UserPlanRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/business/interfaces/AuthServiceInterface.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/business/services/AuthService.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/presentation/controllers/AuthenticationController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../documentation/keep-fit-diagrams.drawio" beforeDir="false" afterPath="$PROJECT_DIR$/../../../documentation/keep-fit-diagrams.drawio" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logger/log.info" beforeDir="false" afterPath="$PROJECT_DIR$/logger/log.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nutrition.db" beforeDir="false" afterPath="$PROJECT_DIR$/nutrition.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plan.db" beforeDir="false" afterPath="$PROJECT_DIR$/plan.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sql_scripts/user/create_tables_user.sql" beforeDir="false" afterPath="$PROJECT_DIR$/sql_scripts/user/create_tables_user.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sql_scripts/user/insert_data_user.sql" beforeDir="false" afterPath="$PROJECT_DIR$/sql_scripts/user/insert_data_user.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user.db" beforeDir="false" afterPath="$PROJECT_DIR$/user.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user_service/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../user_service/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/business/interfaces/AuthenticationServiceInterface.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/business/interfaces/UserServiceInterface.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/business/interfaces/UserServiceInterface.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/business/security/CustomUserDetails.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/business/security/jwt/InvalidJwtAuthenticationException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/business/security/jwt/JwtAuthenticationEntryPoint.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/business/security/jwt/JwtProperties.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/business/security/jwt/JwtSecurityConfigurer.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/business/security/jwt/JwtTokenAuthenticationFilter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/business/security/jwt/JwtTokenProvider.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/business/services/AuthenticationService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/business/services/UserService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/business/services/UserService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/persistence/entities/UserEntity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/persistence/entities/UserEntity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/persistence/interfaces/RepositoryInterface.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/persistence/interfaces/RepositoryInterface.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/persistence/models/UserModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/persistence/models/UserModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/persistence/repositories/UserRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/persistence/repositories/UserRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/persistence/row_mappers/UserRowMapper.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/persistence/row_mappers/UserRowMapper.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/presentation/business_models/LogoutRequest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/presentation/business_models/LogoutRequest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/presentation/business_models/RegisterRequest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/presentation/business_models/RegisterRequest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/presentation/config/SecurityConfig.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/presentation/controllers/UserController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/presentation/controllers/UserController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user_service/user.db" beforeDir="false" afterPath="$PROJECT_DIR$/../user_service/user.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,6 +128,7 @@
       <workItem from="1622963331889" duration="11712000" />
       <workItem from="1622992897121" duration="423000" />
       <workItem from="1623583358741" duration="23000" />
+      <workItem from="1623766111146" duration="1064000" />
     </task>
     <servers />
   </component>
@@ -143,7 +165,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/database_scripts$create_database.coverage" NAME="create-database Coverage Results" MODIFIED="1614776108029" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/database_scripts$create_databases.coverage" NAME="create-databases Coverage Results" MODIFIED="1622984082371" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/database_scripts$create_databases.coverage" NAME="create-databases Coverage Results" MODIFIED="1623766562841" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/database_scripts$create_database_nutrition.coverage" NAME="create-databases Coverage Results" MODIFIED="1616339618191" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

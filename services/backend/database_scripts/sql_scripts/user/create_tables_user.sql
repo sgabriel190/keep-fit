@@ -6,3 +6,14 @@ CREATE TABLE IF NOT EXISTS users(
                                     ID_user_details integer,
                                     target_calories integer
 );
+
+CREATE TABLE IF NOT EXISTS role(
+                                    ID integer PRIMARY KEY,
+                                    role text NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS user_role(
+                                    ID_role integer NOT NULL,
+                                    ID_user integer NOT NULL
+);
+
