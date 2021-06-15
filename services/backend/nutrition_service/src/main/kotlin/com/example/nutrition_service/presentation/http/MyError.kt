@@ -4,8 +4,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 data class MyError(
-    var code: Int,
-    var error: String,
-    var info: String,
-    var timestamp: String = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Date())
+    val code: Int,
+    val error: String,
+    val info: String,
+    val timestamp: String = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Date())
 )
