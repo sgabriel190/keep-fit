@@ -1,4 +1,6 @@
 package com.example.orchestrator_service.business.services
 
-class OrchestratorService {
+import com.example.orchestrator_service.business.interfaces.OrchestratorServiceInterface
+
+class OrchestratorService: OrchestratorServiceInterface {
 }

@@ -11,9 +11,9 @@ abstract class HttpConsumerServiceInterface {
         }
     }
 
-    abstract suspend fun get(): Response<Any>
-    abstract suspend fun post(): Response<Any>
-    abstract suspend fun put(): Response<Any>
-    abstract suspend fun delete(): Response<Any>
-    abstract suspend fun patch(): Response<Any>
+    abstract suspend fun get(path: String): Response<Any>
+    abstract suspend fun post(path: String): Response<Any>
+    abstract suspend fun put(path: String): Response<Any>
+    abstract suspend fun delete(path: String): Response<Any>
+    abstract suspend fun patch(path: String): Response<Any>
 }

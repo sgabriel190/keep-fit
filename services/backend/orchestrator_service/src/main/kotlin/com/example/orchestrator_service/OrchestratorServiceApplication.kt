@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class OrchestratorServiceApplication
 
 fun main(args: Array<String>) {
-    runApplication<OrchestratorServiceApplication>(*args)
+	runApplication<OrchestratorServiceApplication>(*args)
 }

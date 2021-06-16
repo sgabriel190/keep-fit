@@ -1,11 +1,11 @@
-package com.example.orchestrator_service.business.services
+package com.example.orchestrator_service.business.consumers
 
 import com.example.orchestrator_service.business.interfaces.HttpConsumerServiceInterface
 import com.example.orchestrator_service.presentation.http.Response
 import io.ktor.client.request.*
-import org.springframework.stereotype.Service
+import org.springframework.stereotype.Component
 
-@Service
+@Component
 class UserConsumerService: HttpConsumerServiceInterface() {
 
     private val host: String = "http://localhost:2020/api/users"

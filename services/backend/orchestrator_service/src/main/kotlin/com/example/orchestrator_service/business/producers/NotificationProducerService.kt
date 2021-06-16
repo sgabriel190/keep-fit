@@ -1,9 +1,11 @@
-package com.example.orchestrator_service.business.services
+package com.example.orchestrator_service.business.producers
 
 import com.example.orchestrator_service.business.interfaces.HttpConsumerServiceInterface
 import com.example.orchestrator_service.presentation.http.Response
 import io.ktor.client.request.*
+import org.springframework.stereotype.Component
 
+@Component
 class NotificationProducerService: HttpConsumerServiceInterface() {
 
     private val host: String = "http://localhost:2020/api/notification"
