@@ -7,4 +7,5 @@ interface UserRepositoryInterface: RepositoryInterface<UserEntity, UserModel> {
     fun getByUsername(username: String): UserEntity?
     fun getByEmail(email: String): UserEntity?
     fun updateCalories(calories: Int, id: Int)
+    fun updatePlanId(idUserDetails: Int, id: Int)
 }

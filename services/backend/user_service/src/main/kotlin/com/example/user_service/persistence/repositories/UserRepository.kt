@@ -61,4 +61,9 @@ class UserRepository: UserRepositoryInterface {
         val sqlQueryUpdateCalories = "UPDATE users SET target_calories = ? WHERE id = ?"
         jdbcTemplate.update(sqlQueryUpdateCalories, calories, id)
     }
+
+    override fun updatePlanId(idUserDetails: Int, id: Int) {
+        val sqlQueryUpdatePlanId = "UPDATE users SET ID_user_details = ? WHERE id = ?"
+        jdbcTemplate.update(sqlQueryUpdatePlanId, idUserDetails, id)
+    }
 }

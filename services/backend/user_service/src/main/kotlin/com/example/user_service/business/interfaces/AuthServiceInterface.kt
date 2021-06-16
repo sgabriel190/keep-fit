@@ -9,4 +9,5 @@ import com.example.user_service.presentation.http.Response
 interface AuthServiceInterface {
     fun login(username: String, password: String): Response<AuthenticationResponse>
     fun register(data: RegisterRequest): Response<RegisterResponse>
+    fun validateToken(token: String): Response<Boolean>
 }

@@ -61,4 +61,17 @@ class AuthService: AuthServiceInterface {
             Response(successfulOperation = false, code = 400, data = null, error = t.toString())
         }
     }
+
+    override fun validateToken(token: String): Response<Boolean> {
+        return try {
+            val isValid = jwtTokenProvider.validateToken(token)
+            if (isValid) {
+                Response(successfulOperation = true, code = 200, data = true)
+            } else {
+                throw Exception("Token is expired.")
+            }
+        } catch (t: Throwable){
+            Response(successfulOperation = false, code = 400, data = null, error = t.toString())
+        }
+    }
 }

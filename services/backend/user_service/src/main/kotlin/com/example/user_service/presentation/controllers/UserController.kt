@@ -105,4 +105,26 @@ class UserController {
                 ))
         }
     }
+
+    @RequestMapping("/user/{id}/details/{idUserDetails}", method=[RequestMethod.PATCH])
+    @ResponseBody
+    fun updatePlanId(
+        @PathVariable id: Int,
+        @PathVariable idUserDetails: Int,
+        @RequestHeader(name="Authorization") token: String): ResponseEntity<Any>{
+        val result = userService.updatePlanId(idUserDetails, id, token.split(" ")[1])
+        return if (result.successfulOperation){
+            ResponseEntity
+                .status(result.code)
+                .body(result)
+        } else {
+            ResponseEntity
+                .status(result.code)
+                .body(MyError(
+                    code = result.code,
+                    error = result.error,
+                    info = result.message
+                ))
+        }
+    }
 }

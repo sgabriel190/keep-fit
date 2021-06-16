@@ -109,4 +109,23 @@ class UserService: UserServiceInterface {
         }
     }
 
+    override fun updatePlanId(idUserDetails: Int, id: Int, token: String): Response<UserModel> {
+        return try {
+            val claims = tokenProvider.getClaims(token)
+            if (claims["id"] != id){
+                throw Exception("Can't do this operation on another user!")
+            }
+            userRepository.updatePlanId(idUserDetails, id)
+            val user = userRepository.getById(id) ?: throw Exception("User not found.")
+            Response(successfulOperation = true, code = 200, data = user.toUserModel())
+        } catch (t: Throwable){
+            Response(
+                successfulOperation = false,
+                code = 400,
+                error = t.toString(),
+                data = null
+            )
+        }
+    }
+
 }

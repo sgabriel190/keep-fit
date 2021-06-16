@@ -47,4 +47,19 @@ class AuthenticationController {
                 .body(MyError(code = result.code, error = result.error, info = result.message))
         }
     }
+
+    @RequestMapping("/validate", method=[RequestMethod.POST])
+    @ResponseBody
+    fun validate(@RequestHeader(name="Authorization") token: String): ResponseEntity<Any>{
+        val result = authService.validateToken(token.split(" ")[1])
+        return if (result.successfulOperation) {
+            ResponseEntity
+                .status(result.code)
+                .body(result)
+        } else {
+            ResponseEntity
+                .status(result.code)
+                .body(MyError(code = result.code, error = result.error, info = result.message))
+        }
+    }
 }

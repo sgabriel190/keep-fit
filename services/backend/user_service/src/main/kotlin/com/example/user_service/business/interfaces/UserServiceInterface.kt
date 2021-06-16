@@ -10,4 +10,5 @@ interface UserServiceInterface {
     fun forgotPassword(data: ForgotPasswordRequest, token: String): Response<ForgotPasswordResponse>
     fun getUser(id: Int, token: String): Response<UserModel>
     fun updateCalories(calories: Int, id: Int, token: String): Response<UserModel>
+    fun updatePlanId(idUserDetails: Int, id: Int, token: String): Response<UserModel>
 }
