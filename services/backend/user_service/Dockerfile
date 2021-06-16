@@ -11,4 +11,4 @@ WORKDIR ./app
 EXPOSE 8080/tcp
 COPY --from=build /app .
 RUN apk add openjdk8
-CMD java -jar ./build/libs/user_service-0.0.1-SNAPSHOT.jar
+CMD ./gradlew bootRun

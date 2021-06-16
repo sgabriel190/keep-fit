@@ -1,6 +1,6 @@
 package com.example.user_service.business.security.jwt
 
-import com.example.user_service.presentation.responses.HTTPResponse
+import com.example.user_service.presentation.http.MyError
 import com.google.gson.Gson
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.filter.GenericFilterBean
@@ -11,28 +11,27 @@ import javax.servlet.ServletRequest
 import javax.servlet.ServletResponse
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
-import kotlin.jvm.Throws
 
-class JwtTokenAuthenticationFilter(private val jwtTokenProvider: JwtTokenProvider): GenericFilterBean() {
+class JwtTokenAuthenticationFilter(private val jwtTokenProvider: JwtTokenProvider) : GenericFilterBean()  {
     @Throws(IOException::class, ServletException::class)
-    override fun doFilter(request: ServletRequest?, response: ServletResponse?, chain: FilterChain?) {
+    override fun doFilter(req: ServletRequest, res: ServletResponse, filterChain: FilterChain) {
         try{
-            val token = jwtTokenProvider.resolveToken((request as HttpServletRequest))
+            val token = jwtTokenProvider.resolveToken((req as HttpServletRequest))
             if (token != null && jwtTokenProvider.validateToken(token)) {
                 val auth = jwtTokenProvider.getAuthentication(token)
                 SecurityContextHolder.getContext().authentication = auth
             }
-            chain?.doFilter(request, response)
+            filterChain.doFilter(req, res)
         } catch (e: InvalidJwtAuthenticationException){
-            val resp = response as HttpServletResponse
+            val resp = res as HttpServletResponse
             resp.contentType = "application/json"
             resp.characterEncoding = "UTF-8"
-            val text = Gson().toJson(HTTPResponse(false, 401, { "message" to "Provided Information is Invalid. JWT is invalid/expired. Request a new JWT, maybe :)"}))
+            val text = Gson().toJson(MyError(401, "Provided Information is Invalid. JWT is invalid/expired", "Request a new JWT, maybe :)"))
             resp.addHeader("SC_UNAUTHORIZED", "Provided Information is Invalid");
             resp.status = 401
             resp.writer.print(text)
             resp.writer.close()
         }
-    }
 
+    }
 }

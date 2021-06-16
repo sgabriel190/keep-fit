@@ -39,7 +39,7 @@ def handle_exception(err):
 
 if __name__ == '__main__':
     try:
-        app.run()
+        app.run(host='0.0.0.0')
         smtp_connection.close_connection()
     except Exception as exc:
         smtp_connection.close_connection()

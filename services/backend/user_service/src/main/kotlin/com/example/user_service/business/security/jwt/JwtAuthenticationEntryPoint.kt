@@ -9,16 +9,15 @@ import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 import kotlin.jvm.Throws
 
-
 @Slf4j
 class JwtAuthenticationEntryPoint: AuthenticationEntryPoint {
     @Throws(IOException::class, ServletException::class)
     override fun commence(
-        request: HttpServletRequest?,
-        response: HttpServletResponse?,
-        authException: AuthenticationException?
+        request: HttpServletRequest,
+        response: HttpServletResponse,
+        authException: AuthenticationException
     ) {
         print("Jwt authentication failed:$authException")
-        response?.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Jwt authentication failed")
+        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Jwt authentication failed")
     }
 }
