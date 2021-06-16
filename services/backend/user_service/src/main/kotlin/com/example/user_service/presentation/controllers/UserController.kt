@@ -27,8 +27,29 @@ class UserController {
 
     @RequestMapping("/user/{id}", method=[RequestMethod.DELETE])
     @ResponseBody
-    fun deleteUser(@PathVariable id: Int): ResponseEntity<Any>{
-        val result = userService.deleteUser(id)
+    fun deleteUser(@PathVariable id: Int,
+                   @RequestHeader(name="Authorization") token: String): ResponseEntity<Any>{
+        val result = userService.deleteUser(id, token.split(" ")[1])
+        return if (result.successfulOperation){
+            ResponseEntity
+                .status(result.code)
+                .body(result)
+        } else {
+            ResponseEntity
+                .status(result.code)
+                .body(MyError(
+                    code = result.code,
+                    error = result.error,
+                    info = result.message
+                ))
+        }
+    }
+
+    @RequestMapping("/user/{id}", method=[RequestMethod.GET])
+    @ResponseBody
+    fun getUser(@PathVariable id: Int,
+                @RequestHeader(name="Authorization") token: String): ResponseEntity<Any>{
+        val result = userService.getUser(id, token.split(" ")[1])
         return if (result.successfulOperation){
             ResponseEntity
                 .status(result.code)
@@ -46,8 +67,30 @@ class UserController {
 
     @RequestMapping("/forgotPassword", method=[RequestMethod.POST])
     @ResponseBody
-    fun forgotPassword(@RequestBody data: ForgotPasswordRequest): ResponseEntity<Any>{
-        val result = userService.forgotPassword(data)
+    fun forgotPassword(@RequestBody data: ForgotPasswordRequest,
+                       @RequestHeader(name="Authorization") token: String): ResponseEntity<Any>{
+        val result = userService.forgotPassword(data, token.split(" ")[1])
+        return if (result.successfulOperation){
+            ResponseEntity
+                .status(result.code)
+                .body(result)
+        } else {
+            ResponseEntity
+                .status(result.code)
+                .body(MyError(
+                    code = result.code,
+                    error = result.error,
+                    info = result.message
+                ))
+        }
+    }
+
+    @RequestMapping("/user/{id}/calories", method=[RequestMethod.PATCH])
+    @ResponseBody
+    fun updateCalories(@RequestParam(required = true) value: Int,
+                       @PathVariable id: Int,
+                       @RequestHeader(name="Authorization") token: String): ResponseEntity<Any>{
+        val result = userService.updateCalories(value, id, token.split(" ")[1])
         return if (result.successfulOperation){
             ResponseEntity
                 .status(result.code)

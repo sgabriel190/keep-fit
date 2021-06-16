@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration
 @ConfigurationProperties(prefix = "jwt")
 @Data
 class JwtProperties {
-    val secretKey = "my-darkest-secret"
+    val secretKey = "dsadnaQWDADPQWdqob231uxp!@151213!!!@#!@#i12312QA@!#1!"
 
     //validity in milliseconds
     val validityInMs: Long = 3600000 // 1h

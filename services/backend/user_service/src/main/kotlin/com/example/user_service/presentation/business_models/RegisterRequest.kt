@@ -1,6 +1,8 @@
 package com.example.user_service.presentation.business_models
 
-import com.example.user_service.persistence.models.UserModel
+import com.example.user_service.persistence.entities.UserEntity
+import java.security.MessageDigest
+import javax.xml.bind.DatatypeConverter
 
 data class RegisterRequest(
     val username: String,
@@ -9,9 +11,13 @@ data class RegisterRequest(
     val targetCalories: Int
 )
 
-fun RegisterRequest.toUserModel() = UserModel(
-    username = username,
-    password = password,
+fun RegisterRequest.toUserEntity() = UserEntity(
+    userName = username,
+    passWord = DatatypeConverter.printHexBinary(
+        MessageDigest
+            .getInstance("SHA-256")
+            .digest(password.toByteArray())
+    ),
     email = email,
     targetCalories = targetCalories
 )

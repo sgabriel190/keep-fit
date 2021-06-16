@@ -53,8 +53,8 @@ data class UserEntity(
 
 
 fun UserEntity.toUserModel() = UserModel(
+    id = this.id,
     username = this.userName,
-    password = this.passWord,
     email = this.email,
     idUserDetails = this.idUserDetails,
     targetCalories = this.targetCalories

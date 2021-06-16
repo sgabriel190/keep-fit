@@ -2,12 +2,12 @@ package com.example.user_service.business.services
 
 import com.example.user_service.business.interfaces.AuthServiceInterface
 import com.example.user_service.business.security.jwt.JwtTokenProvider
-import com.example.user_service.persistence.entities.toUserModel
 import com.example.user_service.persistence.interfaces.UserRepositoryInterface
 import com.example.user_service.persistence.models.UserModel
 import com.example.user_service.presentation.business_models.AuthenticationResponse
 import com.example.user_service.presentation.business_models.RegisterRequest
-import com.example.user_service.presentation.business_models.toUserModel
+import com.example.user_service.presentation.business_models.RegisterResponse
+import com.example.user_service.presentation.business_models.toUserEntity
 import com.example.user_service.presentation.http.Response
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.authentication.AuthenticationManager
@@ -45,10 +45,18 @@ class AuthService: AuthServiceInterface {
         }
     }
 
-    override fun register(data: RegisterRequest): Response<UserModel> {
+    override fun register(data: RegisterRequest): Response<RegisterResponse> {
         return try {
-            userRepository.insertData(data.toUserModel())
-            Response(successfulOperation = true, code = 204, data = null)
+            userRepository.insertData(data.toUserEntity())
+            val result = userRepository.getByUsername(data.username) ?: throw Exception("User not found.")
+            Response(
+                successfulOperation = true,
+                code = 201,
+                data = RegisterResponse(
+                    id = result.id,
+                    username = result.userName
+                )
+            )
         } catch (t: Throwable){
             Response(successfulOperation = false, code = 400, data = null, error = t.toString())
         }

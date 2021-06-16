@@ -6,4 +6,5 @@ import com.example.user_service.persistence.models.UserModel
 interface UserRepositoryInterface: RepositoryInterface<UserEntity, UserModel> {
     fun getByUsername(username: String): UserEntity?
     fun getByEmail(email: String): UserEntity?
+    fun updateCalories(calories: Int, id: Int)
 }

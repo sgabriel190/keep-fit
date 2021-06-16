@@ -47,12 +47,4 @@ class AuthenticationController {
                 .body(MyError(code = result.code, error = result.error, info = result.message))
         }
     }
-
-    @RequestMapping("/logout", method=[RequestMethod.POST])
-    @ResponseBody
-    fun logout(@RequestBody data: LogoutRequest): ResponseEntity<Any>{
-        return ResponseEntity
-            .status(HttpStatus.OK)
-            .body(Response(successfulOperation = true, code = 204, data = data.userId))
-    }
 }

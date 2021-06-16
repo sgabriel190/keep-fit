@@ -21,7 +21,7 @@ class UserRepository: UserRepositoryInterface {
         return jdbcTemplate.queryForObject(sqlQuery, UserRowMapper())
     }
 
-    override fun updateById(id: Int, data: UserModel): UserEntity? {
+    override fun updateById(id: Int, data: UserEntity): UserEntity? {
         val sqlQuery = "UPDATE users " +
                 "SET username = ?, password = ?, email = ?, ID_user_details, target_calories = ? " +
                 "WHERE ID = $id"
@@ -29,7 +29,7 @@ class UserRepository: UserRepositoryInterface {
         return this.getById(id)
     }
 
-    override fun insertData(data: UserModel) {
+    override fun insertData(data: UserEntity) {
         val sqlQuery = "INSERT INTO users(username, password, email, target_calories) VALUES (?, ?, ?, ?)"
         jdbcTemplate.update(sqlQuery, data.username, data.password, data.email, data.targetCalories)
     }
@@ -55,5 +55,10 @@ class UserRepository: UserRepositoryInterface {
             UserRowMapper(),
             email
         )
+    }
+
+    override fun updateCalories(calories: Int, id: Int) {
+        val sqlQueryUpdateCalories = "UPDATE users SET target_calories = ? WHERE id = ?"
+        jdbcTemplate.update(sqlQueryUpdateCalories, calories, id)
     }
 }

@@ -27,12 +27,12 @@ class SecurityConfig: WebSecurityConfigurerAdapter() {
 
     @Bean
     fun passwordEncoder(): PasswordEncoder {
-        // return MessageDigestPasswordEncoder("SHA-256")
+        return MessageDigestPasswordEncoder("SHA-256")
 
-        //return PasswordEncoderFactories.createDelegatingPasswordEncoder()
-        return NoOpPasswordEncoder.getInstance()
-        //val passEncoder = StandardPasswordEncoder()
-        //return passEncoder
+        // return PasswordEncoderFactories.createDelegatingPasswordEncoder()
+        // return NoOpPasswordEncoder.getInstance()
+        // val passEncoder = StandardPasswordEncoder()
+        // return passEncoder
     }
 
     @Throws(Exception::class)
@@ -43,7 +43,7 @@ class SecurityConfig: WebSecurityConfigurerAdapter() {
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
             .authorizeRequests()
-            .antMatchers("/api/users/ping", "/api/users/auth/login").permitAll()
+            .antMatchers("/api/users/ping", "/api/users/auth/login", "/api/users/auth/register").permitAll()
             //comment these and uncomment below for jwt guard on all routes
             //.antMatchers(HttpMethod.GET, "/api/**").hasRole("USER")
             //.antMatchers(HttpMethod.DELETE, "/api/**").hasRole("USER")

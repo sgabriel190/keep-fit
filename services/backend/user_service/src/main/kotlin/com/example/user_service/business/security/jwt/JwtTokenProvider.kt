@@ -57,6 +57,10 @@ class JwtTokenProvider {
         return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).body.subject
     }
 
+    fun getClaims(token: String?): Map<String, Any> {
+        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).body.toMap()
+    }
+
     fun resolveToken(req: HttpServletRequest): String? {
         val bearerToken = req.getHeader("Authorization")
         return if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
