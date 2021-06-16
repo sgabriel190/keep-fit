@@ -13,7 +13,7 @@ class UserRowMapper: RowMapper<UserEntity?> {
             id = resultSet.getString("ID")!!.toInt(),
             userName = resultSet.getString("username").toString(),
             passWord = resultSet.getString("password").toString(),
-            email = resultSet.getString("email"),
+            email = resultSet.getString("email").toString(),
             idUserDetails = resultSet.getString("ID_user_details")?.toInt(),
             targetCalories = resultSet.getString("target_calories")!!.toInt()
         )
