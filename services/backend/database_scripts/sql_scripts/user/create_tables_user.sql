@@ -4,7 +4,8 @@ CREATE TABLE IF NOT EXISTS users(
                                     password text NOT NULL,
                                     email text NOT NULL,
                                     ID_user_details integer,
-                                    target_calories integer
+                                    target_calories integer,
+                                    CONSTRAINT unique_constr_username UNIQUE (username)
 );
 
 CREATE TABLE IF NOT EXISTS role(
