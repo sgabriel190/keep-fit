@@ -1,6 +1,5 @@
 package com.example.orchestrator_service.presentation.http
 
-
 data class Response<T>(
     val successfulOperation: Boolean,
     val code: Int,
