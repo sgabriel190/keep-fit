@@ -1,0 +1,17 @@
+name: Merge backend changes to main
+
+on:
+  push:
+    branches: 'backend*'
+
+jobs:
+  merge-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Merge backend branches into main
+        uses: devmasx/merge-branch@v1.3.1
+        with:
+          type: now
+          target_branch: backend-kf-1.0
+          github_token: ${{ github.token }}
