@@ -6,9 +6,9 @@ import com.example.user_service.presentation.business_models.ForgotPasswordRespo
 import com.example.user_service.presentation.http.Response
 
 interface UserServiceInterface {
-    fun deleteUser(id: Int, token: String): Response<Any>
+    fun deleteUser(token: String): Response<Any>
     fun forgotPassword(data: ForgotPasswordRequest, token: String): Response<ForgotPasswordResponse>
-    fun getUser(id: Int, token: String): Response<UserModel>
-    fun updateCalories(calories: Int, id: Int, token: String): Response<UserModel>
-    fun updatePlanId(idUserDetails: Int, id: Int, token: String): Response<UserModel>
+    fun getUser(token: String): Response<UserModel>
+    fun updateCalories(calories: Int, token: String): Response<UserModel>
+    fun updatePlanId(idUserDetails: Int, token: String): Response<UserModel>
 }
