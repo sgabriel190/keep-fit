@@ -2,7 +2,7 @@ package com.example.orchestrator_service.business.services
 
 import com.example.orchestrator_service.business.consumers.UserConsumerService
 import com.example.orchestrator_service.business.interfaces.OrchestratorServiceInterface
-import com.example.orchestrator_service.business.models.LoginRequest
+import com.example.orchestrator_service.business.models.user.LoginRequest
 import com.example.orchestrator_service.presentation.http.Response
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
