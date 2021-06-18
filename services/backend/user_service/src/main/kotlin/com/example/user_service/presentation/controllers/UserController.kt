@@ -2,7 +2,6 @@ package com.example.user_service.presentation.controllers
 
 import com.example.user_service.business.interfaces.UserServiceInterface
 import com.example.user_service.presentation.business_models.ForgotPasswordRequest
-import com.example.user_service.presentation.business_models.LogoutRequest
 import com.example.user_service.presentation.http.MyError
 import com.example.user_service.presentation.http.Response
 import org.springframework.beans.factory.annotation.Autowired
@@ -25,11 +24,10 @@ class UserController {
             .body(Response(successfulOperation = true, code = 200, data = null))
     }
 
-    @RequestMapping("/user/{id}", method=[RequestMethod.DELETE])
+    @RequestMapping("/user", method=[RequestMethod.DELETE])
     @ResponseBody
-    fun deleteUser(@PathVariable id: Int,
-                   @RequestHeader(name="Authorization") token: String): ResponseEntity<Any>{
-        val result = userService.deleteUser(id, token.split(" ")[1])
+    fun deleteUser(@RequestHeader(name="Authorization") token: String): ResponseEntity<Any>{
+        val result = userService.deleteUser(token.split(" ")[1])
         return if (result.successfulOperation){
             ResponseEntity
                 .status(result.code)
@@ -45,11 +43,10 @@ class UserController {
         }
     }
 
-    @RequestMapping("/user/{id}", method=[RequestMethod.GET])
+    @RequestMapping("/user", method=[RequestMethod.GET])
     @ResponseBody
-    fun getUser(@PathVariable id: Int,
-                @RequestHeader(name="Authorization") token: String): ResponseEntity<Any>{
-        val result = userService.getUser(id, token.split(" ")[1])
+    fun getUser(@RequestHeader(name="Authorization") token: String): ResponseEntity<Any>{
+        val result = userService.getUser(token.split(" ")[1])
         return if (result.successfulOperation){
             ResponseEntity
                 .status(result.code)
@@ -85,12 +82,11 @@ class UserController {
         }
     }
 
-    @RequestMapping("/user/{id}/calories", method=[RequestMethod.PATCH])
+    @RequestMapping("/user/calories", method=[RequestMethod.PATCH])
     @ResponseBody
     fun updateCalories(@RequestParam(required = true) value: Int,
-                       @PathVariable id: Int,
                        @RequestHeader(name="Authorization") token: String): ResponseEntity<Any>{
-        val result = userService.updateCalories(value, id, token.split(" ")[1])
+        val result = userService.updateCalories(value, token.split(" ")[1])
         return if (result.successfulOperation){
             ResponseEntity
                 .status(result.code)
@@ -106,13 +102,12 @@ class UserController {
         }
     }
 
-    @RequestMapping("/user/{id}/details/{idUserDetails}", method=[RequestMethod.PATCH])
+    @RequestMapping("/user/details/{idUserDetails}", method=[RequestMethod.PATCH])
     @ResponseBody
     fun updatePlanId(
-        @PathVariable id: Int,
         @PathVariable idUserDetails: Int,
         @RequestHeader(name="Authorization") token: String): ResponseEntity<Any>{
-        val result = userService.updatePlanId(idUserDetails, id, token.split(" ")[1])
+        val result = userService.updatePlanId(idUserDetails, token.split(" ")[1])
         return if (result.successfulOperation){
             ResponseEntity
                 .status(result.code)

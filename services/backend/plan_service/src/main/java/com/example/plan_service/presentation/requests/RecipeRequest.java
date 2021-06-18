@@ -1,21 +1,23 @@
 package com.example.plan_service.presentation.requests;
 
+import java.util.List;
+
 public final class RecipeRequest {
-    private Integer idRecipe;
+    private List<Integer> recipesId;
 
     public RecipeRequest() {
 
     }
 
-    public RecipeRequest(Integer idRecipe) {
-        this.idRecipe = idRecipe;
+    public RecipeRequest(List<Integer> recipesId) {
+        this.recipesId = recipesId;
     }
 
-    public Integer getIdRecipe() {
-        return idRecipe;
+    public List<Integer> getRecipesId() {
+        return recipesId;
     }
 
-    public void setIdRecipe(Integer idRecipe) {
-        this.idRecipe = idRecipe;
+    public void setRecipesId(List<Integer> recipesId) {
+        this.recipesId = recipesId;
     }
 }

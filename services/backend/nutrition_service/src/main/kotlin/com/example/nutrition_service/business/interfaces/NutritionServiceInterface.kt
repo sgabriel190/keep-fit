@@ -10,6 +10,7 @@ interface NutritionServiceInterface {
 
     // Recipes CRUD operations
     fun getRecipe(id: Int): Response<RecipeModel>
+    fun getRecipeByCalories(calories: Int): Response<RecipeLiteModel>
     fun getRecipes(pag: Int = 1, items: Int = 10): Response<List<RecipeLiteModel>>
     fun getRecipeByCategoryId(idCategory: Int, pag: Int, items: Int): Response<List<RecipeLiteModel>>
     fun getRecipeByCategoryName(nameCategory: String, pag: Int, items: Int): Response<List<RecipeLiteModel>>
@@ -20,4 +21,6 @@ interface NutritionServiceInterface {
     // Categories CRUD operations
     fun getCategories(): Response<List<CategoryModel>>
     fun getCategory(id: Int): Response<CategoryModel>
+
+    fun createMenu(caloriesThreshold: Int, size: Int = 3): Response<Any>
 }

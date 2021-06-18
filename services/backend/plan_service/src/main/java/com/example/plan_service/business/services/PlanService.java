@@ -139,11 +139,13 @@ public class PlanService implements PlanServiceInterface {
                     mealRepository.save(mealEntity);
 
                     MealRecipeEntityPK mealRecipeEntityPK = new MealRecipeEntityPK();
-                    mealRecipeEntityPK.setIdRecipe(tmp.getIdRecipe());
-                    mealRecipeEntityPK.setMealId(mealEntity.getId());
-                    MealRecipeEntity mealRecipeEntity = new MealRecipeEntity();
-                    mealRecipeEntity.setId(mealRecipeEntityPK);
-                    mealRecipeRepository.save(mealRecipeEntity);
+                    for (Integer idRecipe: tmp.getRecipesId()){
+                        mealRecipeEntityPK.setIdRecipe(idRecipe);
+                        mealRecipeEntityPK.setMealId(mealEntity.getId());
+                        MealRecipeEntity mealRecipeEntity = new MealRecipeEntity();
+                        mealRecipeEntity.setId(mealRecipeEntityPK);
+                        mealRecipeRepository.save(mealRecipeEntity);
+                    }
                 }
             }
             PlanModel result = planRepository.findById(planEntity.getId()).get().toPlanModel();

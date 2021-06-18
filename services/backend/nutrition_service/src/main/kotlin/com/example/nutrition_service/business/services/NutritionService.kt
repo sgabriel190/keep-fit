@@ -6,10 +6,10 @@ import com.example.nutrition_service.persistence.interfaces.NutritionDAOInterfac
 import com.example.nutrition_service.persistence.pojos.*
 import com.example.nutrition_service.persistence.tables.*
 import com.example.nutrition_service.presentation.http.Response
-import org.jetbrains.exposed.sql.and
-import org.jetbrains.exposed.sql.select
+import org.jetbrains.exposed.sql.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import kotlin.random.Random
 
 
 @Service
@@ -69,10 +69,42 @@ class NutritionService: NutritionServiceInterface {
         }
     }
 
+    override fun getRecipeByCalories(calories: Int): Response<RecipeLiteModel> {
+        return try {
+            val result = nutritionDAO.executeQuery {
+                val size = Recipes
+                    .join(Nutrients, JoinType.INNER, Nutrients.id, Recipes.idNutrients)
+                    .select { Nutrients.calories lessEq calories.toFloat() + 50F and
+                            (Nutrients.calories greaterEq calories.toFloat() - 50F) }
+                    .count()
+                Recipes
+                    .join(Nutrients, JoinType.INNER, Nutrients.id, Recipes.idNutrients)
+                    .select { Nutrients.calories lessEq calories.toFloat() + 50F and
+                            (Nutrients.calories greaterEq calories.toFloat() - 50F) }
+                    .let { Recipe.wrapRows(it) }
+                    .limit(10, Random.nextLong(0, size))
+                    .toList()
+                    .map {
+                        it.toRecipeLiteModel()
+                    }
+                    .random()
+            }
+            Response(data = result, code = 200, successfulOperation = true)
+        } catch (t: Throwable){
+            Response(successfulOperation = false, data = null, code = 400, error = t.toString())
+        }
+    }
+
     override fun getRecipes(pag: Int, items: Int): Response<List<RecipeLiteModel>> {
         return try {
             val result = nutritionDAO.executeQuery {
-                Recipe.all().limit(items, ((pag - 1) * items).toLong()).toList().map { it.toRecipeLiteModel() }
+                Recipe
+                    .all()
+                    .limit(items, ((pag - 1) * items).toLong())
+                    .toList()
+                    .map {
+                        it.toRecipeLiteModel()
+                    }
             }
             Response(data = result, code = 200, successfulOperation = true)
         } catch (t: Throwable){
@@ -151,6 +183,35 @@ class NutritionService: NutritionServiceInterface {
             Response(data = result, code = 200, successfulOperation = true)
         } catch (t: Throwable){
             Response(successfulOperation = false, data = null, code = 400, error = t.toString())
+        }
+    }
+
+    override fun createMenu(caloriesThreshold: Int, size: Int): Response<Any> {
+        try {
+            val threshold = Random.nextInt(caloriesThreshold - 50, caloriesThreshold + 50)
+            val result = mutableListOf<Float>()
+            result.add(0F)
+            result.add(1F)
+            result.add(Random.nextDouble(0.2, 0.4).toFloat())
+            (1 until size - 1).forEach { _ ->
+                var tmp = Random.nextDouble(0.4, 1.0).toFloat()
+                while( tmp - result[result.size - 1] < 0.2 || tmp - result[result.size - 1] > 0.4){
+                    tmp = Random.nextDouble(0.4, 1.0).toFloat()
+                }
+                result.add(tmp)
+            }
+            result.sort()
+            val tmp = result
+                .subList(1, result.size)
+                .mapIndexed { index, it -> it - result[index] }
+                .map {
+                    it * threshold
+                }.map {
+                    this.getRecipeByCalories(it.toInt()).data!!
+                }
+            return Response(successfulOperation = true, data = tmp, code = 200)
+        } catch (t: Throwable){
+            return Response(successfulOperation = false, data = null, code = 400, error = t.toString())
         }
     }
 }

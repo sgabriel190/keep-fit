@@ -1,0 +1,1056 @@
+{
+	"info": {
+		"_postman_id": "403d30d6-52bc-4c54-a72a-2bba2b96e419",
+		"name": "Keep fit",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Backend",
+			"item": [
+				{
+					"name": "User service",
+					"item": [
+						{
+							"name": "Health",
+							"item": [
+								{
+									"name": "Ping",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:2022/api/users/ping",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "2022",
+											"path": [
+												"api",
+												"users",
+												"ping"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Auth",
+							"item": [
+								{
+									"name": "Login",
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "",
+												"value": "",
+												"type": "text",
+												"disabled": true
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"username\": \"vasile\",\n    \"password\": \"enachi\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/users/auth/login",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"users",
+												"auth",
+												"login"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Register",
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"username\": \"test\",\n    \"password\": \"12343335\",\n    \"email\": \"test@gmail.com\",\n    \"targetCalories\": 2000\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/users/auth/register",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"users",
+												"auth",
+												"register"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Validate token",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2YXNpbGUiLCJpZCI6NCwidXNlcm5hbWUiOiJ2YXNpbGUiLCJlbWFpbCI6InZhc2lsZS5lbmFjaGlAZ21haWwuY29tIiwicm9sZXMiOlsidXNlciJdLCJpYXQiOjE2MjM4Nzc2MjQsImV4cCI6MTYyMzg4MTIyNH0.Tv3kwRltAY79eXKAaiNmszH8IWzBpza7Kmhur484v9M",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/users/auth/validate",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"users",
+												"auth",
+												"validate"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "User",
+							"item": [
+								{
+									"name": "Delete user",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2YXNpbGUiLCJpZCI6NCwidXNlcm5hbWUiOiJ2YXNpbGUiLCJlbWFpbCI6InZhc2lsZS5lbmFjaGlAZ21haWwuY29tIiwicm9sZXMiOlsidXNlciJdLCJpYXQiOjE2MjM4NDA5MTksImV4cCI6MTYyMzg0NDUxOX0.ISs94oe7FDTtcWaLmmJQLlfPRJ2tCa2_o7vRxptKbvA",
+													"type": "string"
+												}
+											]
+										},
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/users/user",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"users",
+												"user"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Forgot password",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2YXNpbGUiLCJpZCI6NCwidXNlcm5hbWUiOiJ2YXNpbGUiLCJlbWFpbCI6InZhc2lsZS5lbmFjaGlAZ21haWwuY29tIiwicm9sZXMiOlsidXNlciJdLCJpYXQiOjE2MjM4NDA5MTksImV4cCI6MTYyMzg0NDUxOX0.ISs94oe7FDTtcWaLmmJQLlfPRJ2tCa2_o7vRxptKbvA",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2YXNpbGUiLCJpZCI6NCwidXNlcm5hbWUiOiJ2YXNpbGUiLCJlbWFpbCI6InZhc2lsZS5lbmFjaGlAZ21haWwuY29tIiwicm9sZXMiOlsidXNlciJdLCJpYXQiOjE2MjM3ODQ5MjUsImV4cCI6MTYyMzc4ODUyNX0._q1Cb_24u-NkKSX3cAM4bUKxPbjp7nKRVBSUeomMXVo",
+												"type": "text",
+												"disabled": true
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"username\": \"vasile\",\n    \"email\": \"vasile.enachi@gmail.com\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/users/forgotPassword",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"users",
+												"forgotPassword"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get user",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2YXNpbGUiLCJpZCI6NCwidXNlcm5hbWUiOiJ2YXNpbGUiLCJlbWFpbCI6InZhc2lsZS5lbmFjaGlAZ21haWwuY29tIiwicm9sZXMiOlsidXNlciJdLCJpYXQiOjE2MjM4NDU4NzYsImV4cCI6MTYyMzg0OTQ3Nn0.Z7SsEi3JwDIAcbFGXL86xyI_YZnAmMbUF1Lem8arSq8",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/users/user",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"users",
+												"user"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update taget calories",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2YXNpbGUiLCJpZCI6NCwidXNlcm5hbWUiOiJ2YXNpbGUiLCJlbWFpbCI6InZhc2lsZS5lbmFjaGlAZ21haWwuY29tIiwicm9sZXMiOlsidXNlciJdLCJpYXQiOjE2MjM4NDU4NzYsImV4cCI6MTYyMzg0OTQ3Nn0.Z7SsEi3JwDIAcbFGXL86xyI_YZnAmMbUF1Lem8arSq8",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PATCH",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/users/user/calories?value=2100",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"users",
+												"user",
+												"calories"
+											],
+											"query": [
+												{
+													"key": "value",
+													"value": "2100"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update user details",
+									"request": {
+										"method": "PATCH",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/users/user/details/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"users",
+												"user",
+												"details",
+												"1"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Plan service",
+					"item": [
+						{
+							"name": "Health",
+							"item": [
+								{
+									"name": "Ping",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:2021/api/planning/ping",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "2021",
+											"path": [
+												"api",
+												"planning",
+												"ping"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Plan",
+							"item": [
+								{
+									"name": "Get meals",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/planning/meal",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"planning",
+												"meal"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get meal recipe",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/planning/mealRecipe",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"planning",
+												"mealRecipe"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get plans",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/planning/plan",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"planning",
+												"plan"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get menus",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/planning/menu",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"planning",
+												"menu"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get user plan",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/planning/plan/user/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"planning",
+												"plan",
+												"user",
+												"1"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create user plan",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"description\": \"test description\",\n    \"planDays\": 5,\n    \"menus\": [\n        {\n            \"day\": 1,\n            \"recipes\": [\n                {\n                    \"recipesId\": [1]\n                },\n                {\n                    \"recipesId\": [1]\n                },\n                {\n                    \"recipesId\": [1]\n                }\n            ]\n        },\n        {\n            \"day\": 2,\n            \"recipes\": [\n                {\n                    \"recipesId\": [1]\n                },\n                {\n                    \"recipesId\": [1]\n                },\n                {\n                    \"recipesId\": [1]\n                }\n            ]\n        },\n        {\n            \"day\": 3,\n            \"recipes\": [\n                {\n                    \"recipesId\": [1]\n                },\n                {\n                    \"recipesId\": [1]\n                },\n                {\n                    \"recipesId\": [1]\n                }\n            ]\n        },\n        {\n            \"day\": 4,\n            \"recipes\": [\n                {\n                    \"recipesId\": [1]\n                },\n                {\n                    \"recipesId\": [1]\n                },\n                {\n                    \"recipesId\": [1]\n                }\n            ]\n        },\n        {\n            \"day\": 5,\n            \"recipes\": [\n                {\n                    \"recipesId\": [1]\n                },\n                {\n                    \"recipesId\": [1]\n                },\n                {\n                    \"recipesId\": [1]\n                }\n            ]\n        }\n    ]\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/planning/plan/user/2",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"planning",
+												"plan",
+												"user",
+												"2"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Nutrition service",
+					"item": [
+						{
+							"name": "Health",
+							"item": [
+								{
+									"name": "Ping",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:2020/api/nutrition/ping",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "2020",
+											"path": [
+												"api",
+												"nutrition",
+												"ping"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "User nutrition detail",
+							"item": [
+								{
+									"name": "Get activity types",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/nutrition/userDetails/activityType",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"nutrition",
+												"userDetails",
+												"activityType"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get activity type",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/nutrition/userDetails/activityType/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"nutrition",
+												"userDetails",
+												"activityType",
+												"1"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Recipes",
+							"item": [
+								{
+									"name": "Get instruction",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:2020/api/nutrition/instruction/136",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "2020",
+											"path": [
+												"api",
+												"nutrition",
+												"instruction",
+												"136"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get instructions",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:2020/api/nutrition/recipe/instruction/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "2020",
+											"path": [
+												"api",
+												"nutrition",
+												"recipe",
+												"instruction",
+												"1"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get recipe",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/nutrition/recipe/991",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"nutrition",
+												"recipe",
+												"991"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get image",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:2020/api/nutrition/image/2-Ingredient Blueberry Nice Cream/blueberrybanananicecream-4-500x375.jpg",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "2020",
+											"path": [
+												"api",
+												"nutrition",
+												"image",
+												"2-Ingredient Blueberry Nice Cream",
+												"blueberrybanananicecream-4-500x375.jpg"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get categories",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/nutrition/recipe/category",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"nutrition",
+												"recipe",
+												"category"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get category",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/nutrition/recipe/category/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"nutrition",
+												"recipe",
+												"category",
+												"1"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get recipes",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/nutrition/recipe?calories=400",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"nutrition",
+												"recipe"
+											],
+											"query": [
+												{
+													"key": "categoryId",
+													"value": "1",
+													"disabled": true
+												},
+												{
+													"key": "categoryName",
+													"value": "Dinner",
+													"disabled": true
+												},
+												{
+													"key": "pagNumber",
+													"value": "3",
+													"disabled": true
+												},
+												{
+													"key": "pagSize",
+													"value": "5",
+													"disabled": true
+												},
+												{
+													"key": "calories",
+													"value": "400"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get image",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/nutrition/image/poli/index.png",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"nutrition",
+												"image",
+												"poli",
+												"index.png"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get user details",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/nutrition/userDetails/10",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"nutrition",
+												"userDetails",
+												"10"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Add user details",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"id\": 10,\n    \"age\": 22,\n    \"height\": 200,\n    \"weight\": 200,\n    \"calories\": 1000,\n    \"bmi\": 2000,\n    \"idActivityType\": 99\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/nutrition/userDetails",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"nutrition",
+												"userDetails"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create menu",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"calories\": 2000\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/nutrition/menu",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"nutrition",
+												"menu"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Notification service",
+					"item": [
+						{
+							"name": "Health",
+							"item": [
+								{
+									"name": "Ping",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:2030/api/notification/ping",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "2030",
+											"path": [
+												"api",
+												"notification",
+												"ping"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Notification",
+							"item": [
+								{
+									"name": "Sent email",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"message\": \"<html><b>test</b></html>\",\n    \"to\": \"gabriel.strilciuc@student.tuiasi.ro\",\n    \"subject\": \"Test\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5000/api/notification/send/mail",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"api",
+												"notification",
+												"send",
+												"mail"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Orchestrator service",
+					"item": [
+						{
+							"name": "Health",
+							"item": [
+								{
+									"name": "Ping",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/backend/ping",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"backend",
+												"ping"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Backend",
+							"item": [
+								{
+									"name": "User login",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"username\": \"vasile\",\n    \"password\":  \"enachi\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/backend/login",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"backend",
+												"login"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "User register",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/backend/register",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"backend",
+												"register"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create user plan",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/backend/user/plan",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"backend",
+												"user",
+												"plan"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}
