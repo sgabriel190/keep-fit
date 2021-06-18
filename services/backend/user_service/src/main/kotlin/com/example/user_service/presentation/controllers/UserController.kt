@@ -2,7 +2,6 @@ package com.example.user_service.presentation.controllers
 
 import com.example.user_service.business.interfaces.UserServiceInterface
 import com.example.user_service.presentation.business_models.ForgotPasswordRequest
-import com.example.user_service.presentation.business_models.LogoutRequest
 import com.example.user_service.presentation.http.MyError
 import com.example.user_service.presentation.http.Response
 import org.springframework.beans.factory.annotation.Autowired

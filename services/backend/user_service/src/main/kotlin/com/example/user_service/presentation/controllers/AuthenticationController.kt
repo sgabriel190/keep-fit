@@ -2,12 +2,9 @@ package com.example.user_service.presentation.controllers
 
 import com.example.user_service.business.interfaces.AuthServiceInterface
 import com.example.user_service.presentation.business_models.LoginRequest
-import com.example.user_service.presentation.business_models.LogoutRequest
 import com.example.user_service.presentation.business_models.RegisterRequest
 import com.example.user_service.presentation.http.MyError
-import com.example.user_service.presentation.http.Response
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
