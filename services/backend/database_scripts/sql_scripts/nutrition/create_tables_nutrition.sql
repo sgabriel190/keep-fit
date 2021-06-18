@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS macronutrients(
 
 CREATE TABLE IF NOT EXISTS nutrients(
                                         ID integer PRIMARY KEY,
-                                        calories text NOT NULL,
+                                        calories float NOT NULL,
                                         ID_macronutrients integer NOT NULL,
                                         FOREIGN KEY (ID_macronutrients) references macronutrients(ID)
 );

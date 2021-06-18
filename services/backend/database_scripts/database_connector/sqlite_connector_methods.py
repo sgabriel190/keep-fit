@@ -87,7 +87,7 @@ def insert_data(connection: Connection, data: List[Dict]) -> None:
         # Nutrients TABLE
         if 'calories' in temp_data:
             sql_query_nutrients = 'INSERT INTO nutrients(ID, calories, ID_macronutrients) VALUES(?, ?, ?)'
-            sql_parameters_nutrients = (idx, temp_data['calories'], idx)
+            sql_parameters_nutrients = (idx, float(temp_data['calories'].split(" ")[0]), idx)
         else:
             continue
 
