@@ -5,8 +5,12 @@ import com.example.orchestrator_service.business.config.setBodyJson
 import com.example.orchestrator_service.business.config.setQueryParams
 import com.example.orchestrator_service.business.interfaces.HttpConsumerServiceInterface
 import com.example.orchestrator_service.presentation.http.Response
+import io.ktor.client.call.*
 import io.ktor.client.request.*
+import io.ktor.client.statement.*
+import io.ktor.http.*
 import org.springframework.stereotype.Component
+import java.awt.Image
 
 @Component
 class NutritionConsumerService: HttpConsumerServiceInterface() {
@@ -17,6 +21,11 @@ class NutritionConsumerService: HttpConsumerServiceInterface() {
         val response: Response<Any> =  client.get("$host/$path"){
             this.setQueryParams(reqParam)
         }
+        return response
+    }
+
+    suspend fun getImage(path: String): ByteArray {
+        val response: ByteArray = client.get("$host/$path")
         return response
     }
 
