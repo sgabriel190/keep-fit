@@ -40,8 +40,7 @@ class AuthService: AuthServiceInterface {
                 data = authResponse
             )
         } catch (t: Throwable){
-            return Response(successfulOperation = false, code = 400, data = null, error = t.toString()
-            )
+            return Response(successfulOperation = false, code = 400, data = null, error = t.toString(), message = t.message?: "")
         }
     }
 
@@ -58,7 +57,7 @@ class AuthService: AuthServiceInterface {
                 )
             )
         } catch (t: Throwable){
-            Response(successfulOperation = false, code = 400, data = null, error = t.toString())
+            Response(successfulOperation = false, code = 400, data = null, error = t.toString(), message = t.message?: "")
         }
     }
 
@@ -71,7 +70,7 @@ class AuthService: AuthServiceInterface {
                 throw Exception("Token is expired.")
             }
         } catch (t: Throwable){
-            Response(successfulOperation = false, code = 400, data = null, error = t.toString())
+            Response(successfulOperation = false, code = 400, data = null, error = t.toString(), message = t.message?: "")
         }
     }
 }

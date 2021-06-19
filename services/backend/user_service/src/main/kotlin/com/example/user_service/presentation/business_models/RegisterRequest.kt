@@ -17,7 +17,7 @@ fun RegisterRequest.toUserEntity() = UserEntity(
         MessageDigest
             .getInstance("SHA-256")
             .digest(password.toByteArray())
-    ),
+    ).toLowerCase(),
     email = email,
     targetCalories = targetCalories
 )

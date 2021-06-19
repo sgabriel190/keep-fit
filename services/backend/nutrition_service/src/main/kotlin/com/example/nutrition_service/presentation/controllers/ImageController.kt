@@ -6,10 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType
 import org.springframework.http.MediaTypeFactory
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestMethod
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.scheduling.annotation.Async
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api/nutrition/image")
@@ -17,7 +15,9 @@ class ImageController {
     @Autowired
     lateinit var imageService: ImageServiceInterface
 
+    @Async
     @RequestMapping(value = ["/{dirName}/{imageName}"], method = [RequestMethod.GET])
+    @ResponseBody
     fun getImage(@PathVariable dirName: String, @PathVariable imageName: String): ResponseEntity<Any?> {
         val response = imageService.getImage(dirName, imageName)
         return if (response.successfulOperation) {
