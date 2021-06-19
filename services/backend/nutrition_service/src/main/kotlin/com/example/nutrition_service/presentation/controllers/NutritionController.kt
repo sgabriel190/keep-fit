@@ -4,6 +4,7 @@ import com.example.nutrition_service.business.interfaces.NutritionServiceInterfa
 import com.example.nutrition_service.persistence.repositories.NutritionDAO
 import com.example.nutrition_service.presentation.business_models.CreateMenu
 import com.example.nutrition_service.presentation.http.MyError
+import com.example.nutrition_service.presentation.http.Response
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -22,7 +23,7 @@ class NutritionController {
     @RequestMapping(value = ["/ping"], method = [RequestMethod.GET])
     @ResponseBody
     fun ping(): ResponseEntity<Any> {
-        return ResponseEntity.status(HttpStatus.OK).body(null)
+        return ResponseEntity.status(HttpStatus.OK).body(Response(successfulOperation = true, data = null, code = 200))
     }
 
     @Async
