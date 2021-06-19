@@ -7,6 +7,7 @@ import com.example.nutrition_service.presentation.http.MyError
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.scheduling.annotation.Async
 import org.springframework.web.bind.annotation.*
 import javax.websocket.server.PathParam
 
@@ -17,12 +18,16 @@ class NutritionController {
     @Autowired
     lateinit var nutritionService: NutritionServiceInterface
 
+    @Async
     @RequestMapping(value = ["/ping"], method = [RequestMethod.GET])
+    @ResponseBody
     fun ping(): ResponseEntity<Any> {
         return ResponseEntity.status(HttpStatus.OK).body(null)
     }
 
+    @Async
     @RequestMapping(value = ["/instruction/{id}"], method = [RequestMethod.GET])
+    @ResponseBody
     fun getInstruction(@PathVariable id: Int): ResponseEntity<Any> {
         val response = nutritionService.getInstruction(id)
         return if (response.successfulOperation) {
@@ -32,7 +37,9 @@ class NutritionController {
         }
     }
 
+    @Async
     @RequestMapping(value = ["/recipe/instruction/{idRecipe}"], method = [RequestMethod.GET])
+    @ResponseBody
     fun getInstructions(@PathVariable idRecipe: Int): ResponseEntity<Any> {
         val response = nutritionService.getInstructions(idRecipe)
         return if (response.successfulOperation) {
@@ -42,7 +49,9 @@ class NutritionController {
         }
     }
 
+    @Async
     @RequestMapping(value = ["/recipe/{id}"], method = [RequestMethod.GET])
+    @ResponseBody
     fun getRecipe(@PathVariable id: Int): ResponseEntity<Any> {
         val response = nutritionService.getRecipe(id)
         return if (response.successfulOperation) {
@@ -52,7 +61,9 @@ class NutritionController {
         }
     }
 
+    @Async
     @RequestMapping(value = ["/recipe/image/{idRecipe}"], method = [RequestMethod.GET])
+    @ResponseBody
     fun getImages(@PathVariable idRecipe: Int): ResponseEntity<Any> {
         val response = nutritionService.getImages(idRecipe)
         return if (response.successfulOperation) {
@@ -62,7 +73,9 @@ class NutritionController {
         }
     }
 
+    @Async
     @RequestMapping(value = ["/recipe/category"], method = [RequestMethod.GET])
+    @ResponseBody
     fun getCategories(): ResponseEntity<Any> {
         val response = nutritionService.getCategories()
         return if (response.successfulOperation) {
@@ -72,7 +85,9 @@ class NutritionController {
         }
     }
 
+    @Async
     @RequestMapping(value = ["/recipe/category/{id}"], method = [RequestMethod.GET])
+    @ResponseBody
     fun getCategory(@PathVariable id: Int): ResponseEntity<Any> {
         val response = nutritionService.getCategory(id)
         return if (response.successfulOperation) {
@@ -82,7 +97,9 @@ class NutritionController {
         }
     }
 
+    @Async
     @RequestMapping(value = ["/recipe"], method = [RequestMethod.GET])
+    @ResponseBody
     fun getRecipesByParam(@RequestParam(required = false) categoryId: Int?,
                           @RequestParam(required = false) categoryName: String?,
                           @RequestParam(required = false) pagNumber: Int?,
@@ -109,7 +126,9 @@ class NutritionController {
         }
     }
 
+    @Async
     @RequestMapping(value = ["/menu"], method = [RequestMethod.GET])
+    @ResponseBody
     fun createMenu(@RequestBody data: CreateMenu, @RequestParam(required = false) size: Int?): ResponseEntity<Any> {
         val response = nutritionService.createMenu(data.calories)
         return if (response.successfulOperation){
