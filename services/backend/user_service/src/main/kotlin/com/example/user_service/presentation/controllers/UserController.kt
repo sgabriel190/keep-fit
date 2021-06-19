@@ -7,6 +7,7 @@ import com.example.user_service.presentation.http.Response
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.scheduling.annotation.Async
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -16,6 +17,7 @@ class UserController {
     @Autowired
     private lateinit var userService: UserServiceInterface
 
+    @Async
     @RequestMapping("/ping", method=[RequestMethod.GET])
     @ResponseBody
     fun ping(): ResponseEntity<Any>{
@@ -24,6 +26,7 @@ class UserController {
             .body(Response(successfulOperation = true, code = 200, data = null))
     }
 
+    @Async
     @RequestMapping("/user", method=[RequestMethod.DELETE])
     @ResponseBody
     fun deleteUser(@RequestHeader(name="Authorization") token: String): ResponseEntity<Any>{
@@ -43,6 +46,7 @@ class UserController {
         }
     }
 
+    @Async
     @RequestMapping("/user", method=[RequestMethod.GET])
     @ResponseBody
     fun getUser(@RequestHeader(name="Authorization") token: String): ResponseEntity<Any>{
@@ -62,6 +66,7 @@ class UserController {
         }
     }
 
+    @Async
     @RequestMapping("/forgotPassword", method=[RequestMethod.POST])
     @ResponseBody
     fun forgotPassword(@RequestBody data: ForgotPasswordRequest,
@@ -82,6 +87,7 @@ class UserController {
         }
     }
 
+    @Async
     @RequestMapping("/user/calories", method=[RequestMethod.PATCH])
     @ResponseBody
     fun updateCalories(@RequestParam(required = true) value: Int,
@@ -102,6 +108,7 @@ class UserController {
         }
     }
 
+    @Async
     @RequestMapping("/user/details/{idUserDetails}", method=[RequestMethod.PATCH])
     @ResponseBody
     fun updatePlanId(

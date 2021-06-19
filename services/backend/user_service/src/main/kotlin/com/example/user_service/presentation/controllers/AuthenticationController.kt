@@ -6,6 +6,7 @@ import com.example.user_service.presentation.business_models.RegisterRequest
 import com.example.user_service.presentation.http.MyError
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
+import org.springframework.scheduling.annotation.Async
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -15,6 +16,7 @@ class AuthenticationController {
     @Autowired
     lateinit var authService: AuthServiceInterface
 
+    @Async
     @RequestMapping("/register", method=[RequestMethod.PUT])
     @ResponseBody
     fun register(@RequestBody data: RegisterRequest): ResponseEntity<Any> {
@@ -30,6 +32,7 @@ class AuthenticationController {
         }
     }
 
+    @Async
     @RequestMapping("/login", method=[RequestMethod.POST])
     @ResponseBody
     fun login(@RequestBody data: LoginRequest): ResponseEntity<Any>{
@@ -45,6 +48,7 @@ class AuthenticationController {
         }
     }
 
+    @Async
     @RequestMapping("/validate", method=[RequestMethod.POST])
     @ResponseBody
     fun validate(@RequestHeader(name="Authorization") token: String): ResponseEntity<Any>{
