@@ -1,9 +1,10 @@
 package com.example.nutrition_service.presentation.business_models
 
-data class CreateMenu(
-    val calories: Int
+data class CreateMeal(
+    val calories: Int,
+    val size: Int
 ){
-    constructor(): this(calories = 0) {
+    constructor(): this(calories = 0, size = 0) {
 
     }
 }

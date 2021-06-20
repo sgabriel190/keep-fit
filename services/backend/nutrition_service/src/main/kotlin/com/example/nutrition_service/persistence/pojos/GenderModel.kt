@@ -1,3 +1,6 @@
 package com.example.nutrition_service.persistence.pojos
 
-data class GenderModel()
+data class GenderModel(
+    val id: Int,
+    val name: String
+)

@@ -1,13 +1,10 @@
 package com.example.nutrition_service.business.interfaces
 
 import com.example.nutrition_service.persistence.pojos.*
+import com.example.nutrition_service.presentation.business_models.CreateMeal
 import com.example.nutrition_service.presentation.http.Response
 
 interface NutritionServiceInterface {
-    // Instructions CRUD operations
-    fun getInstruction(id: Int): Response<InstructionModel>
-    fun getInstructions(idRecipe: Int): Response<List<InstructionModel>>
-
     // Recipes CRUD operations
     fun getRecipe(id: Int): Response<RecipeModel>
     fun getRecipeByCalories(calories: Int): Response<RecipeLiteModel>
@@ -22,5 +19,5 @@ interface NutritionServiceInterface {
     fun getCategories(): Response<List<CategoryModel>>
     fun getCategory(id: Int): Response<CategoryModel>
 
-    fun createMenu(caloriesThreshold: Int, size: Int = 3): Response<Any>
+    fun createMenu(data: CreateMeal): Response<Any>
 }

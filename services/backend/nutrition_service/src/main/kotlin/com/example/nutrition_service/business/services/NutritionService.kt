@@ -1,10 +1,12 @@
 package com.example.nutrition_service.business.services
 
 import com.example.nutrition_service.business.interfaces.NutritionServiceInterface
+import com.example.nutrition_service.business.interfaces.UtilsInterface
 import com.example.nutrition_service.persistence.entities.*
 import com.example.nutrition_service.persistence.interfaces.NutritionDAOInterface
 import com.example.nutrition_service.persistence.pojos.*
 import com.example.nutrition_service.persistence.tables.*
+import com.example.nutrition_service.presentation.business_models.CreateMeal
 import com.example.nutrition_service.presentation.http.Response
 import org.jetbrains.exposed.sql.*
 import org.springframework.beans.factory.annotation.Autowired
@@ -16,29 +18,6 @@ import kotlin.random.Random
 class NutritionService: NutritionServiceInterface {
     @Autowired
     lateinit var nutritionDAO: NutritionDAOInterface
-
-    // Instructions CRUD operations
-    override fun getInstruction(id: Int): Response<InstructionModel> {
-        return try {
-            val result = nutritionDAO.executeQuery {
-                Instruction.findById(id)!!.toInstructionModel()
-            }
-            Response(data = result, code = 200, successfulOperation = true)
-        } catch (t: Throwable){
-            Response(successfulOperation = false, data = null, code = 400, error = t.toString())
-        }
-    }
-
-    override fun getInstructions(idRecipe: Int): Response<List<InstructionModel>> {
-        return try {
-            val result = nutritionDAO.executeQuery {
-                Instruction.find { Instructions.idRecipe eq idRecipe }.toList().map { it.toInstructionModel() }
-            }
-            Response(data = result, code = 200, successfulOperation = true)
-        } catch (t: Throwable){
-            Response(successfulOperation = false, data = null, code = 400, error = t.toString())
-        }
-    }
 
     // Recipes CRUD operations
     override fun getRecipe(id: Int): Response<RecipeModel> {
@@ -52,6 +31,9 @@ class NutritionService: NutritionServiceInterface {
             val instructionResult = nutritionDAO.executeQuery {
                 Instruction.find { Instructions.idRecipe eq id }.toList().map { it.toInstructionModel() }
             }
+            val ingredientsResult = nutritionDAO.executeQuery {
+                Ingredient.find { Ingredients.idRecipe eq id }.toList().map { it.toIngredientModel() }
+            }
             val result = RecipeModel(
                 nutrients = recipeResult.nutrients,
                 timeTotal = recipeResult.timeTotal,
@@ -60,7 +42,8 @@ class NutritionService: NutritionServiceInterface {
                 keywords = recipeResult.keywords,
                 categories = recipeResult.categories,
                 images = imageResult,
-                instructions = instructionResult
+                instructions = instructionResult,
+                ingredients = ingredientsResult
             )
             return Response(data = result, code = 200, successfulOperation = true)
         }
@@ -186,30 +169,39 @@ class NutritionService: NutritionServiceInterface {
         }
     }
 
-    override fun createMenu(caloriesThreshold: Int, size: Int): Response<Any> {
+    override fun createMenu(data: CreateMeal): Response<Any> {
         try {
-            val threshold = Random.nextInt(caloriesThreshold - 50, caloriesThreshold + 50)
-            val result = mutableListOf<Float>()
-            result.add(0F)
-            result.add(1F)
-            result.add(Random.nextDouble(0.2, 0.4).toFloat())
-            (1 until size - 1).forEach { _ ->
-                var tmp = Random.nextDouble(0.4, 1.0).toFloat()
-                while( tmp - result[result.size - 1] < 0.2 || tmp - result[result.size - 1] > 0.4){
-                    tmp = Random.nextDouble(0.4, 1.0).toFloat()
+            val threshold = Random.nextInt(data.calories - 50, data.calories + 50)
+            if(data.size >= 2){
+                val result = mutableListOf<Float>()
+                result.add(0F)
+                result.add(1F)
+                result.add(Random.nextDouble(0.2, 0.4).toFloat())
+                (1 until data.size - 1).forEach { _ ->
+                    var tmp = Random.nextDouble(0.4, 1.0).toFloat()
+                    while( tmp - result[result.size - 1] < 0.2 || tmp - result[result.size - 1] > 0.4){
+                        tmp = Random.nextDouble(0.4, 1.0).toFloat()
+                    }
+                    result.add(tmp)
                 }
-                result.add(tmp)
+                result.sort()
+                val tmp = result
+                    .subList(1, result.size)
+                    .mapIndexed { index, it -> it - result[index] }
+                    .map {
+                        it * threshold
+                    }.map {
+                        this.getRecipeByCalories(it.toInt()).data!!
+                    }
+                return Response(successfulOperation = true, data = tmp, code = 200)
+            } else {
+                if (data.size <= 0) {
+                    throw Exception("Incorrect number of recipes in a meal.")
+                }
+                val result = this.getRecipeByCalories(threshold)
+                return Response(successfulOperation = true, data = result, code = 200)
             }
-            result.sort()
-            val tmp = result
-                .subList(1, result.size)
-                .mapIndexed { index, it -> it - result[index] }
-                .map {
-                    it * threshold
-                }.map {
-                    this.getRecipeByCalories(it.toInt()).data!!
-                }
-            return Response(successfulOperation = true, data = tmp, code = 200)
+
         } catch (t: Throwable){
             return Response(successfulOperation = false, data = null, code = 400, error = t.toString())
         }

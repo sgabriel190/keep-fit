@@ -2,10 +2,7 @@ package com.example.nutrition_service.persistence.entities
 
 import com.example.nutrition_service.persistence.pojos.RecipeLiteModel
 import com.example.nutrition_service.persistence.pojos.RecipeModel
-import com.example.nutrition_service.persistence.tables.Images
-import com.example.nutrition_service.persistence.tables.Instructions
-import com.example.nutrition_service.persistence.tables.RecipeToCategories
-import com.example.nutrition_service.persistence.tables.Recipes
+import com.example.nutrition_service.persistence.tables.*
 import org.jetbrains.exposed.dao.IntEntity
 import org.jetbrains.exposed.dao.IntEntityClass
 import org.jetbrains.exposed.dao.id.EntityID
@@ -29,7 +26,8 @@ fun Recipe.toRecipeModel(): RecipeModel{
         keywords = this.keywords,
         categories = this.categories.toList().map { it.toCategoryModel() },
         images = null,
-        instructions = null
+        instructions = null,
+        ingredients = null
     )
 }
 
