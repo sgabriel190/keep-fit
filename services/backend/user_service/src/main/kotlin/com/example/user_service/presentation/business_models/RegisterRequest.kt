@@ -7,8 +7,7 @@ import javax.xml.bind.DatatypeConverter
 data class RegisterRequest(
     val username: String,
     val password: String,
-    val email: String,
-    val targetCalories: Int
+    val email: String
 )
 
 fun RegisterRequest.toUserEntity() = UserEntity(
@@ -18,6 +17,5 @@ fun RegisterRequest.toUserEntity() = UserEntity(
             .getInstance("SHA-256")
             .digest(password.toByteArray())
     ).toLowerCase(),
-    email = email,
-    targetCalories = targetCalories
+    email = email
 )

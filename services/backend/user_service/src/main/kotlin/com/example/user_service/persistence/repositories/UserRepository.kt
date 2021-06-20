@@ -30,7 +30,7 @@ class UserRepository: UserRepositoryInterface {
     }
 
     override fun insertData(data: UserEntity) {
-        val sqlQuery = "INSERT INTO users(username, password, email) VALUES (?, ?, ?, ?)"
+        val sqlQuery = "INSERT INTO users(username, password, email) VALUES (?, ?, ?)"
         jdbcTemplate.update(sqlQuery, data.username, data.password, data.email)
     }
 

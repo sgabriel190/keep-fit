@@ -9,6 +9,5 @@ interface UserServiceInterface {
     fun deleteUser(token: String): Response<Any>
     fun forgotPassword(data: ForgotPasswordRequest, token: String): Response<ForgotPasswordResponse>
     fun getUser(token: String): Response<UserModel>
-    fun updateCalories(calories: Int, token: String): Response<UserModel>
     fun updatePlanId(idUserDetails: Int, token: String): Response<UserModel>
 }
