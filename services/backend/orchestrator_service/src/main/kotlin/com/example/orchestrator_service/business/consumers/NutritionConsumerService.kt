@@ -17,7 +17,7 @@ class NutritionConsumerService: HttpConsumerServiceInterface() {
 
     private val host = Host("http://localhost:2020/api/nutrition")
 
-    override suspend fun get(path: String, reqParam: Map<String, String>?): Response<Any> {
+    override suspend fun get(path: String, reqParam: Map<String, Any>?): Response<Any> {
         val response: Response<Any> =  client.get("$host/$path"){
             this.setQueryParams(reqParam)
         }
@@ -29,7 +29,7 @@ class NutritionConsumerService: HttpConsumerServiceInterface() {
         return response
     }
 
-    override suspend fun post(path: String, body: Any?, reqParam: Map<String, String>?): Response<Any> {
+    override suspend fun post(path: String, body: Any?, reqParam: Map<String, Any>?): Response<Any> {
         val response: Response<Any> =  client.post("$host/$path"){
             this.setBodyJson(body)
             this.setQueryParams(reqParam)
@@ -37,7 +37,7 @@ class NutritionConsumerService: HttpConsumerServiceInterface() {
         return response
     }
 
-    override suspend fun put(path: String, body: Any?, reqParam: Map<String, String>?): Response<Any> {
+    override suspend fun put(path: String, body: Any?, reqParam: Map<String, Any>?): Response<Any> {
         val response: Response<Any> =  client.put("$host/$path"){
             this.setBodyJson(body)
             this.setQueryParams(reqParam)
@@ -45,7 +45,7 @@ class NutritionConsumerService: HttpConsumerServiceInterface() {
         return response
     }
 
-    override suspend fun delete(path: String, body: Any?, reqParam: Map<String, String>?): Response<Any> {
+    override suspend fun delete(path: String, body: Any?, reqParam: Map<String, Any>?): Response<Any> {
         val response: Response<Any> =  client.delete("$host/$path"){
             this.setBodyJson(body)
             this.setQueryParams(reqParam)
@@ -53,7 +53,7 @@ class NutritionConsumerService: HttpConsumerServiceInterface() {
         return response
     }
 
-    override suspend fun patch(path: String, body: Any?, reqParam: Map<String, String>?): Response<Any> {
+    override suspend fun patch(path: String, body: Any?, reqParam: Map<String, Any>?): Response<Any> {
         val response: Response<Any> =  client.patch("$host/$path"){
             this.setBodyJson(body)
             this.setQueryParams(reqParam)

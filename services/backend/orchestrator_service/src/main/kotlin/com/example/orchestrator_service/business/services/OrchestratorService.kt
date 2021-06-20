@@ -42,4 +42,52 @@ class OrchestratorService: OrchestratorServiceInterface {
         }
     }
 
+    override suspend fun getRecipes(params: Map<String, Any>): Response<Any> {
+        return try {
+            nutritionConsumerService.get("recipe", reqParam = params)
+        } catch (t: Throwable){
+            Response(successfulOperation = false, code = 400, data = null)
+        }
+    }
+
+    override suspend fun getGenders(): Response<Any> {
+        return try {
+            nutritionConsumerService.get("userDetails/gender")
+        } catch (t: Throwable){
+            Response(successfulOperation = false, code = 400, data = null)
+        }
+    }
+
+    override suspend fun getDietTypes(): Response<Any> {
+        return try {
+            nutritionConsumerService.get("userDetails/dietType")
+        } catch (t: Throwable){
+            Response(successfulOperation = false, code = 400, data = null)
+        }
+    }
+
+    override suspend fun getActivityTypes(): Response<Any> {
+        return try {
+            nutritionConsumerService.get("userDetails/activityType")
+        } catch (t: Throwable){
+            Response(successfulOperation = false, code = 400, data = null)
+        }
+    }
+
+    override suspend fun getActivityType(id: Int): Response<Any> {
+        return try {
+            nutritionConsumerService.get("userDetails/activityType/$id")
+        } catch (t: Throwable){
+            Response(successfulOperation = false, code = 400, data = null)
+        }
+    }
+
+    override suspend fun getUserDetails(id: Int): Response<Any> {
+        return try {
+            nutritionConsumerService.get("userDetails/$id")
+        } catch (t: Throwable){
+            Response(successfulOperation = false, code = 400, data = null)
+        }
+    }
+
 }

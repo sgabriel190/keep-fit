@@ -1,14 +1,6 @@
-# Build stage
-FROM alpine:3.13.5 AS build
+FROM openjdk:8
 WORKDIR ./app
-COPY . .
-RUN apk add openjdk8
-RUN ./mvnw package
-
-# Run stage
-FROM alpine:3.13.5 
-WORKDIR ./app
+COPY ./plan.db .
+COPY ./target/plan_service-0.0.1-SNAPSHOT.jar .
 EXPOSE 8080/tcp
-COPY --from=build /app .
-RUN apk add openjdk8
-CMD java -jar ./target/plan_service-0.0.1-SNAPSHOT.jar
+CMD java -jar ./plan_service-0.0.1-SNAPSHOT.jar

@@ -12,9 +12,9 @@ val HttpRequestBuilder.setBodyJson: (Any?) -> Unit?
         }
     }
 
-val HttpRequestBuilder.setQueryParams: (Map<String, String>?) -> Unit?
+val HttpRequestBuilder.setQueryParams: (Map<String, Any>?) -> Unit?
     get() = {
-            reqParam: Map<String, String>? ->
+            reqParam: Map<String, Any>? ->
         reqParam?.forEach{
             parameter(it.key, it.value)
         }

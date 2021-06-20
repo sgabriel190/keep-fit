@@ -18,15 +18,6 @@ class UserController {
     private lateinit var userService: UserServiceInterface
 
     @Async
-    @RequestMapping("/ping", method=[RequestMethod.GET])
-    @ResponseBody
-    fun ping(): ResponseEntity<Any>{
-        return ResponseEntity
-            .status(HttpStatus.OK)
-            .body(Response(successfulOperation = true, code = 200, data = null))
-    }
-
-    @Async
     @RequestMapping("/user", method=[RequestMethod.DELETE])
     @ResponseBody
     fun deleteUser(@RequestHeader(name="Authorization") token: String): ResponseEntity<Any>{
@@ -72,27 +63,6 @@ class UserController {
     fun forgotPassword(@RequestBody data: ForgotPasswordRequest,
                        @RequestHeader(name="Authorization") token: String): ResponseEntity<Any>{
         val result = userService.forgotPassword(data, token.split(" ")[1])
-        return if (result.successfulOperation){
-            ResponseEntity
-                .status(result.code)
-                .body(result)
-        } else {
-            ResponseEntity
-                .status(result.code)
-                .body(MyError(
-                    code = result.code,
-                    error = result.error,
-                    info = result.message
-                ))
-        }
-    }
-
-    @Async
-    @RequestMapping("/user/calories", method=[RequestMethod.PATCH])
-    @ResponseBody
-    fun updateCalories(@RequestParam(required = true) value: Int,
-                       @RequestHeader(name="Authorization") token: String): ResponseEntity<Any>{
-        val result = userService.updateCalories(value, token.split(" ")[1])
         return if (result.successfulOperation){
             ResponseEntity
                 .status(result.code)
