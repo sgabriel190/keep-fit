@@ -1,14 +1,7 @@
-# Build stage
-FROM alpine:3.13.5 AS build
+FROM openjdk:8
 WORKDIR ./app
-COPY . .
-RUN apk add openjdk8
-RUN ./gradlew build
-
-# Run stage
-FROM alpine:3.13.5 
-WORKDIR ./app
+COPY ./build/libs/nutrition_service-0.0.1-SNAPSHOT.jar .
+COPY ./images ./images
+COPY ./nutrition.db .
 EXPOSE 8080/tcp
-COPY --from=build /app .
-RUN apk add openjdk8
-CMD java -jar ./build/libs/nutrition_service-0.0.1-SNAPSHOT.jar
+CMD java -jar ./nutrition_service-0.0.1-SNAPSHOT.jar
