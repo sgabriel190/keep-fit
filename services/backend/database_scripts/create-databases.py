@@ -2,7 +2,8 @@ import sqlite3
 import sys
 
 from Logger import Logger
-from database_connector.sqlite_connector_methods import execute_script_on_table, create_activities, insert_data
+from database_connector.sqlite_connector_methods import execute_script_on_table, create_activities, insert_data, \
+    create_diet_types, create_genders
 from io_helper.io_methods import read_file
 
 FILENAME_SOURCE = './data_source/filtered_data.json'
@@ -15,6 +16,7 @@ def create_database_nutrition() -> None:
     files = {
         'delete': './sql_scripts/nutrition/delete_tables_nutrition.sql',
         'create': './sql_scripts/nutrition/create_tables_nutrition.sql',
+        'insert': './sql_scripts/nutrition/insert_data_nutrition.sql'
     }
     data = read_file(FILENAME_SOURCE)
     execute_script_on_table(conn, files['delete'])
@@ -22,7 +24,10 @@ def create_database_nutrition() -> None:
     execute_script_on_table(conn, files['create'])
     logger.log('Created successfully all the tables in database NUTRITION.')
     create_activities(conn)
+    create_diet_types(conn)
+    create_genders(conn)
     insert_data(conn, data)
+    execute_script_on_table(conn, files['insert'])
     logger.log('Inserted successfully data in tables in database NUTRITION.')
     conn.close()
     logger.log('Closed the NUTRITION database connection successfully.')

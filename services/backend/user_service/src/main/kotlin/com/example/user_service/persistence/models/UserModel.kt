@@ -4,6 +4,5 @@ data class UserModel(
     val id: Int,
     val username: String,
     val email: String,
-    val idUserDetails: Int? = null,
-    val targetCalories: Int
+    val idUserDetails: Int? = null
 )

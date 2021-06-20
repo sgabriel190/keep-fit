@@ -1,5 +1,7 @@
 DROP TABLE IF EXISTS user_details;
-DROP TABLE IF EXISTS activity_type;
+DROP TABLE IF EXISTS activity_types;
+DROP TABLE IF EXISTS genders;
+DROP TABLE IF EXISTS diet_types;
 DROP TABLE IF EXISTS recipe_to_category;
 DROP TABLE IF EXISTS categories;
 DROP TABLE IF EXISTS instructions;

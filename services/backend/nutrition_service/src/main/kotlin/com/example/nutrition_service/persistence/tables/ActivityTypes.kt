@@ -5,5 +5,6 @@ import org.jetbrains.exposed.sql.Column
 
 object ActivityTypes: IntIdTable() {
     val name: Column<String>        = text("name")
-    override val tableName: String  = "activity_type"
+    val calories: Column<Float>     = float("calories")
+    override val tableName: String  = "activity_types"
 }

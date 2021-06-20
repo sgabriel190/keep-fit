@@ -1,10 +1,8 @@
 package com.example.nutrition_service.business.services
 
 import com.example.nutrition_service.business.interfaces.UserDetailsServiceInterface
-import com.example.nutrition_service.persistence.entities.ActivityType
-import com.example.nutrition_service.persistence.entities.UserDetail
-import com.example.nutrition_service.persistence.entities.toActivityTypeModel
-import com.example.nutrition_service.persistence.entities.toUserDetailModel
+import com.example.nutrition_service.business.interfaces.UtilsInterface
+import com.example.nutrition_service.persistence.entities.*
 import com.example.nutrition_service.persistence.interfaces.NutritionDAOInterface
 import com.example.nutrition_service.persistence.pojos.ActivityTypeModel
 import com.example.nutrition_service.persistence.pojos.UserDetailModel
@@ -17,6 +15,9 @@ import org.springframework.stereotype.Service
 class UserDetailsService: UserDetailsServiceInterface {
     @Autowired
     lateinit var nutritionDAO: NutritionDAOInterface
+
+    @Autowired
+    lateinit var utils: UtilsInterface
 
     override fun getActivityTypes(): Response<List<ActivityTypeModel>> {
         return try {
@@ -56,20 +57,57 @@ class UserDetailsService: UserDetailsServiceInterface {
             val resultActivityType = nutritionDAO.executeQuery {
                 ActivityType.findById(data.idActivityType)!!
             }
-            nutritionDAO.executeQuery {
-                UserDetail.new(data.id) {
+            val resultGender = nutritionDAO.executeQuery {
+                Gender.findById(data.idGender)!!
+            }
+            val resultDietType = nutritionDAO.executeQuery {
+                DietType.findById(data.idDietType)!!
+            }
+            val idealWeight = this.utils.computeIdealWeight(data.height, data.age, data.idGender)
+            val bmi = this.utils.computeBMI(data.weight, data.height)
+            val wnd = this.utils.computeWND(idealWeight)
+            val calories = this.utils.computeCalories(idealWeight, resultDietType.calories, resultActivityType.calories)
+            val userDetailsId = nutritionDAO.executeQuery {
+                val result = UserDetail.new{
                     this.age = data.age
                     this.height = data.height
                     this.weight = data.weight
-                    this.calories = data.calories
-                    this.bmi = data.bmi
+                    this.calories = calories
+                    this.bmi = bmi
+                    this.wnd = wnd
+                    this.idealWeight = idealWeight
                     this.idActivityType = resultActivityType
+                    this.idGender = resultGender
+                    this.idDietType = resultDietType
                 }
+                result.id.value
             }
-            return Response(data = null, code = 201, successfulOperation = true)
+            return Response(data = userDetailsId, code = 201, successfulOperation = true)
         }
         catch (t: Throwable){
             return Response(successfulOperation = false, data = null, code = 400, error = t.toString())
+        }
+    }
+
+    override fun getGenders(): Response<Any> {
+        return try {
+            val result = nutritionDAO.executeQuery {
+                Gender.all().map { it.toGenderModel() }
+            }
+            Response(data = result, code = 200, successfulOperation = true)
+        } catch (t: Throwable){
+            Response(successfulOperation = false, data = null, code = 400, error = t.toString())
+        }
+    }
+
+    override fun getDietTypes(): Response<Any> {
+        return try {
+            val result = nutritionDAO.executeQuery {
+                DietType.all().map { it.toDietTypeModel() }
+            }
+            Response(data = result, code = 200, successfulOperation = true)
+        } catch (t: Throwable){
+            Response(successfulOperation = false, data = null, code = 400, error = t.toString())
         }
     }
 }

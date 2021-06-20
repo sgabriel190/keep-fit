@@ -27,6 +27,30 @@ class UserDetailsController {
     }
 
     @Async
+    @RequestMapping(value = ["/gender"], method = [RequestMethod.GET])
+    @ResponseBody
+    fun getGenders(): ResponseEntity<Any> {
+        val response = userDetailsServiceInterface.getGenders()
+        return if (response.successfulOperation) {
+            ResponseEntity.status(response.code).body(response)
+        } else {
+            ResponseEntity.status(response.code).body(MyError(response.code, response.error, response.message))
+        }
+    }
+
+    @Async
+    @RequestMapping(value = ["/dietType"], method = [RequestMethod.GET])
+    @ResponseBody
+    fun getDietTypes(): ResponseEntity<Any> {
+        val response = userDetailsServiceInterface.getDietTypes()
+        return if (response.successfulOperation) {
+            ResponseEntity.status(response.code).body(response)
+        } else {
+            ResponseEntity.status(response.code).body(MyError(response.code, response.error, response.message))
+        }
+    }
+
+    @Async
     @RequestMapping(value = ["/activityType/{id}"], method = [RequestMethod.GET])
     @ResponseBody
     fun getActivityType(@PathVariable id: Int): ResponseEntity<Any> {

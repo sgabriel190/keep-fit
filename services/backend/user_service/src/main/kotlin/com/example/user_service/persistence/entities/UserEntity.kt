@@ -15,8 +15,7 @@ data class UserEntity(
     var userName: String,
     var passWord: String,
     var email: String,
-    var idUserDetails: Int? = null,
-    var targetCalories: Int
+    var idUserDetails: Int? = null
 ): UserDetails{
     fun getRoles(): List<String> {
         return listOf("user")
@@ -57,5 +56,4 @@ fun UserEntity.toUserModel() = UserModel(
     username = this.userName,
     email = this.email,
     idUserDetails = this.idUserDetails,
-    targetCalories = this.targetCalories
 )

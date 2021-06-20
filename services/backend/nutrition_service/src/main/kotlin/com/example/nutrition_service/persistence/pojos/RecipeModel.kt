@@ -8,5 +8,6 @@ data class RecipeModel(
     val keywords: String,
     val categories: List<CategoryModel>,
     val images: List<ImageModel>?,
-    val instructions: List<InstructionModel>?
+    val instructions: List<InstructionModel>?,
+    val ingredients: List<IngredientModel>?
 )

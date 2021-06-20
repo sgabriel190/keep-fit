@@ -1,8 +1,7 @@
 package com.example.nutrition_service.presentation.controllers
 
 import com.example.nutrition_service.business.interfaces.NutritionServiceInterface
-import com.example.nutrition_service.persistence.repositories.NutritionDAO
-import com.example.nutrition_service.presentation.business_models.CreateMenu
+import com.example.nutrition_service.presentation.business_models.CreateMeal
 import com.example.nutrition_service.presentation.http.MyError
 import com.example.nutrition_service.presentation.http.Response
 import org.springframework.beans.factory.annotation.Autowired
@@ -10,7 +9,6 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.scheduling.annotation.Async
 import org.springframework.web.bind.annotation.*
-import javax.websocket.server.PathParam
 
 
 @RestController
@@ -24,30 +22,6 @@ class NutritionController {
     @ResponseBody
     fun ping(): ResponseEntity<Any> {
         return ResponseEntity.status(HttpStatus.OK).body(Response(successfulOperation = true, data = null, code = 200))
-    }
-
-    @Async
-    @RequestMapping(value = ["/instruction/{id}"], method = [RequestMethod.GET])
-    @ResponseBody
-    fun getInstruction(@PathVariable id: Int): ResponseEntity<Any> {
-        val response = nutritionService.getInstruction(id)
-        return if (response.successfulOperation) {
-            ResponseEntity.status(response.code).body(response)
-        } else {
-            ResponseEntity.status(response.code).body(MyError(response.code, response.error, response.message))
-        }
-    }
-
-    @Async
-    @RequestMapping(value = ["/recipe/instruction/{idRecipe}"], method = [RequestMethod.GET])
-    @ResponseBody
-    fun getInstructions(@PathVariable idRecipe: Int): ResponseEntity<Any> {
-        val response = nutritionService.getInstructions(idRecipe)
-        return if (response.successfulOperation) {
-            ResponseEntity.status(response.code).body(response)
-        } else {
-            ResponseEntity.status(response.code).body(MyError(response.code, response.error, response.message))
-        }
     }
 
     @Async
@@ -130,8 +104,8 @@ class NutritionController {
     @Async
     @RequestMapping(value = ["/menu"], method = [RequestMethod.GET])
     @ResponseBody
-    fun createMenu(@RequestBody data: CreateMenu, @RequestParam(required = false) size: Int?): ResponseEntity<Any> {
-        val response = nutritionService.createMenu(data.calories)
+    fun createMenu(@RequestBody data: CreateMeal): ResponseEntity<Any> {
+        val response = nutritionService.createMenu(data)
         return if (response.successfulOperation){
             ResponseEntity.status(response.code).body(response)
         } else {

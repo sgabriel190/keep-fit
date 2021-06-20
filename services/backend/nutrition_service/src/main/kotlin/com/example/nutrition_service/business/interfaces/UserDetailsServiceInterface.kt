@@ -10,4 +10,7 @@ interface UserDetailsServiceInterface {
     fun getActivityType(id: Int): Response<ActivityTypeModel>
     fun getUserDetails(id: Int): Response<UserDetailModel>
     fun addUserDetails(data: CreateUserDetails): Response<Any>
+
+    fun getGenders(): Response<Any>
+    fun getDietTypes(): Response<Any>
 }

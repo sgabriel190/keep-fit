@@ -40,6 +40,13 @@ CREATE TABLE IF NOT EXISTS images(
                                      FOREIGN KEY (ID_recipe) REFERENCES recipes(ID)
 );
 
+CREATE TABLE IF NOT EXISTS ingredients(
+                                          ID integer PRIMARY KEY,
+                                          name text NOT NULL,
+                                          ID_recipe integer NOT NULL,
+                                          FOREIGN KEY (ID_recipe) REFERENCES recipes(ID)
+);
+
 CREATE TABLE IF NOT EXISTS categories(
                                          ID integer PRIMARY KEY,
                                          category text NOT NULL
@@ -60,9 +67,21 @@ CREATE TABLE IF NOT EXISTS instructions(
                                            FOREIGN KEY (ID_recipe) references recipes(ID)
 );
 
-CREATE TABLE IF NOT EXISTS activity_type(
-                                            ID integer PRIMARY KEY,
-                                            name text NOT NULL
+CREATE TABLE IF NOT EXISTS activity_types(
+                                             ID integer PRIMARY KEY,
+                                             name text NOT NULL,
+                                             calories real NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS diet_types(
+                                         ID integer PRIMARY KEY,
+                                         name text NOT NULL,
+                                         calories integer NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS genders(
+                                      ID integer PRIMARY KEY,
+                                      name text NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS user_details(
@@ -70,8 +89,14 @@ CREATE TABLE IF NOT EXISTS user_details(
                                            age integer NOT NULL,
                                            height integer NOT NULL,
                                            weight integer NOT NULL,
+                                           ideal_weight integer NOT NULL,
                                            calories integer NOT NULL,
-                                           bmi integer NOT NULL,
+                                           bmi real NOT NULL,
+                                           wnd integer NOT NULL,
                                            ID_activity_type integer NOT NULL,
-                                           FOREIGN KEY (ID_activity_type) REFERENCES activity_type (ID)
+                                           ID_diet_type integer NOT NULL,
+                                           ID_gender integer NOT NULL,
+                                           FOREIGN KEY (ID_activity_type) REFERENCES activity_types (ID),
+                                           FOREIGN KEY (ID_diet_type) REFERENCES diet_types (ID),
+                                           FOREIGN KEY (ID_gender) REFERENCES genders (ID)
 );
