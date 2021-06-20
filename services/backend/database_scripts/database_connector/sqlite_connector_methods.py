@@ -22,8 +22,26 @@ def insert_values(connection: Connection, values: tuple) -> None:
 
 def create_activities(connection: Connection) -> None:
     logger.log('Create activity types.')
-    values: list = ['Sedentary', 'Light Active', 'Active', 'Very Active']
-    sql_query: str = 'INSERT INTO activity_type(name) VALUES(?)'
+    values: list = [('Sedentary', 1), ('Light Active', 1.1), ('Active', 1.2), ('Very Active', 1.3)]
+    sql_query: str = 'INSERT INTO activity_types(name, calories) VALUES(?, ?)'
+    for value in values:
+        connection.execute(sql_query, (value[0], value[1]))
+        connection.commit()
+
+
+def create_diet_types(connection: Connection) -> None:
+    logger.log('Create diet types.')
+    values: list = [('Loss weight', 25), ('Maintenance', 30), ('Gain weight', 35)]
+    sql_query: str = 'INSERT INTO diet_types(name, calories) VALUES(?, ?)'
+    for value in values:
+        connection.execute(sql_query, (value[0], value[1]))
+        connection.commit()
+
+
+def create_genders(connection: Connection) -> None:
+    logger.log('Create gender.')
+    values: list = ['Male', 'Female']
+    sql_query: str = 'INSERT INTO genders(name) VALUES(?)'
     for value in values:
         connection.execute(sql_query, (value, ))
         connection.commit()
@@ -113,6 +131,13 @@ def insert_data(connection: Connection, data: List[Dict]) -> None:
             sql_query_image = 'INSERT INTO images(image_path, ID_recipe) ' \
                               'VALUES(?, ?)'
             sql_parameters_image = (item['name'] + "/" + token.split("/")[-1], idx)
+            connection.execute(sql_query_image, sql_parameters_image)
+
+        # Images TABLE
+        for token in item['recipeIngredient']:
+            sql_query_image = 'INSERT INTO ingredients(name, ID_recipe) ' \
+                              'VALUES(?, ?)'
+            sql_parameters_image = (token, idx)
             connection.execute(sql_query_image, sql_parameters_image)
 
         # Instructions TABLE

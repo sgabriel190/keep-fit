@@ -2,21 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2980abcb-0aa4-4b9d-b9c8-c6433d4e5abf" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../nutrition_service/src/main/kotlin/com/example/nutrition_service/presentation/business_models/CreateMenu.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sql_scripts/nutrition/insert_data_nutrition.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../documentation/keep-fit-diagrams.drawio" beforeDir="false" afterPath="$PROJECT_DIR$/../../../documentation/keep-fit-diagrams.drawio" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/create-databases.py" beforeDir="false" afterPath="$PROJECT_DIR$/create-databases.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database_connector/sqlite_connector_methods.py" beforeDir="false" afterPath="$PROJECT_DIR$/database_connector/sqlite_connector_methods.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logger/log.info" beforeDir="false" afterPath="$PROJECT_DIR$/logger/log.info" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nutrition.db" beforeDir="false" afterPath="$PROJECT_DIR$/nutrition.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/plan.db" beforeDir="false" afterPath="$PROJECT_DIR$/plan.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sql_scripts/nutrition/create_tables_nutrition.sql" beforeDir="false" afterPath="$PROJECT_DIR$/sql_scripts/nutrition/create_tables_nutrition.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sql_scripts/nutrition/delete_tables_nutrition.sql" beforeDir="false" afterPath="$PROJECT_DIR$/sql_scripts/nutrition/delete_tables_nutrition.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sql_scripts/user/create_tables_user.sql" beforeDir="false" afterPath="$PROJECT_DIR$/sql_scripts/user/create_tables_user.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sql_scripts/user/insert_data_user.sql" beforeDir="false" afterPath="$PROJECT_DIR$/sql_scripts/user/insert_data_user.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user.db" beforeDir="false" afterPath="$PROJECT_DIR$/user.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nutrition_service/src/main/kotlin/com/example/nutrition_service/business/interfaces/NutritionServiceInterface.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../nutrition_service/src/main/kotlin/com/example/nutrition_service/business/interfaces/NutritionServiceInterface.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nutrition_service/src/main/kotlin/com/example/nutrition_service/business/services/NutritionService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../nutrition_service/src/main/kotlin/com/example/nutrition_service/business/services/NutritionService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nutrition_service/src/main/kotlin/com/example/nutrition_service/presentation/controllers/NutritionController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../nutrition_service/src/main/kotlin/com/example/nutrition_service/presentation/controllers/NutritionController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/business/interfaces/AuthServiceInterface.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/business/interfaces/AuthServiceInterface.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/business/interfaces/UserServiceInterface.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/business/interfaces/UserServiceInterface.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/business/services/UserService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/business/services/UserService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/presentation/controllers/UserController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/presentation/controllers/UserController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../recipe_web_scraper/filter-data.py" beforeDir="false" afterPath="$PROJECT_DIR$/../recipe_web_scraper/filter-data.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,6 +115,10 @@
       <workItem from="1623915260726" duration="26000" />
       <workItem from="1623919413703" duration="1184000" />
       <workItem from="1624021533375" duration="694000" />
+      <workItem from="1624181724323" duration="6813000" />
+      <workItem from="1624199432469" duration="23000" />
+      <workItem from="1624200369699" duration="40000" />
+      <workItem from="1624201042231" duration="704000" />
     </task>
     <servers />
   </component>
@@ -143,7 +146,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/database_scripts$create_database.coverage" NAME="create-database Coverage Results" MODIFIED="1614776108029" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/database_scripts$create_databases.coverage" NAME="create-databases Coverage Results" MODIFIED="1624021626180" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/database_scripts$create_databases.coverage" NAME="create-databases Coverage Results" MODIFIED="1624192562681" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/database_scripts$create_database_nutrition.coverage" NAME="create-databases Coverage Results" MODIFIED="1616339618191" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
