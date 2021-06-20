@@ -23,15 +23,15 @@ class UserRepository: UserRepositoryInterface {
 
     override fun updateById(id: Int, data: UserEntity): UserEntity? {
         val sqlQuery = "UPDATE users " +
-                "SET username = ?, password = ?, email = ?, ID_user_details, target_calories = ? " +
+                "SET username = ?, password = ?, email = ?, ID_user_details = ? " +
                 "WHERE ID = $id"
-        this.jdbcTemplate.update(sqlQuery, data.username, data.password, data.email, data.idUserDetails, data.targetCalories)
+        this.jdbcTemplate.update(sqlQuery, data.username, data.password, data.email, data.idUserDetails)
         return this.getById(id)
     }
 
     override fun insertData(data: UserEntity) {
-        val sqlQuery = "INSERT INTO users(username, password, email, target_calories) VALUES (?, ?, ?, ?)"
-        jdbcTemplate.update(sqlQuery, data.username, data.password, data.email, data.targetCalories)
+        val sqlQuery = "INSERT INTO users(username, password, email) VALUES (?, ?, ?, ?)"
+        jdbcTemplate.update(sqlQuery, data.username, data.password, data.email)
     }
 
     override fun deleteById(id: Int) {
@@ -55,11 +55,6 @@ class UserRepository: UserRepositoryInterface {
             UserRowMapper(),
             email
         )
-    }
-
-    override fun updateCalories(calories: Int, id: Int) {
-        val sqlQueryUpdateCalories = "UPDATE users SET target_calories = ? WHERE id = ?"
-        jdbcTemplate.update(sqlQueryUpdateCalories, calories, id)
     }
 
     override fun updatePlanId(idUserDetails: Int, id: Int) {
