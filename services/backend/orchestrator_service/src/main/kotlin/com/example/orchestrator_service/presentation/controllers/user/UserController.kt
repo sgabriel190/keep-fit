@@ -24,7 +24,7 @@ class UserController {
         if (result.successfulOperation){
             ResponseEntity.status(result.code).body(result)
         } else {
-            ResponseEntity.status(result.code).body(MyError(code = result.code, error = result.error, info = result.message))
+            ResponseEntity.status(result.code).body(result.data)
         }
     }
 
@@ -36,51 +36,44 @@ class UserController {
         if (result.successfulOperation){
             ResponseEntity.status(result.code).body(result)
         } else {
-            ResponseEntity.status(result.code).body(MyError(code = result.code, error = result.error, info = result.message))
+            ResponseEntity.status(result.code).body(result.data)
         }
     }
 
     @RequestMapping("/user", method = [RequestMethod.GET])
     @ResponseBody
     @Async
-    fun getUser(@RequestHeader(name="Authorization") token: String): ResponseEntity<Any> = runBlocking {
+    fun getUser(@RequestHeader(name="Authorization", required = false, defaultValue = "") token: String): ResponseEntity<Any> = runBlocking {
         val result = userService.getUser(token)
         if (result.successfulOperation){
             ResponseEntity.status(result.code).body(result)
         } else {
-            ResponseEntity.status(result.code).body(MyError(code = result.code, error = result.error, info = result.message))
+            ResponseEntity.status(result.code).body(result.data)
         }
     }
 
     @RequestMapping("/user", method = [RequestMethod.DELETE])
     @ResponseBody
     @Async
-    fun deleteUser(@RequestHeader(name="Authorization") token: String): ResponseEntity<Any> = runBlocking {
+    fun deleteUser(@RequestHeader(name="Authorization", required = false, defaultValue = "") token: String): ResponseEntity<Any> = runBlocking {
         val result = userService.deleteUser(token)
         if (result.successfulOperation){
             ResponseEntity.status(result.code).body(result)
         } else {
-            ResponseEntity.status(result.code).body(MyError(code = result.code, error = result.error, info = result.message))
+            ResponseEntity.status(result.code).body(result.data)
         }
     }
 
     @RequestMapping("/user/details/{id}", method = [RequestMethod.PATCH])
     @ResponseBody
     @Async
-    fun updateUserProfile(@RequestHeader(name="Authorization") token: String,
+    fun updateUserProfile(@RequestHeader(name="Authorization", required = false, defaultValue = "") token: String,
                                   @PathVariable id: Int): ResponseEntity<Any> = runBlocking {
         val result = userService.updateUserDetails(token, id)
         if (result.successfulOperation){
             ResponseEntity.status(result.code).body(result)
         } else {
-            ResponseEntity.status(result.code).body(MyError(code = result.code, error = result.error, info = result.message))
+            ResponseEntity.status(result.code).body(result.data)
         }
-    }
-
-    @RequestMapping("/user/plan", method = [RequestMethod.GET])
-    @ResponseBody
-    @Async
-    suspend fun getUserPlan(): ResponseEntity<Any> {
-        return ResponseEntity.status(200).body(null)
     }
 }

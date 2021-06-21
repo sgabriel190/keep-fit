@@ -20,14 +20,14 @@ class ImageController {
     @Async
     fun getImage(@PathVariable imgDir: String,
                  @PathVariable imgName: String,
-                 @RequestHeader(name="Authorization") token: String): ResponseEntity<Any> = runBlocking {
+                 @RequestHeader(name="Authorization", required = false) token: String): ResponseEntity<Any> = runBlocking {
         val result = nutritionService.getImage("$imgDir/$imgName", token)
         if (result.successfulOperation){
             ResponseEntity.status(200)
                 .contentType(MediaType.IMAGE_JPEG)
                 .body(result.data)
         } else {
-            ResponseEntity.status(result.code).body(MyError(code = result.code, error = result.error, info = result.message))
+            ResponseEntity.status(result.code).body(result.data)
         }
     }
 }
