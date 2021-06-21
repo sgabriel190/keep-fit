@@ -11,7 +11,7 @@ import org.springframework.scheduling.annotation.Async
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping(value = ["/api/backend/user"])
+@RequestMapping(value = ["/api/backend/users"])
 class UserController {
     @Autowired
     lateinit var userService: UserServiceInterface
@@ -40,25 +40,41 @@ class UserController {
         }
     }
 
-    @RequestMapping("/user/plan", method = [RequestMethod.POST])
+    @RequestMapping("/user", method = [RequestMethod.GET])
     @ResponseBody
     @Async
-    fun createUserPlan(): ResponseEntity<Any> = runBlocking {
-        ResponseEntity.status(200).body(null)
+    fun getUser(@RequestHeader(name="Authorization") token: String): ResponseEntity<Any> = runBlocking {
+        val result = userService.getUser(token)
+        if (result.successfulOperation){
+            ResponseEntity.status(result.code).body(result)
+        } else {
+            ResponseEntity.status(result.code).body(MyError(code = result.code, error = result.error, info = result.message))
+        }
     }
 
-    @RequestMapping("/user/profile", method = [RequestMethod.GET])
+    @RequestMapping("/user", method = [RequestMethod.DELETE])
     @ResponseBody
     @Async
-    fun getUserProfile(): ResponseEntity<Any> = runBlocking {
-        ResponseEntity.status(200).body(null)
+    fun deleteUser(@RequestHeader(name="Authorization") token: String): ResponseEntity<Any> = runBlocking {
+        val result = userService.deleteUser(token)
+        if (result.successfulOperation){
+            ResponseEntity.status(result.code).body(result)
+        } else {
+            ResponseEntity.status(result.code).body(MyError(code = result.code, error = result.error, info = result.message))
+        }
     }
 
-    @RequestMapping("/user/profile", method = [RequestMethod.PUT])
+    @RequestMapping("/user/details/{id}", method = [RequestMethod.PATCH])
     @ResponseBody
     @Async
-    suspend fun updateUserProfile(): ResponseEntity<Any> {
-        return ResponseEntity.status(200).body(null)
+    fun updateUserProfile(@RequestHeader(name="Authorization") token: String,
+                                  @PathVariable id: Int): ResponseEntity<Any> = runBlocking {
+        val result = userService.updateUserDetails(token, id)
+        if (result.successfulOperation){
+            ResponseEntity.status(result.code).body(result)
+        } else {
+            ResponseEntity.status(result.code).body(MyError(code = result.code, error = result.error, info = result.message))
+        }
     }
 
     @RequestMapping("/user/plan", method = [RequestMethod.GET])

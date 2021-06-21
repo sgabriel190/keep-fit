@@ -19,8 +19,9 @@ class ImageController {
     @ResponseBody
     @Async
     fun getImage(@PathVariable imgDir: String,
-                 @PathVariable imgName: String): ResponseEntity<Any> = runBlocking {
-        val result = nutritionService.getImage("$imgDir/$imgName")
+                 @PathVariable imgName: String,
+                 @RequestHeader(name="Authorization") token: String): ResponseEntity<Any> = runBlocking {
+        val result = nutritionService.getImage("$imgDir/$imgName", token)
         if (result.successfulOperation){
             ResponseEntity.status(200)
                 .contentType(MediaType.IMAGE_JPEG)
