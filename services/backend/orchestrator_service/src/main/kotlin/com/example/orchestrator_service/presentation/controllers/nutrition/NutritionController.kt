@@ -20,12 +20,12 @@ class NutritionController {
     @ResponseBody
     @Async
     fun getRecipe(@PathVariable id: Int,
-                  @RequestHeader(name="Authorization") token: String): ResponseEntity<Any> = runBlocking {
+                  @RequestHeader(name="Authorization", required = false, defaultValue = "") token: String): ResponseEntity<Any> = runBlocking {
         val result = nutritionService.getRecipe(id, token)
         if (result.successfulOperation){
             ResponseEntity.status(result.code).body(result)
         } else {
-            ResponseEntity.status(result.code).body(MyError(code = result.code, error = result.error, info = result.message))
+            ResponseEntity.status(result.code).body(result.data)
         }
     }
 
@@ -37,7 +37,7 @@ class NutritionController {
                    @RequestParam(required = false) pagNumber: Int?,
                    @RequestParam(required = false) pagSize: Int?,
                    @RequestParam(required = false) calories: Int?,
-                   @RequestHeader(name="Authorization") token: String): ResponseEntity<Any> = runBlocking {
+                   @RequestHeader(name="Authorization", required = false, defaultValue = "") token: String): ResponseEntity<Any> = runBlocking {
         val params = mutableMapOf<String, Any?>(
             "categoryId" to categoryId,
             "categoryName" to categoryName,
@@ -54,19 +54,19 @@ class NutritionController {
         if (result.successfulOperation){
             ResponseEntity.status(result.code).body(result)
         } else {
-            ResponseEntity.status(result.code).body(MyError(code = result.code, error = result.error, info = result.message))
+            ResponseEntity.status(result.code).body(result.data)
         }
     }
 
     @RequestMapping("/recipe/category", method = [RequestMethod.GET])
     @ResponseBody
     @Async
-    fun getCategories(@RequestHeader(name="Authorization") token: String): ResponseEntity<Any> = runBlocking {
+    fun getCategories(@RequestHeader(name="Authorization", required = false, defaultValue = "") token: String): ResponseEntity<Any> = runBlocking {
         val result = nutritionService.getCategories(token)
         if (result.successfulOperation){
             ResponseEntity.status(result.code).body(result)
         } else {
-            ResponseEntity.status(result.code).body(MyError(code = result.code, error = result.error, info = result.message))
+            ResponseEntity.status(result.code).body(result.data)
         }
     }
 
@@ -74,12 +74,12 @@ class NutritionController {
     @ResponseBody
     @Async
     fun getCategory(@PathVariable id: Int,
-                    @RequestHeader(name="Authorization") token: String): ResponseEntity<Any> = runBlocking {
+                    @RequestHeader(name="Authorization", required = false, defaultValue = "") token: String): ResponseEntity<Any> = runBlocking {
         val result = nutritionService.getCategory(id, token)
         if (result.successfulOperation){
             ResponseEntity.status(result.code).body(result)
         } else {
-            ResponseEntity.status(result.code).body(MyError(code = result.code, error = result.error, info = result.message))
+            ResponseEntity.status(result.code).body(result.data)
         }
     }
 
@@ -87,12 +87,12 @@ class NutritionController {
     @ResponseBody
     @Async
     fun getMeal(@RequestBody data: CreateMeal,
-                @RequestHeader(name="Authorization") token: String): ResponseEntity<Any> = runBlocking {
+                @RequestHeader(name="Authorization", required = false, defaultValue = "") token: String): ResponseEntity<Any> = runBlocking {
         val result = nutritionService.createMeal(data, token)
         if (result.successfulOperation){
             ResponseEntity.status(result.code).body(result)
         } else {
-            ResponseEntity.status(result.code).body(MyError(code = result.code, error = result.error, info = result.message))
+            ResponseEntity.status(result.code).body(result.data)
         }
     }
 }

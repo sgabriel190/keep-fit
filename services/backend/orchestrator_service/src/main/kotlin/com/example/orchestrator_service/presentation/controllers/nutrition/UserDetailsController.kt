@@ -19,24 +19,20 @@ class UserDetailsController {
     @RequestMapping("/gender", method = [RequestMethod.GET])
     @ResponseBody
     @Async
-    fun getGenders(@RequestHeader(name="Authorization") token: String): ResponseEntity<Any> = runBlocking {
+    fun getGenders(@RequestHeader(name="Authorization", required = false, defaultValue = "") token: String): ResponseEntity<Any> = runBlocking {
         val result = nutritionService.getGenders(token)
-        if (result.successfulOperation){
-            ResponseEntity.status(result.code).body(result)
-        } else {
-            ResponseEntity.status(result.code).body(MyError(code = result.code, error = result.error, info = result.message))
-        }
+        ResponseEntity.status(result.code).body(result)
     }
 
     @RequestMapping("/dietType", method = [RequestMethod.GET])
     @ResponseBody
     @Async
-    fun getDietTypes(@RequestHeader(name="Authorization") token: String): ResponseEntity<Any> = runBlocking {
+    fun getDietTypes(@RequestHeader(name="Authorization", required = false, defaultValue = "") token: String): ResponseEntity<Any> = runBlocking {
         val result = nutritionService.getDietTypes(token)
         if (result.successfulOperation){
             ResponseEntity.status(result.code).body(result)
         } else {
-            ResponseEntity.status(result.code).body(MyError(code = result.code, error = result.error, info = result.message))
+            ResponseEntity.status(result.code).body(result.data)
         }
     }
 
@@ -44,24 +40,24 @@ class UserDetailsController {
     @ResponseBody
     @Async
     fun addUserDetails(@RequestBody data: CreateUserDetails,
-                       @RequestHeader(name="Authorization") token: String): ResponseEntity<Any> = runBlocking {
+                       @RequestHeader(name="Authorization", required = false, defaultValue = "") token: String): ResponseEntity<Any> = runBlocking {
         val result = nutritionService.addUserDetails(data, token)
         if (result.successfulOperation){
             ResponseEntity.status(result.code).body(result)
         } else {
-            ResponseEntity.status(result.code).body(MyError(code = result.code, error = result.error, info = result.message))
+            ResponseEntity.status(result.code).body(result.data)
         }
     }
 
     @RequestMapping("/activityType", method = [RequestMethod.POST])
     @ResponseBody
     @Async
-    fun getActivityTypes(@RequestHeader(name="Authorization") token: String): ResponseEntity<Any> = runBlocking {
+    fun getActivityTypes(@RequestHeader(name="Authorization", required = false, defaultValue = "") token: String): ResponseEntity<Any> = runBlocking {
         val result = nutritionService.getActivityTypes(token)
         if (result.successfulOperation){
             ResponseEntity.status(result.code).body(result)
         } else {
-            ResponseEntity.status(result.code).body(MyError(code = result.code, error = result.error, info = result.message))
+            ResponseEntity.status(result.code).body(result.data)
         }
     }
 
@@ -69,12 +65,12 @@ class UserDetailsController {
     @ResponseBody
     @Async
     fun getActivityType(@PathVariable id: Int,
-                        @RequestHeader(name="Authorization") token: String): ResponseEntity<Any> = runBlocking {
+                        @RequestHeader(name="Authorization", required = false, defaultValue = "") token: String): ResponseEntity<Any> = runBlocking {
         val result = nutritionService.getActivityType(id, token)
         if (result.successfulOperation){
             ResponseEntity.status(result.code).body(result)
         } else {
-            ResponseEntity.status(result.code).body(MyError(code = result.code, error = result.error, info = result.message))
+            ResponseEntity.status(result.code).body(result.data)
         }
     }
 
@@ -82,12 +78,12 @@ class UserDetailsController {
     @ResponseBody
     @Async
     fun getUserDetails(@PathVariable id: Int,
-                       @RequestHeader(name="Authorization") token: String): ResponseEntity<Any> = runBlocking {
+                       @RequestHeader(name="Authorization", required = false, defaultValue = "") token: String): ResponseEntity<Any> = runBlocking {
         val result = nutritionService.getUserDetails(id, token)
         if (result.successfulOperation){
             ResponseEntity.status(result.code).body(result)
         } else {
-            ResponseEntity.status(result.code).body(MyError(code = result.code, error = result.error, info = result.message))
+            ResponseEntity.status(result.code).body(result.data)
         }
     }
 }

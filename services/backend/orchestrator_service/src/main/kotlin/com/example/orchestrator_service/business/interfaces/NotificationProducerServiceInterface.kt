@@ -4,5 +4,5 @@ import com.example.orchestrator_service.business.models.notification.EmailReques
 import com.example.orchestrator_service.presentation.http.Response
 
 interface NotificationProducerServiceInterface {
-    suspend fun sendEmail(data: EmailRequest): Response<Any>
+    suspend fun sendEmail(data: EmailRequest): Response<out Any>
 }

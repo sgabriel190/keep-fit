@@ -17,7 +17,7 @@ class NotificationProducerService: NotificationProducerServiceInterface {
 
     private val host = Host("http://localhost:2030/api/notification")
 
-    override suspend fun sendEmail(data: EmailRequest): Response<Any> {
+    override suspend fun sendEmail(data: EmailRequest): Response<out Any> {
         return try {
             val result = httpConsumerService.executeRequest {
                 val response: Response<Any> = httpConsumerService.client.post("$host/send/mail"){
