@@ -1,14 +1,11 @@
-package com.example.orchestrator_service.presentation.controllers
+package com.example.orchestrator_service.presentation.controllers.user
 
-import com.example.orchestrator_service.business.interfaces.OrchestratorServiceInterface
+import com.example.orchestrator_service.business.interfaces.UserServiceInterface
 import com.example.orchestrator_service.business.models.user.LoginRequest
 import com.example.orchestrator_service.business.models.user.RegisterRequest
 import com.example.orchestrator_service.presentation.http.MyError
-import com.example.orchestrator_service.presentation.http.Response
 import kotlinx.coroutines.runBlocking
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.http.MediaType
-import org.springframework.http.MediaTypeFactory
 import org.springframework.http.ResponseEntity
 import org.springframework.scheduling.annotation.Async
 import org.springframework.web.bind.annotation.*
@@ -17,13 +14,13 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping(value = ["/api/backend/user"])
 class UserController {
     @Autowired
-    lateinit var orchestratorService: OrchestratorServiceInterface
+    lateinit var userService: UserServiceInterface
 
     @RequestMapping("/login", method = [RequestMethod.POST])
     @ResponseBody
     @Async
     fun authenticateUser(@RequestBody data: LoginRequest): ResponseEntity<Any> = runBlocking {
-        val result = orchestratorService.authenticateUser(data)
+        val result = userService.authenticateUser(data)
         if (result.successfulOperation){
             ResponseEntity.status(result.code).body(result)
         } else {
@@ -35,7 +32,7 @@ class UserController {
     @ResponseBody
     @Async
     fun registerUser(@RequestBody data: RegisterRequest): ResponseEntity<Any> = runBlocking {
-        val result = orchestratorService.registerUser(data)
+        val result = userService.registerUser(data)
         if (result.successfulOperation){
             ResponseEntity.status(result.code).body(result)
         } else {

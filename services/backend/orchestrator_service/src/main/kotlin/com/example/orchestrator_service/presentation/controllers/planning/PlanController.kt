@@ -1,4 +1,4 @@
-package com.example.orchestrator_service.presentation.controllers
+package com.example.orchestrator_service.presentation.controllers.planning
 
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController

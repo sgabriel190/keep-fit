@@ -1,4 +1,4 @@
-package com.example.orchestrator_service.presentation.controllers
+package com.example.orchestrator_service.presentation.controllers.health
 
 import com.example.orchestrator_service.presentation.http.Response
 import kotlinx.coroutines.runBlocking
