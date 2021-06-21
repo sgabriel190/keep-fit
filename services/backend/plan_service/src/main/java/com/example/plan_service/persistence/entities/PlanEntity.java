@@ -24,8 +24,7 @@ public class PlanEntity {
     @Column(name = "description")
     private String description;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "ID_plan")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "plan")
     private final List<MenuEntity> menus = new ArrayList<>();
 
     public Integer getId() {

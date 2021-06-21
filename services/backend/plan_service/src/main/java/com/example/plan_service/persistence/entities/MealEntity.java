@@ -15,15 +15,20 @@ public class MealEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "ID_menu")
-    private Integer menuId;
-
     @Column(name = "time_of_day")
     private String timeOfDay;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_meal")
     private final List<MealRecipeEntity> recipes = new ArrayList<>();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_menu")
+    private MenuEntity menu;
+
+    public void addMealRecipeEntity(MealRecipeEntity data) {
+        this.recipes.add(data);
+    }
 
     public void setId(Integer id) {
         this.id = id;
@@ -31,14 +36,6 @@ public class MealEntity {
 
     public Integer getId() {
         return id;
-    }
-
-    public void setIdMenu(Integer menuId) {
-        this.menuId = menuId;
-    }
-
-    public Integer getIdMenu() {
-        return this.menuId;
     }
 
     public void setTime(String timeOfDay) {
@@ -56,5 +53,13 @@ public class MealEntity {
                         .collect(Collectors.toList()),
                 this.timeOfDay
         );
+    }
+
+    public MenuEntity getMenu() {
+        return menu;
+    }
+
+    public void setMenu(MenuEntity menu) {
+        this.menu = menu;
     }
 }

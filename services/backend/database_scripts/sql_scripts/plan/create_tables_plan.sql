@@ -2,7 +2,8 @@ CREATE TABLE IF NOT EXISTS plan(
                                    ID integer PRIMARY KEY,
                                    ID_user integer NOT NULL,
                                    plan_days integer NOT NULL,
-                                   description text
+                                   description text,
+                                   CONSTRAINT unique_constr_meal_user UNIQUE (ID_user)
 );
 
 CREATE TABLE IF NOT EXISTS menu(
