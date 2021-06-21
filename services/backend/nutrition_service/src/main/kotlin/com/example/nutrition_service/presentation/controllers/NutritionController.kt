@@ -102,9 +102,9 @@ class NutritionController {
     }
 
     @Async
-    @RequestMapping(value = ["/menu"], method = [RequestMethod.GET])
+    @RequestMapping(value = ["/meal"], method = [RequestMethod.GET])
     @ResponseBody
-    fun createMenu(@RequestBody data: CreateMeal): ResponseEntity<Any> {
+    fun createMeal(@RequestBody data: CreateMeal): ResponseEntity<Any> {
         val response = nutritionService.createMenu(data)
         return if (response.successfulOperation){
             ResponseEntity.status(response.code).body(response)

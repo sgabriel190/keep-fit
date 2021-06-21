@@ -27,7 +27,7 @@ def send_email():
             'subject' not in data:
         raise Exception("The data is not formatted correctly.")
     smtp_connection.send_email(data["to"], data["message"], data["subject"])
-    return jsonify(None), 204
+    return Response(code=200, data=None, message="").to_dict(), 200
 
 
 @app.errorhandler(Exception)
