@@ -19,8 +19,9 @@ class NutritionController {
     @RequestMapping("/recipe/{id}", method = [RequestMethod.GET])
     @ResponseBody
     @Async
-    fun getRecipe(@PathVariable id: Int): ResponseEntity<Any> = runBlocking {
-        val result = nutritionService.getRecipe(id)
+    fun getRecipe(@PathVariable id: Int,
+                  @RequestHeader(name="Authorization") token: String): ResponseEntity<Any> = runBlocking {
+        val result = nutritionService.getRecipe(id, token)
         if (result.successfulOperation){
             ResponseEntity.status(result.code).body(result)
         } else {
@@ -35,7 +36,8 @@ class NutritionController {
                    @RequestParam(required = false) categoryName: String?,
                    @RequestParam(required = false) pagNumber: Int?,
                    @RequestParam(required = false) pagSize: Int?,
-                   @RequestParam(required = false) calories: Int?): ResponseEntity<Any> = runBlocking {
+                   @RequestParam(required = false) calories: Int?,
+                   @RequestHeader(name="Authorization") token: String): ResponseEntity<Any> = runBlocking {
         val params = mutableMapOf<String, Any?>(
             "categoryId" to categoryId,
             "categoryName" to categoryName,
@@ -48,7 +50,7 @@ class NutritionController {
         }.map {
             it.key to it.value!!
         }.toMap()
-        val result = nutritionService.getRecipes(tmp)
+        val result = nutritionService.getRecipes(tmp, token)
         if (result.successfulOperation){
             ResponseEntity.status(result.code).body(result)
         } else {
@@ -59,8 +61,8 @@ class NutritionController {
     @RequestMapping("/recipe/category", method = [RequestMethod.GET])
     @ResponseBody
     @Async
-    fun getCategories(): ResponseEntity<Any> = runBlocking {
-        val result = nutritionService.getCategories()
+    fun getCategories(@RequestHeader(name="Authorization") token: String): ResponseEntity<Any> = runBlocking {
+        val result = nutritionService.getCategories(token)
         if (result.successfulOperation){
             ResponseEntity.status(result.code).body(result)
         } else {
@@ -71,8 +73,9 @@ class NutritionController {
     @RequestMapping("/recipe/category/{id}", method = [RequestMethod.GET])
     @ResponseBody
     @Async
-    fun getCategory(@PathVariable id: Int): ResponseEntity<Any> = runBlocking {
-        val result = nutritionService.getCategory(id)
+    fun getCategory(@PathVariable id: Int,
+                    @RequestHeader(name="Authorization") token: String): ResponseEntity<Any> = runBlocking {
+        val result = nutritionService.getCategory(id, token)
         if (result.successfulOperation){
             ResponseEntity.status(result.code).body(result)
         } else {
@@ -83,8 +86,9 @@ class NutritionController {
     @RequestMapping("meal", method = [RequestMethod.GET])
     @ResponseBody
     @Async
-    fun getMeal(@RequestBody data: CreateMeal): ResponseEntity<Any> = runBlocking {
-        val result = nutritionService.createMeal(data)
+    fun getMeal(@RequestBody data: CreateMeal,
+                @RequestHeader(name="Authorization") token: String): ResponseEntity<Any> = runBlocking {
+        val result = nutritionService.createMeal(data, token)
         if (result.successfulOperation){
             ResponseEntity.status(result.code).body(result)
         } else {

@@ -10,6 +10,7 @@ import com.example.orchestrator_service.business.models.user.LoginRequest
 import com.example.orchestrator_service.business.models.user.RegisterRequest
 import com.example.orchestrator_service.presentation.http.Response
 import io.ktor.client.request.*
+import io.ktor.client.statement.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
@@ -54,6 +55,86 @@ class UserService: UserServiceInterface {
             val tmp = notificationProducerService.sendEmail(EmailRequest("Welcome", data.email, "Register"))
             if (tmp.code / 100 != 2){
                 throw Exception(tmp.message + " " + tmp.error)
+            }
+            result
+        } catch (t: Throwable){
+            Response(successfulOperation = false, code = 400, data = null, error = t.toString())
+        }
+    }
+
+    override suspend fun getUser(token: String): Response<Any> {
+        return try {
+            val responseValidToken = this.validateToken(token)
+            if (responseValidToken.code / 100 != 2){
+                throw Exception(responseValidToken.error)
+            }
+            val result = httpConsumerService.executeRequest {
+                val response: Response<Any> = httpConsumerService.client.get("$host/user"){
+                    headers["Authorization"] = token
+                }
+                if (response.code / 100 != 2){
+                    throw Exception(response.message + " " + response.error)
+                }
+                response
+            }
+            result
+        } catch (t: Throwable){
+            Response(successfulOperation = false, code = 400, data = null, error = t.toString())
+        }
+    }
+
+    override suspend fun validateToken(token: String): Response<Any> {
+        return try {
+            val result = httpConsumerService.executeRequest {
+                val response: Response<Any> = httpConsumerService.client.post("$host/auth/validate"){
+                    headers["Authorization"] = token
+                }
+                if (response.code / 100 != 2){
+                    throw Exception(response.message + " " + response.error)
+                }
+                response
+            }
+            result
+        } catch (t: Throwable){
+            Response(successfulOperation = false, code = 400, data = null, error = t.toString())
+        }
+    }
+
+    override suspend fun deleteUser(token: String): Response<Any> {
+        return try {
+            val responseValidToken = this.validateToken(token)
+            if (responseValidToken.code / 100 != 2){
+                throw Exception(responseValidToken.error)
+            }
+            val result = httpConsumerService.executeRequest {
+                val response: HttpResponse = httpConsumerService.client.delete("$host/user"){
+                    headers["Authorization"] = token
+                }
+                if (response.status.value != 204){
+                    throw Exception("User was not deleted.")
+                }
+                Response(successfulOperation = true, code = 204, data = Any())
+            }
+            Response(successfulOperation = result.successfulOperation, code = result.code, data = null)
+        } catch (t: Throwable){
+            Response(successfulOperation = false, code = 400, data = null, error = t.toString())
+        }
+    }
+
+    override suspend fun updateUserDetails(token: String, userDetailsId: Int): Response<Any> {
+        return try {
+            val responseValidToken = this.validateToken(token)
+            if (responseValidToken.code / 100 != 2){
+                throw Exception(responseValidToken.error)
+            }
+            val result = httpConsumerService.executeRequest {
+                val response: Response<Any> = httpConsumerService.client.patch("$host/user/details/$userDetailsId"){
+                    headers["Authorization"] = token
+                }
+                if (response.code / 100 != 2){
+                    throw Exception(response.message + " " + response.error)
+                }
+                response
             }
             result
         } catch (t: Throwable){

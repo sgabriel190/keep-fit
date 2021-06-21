@@ -19,8 +19,8 @@ class UserDetailsController {
     @RequestMapping("/gender", method = [RequestMethod.GET])
     @ResponseBody
     @Async
-    fun getGenders(): ResponseEntity<Any> = runBlocking {
-        val result = nutritionService.getGenders()
+    fun getGenders(@RequestHeader(name="Authorization") token: String): ResponseEntity<Any> = runBlocking {
+        val result = nutritionService.getGenders(token)
         if (result.successfulOperation){
             ResponseEntity.status(result.code).body(result)
         } else {
@@ -31,8 +31,8 @@ class UserDetailsController {
     @RequestMapping("/dietType", method = [RequestMethod.GET])
     @ResponseBody
     @Async
-    fun getDietTypes(): ResponseEntity<Any> = runBlocking {
-        val result = nutritionService.getDietTypes()
+    fun getDietTypes(@RequestHeader(name="Authorization") token: String): ResponseEntity<Any> = runBlocking {
+        val result = nutritionService.getDietTypes(token)
         if (result.successfulOperation){
             ResponseEntity.status(result.code).body(result)
         } else {
@@ -43,8 +43,9 @@ class UserDetailsController {
     @RequestMapping("/userDetails", method = [RequestMethod.POST])
     @ResponseBody
     @Async
-    fun addUserDetails(@RequestBody data: CreateUserDetails): ResponseEntity<Any> = runBlocking {
-        val result = nutritionService.addUserDetails(data)
+    fun addUserDetails(@RequestBody data: CreateUserDetails,
+                       @RequestHeader(name="Authorization") token: String): ResponseEntity<Any> = runBlocking {
+        val result = nutritionService.addUserDetails(data, token)
         if (result.successfulOperation){
             ResponseEntity.status(result.code).body(result)
         } else {
@@ -55,8 +56,8 @@ class UserDetailsController {
     @RequestMapping("/activityType", method = [RequestMethod.POST])
     @ResponseBody
     @Async
-    fun getActivityTypes(): ResponseEntity<Any> = runBlocking {
-        val result = nutritionService.getActivityTypes()
+    fun getActivityTypes(@RequestHeader(name="Authorization") token: String): ResponseEntity<Any> = runBlocking {
+        val result = nutritionService.getActivityTypes(token)
         if (result.successfulOperation){
             ResponseEntity.status(result.code).body(result)
         } else {
@@ -67,8 +68,9 @@ class UserDetailsController {
     @RequestMapping("/activityType/{id}", method = [RequestMethod.GET])
     @ResponseBody
     @Async
-    fun getActivityType(@PathVariable id: Int): ResponseEntity<Any> = runBlocking {
-        val result = nutritionService.getActivityType(id)
+    fun getActivityType(@PathVariable id: Int,
+                        @RequestHeader(name="Authorization") token: String): ResponseEntity<Any> = runBlocking {
+        val result = nutritionService.getActivityType(id, token)
         if (result.successfulOperation){
             ResponseEntity.status(result.code).body(result)
         } else {
@@ -79,8 +81,9 @@ class UserDetailsController {
     @RequestMapping("/userDetails/{id}", method = [RequestMethod.GET])
     @ResponseBody
     @Async
-    fun getUserDetails(@PathVariable id: Int): ResponseEntity<Any> = runBlocking {
-        val result = nutritionService.getUserDetails(id)
+    fun getUserDetails(@PathVariable id: Int,
+                       @RequestHeader(name="Authorization") token: String): ResponseEntity<Any> = runBlocking {
+        val result = nutritionService.getUserDetails(id, token)
         if (result.successfulOperation){
             ResponseEntity.status(result.code).body(result)
         } else {
