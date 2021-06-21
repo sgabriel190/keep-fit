@@ -2,33 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2980abcb-0aa4-4b9d-b9c8-c6433d4e5abf" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/presentation/controllers/HealthController.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/presentation/controllers/NutritionController.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/presentation/controllers/PlanController.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/presentation/controllers/HealthController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../documentation/keep-fit-diagrams.drawio" beforeDir="false" afterPath="$PROJECT_DIR$/../../../documentation/keep-fit-diagrams.drawio" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../plan_service/src/main/java/com/example/plan_service/presentation/controllers/HealthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logger/log.info" beforeDir="false" afterPath="$PROJECT_DIR$/logger/log.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nutrition.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nutrition.db" beforeDir="false" afterPath="$PROJECT_DIR$/nutrition.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/plan.db" beforeDir="false" afterPath="$PROJECT_DIR$/plan.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sql_scripts/plan/create_tables_plan.sql" beforeDir="false" afterPath="$PROJECT_DIR$/sql_scripts/plan/create_tables_plan.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user.db" beforeDir="false" afterPath="$PROJECT_DIR$/user.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nutrition_service/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/../nutrition_service/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/business/config/HttpRequestBuilderExtensions.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/business/config/HttpRequestBuilderExtensions.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/business/consumers/NutritionConsumerService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/business/consumers/NutritionConsumerService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/business/consumers/PlanConsumerService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/business/consumers/PlanConsumerService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/business/consumers/UserConsumerService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/business/consumers/UserConsumerService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/business/interfaces/HttpConsumerServiceInterface.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/business/interfaces/HttpConsumerServiceInterface.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/business/interfaces/OrchestratorServiceInterface.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/business/interfaces/OrchestratorServiceInterface.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/business/models/user/RegisterRequest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/business/models/user/RegisterRequest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/business/producers/NotificationProducerService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/business/producers/NotificationProducerService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/business/services/OrchestratorService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/business/services/OrchestratorService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/presentation/controllers/OrchestratorController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/presentation/controllers/UserController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/business/interfaces/UserServiceInterface.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/business/interfaces/UserServiceInterface.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/business/services/UserService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/business/services/UserService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/persistence/repositories/UserRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/persistence/repositories/UserRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/persistence/row_mappers/UserRowMapper.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/persistence/row_mappers/UserRowMapper.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/presentation/business_models/RegisterRequest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/presentation/business_models/RegisterRequest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/presentation/controllers/UserController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../user_service/src/main/kotlin/com/example/user_service/presentation/controllers/UserController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../user_service/user.db" beforeDir="false" afterPath="$PROJECT_DIR$/../user_service/user.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/business/interfaces/PlanServiceInterface.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/business/interfaces/PlanServiceInterface.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/business/services/PlanService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/business/services/PlanService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/presentation/controllers/planning/PlanController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/presentation/controllers/planning/PlanController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../plan_service/plan.db" beforeDir="false" afterPath="$PROJECT_DIR$/../plan_service/plan.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../plan_service/src/main/java/com/example/plan_service/business/interfaces/PlanServiceInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/../plan_service/src/main/java/com/example/plan_service/business/interfaces/PlanServiceInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../plan_service/src/main/java/com/example/plan_service/business/services/PlanService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../plan_service/src/main/java/com/example/plan_service/business/services/PlanService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../plan_service/src/main/java/com/example/plan_service/presentation/controllers/PlanController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../plan_service/src/main/java/com/example/plan_service/presentation/controllers/PlanController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,6 +120,7 @@
       <workItem from="1624200369699" duration="40000" />
       <workItem from="1624201042231" duration="920000" />
       <workItem from="1624221672527" duration="105000" />
+      <workItem from="1624291840770" duration="105000" />
     </task>
     <servers />
   </component>
@@ -160,7 +148,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/database_scripts$create_database.coverage" NAME="create-database Coverage Results" MODIFIED="1614776108029" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/database_scripts$create_databases.coverage" NAME="create-databases Coverage Results" MODIFIED="1624221748210" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/database_scripts$create_databases.coverage" NAME="create-databases Coverage Results" MODIFIED="1624291876639" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/database_scripts$create_database_nutrition.coverage" NAME="create-databases Coverage Results" MODIFIED="1616339618191" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
