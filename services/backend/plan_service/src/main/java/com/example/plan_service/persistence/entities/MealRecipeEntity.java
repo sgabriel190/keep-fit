@@ -1,10 +1,8 @@
 package com.example.plan_service.persistence.entities;
 
 import com.example.plan_service.persistence.pojo.MealRecipeModel;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "meal_recipe",

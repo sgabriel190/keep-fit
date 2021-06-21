@@ -2,9 +2,6 @@ package com.example.plan_service.business.services;
 
 import com.example.plan_service.business.interfaces.PlanServiceInterface;
 import com.example.plan_service.persistence.entities.*;
-import com.example.plan_service.persistence.pojo.MealModel;
-import com.example.plan_service.persistence.pojo.MealRecipeModel;
-import com.example.plan_service.persistence.pojo.MenuModel;
 import com.example.plan_service.persistence.pojo.PlanModel;
 import com.example.plan_service.persistence.repositories.MealRecipeRepository;
 import com.example.plan_service.persistence.repositories.MealRepository;
@@ -13,12 +10,12 @@ import com.example.plan_service.persistence.repositories.PlanRepository;
 import com.example.plan_service.presentation.http.Response;
 import com.example.plan_service.presentation.requests.RecipeRequest;
 import com.example.plan_service.presentation.requests.UserPlanRequest;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
+import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class PlanService implements PlanServiceInterface {
@@ -42,35 +39,7 @@ public class PlanService implements PlanServiceInterface {
     }
 
     @Override
-    public final Response<List<MealModel>> getMeals(){
-        try {
-            List<MealModel> result = mealRepository.findAll()
-                    .stream()
-                    .map(MealEntity::toMealModel)
-                    .collect(Collectors.toList());
-            return new Response<>(true, 200, result, "", "");
-        }
-        catch(Throwable t){
-            return new Response<>(false, 400, null, "", t.toString());
-        }
-    }
-
-    @Override
-    public final Response<List<PlanModel>> getPlans() {
-        try{
-            List<PlanModel> result = planRepository.findAll()
-                    .stream()
-                    .map(PlanEntity::toPlanModel)
-                    .collect(Collectors.toList());
-            return new Response<>(true, 200, result, "", "");
-        }
-        catch (Throwable t){
-            return new Response<>(false, 400, null, "", t.toString());
-        }
-    }
-
-    @Override
-    public Response<PlanModel> getPlan(Integer idUser) {
+    public Response<Object> getPlan(Integer idUser) {
         try {
             PlanEntity result = planRepository.getByIdUser(idUser);
             if (result == null){
@@ -79,40 +48,27 @@ public class PlanService implements PlanServiceInterface {
             return new Response<>(true, 200, result.toPlanModel(), "", "");
         }
         catch (Throwable t){
-            return new Response<>(false, 400, null, "", t.toString());
+            return new Response<>(false, 400, null, "", t.getMessage());
         }
     }
 
     @Override
-    public final Response<List<MenuModel>> getMenus() {
-        try{
-            List<MenuModel> result = menuRepository.findAll()
-                    .stream()
-                    .map(MenuEntity::toMenuModel)
-                    .collect(Collectors.toList());
-            return new Response<>(true, 200, result, "", "");
+    public Response<Object> deletePlan(Integer idUser) {
+        try {
+            PlanEntity entity = planRepository.getByIdUser(idUser);
+            planRepository.delete(entity);
+            return new Response<>(true, 204, null, "", "");
+        }
+        catch (InvalidDataAccessApiUsageException e){
+            return new Response<>(false, 404, null, "", e.getMessage());
         }
         catch (Throwable t){
-            return new Response<>(false, 400, null, "", t.toString());
+            return new Response<>(false, 400, null, "", t.getMessage());
         }
     }
 
     @Override
-    public final Response<List<MealRecipeModel>> getMealRecipes() {
-        try{
-            List<MealRecipeModel> result = mealRecipeRepository.findAll()
-                    .stream()
-                    .map(MealRecipeEntity::toMealRecipeModel)
-                    .collect(Collectors.toList());
-            return new Response<>(true, 200, result, "", "");
-        }
-        catch (Throwable t){
-            return new Response<>(false, 400, null, "", t.toString());
-        }
-    }
-
-    @Override
-    public Response<PlanModel> createUserPlan(Integer idUser, UserPlanRequest data) {
+    public Response<Object> createUserPlan(Integer idUser, UserPlanRequest data) {
         try{
             if (data.getMenus().size() != data.getPlanDays()){
                 throw new Exception("The number of menus for the plan is insufficient.");
@@ -121,38 +77,40 @@ public class PlanService implements PlanServiceInterface {
             planEntity.setIdUser(idUser);
             planEntity.setDescription(data.getDescription());
             planEntity.setPlanDays(data.getPlanDays());
-            planRepository.save(planEntity);
 
             for(int day = 0; day < data.getPlanDays(); day++){
                 MenuEntity menuEntity = new MenuEntity();
-                menuEntity.setIdPlan(planEntity.getId());
+                menuEntity.setPlan(planEntity);
                 menuEntity.setDay("Day " + data.getMenus().get(day).getDay());
-                menuRepository.save(menuEntity);
+                planEntity.addMenu(menuEntity);
                 for (int token = 0; token < timeOfDay.size(); token ++) {
                     if (data.getMenus().get(day).getRecipes().size() != 3){
                         throw new Exception("The number of menus for the plan is insufficient.");
                     }
                     RecipeRequest tmp = data.getMenus().get(day).getRecipes().get(token);
                     MealEntity mealEntity = new MealEntity();
-                    mealEntity.setIdMenu(menuEntity.getId());
+                    mealEntity.setMenu(menuEntity);
                     mealEntity.setTime(timeOfDay.get(token));
-                    mealRepository.save(mealEntity);
+                    menuEntity.addMeal(mealEntity);
 
                     MealRecipeEntityPK mealRecipeEntityPK = new MealRecipeEntityPK();
                     for (Integer idRecipe: tmp.getRecipesId()){
                         mealRecipeEntityPK.setIdRecipe(idRecipe);
-                        mealRecipeEntityPK.setMealId(mealEntity.getId());
+                        mealRecipeEntityPK.setMeal(mealEntity);
                         MealRecipeEntity mealRecipeEntity = new MealRecipeEntity();
                         mealRecipeEntity.setId(mealRecipeEntityPK);
-                        mealRecipeRepository.save(mealRecipeEntity);
+                        mealEntity.addMealRecipeEntity(mealRecipeEntity);
                     }
                 }
             }
-            PlanModel result = planRepository.findById(planEntity.getId()).get().toPlanModel();
+            planRepository.save(planEntity);
+            PlanModel result = planRepository.getByIdUser(idUser).toPlanModel();
             return new Response<>(true, 201, result, "", "");
+        } catch (JpaSystemException e){
+            return new Response<>(false, 400, null, "", e.getMessage());
         }
         catch (Throwable t){
-            return new Response<>(false, 400, null, "", t.toString());
+            return new Response<>(false, 400, null, "", t.getMessage());
         }
 
     }

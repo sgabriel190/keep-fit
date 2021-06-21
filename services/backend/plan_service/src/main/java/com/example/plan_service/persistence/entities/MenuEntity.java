@@ -15,11 +15,11 @@ public class MenuEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "ID_plan")
-    private Integer planId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_plan")
+    private PlanEntity plan;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "ID_menu")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "menu")
     private final List<MealEntity> meals = new ArrayList<>();
 
     @Column(name = "day")
@@ -33,12 +33,12 @@ public class MenuEntity {
         this.id = id;
     }
 
-    public Integer getIdPlan() {
-        return planId;
+    public PlanEntity getPlan() {
+        return plan;
     }
 
-    public void setIdPlan(Integer idPlan) {
-        this.planId = idPlan;
+    public void setPlan(PlanEntity plan) {
+        this.plan = plan;
     }
 
     public String getDay() {
