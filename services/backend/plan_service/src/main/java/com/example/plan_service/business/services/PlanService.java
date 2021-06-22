@@ -3,6 +3,9 @@ package com.example.plan_service.business.services;
 import com.example.plan_service.business.interfaces.PlanServiceInterface;
 import com.example.plan_service.persistence.entities.*;
 import com.example.plan_service.persistence.pojo.PlanModel;
+import com.example.plan_service.persistence.repositories.MealRecipeRepository;
+import com.example.plan_service.persistence.repositories.MealRepository;
+import com.example.plan_service.persistence.repositories.MenuRepository;
 import com.example.plan_service.persistence.repositories.PlanRepository;
 import com.example.plan_service.presentation.http.Response;
 import com.example.plan_service.presentation.requests.RecipeRequest;
@@ -17,10 +20,19 @@ import java.util.List;
 @Service
 public class PlanService implements PlanServiceInterface {
     private final PlanRepository planRepository;
+    private final MenuRepository menuRepository;
+    private final MealRepository mealRepository;
+    private final MealRecipeRepository mealRecipeRepository;
     private final List<String> timeOfDay = new ArrayList<>();
 
-    public PlanService(PlanRepository planRepository) {
+    public PlanService(PlanRepository planRepository,
+                       MenuRepository menuRepository,
+                       MealRepository mealRepository,
+                       MealRecipeRepository mealRecipeRepository) {
         this.planRepository = planRepository;
+        this.menuRepository = menuRepository;
+        this.mealRepository = mealRepository;
+        this.mealRecipeRepository = mealRecipeRepository;
         timeOfDay.add(0, "Breakfast");
         timeOfDay.add(1, "Lunch");
         timeOfDay.add(2, "Dinner");
@@ -65,12 +77,12 @@ public class PlanService implements PlanServiceInterface {
             planEntity.setIdUser(idUser);
             planEntity.setDescription(data.getDescription());
             planEntity.setPlanDays(data.getPlanDays());
-
+            planRepository.save(planEntity);
             for(int day = 0; day < data.getPlanDays(); day++){
                 MenuEntity menuEntity = new MenuEntity();
                 menuEntity.setPlan(planEntity);
                 menuEntity.setDay("Day " + data.getMenus().get(day).getDay());
-                planEntity.addMenu(menuEntity);
+                menuRepository.save(menuEntity);
                 for (int token = 0; token < timeOfDay.size(); token ++) {
                     if (data.getMenus().get(day).getRecipes().size() != 3){
                         throw new Exception("The number of menus for the plan is insufficient.");
@@ -79,7 +91,7 @@ public class PlanService implements PlanServiceInterface {
                     MealEntity mealEntity = new MealEntity();
                     mealEntity.setMenu(menuEntity);
                     mealEntity.setTime(timeOfDay.get(token));
-                    menuEntity.addMeal(mealEntity);
+                    mealRepository.save(mealEntity);
 
                     MealRecipeEntityPK mealRecipeEntityPK = new MealRecipeEntityPK();
                     for (Integer idRecipe: tmp.getRecipesId()){
@@ -87,11 +99,10 @@ public class PlanService implements PlanServiceInterface {
                         mealRecipeEntityPK.setMeal(mealEntity);
                         MealRecipeEntity mealRecipeEntity = new MealRecipeEntity();
                         mealRecipeEntity.setId(mealRecipeEntityPK);
-                        mealEntity.addMealRecipeEntity(mealRecipeEntity);
+                        mealRecipeRepository.save(mealRecipeEntity);
                     }
                 }
             }
-            planRepository.save(planEntity);
             PlanModel result = planRepository.getByIdUser(idUser).toPlanModel();
             return new Response<>(true, 201, result, "", "");
         } catch (JpaSystemException e){
