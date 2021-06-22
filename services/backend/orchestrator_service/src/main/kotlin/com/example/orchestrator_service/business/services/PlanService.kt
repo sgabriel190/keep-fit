@@ -78,21 +78,20 @@ class PlanService: PlanServiceInterface {
         try {
             val userResponse: Response<UserModel> = userService.getUser(token)
             val user: UserModel = userResponse.data ?: throw Exception(userResponse.error)
-            if (user.idUserDetails != null){
-                // Delete existing plan
-            }
+            deleteUserPlan(token)
             val userDetailsResponse = nutritionService.getUserDetails(token)
             val userDetails: UserDetailResponse = userDetailsResponse.data ?: throw Exception(userDetailsResponse.error)
             val menus = mutableListOf<DailyMenuRequest>()
             for (day in 1..data.planDays) coroutineScope {
                 val recipes = mutableListOf<RecipeRequest>()
-                for (recipe in 1..data.recipeAmount) coroutineScope{
+                for (recipe in 1..3) coroutineScope{
                     val mealResponse = nutritionService.createMeal(
-                        CreateMealRequest(userDetails.calories, data.recipeAmount),
+                        CreateMealRequest(calories = userDetails.calories / 3, size = data.recipeAmount),
                         token
                     )
                     val meal: List<RecipeLiteResponse> = mealResponse.data ?: throw Exception(mealResponse.error)
-                    recipes.add(RecipeRequest(meal.map { it.id }))
+                    val recipesId = meal.map { it.id }
+                    recipes.add(RecipeRequest(recipesId))
                 }
                 val tmpDailyMenuRequest = DailyMenuRequest(day, recipes.toList())
                 menus.add(tmpDailyMenuRequest)
@@ -129,10 +128,11 @@ class PlanService: PlanServiceInterface {
         try {
             checkToken(token)
             val user = userService.getUser(token)
+            user.data ?: throw Exception("User not found")
             val result: Response<out Any> = httpConsumerService.executeRequest {
-                val response: HttpResponse = httpConsumerService.client.delete("$host/plan/user/${user.data!!.id}")
+                val response: HttpResponse = httpConsumerService.client.delete("$host/plan/user/${user.data.id}")
                 httpConsumerService.checkResponse(response)
-                response.receive()
+                Response(successfulOperation = true, code = response.status.value, data = null)
             }
             result
         }

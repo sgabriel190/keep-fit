@@ -179,7 +179,7 @@ class NutritionService: NutritionServiceInterface {
         try {
             checkToken(token)
             val result: Response<List<RecipeLiteResponse>> = httpConsumerService.executeRequest {
-                val response: HttpResponse = httpConsumerService.client.get("$host/menu"){
+                val response: HttpResponse = httpConsumerService.client.get("$host/meal"){
                     this.setBodyJson(data)
                 }
                 httpConsumerService.checkResponse(response)
@@ -341,8 +341,35 @@ class NutritionService: NutritionServiceInterface {
         }
     }
 
-    override suspend fun deleteUserDetails(token: String): Response<UserDetailResponse> = coroutineScope{
-        TODO("Not yet implemented")
+    override suspend fun deleteUserDetails(token: String): Response<out Any> = coroutineScope{
+        try {
+            checkToken(token)
+            val userResponse = userService.getUser(token)
+            val user: UserModel = userResponse.data ?: throw Exception(userResponse.error)
+            val result: Response<Any> = httpConsumerService.executeRequest {
+                val response: HttpResponse = httpConsumerService.client.delete("$host/userDetails/${user.idUserDetails}")
+                httpConsumerService.checkResponse(response)
+                response.receive()
+            }
+            val updateUserResult = userService.updateUserDetails(token, -1)
+            updateUserResult.data ?: throw Exception(updateUserResult.error)
+            Response(successfulOperation = result.successfulOperation, code = result.code, data = result.data)
+        } catch (e: InvalidJwt){
+            Response(
+                successfulOperation = false,
+                code = 400,
+                data = null,
+                error = e.toString()
+            )
+        }
+        catch (t: Throwable){
+            Response(
+                successfulOperation = false,
+                code = 400,
+                data = null,
+                error = t.toString()
+            )
+        }
     }
 
     override suspend fun addUserDetails(data: UserDetailsRequest, token: String): Response<Int> = coroutineScope {

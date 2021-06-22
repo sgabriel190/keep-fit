@@ -63,17 +63,4 @@ class UserController {
             ResponseEntity.status(result.code).body(MyError(code = result.code, error = result.error, info = result.message))
         }
     }
-
-    @RequestMapping("/user/details/{id}", method = [RequestMethod.PATCH])
-    @ResponseBody
-    @Async
-    fun updateUserProfile(@RequestHeader(name="Authorization", required = false, defaultValue = "") token: String,
-                                  @PathVariable id: Int): ResponseEntity<Any> = runBlocking {
-        val result = userService.updateUserDetails(token, id)
-        if (result.successfulOperation){
-            ResponseEntity.status(result.code).body(result)
-        } else {
-            ResponseEntity.status(result.code).body(MyError(code = result.code, error = result.error, info = result.message))
-        }
-    }
 }

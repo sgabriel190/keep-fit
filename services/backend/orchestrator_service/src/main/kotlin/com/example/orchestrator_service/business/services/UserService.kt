@@ -3,9 +3,7 @@ package com.example.orchestrator_service.business.services
 import com.example.orchestrator_service.business.config.Host
 import com.example.orchestrator_service.business.config.InvalidJwt
 import com.example.orchestrator_service.business.config.setBodyJson
-import com.example.orchestrator_service.business.interfaces.HttpConsumerServiceInterface
-import com.example.orchestrator_service.business.interfaces.NotificationProducerServiceInterface
-import com.example.orchestrator_service.business.interfaces.UserServiceInterface
+import com.example.orchestrator_service.business.interfaces.*
 import com.example.orchestrator_service.business.models.notification.EmailRequest
 import com.example.orchestrator_service.business.models.user.request.LoginRequest
 import com.example.orchestrator_service.business.models.user.request.RegisterRequest
@@ -30,6 +28,12 @@ class UserService: UserServiceInterface {
 
     @Autowired
     lateinit var notificationProducerService: NotificationProducerServiceInterface
+
+    @Autowired
+    lateinit var nutritionService: NutritionServiceInterface
+
+    @Autowired
+    lateinit var planService: PlanServiceInterface
 
     private val host = Host("http://localhost:2022/api/users")
 
@@ -70,24 +74,17 @@ class UserService: UserServiceInterface {
 
     override suspend fun registerUser(data: RegisterRequest): Response<RegisterResponse> = coroutineScope{
         try {
-            val channelRegisterResponse = Channel<Response<RegisterResponse>>()
-            launch {
-                val result: Response<RegisterResponse> = httpConsumerService.executeRequest {
-                    val response: HttpResponse = httpConsumerService.client.put("$host/auth/register") {
-                        this.setBodyJson(data)
-                    }
-                    httpConsumerService.checkResponse(response)
-                    response.receive()
+            val result: Response<RegisterResponse> = httpConsumerService.executeRequest {
+                val response: HttpResponse = httpConsumerService.client.put("$host/auth/register") {
+                    this.setBodyJson(data)
                 }
-                channelRegisterResponse.send(result)
+                httpConsumerService.checkResponse(response)
+                response.receive()
             }
-            val result = channelRegisterResponse.receive()
-            launch {
-                if (result.code / 100 == 2) {
-                    val tmp = notificationProducerService.sendEmail(EmailRequest("Welcome", data.email, "Register"))
-                    if (tmp.code / 100 != 2) {
-                        throw Exception(tmp.message + " " + tmp.error)
-                    }
+            if (result.code / 100 == 2) {
+                val tmp = notificationProducerService.sendEmail(EmailRequest("Welcome", data.email, "Register"))
+                if (tmp.code / 100 != 2) {
+                    throw Exception(tmp.message + " " + tmp.error)
                 }
             }
             result
@@ -164,7 +161,8 @@ class UserService: UserServiceInterface {
 
     override suspend fun deleteUser(token: String): Response<out Any> = coroutineScope {
         try {
-            checkToken(token)
+            nutritionService.deleteUserDetails(token)
+            planService.deleteUserPlan(token)
             val result = httpConsumerService.executeRequest {
                 val response: HttpResponse = httpConsumerService.client.delete("$host/user"){
                     headers["Authorization"] = token

@@ -1,8 +1,8 @@
 package com.example.orchestrator_service.business.models.plan.response
 
-data class PlanModelResponse(
+data class PlanResponse(
     val idUser: Int,
     val planDays: Int,
-    val menus: List<MenuModelResponse>,
+    val menus: List<MenuResponse>,
     val description: String
 )

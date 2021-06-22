@@ -17,6 +17,6 @@ interface NutritionServiceInterface {
     suspend fun getActivityTypes(token: String): Response<List<ActivityTypeResponse>>
     suspend fun getActivityType(id: Int, token: String): Response<ActivityTypeResponse>
     suspend fun getUserDetails(token: String): Response<UserDetailResponse>
-    suspend fun deleteUserDetails(token: String): Response<UserDetailResponse>
+    suspend fun deleteUserDetails(token: String): Response<out Any>
     suspend fun addUserDetails(data: UserDetailsRequest, token: String): Response<Int>
 }

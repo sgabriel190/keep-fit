@@ -82,17 +82,4 @@ class NutritionController {
             ResponseEntity.status(result.code).body(MyError(code = result.code, error = result.error, info = result.message))
         }
     }
-
-    @RequestMapping("meal", method = [RequestMethod.GET])
-    @ResponseBody
-    @Async
-    fun getMeal(@RequestBody data: CreateMealRequest,
-                @RequestHeader(name="Authorization", required = false, defaultValue = "") token: String): ResponseEntity<Any> = runBlocking {
-        val result = nutritionService.createMeal(data, token)
-        if (result.successfulOperation){
-            ResponseEntity.status(result.code).body(result)
-        } else {
-            ResponseEntity.status(result.code).body(MyError(code = result.code, error = result.error, info = result.message))
-        }
-    }
 }
