@@ -17,12 +17,10 @@ import com.example.orchestrator_service.business.models.plan.request.UserPlanReq
 import com.example.orchestrator_service.business.models.plan.response.PlanModelResponse
 import com.example.orchestrator_service.business.models.user.response.UserModel
 import com.example.orchestrator_service.presentation.http.Response
-import com.google.gson.internal.LinkedTreeMap
 import io.ktor.client.call.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.launch
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
