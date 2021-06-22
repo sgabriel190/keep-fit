@@ -7,7 +7,7 @@ import com.example.nutrition_service.presentation.http.Response
 interface NutritionServiceInterface {
     // Recipes CRUD operations
     fun getRecipe(id: Int): Response<RecipeModel>
-    fun getRecipeByCalories(calories: Int): Response<RecipeLiteModel>
+    fun getRecipeByCalories(calories: Int, size: Int, window: Float = 25F): Response<List<RecipeLiteModel>>
     fun getRecipes(pag: Int = 1, items: Int = 10): Response<List<RecipeLiteModel>>
     fun getRecipeByCategoryId(idCategory: Int, pag: Int, items: Int): Response<List<RecipeLiteModel>>
     fun getRecipeByCategoryName(nameCategory: String, pag: Int, items: Int): Response<List<RecipeLiteModel>>
@@ -19,5 +19,5 @@ interface NutritionServiceInterface {
     fun getCategories(): Response<List<CategoryModel>>
     fun getCategory(id: Int): Response<CategoryModel>
 
-    fun createMenu(data: CreateMeal): Response<Any>
+    fun createMeal(data: CreateMeal): Response<Any>
 }

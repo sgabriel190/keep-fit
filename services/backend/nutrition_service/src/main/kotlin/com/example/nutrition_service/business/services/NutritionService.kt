@@ -52,25 +52,24 @@ class NutritionService: NutritionServiceInterface {
         }
     }
 
-    override fun getRecipeByCalories(calories: Int): Response<RecipeLiteModel> {
+    override fun getRecipeByCalories(calories: Int, size: Int, window: Float): Response<List<RecipeLiteModel>> {
         return try {
             val result = nutritionDAO.executeQuery {
-                val size = Recipes
+                val sizeRecipes = Recipes
                     .join(Nutrients, JoinType.INNER, Nutrients.id, Recipes.idNutrients)
-                    .select { Nutrients.calories lessEq calories.toFloat() + 50F and
-                            (Nutrients.calories greaterEq calories.toFloat() - 50F) }
+                    .select { Nutrients.calories lessEq calories.toFloat() + window and
+                            (Nutrients.calories greaterEq calories.toFloat() - window) }
                     .count()
                 Recipes
                     .join(Nutrients, JoinType.INNER, Nutrients.id, Recipes.idNutrients)
-                    .select { Nutrients.calories lessEq calories.toFloat() + 50F and
-                            (Nutrients.calories greaterEq calories.toFloat() - 50F) }
+                    .select { Nutrients.calories lessEq calories.toFloat() + window and
+                            (Nutrients.calories greaterEq calories.toFloat() - window) }
                     .let { Recipe.wrapRows(it) }
-                    .limit(10, Random.nextLong(0, size))
+                    .limit(size, Random.nextLong(0, sizeRecipes))
                     .toList()
                     .map {
                         it.toRecipeLiteModel()
                     }
-                    .random()
             }
             Response(data = result, code = 200, successfulOperation = true)
         } catch (t: Throwable){
@@ -169,19 +168,17 @@ class NutritionService: NutritionServiceInterface {
         }
     }
 
-    override fun createMenu(data: CreateMeal): Response<Any> {
+    override fun createMeal(data: CreateMeal): Response<Any> {
         try {
-            val threshold = Random.nextInt(data.calories - 50, data.calories + 50)
+            val threshold = data.calories
             if(data.size >= 2){
                 val result = mutableListOf<Float>()
+                val step = (1F/data.size).toDouble()
+                val window = step / 2
                 result.add(0F)
                 result.add(1F)
-                result.add(Random.nextDouble(0.2, 0.4).toFloat())
-                (1 until data.size - 1).forEach { _ ->
-                    var tmp = Random.nextDouble(0.4, 1.0).toFloat()
-                    while( tmp - result[result.size - 1] < 0.2 || tmp - result[result.size - 1] > 0.4){
-                        tmp = Random.nextDouble(0.4, 1.0).toFloat()
-                    }
+                (1 until data.size).forEach { idx ->
+                    val tmp = Random.nextDouble((idx * step) - window, (idx * step) + window).toFloat()
                     result.add(tmp)
                 }
                 result.sort()
@@ -191,14 +188,14 @@ class NutritionService: NutritionServiceInterface {
                     .map {
                         it * threshold
                     }.map {
-                        this.getRecipeByCalories(it.toInt()).data!!
+                        this.getRecipeByCalories(it.toInt(), 1, window = 10F).data?.random()
                     }
                 return Response(successfulOperation = true, data = tmp, code = 200)
             } else {
                 if (data.size <= 0) {
                     throw Exception("Incorrect number of recipes in a meal.")
                 }
-                val result = this.getRecipeByCalories(threshold)
+                val result = listOf(this.getRecipeByCalories(threshold, 1).data?.random())
                 return Response(successfulOperation = true, data = result, code = 200)
             }
 

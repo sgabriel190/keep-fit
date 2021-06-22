@@ -82,7 +82,7 @@ class NutritionController {
                           @RequestParam(required = false) calories: Int?): ResponseEntity<Any> {
 
         val response =  if (calories != null){
-            nutritionService.getRecipeByCalories(calories)
+            nutritionService.getRecipeByCalories(calories, pagSize ?: 10)
         } else {
             if (categoryId != null) {
                 nutritionService.getRecipeByCategoryId(categoryId, pag = pagNumber ?: 1, items = pagSize ?: 10)
@@ -105,7 +105,7 @@ class NutritionController {
     @RequestMapping(value = ["/meal"], method = [RequestMethod.GET])
     @ResponseBody
     fun createMeal(@RequestBody data: CreateMeal): ResponseEntity<Any> {
-        val response = nutritionService.createMenu(data)
+        val response = nutritionService.createMeal(data)
         return if (response.successfulOperation){
             ResponseEntity.status(response.code).body(response)
         } else {
