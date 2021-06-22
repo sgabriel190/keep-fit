@@ -5,25 +5,26 @@ import com.example.orchestrator_service.presentation.http.Response
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.engine.cio.*
-import io.ktor.client.features.*
 import io.ktor.client.features.json.*
 import io.ktor.client.statement.*
 
 abstract class HttpConsumerServiceInterface {
-    val client = HttpClient(CIO){
+    val client = HttpClient{
         install(JsonFeature){
-            serializer = JacksonSerializer()
+            serializer = GsonSerializer{
+                setPrettyPrinting()
+                disableHtmlEscaping()
+            }
         }
         expectSuccess = false
     }
 
-    suspend fun checkResponse(response: HttpResponse): Response<out Any> {
+    suspend fun checkResponse(response: HttpResponse): Boolean{
         return if(response.status.value / 100 == 2){
-            val tmp = response.receive<Response<Any>>()
-            tmp
+            true
         } else {
             val tmp = response.receive<MyError>()
-            Response(successfulOperation = false, code = tmp.code, data = tmp)
+            throw Exception(tmp.error)
         }
     }
     abstract suspend fun<T> executeRequest(block: suspend () -> T): T

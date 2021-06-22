@@ -1,7 +1,7 @@
 package com.example.orchestrator_service.presentation.controllers.nutrition
 
 import com.example.orchestrator_service.business.interfaces.NutritionServiceInterface
-import com.example.orchestrator_service.business.models.nutrition.CreateUserDetails
+import com.example.orchestrator_service.business.models.nutrition.request.UserDetailsRequest
 import com.example.orchestrator_service.presentation.http.MyError
 import kotlinx.coroutines.runBlocking
 import org.springframework.beans.factory.annotation.Autowired
@@ -21,7 +21,11 @@ class UserDetailsController {
     @Async
     fun getGenders(@RequestHeader(name="Authorization", required = false, defaultValue = "") token: String): ResponseEntity<Any> = runBlocking {
         val result = nutritionService.getGenders(token)
-        ResponseEntity.status(result.code).body(result)
+        if (result.successfulOperation){
+            ResponseEntity.status(result.code).body(result)
+        } else {
+            ResponseEntity.status(result.code).body(MyError(code = result.code, error = result.error, info = result.message))
+        }
     }
 
     @RequestMapping("/dietType", method = [RequestMethod.GET])
@@ -32,24 +36,24 @@ class UserDetailsController {
         if (result.successfulOperation){
             ResponseEntity.status(result.code).body(result)
         } else {
-            ResponseEntity.status(result.code).body(result.data)
+            ResponseEntity.status(result.code).body(MyError(code = result.code, error = result.error, info = result.message))
         }
     }
 
     @RequestMapping("/userDetails", method = [RequestMethod.POST])
     @ResponseBody
     @Async
-    fun addUserDetails(@RequestBody data: CreateUserDetails,
+    fun addUserDetails(@RequestBody data: UserDetailsRequest,
                        @RequestHeader(name="Authorization", required = false, defaultValue = "") token: String): ResponseEntity<Any> = runBlocking {
         val result = nutritionService.addUserDetails(data, token)
         if (result.successfulOperation){
             ResponseEntity.status(result.code).body(result)
         } else {
-            ResponseEntity.status(result.code).body(result.data)
+            ResponseEntity.status(result.code).body(MyError(code = result.code, error = result.error, info = result.message))
         }
     }
 
-    @RequestMapping("/activityType", method = [RequestMethod.POST])
+    @RequestMapping("/activityType", method = [RequestMethod.GET])
     @ResponseBody
     @Async
     fun getActivityTypes(@RequestHeader(name="Authorization", required = false, defaultValue = "") token: String): ResponseEntity<Any> = runBlocking {
@@ -57,7 +61,7 @@ class UserDetailsController {
         if (result.successfulOperation){
             ResponseEntity.status(result.code).body(result)
         } else {
-            ResponseEntity.status(result.code).body(result.data)
+            ResponseEntity.status(result.code).body(MyError(code = result.code, error = result.error, info = result.message))
         }
     }
 
@@ -70,20 +74,20 @@ class UserDetailsController {
         if (result.successfulOperation){
             ResponseEntity.status(result.code).body(result)
         } else {
-            ResponseEntity.status(result.code).body(result.data)
+            ResponseEntity.status(result.code).body(MyError(code = result.code, error = result.error, info = result.message))
         }
     }
 
-    @RequestMapping("/userDetails/{id}", method = [RequestMethod.GET])
+    @RequestMapping("/userDetails/user", method = [RequestMethod.GET])
     @ResponseBody
     @Async
-    fun getUserDetails(@PathVariable id: Int,
-                       @RequestHeader(name="Authorization", required = false, defaultValue = "") token: String): ResponseEntity<Any> = runBlocking {
-        val result = nutritionService.getUserDetails(id, token)
+    fun getUserDetails(@RequestHeader(name="Authorization", required = false, defaultValue = "") token: String): ResponseEntity<Any> = runBlocking {
+        val result = nutritionService.getUserDetails(token)
         if (result.successfulOperation){
             ResponseEntity.status(result.code).body(result)
         } else {
-            ResponseEntity.status(result.code).body(result.data)
+            ResponseEntity.status(result.code).body(MyError(code = result.code, error = result.error, info = result.message))
         }
     }
+
 }

@@ -1,7 +1,7 @@
 package com.example.orchestrator_service.presentation.controllers.planning
 
 import com.example.orchestrator_service.business.interfaces.PlanServiceInterface
-import com.example.orchestrator_service.business.models.plan.UserPlanRequest
+import com.example.orchestrator_service.business.models.plan.request.CreateUserPlanRequest
 import com.example.orchestrator_service.presentation.http.MyError
 import kotlinx.coroutines.runBlocking
 import org.springframework.beans.factory.annotation.Autowired
@@ -15,42 +15,41 @@ class PlanController {
     @Autowired
     lateinit var planService: PlanServiceInterface
 
-    @RequestMapping("/plan/user/{id}", method = [RequestMethod.GET])
+    @RequestMapping("/plan/user", method = [RequestMethod.GET])
     @ResponseBody
     @Async
-    fun getUserPlan(@RequestHeader(name="Authorization", required = false, defaultValue = "") token: String,
-                    @PathVariable id: Int): ResponseEntity<Any> = runBlocking {
-        val result = planService.getUserPlan(id, token)
+    fun getUserPlan(@RequestHeader(name="Authorization", required = false, defaultValue = "") token: String): ResponseEntity<Any> = runBlocking {
+        val result = planService.getUserPlan(token)
         if (result.successfulOperation){
             ResponseEntity.status(result.code).body(result)
         } else {
-            ResponseEntity.status(result.code).body(result.data)
+            ResponseEntity.status(result.code).body(MyError(code = result.code, error = result.error, info = result.message))
         }
     }
 
-    @RequestMapping("/plan", method = [RequestMethod.GET])
-    @ResponseBody
-    @Async
-    fun getPlans(@RequestHeader(name="Authorization", required = false, defaultValue = "") token: String): ResponseEntity<Any> = runBlocking {
-        val result = planService.getPlans()
-        if (result.successfulOperation){
-            ResponseEntity.status(result.code).body(result)
-        } else {
-            ResponseEntity.status(result.code).body(result.data)
-        }
-    }
-
-    @RequestMapping("/plan/user/{idUser}", method = [RequestMethod.POST])
+    @RequestMapping("/plan/user", method = [RequestMethod.POST])
     @ResponseBody
     @Async
     fun createUserPlan(@RequestHeader(name="Authorization", required = false, defaultValue = "") token: String,
-                       @PathVariable idUser: Int,
-                       @RequestBody data: UserPlanRequest): ResponseEntity<Any> = runBlocking {
-        val result = planService.createPlan(idUser, data)
+                       @RequestBody data: CreateUserPlanRequest
+    ): ResponseEntity<Any> = runBlocking {
+        val result = planService.createUserPlan(data, token)
         if (result.successfulOperation){
             ResponseEntity.status(result.code).body(result)
         } else {
-            ResponseEntity.status(result.code).body(result.data)
+            ResponseEntity.status(result.code).body(MyError(code = result.code, error = result.error, info = result.message))
+        }
+    }
+
+    @RequestMapping("/plan/user", method = [RequestMethod.DELETE])
+    @ResponseBody
+    @Async
+    fun deleteUserPlan(@RequestHeader(name="Authorization", required = false, defaultValue = "") token: String): ResponseEntity<Any> = runBlocking {
+        val result = planService.deleteUserPlan(token)
+        if (result.successfulOperation){
+            ResponseEntity.status(result.code).body(result)
+        } else {
+            ResponseEntity.status(result.code).body(MyError(code = result.code, error = result.error, info = result.message))
         }
     }
 }

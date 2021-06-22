@@ -2,6 +2,7 @@ package com.example.nutrition_service.presentation.controllers
 
 import com.example.nutrition_service.business.interfaces.UserDetailsServiceInterface
 import com.example.nutrition_service.presentation.business_models.CreateUserDetails
+import com.example.nutrition_service.presentation.business_models.UpdateUserDetails
 import com.example.nutrition_service.presentation.http.MyError
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
@@ -79,6 +80,32 @@ class UserDetailsController {
     @ResponseBody
     fun addUserDetails(@RequestBody data: CreateUserDetails): ResponseEntity<Any> {
         val response = userDetailsServiceInterface.addUserDetails(data)
+        return if (response.successfulOperation) {
+            ResponseEntity.status(response.code).body(response)
+        } else {
+            ResponseEntity.status(response.code).body(MyError(response.code, response.error, response.message))
+        }
+    }
+
+    @Async
+    @RequestMapping(value = ["/{id}"], method = [RequestMethod.DELETE])
+    @ResponseBody
+    fun deleteUserDetails(@PathVariable id: Int): ResponseEntity<Any> {
+        val response = userDetailsServiceInterface.deleteUserDetails(id)
+        return if (response.successfulOperation) {
+            ResponseEntity.status(response.code).body(null)
+        } else {
+            ResponseEntity.status(response.code).body(MyError(response.code, response.error, response.message))
+        }
+    }
+
+    @Async
+    @RequestMapping(value = ["/{id}"], method = [RequestMethod.PATCH])
+    @ResponseBody
+    fun deleteUserDetails(@PathVariable id: Int,
+                          @RequestBody data: UpdateUserDetails
+    ): ResponseEntity<Any> {
+        val response = userDetailsServiceInterface.updateUserDetails(id, data)
         return if (response.successfulOperation) {
             ResponseEntity.status(response.code).body(response)
         } else {

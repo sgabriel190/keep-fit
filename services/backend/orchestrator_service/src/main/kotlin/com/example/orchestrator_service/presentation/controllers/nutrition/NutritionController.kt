@@ -1,7 +1,7 @@
 package com.example.orchestrator_service.presentation.controllers.nutrition
 
 import com.example.orchestrator_service.business.interfaces.NutritionServiceInterface
-import com.example.orchestrator_service.business.models.nutrition.CreateMeal
+import com.example.orchestrator_service.business.models.nutrition.request.CreateMealRequest
 import com.example.orchestrator_service.presentation.http.MyError
 import kotlinx.coroutines.runBlocking
 import org.springframework.beans.factory.annotation.Autowired
@@ -25,7 +25,7 @@ class NutritionController {
         if (result.successfulOperation){
             ResponseEntity.status(result.code).body(result)
         } else {
-            ResponseEntity.status(result.code).body(result.data)
+            ResponseEntity.status(result.code).body(MyError(code = result.code, error = result.error, info = result.message))
         }
     }
 
@@ -54,7 +54,7 @@ class NutritionController {
         if (result.successfulOperation){
             ResponseEntity.status(result.code).body(result)
         } else {
-            ResponseEntity.status(result.code).body(result.data)
+            ResponseEntity.status(result.code).body(MyError(code = result.code, error = result.error, info = result.message))
         }
     }
 
@@ -66,7 +66,7 @@ class NutritionController {
         if (result.successfulOperation){
             ResponseEntity.status(result.code).body(result)
         } else {
-            ResponseEntity.status(result.code).body(result.data)
+            ResponseEntity.status(result.code).body(MyError(code = result.code, error = result.error, info = result.message))
         }
     }
 
@@ -79,20 +79,7 @@ class NutritionController {
         if (result.successfulOperation){
             ResponseEntity.status(result.code).body(result)
         } else {
-            ResponseEntity.status(result.code).body(result.data)
-        }
-    }
-
-    @RequestMapping("meal", method = [RequestMethod.GET])
-    @ResponseBody
-    @Async
-    fun getMeal(@RequestBody data: CreateMeal,
-                @RequestHeader(name="Authorization", required = false, defaultValue = "") token: String): ResponseEntity<Any> = runBlocking {
-        val result = nutritionService.createMeal(data, token)
-        if (result.successfulOperation){
-            ResponseEntity.status(result.code).body(result)
-        } else {
-            ResponseEntity.status(result.code).body(result.data)
+            ResponseEntity.status(result.code).body(MyError(code = result.code, error = result.error, info = result.message))
         }
     }
 }

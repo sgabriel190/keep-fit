@@ -7,9 +7,13 @@ import com.example.nutrition_service.persistence.interfaces.NutritionDAOInterfac
 import com.example.nutrition_service.persistence.pojos.ActivityTypeModel
 import com.example.nutrition_service.persistence.pojos.UserDetailModel
 import com.example.nutrition_service.presentation.business_models.CreateUserDetails
+import com.example.nutrition_service.presentation.business_models.UpdateUserDetails
 import com.example.nutrition_service.presentation.http.Response
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import java.math.BigDecimal
+import java.math.RoundingMode
+import kotlin.math.round
 
 @Service
 class UserDetailsService: UserDetailsServiceInterface {
@@ -86,6 +90,53 @@ class UserDetailsService: UserDetailsServiceInterface {
         }
         catch (t: Throwable){
             return Response(successfulOperation = false, data = null, code = 400, error = t.toString())
+        }
+    }
+
+    override fun deleteUserDetails(id: Int): Response<Any> {
+        return try {
+            nutritionDAO.executeQuery {
+                UserDetail.findById(id)!!.delete()
+            }
+            Response(data = null, code = 204, successfulOperation = true)
+        } catch (t: Throwable){
+            Response(successfulOperation = false, data = null, code = 400, error = t.toString())
+        }
+    }
+
+    override fun updateUserDetails(id: Int, data: UpdateUserDetails): Response<Any> {
+        return try {
+            nutritionDAO.executeQuery {
+                val userDetail = UserDetail.findById(id) ?: throw Exception("User detail not found.")
+                if (data.weight != null)
+                    userDetail.weight = data.weight
+                if (data.height != null)
+                    userDetail.height = data.height
+                if (data.age != null)
+                    userDetail.age = data.age
+                if (data.idActivityType != null)
+                    userDetail.idActivityType = ActivityType.findById(data.idActivityType) ?: throw Exception("Activity type not found.")
+                if (data.idDietType != null)
+                    userDetail.idDietType = DietType.findById(data.idDietType) ?: throw Exception("Diet type not found.")
+                if (data.height != null || data.age != null){
+                    userDetail.idealWeight = utils.computeIdealWeight(userDetail.height, userDetail.age, userDetail.idGender.id.value)
+                    userDetail.wnd = utils.computeWND(userDetail.idealWeight)
+                    userDetail.calories = utils.computeCalories(
+                        userDetail.idealWeight,
+                        userDetail.idDietType.calories,
+                        userDetail.idActivityType.calories
+                    )
+                }
+                if (data.weight != null || data.height != null){
+                    userDetail.bmi = utils.computeBMI(userDetail.weight, userDetail.height)
+                }
+            }
+            val result = nutritionDAO.executeQuery {
+                UserDetail.findById(id)?.toUserDetailModel() ?: throw Exception("User detail not found.")
+            }
+            Response(data = result, code = 200, successfulOperation = true)
+        } catch (t: Throwable){
+            Response(successfulOperation = false, data = null, code = 400, error = t.toString())
         }
     }
 

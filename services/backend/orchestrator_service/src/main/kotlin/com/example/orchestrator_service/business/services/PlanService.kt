@@ -4,14 +4,23 @@ import com.example.orchestrator_service.business.config.Host
 import com.example.orchestrator_service.business.config.InvalidJwt
 import com.example.orchestrator_service.business.config.setBodyJson
 import com.example.orchestrator_service.business.interfaces.HttpConsumerServiceInterface
+import com.example.orchestrator_service.business.interfaces.NutritionServiceInterface
 import com.example.orchestrator_service.business.interfaces.PlanServiceInterface
 import com.example.orchestrator_service.business.interfaces.UserServiceInterface
-import com.example.orchestrator_service.business.models.plan.UserPlanRequest
-import com.example.orchestrator_service.presentation.http.MyError
+import com.example.orchestrator_service.business.models.nutrition.request.CreateMealRequest
+import com.example.orchestrator_service.business.models.nutrition.response.RecipeLiteResponse
+import com.example.orchestrator_service.business.models.nutrition.response.UserDetailResponse
+import com.example.orchestrator_service.business.models.plan.request.CreateUserPlanRequest
+import com.example.orchestrator_service.business.models.plan.request.DailyMenuRequest
+import com.example.orchestrator_service.business.models.plan.request.RecipeRequest
+import com.example.orchestrator_service.business.models.plan.request.UserPlanRequest
+import com.example.orchestrator_service.business.models.plan.response.PlanModelResponse
+import com.example.orchestrator_service.business.models.user.response.UserModel
 import com.example.orchestrator_service.presentation.http.Response
 import io.ktor.client.call.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
+import kotlinx.coroutines.coroutineScope
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
@@ -26,6 +35,9 @@ class PlanService: PlanServiceInterface {
     @Autowired
     lateinit var userService: UserServiceInterface
 
+    @Autowired
+    lateinit var nutritionService: NutritionServiceInterface
+
     private suspend fun checkToken(token: String) {
         val responseValidToken = userService.validateToken(token)
         if (responseValidToken.code / 100 != 2){
@@ -33,12 +45,14 @@ class PlanService: PlanServiceInterface {
         }
     }
 
-    override suspend fun getUserPlan(idUser: Int, token: String): Response<out Any> {
-        return try {
-            this.checkToken(token)
-            val result = httpConsumerService.executeRequest {
-                val response: HttpResponse = httpConsumerService.client.get("$host/plan/user/{id}")
+    override suspend fun getUserPlan(token: String): Response<PlanModelResponse> = coroutineScope{
+        try {
+            checkToken(token)
+            val user = userService.getUser(token)
+            val result: Response<PlanModelResponse> = httpConsumerService.executeRequest {
+                val response: HttpResponse = httpConsumerService.client.get("$host/plan/user/${user.data!!.id}")
                 httpConsumerService.checkResponse(response)
+                response.receive()
             }
             result
         }
@@ -46,77 +60,49 @@ class PlanService: PlanServiceInterface {
             Response(
                 successfulOperation = false,
                 code = 400,
-                data = MyError(
-                    error = e.toString(),
-                    info = "",
-                    code = 400
-                )
+                data = null,
+                error = e.toString()
             )
         }
         catch (t: Throwable){
             Response(
                 successfulOperation = false,
                 code = 400,
-                data = MyError(
-                    error = t.toString(),
-                    info = "",
-                    code = 400
-                )
+                data = null,
+                error = t.toString()
             )
         }
     }
 
-    override suspend fun getMeals(): Response<out Any> {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun getMealRecipes(): Response<out Any> {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun getPlans(): Response<out Any> {
-        return try {
-            val result = httpConsumerService.executeRequest {
-                val response: HttpResponse = httpConsumerService.client.get("$host/plan")
-                httpConsumerService.checkResponse(response)
+    override suspend fun createUserPlan(data: CreateUserPlanRequest, token: String): Response<PlanModelResponse> = coroutineScope{
+        try {
+            val userResponse: Response<UserModel> = userService.getUser(token)
+            val user: UserModel = userResponse.data ?: throw Exception(userResponse.error)
+            deleteUserPlan(token)
+            val userDetailsResponse = nutritionService.getUserDetails(token)
+            val userDetails: UserDetailResponse = userDetailsResponse.data ?: throw Exception(userDetailsResponse.error)
+            val menus = mutableListOf<DailyMenuRequest>()
+            for (day in 1..data.planDays) coroutineScope {
+                val recipes = mutableListOf<RecipeRequest>()
+                for (recipe in 1..3) coroutineScope{
+                    val mealResponse = nutritionService.createMeal(
+                        CreateMealRequest(calories = userDetails.calories / 3, size = data.recipeAmount),
+                        token
+                    )
+                    val meal: List<RecipeLiteResponse> = mealResponse.data ?: throw Exception(mealResponse.error)
+                    val recipesId = meal.map { it.id }
+                    recipes.add(RecipeRequest(recipesId))
+                }
+                val tmpDailyMenuRequest = DailyMenuRequest(day, recipes.toList())
+                menus.add(tmpDailyMenuRequest)
             }
-            result
-        }
-        catch (e: InvalidJwt){
-            Response(
-                successfulOperation = false,
-                code = 400,
-                data = MyError(
-                    error = e.toString(),
-                    info = "",
-                    code = 400
-                )
-            )
-        }
-        catch (t: Throwable){
-            Response(
-                successfulOperation = false,
-                code = 400,
-                data = MyError(
-                    error = t.toString(),
-                    info = "",
-                    code = 400
-                )
-            )
-        }
-    }
-
-    override suspend fun getMenus(): Response<out Any> {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun createPlan(idUser: Int, data: UserPlanRequest): Response<out Any> {
-        return try {
-            val result = httpConsumerService.executeRequest {
-                val response: HttpResponse = httpConsumerService.client.post("$host/plan/user/$idUser"){
-                    this.setBodyJson(data)
+            val tmp = UserPlanRequest(data.description, data.planDays, menus.toList())
+            val result: Response<PlanModelResponse> = httpConsumerService.executeRequest {
+                val response: HttpResponse = httpConsumerService.client.post("$host/plan/user/${user.id}"){
+                    this.setBodyJson(tmp)
                 }
                 httpConsumerService.checkResponse(response)
+                response.receive()
             }
             result
         }
@@ -124,22 +110,46 @@ class PlanService: PlanServiceInterface {
             Response(
                 successfulOperation = false,
                 code = 400,
-                data = MyError(
-                    error = e.toString(),
-                    info = "",
-                    code = 400
-                )
+                data = null,
+                error = e.toString()
             )
         }
         catch (t: Throwable){
             Response(
                 successfulOperation = false,
                 code = 400,
-                data = MyError(
-                    error = t.toString(),
-                    info = "",
-                    code = 400
-                )
+                data = null,
+                error = t.toString()
+            )
+        }
+    }
+
+    override suspend fun deleteUserPlan(token: String): Response<out Any> = coroutineScope{
+        try {
+            checkToken(token)
+            val user = userService.getUser(token)
+            user.data ?: throw Exception("User not found")
+            val result: Response<out Any> = httpConsumerService.executeRequest {
+                val response: HttpResponse = httpConsumerService.client.delete("$host/plan/user/${user.data.id}")
+                httpConsumerService.checkResponse(response)
+                Response(successfulOperation = true, code = response.status.value, data = null)
+            }
+            result
+        }
+        catch (e: InvalidJwt){
+            Response(
+                successfulOperation = false,
+                code = 400,
+                data = null,
+                error = e.toString()
+            )
+        }
+        catch (t: Throwable){
+            Response(
+                successfulOperation = false,
+                code = 400,
+                data = null,
+                error = t.toString()
             )
         }
     }

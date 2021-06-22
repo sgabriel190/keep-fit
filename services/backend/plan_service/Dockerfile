@@ -1,6 +1,10 @@
+FROM openjdk:8 AS build
+WORKDIR ./app
+COPY . .
+RUN ./mvnw package
+
 FROM openjdk:8
 WORKDIR ./app
-COPY ./plan.db .
-COPY ./target/plan_service-0.0.1-SNAPSHOT.jar .
+COPY --from=build /app .
 EXPOSE 8080/tcp
-CMD java -jar ./plan_service-0.0.1-SNAPSHOT.jar
+CMD java -jar ./target/plan_service-0.0.1-SNAPSHOT.jar
