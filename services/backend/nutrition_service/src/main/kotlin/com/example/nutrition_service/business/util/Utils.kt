@@ -7,6 +7,7 @@ import com.example.nutrition_service.persistence.interfaces.NutritionDAOInterfac
 import com.example.nutrition_service.persistence.pojos.GenderModel
 import com.example.nutrition_service.persistence.repositories.NutritionDAO
 import org.springframework.stereotype.Component
+import kotlin.math.roundToInt
 
 @Component
 class Utils: UtilsInterface {
@@ -29,7 +30,7 @@ class Utils: UtilsInterface {
 
     override fun computeBMI(weight: Int, height: Int): Float {
         val heightMeters = height / 100F
-        return weight / (heightMeters * heightMeters)
+        return (weight / (heightMeters * heightMeters) * 10).roundToInt().toFloat() / 10
     }
 
     override fun computeWND(idealWeight: Int): Int {

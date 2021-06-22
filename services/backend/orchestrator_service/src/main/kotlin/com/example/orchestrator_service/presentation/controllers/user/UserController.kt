@@ -1,8 +1,8 @@
 package com.example.orchestrator_service.presentation.controllers.user
 
 import com.example.orchestrator_service.business.interfaces.UserServiceInterface
-import com.example.orchestrator_service.business.models.user.LoginRequest
-import com.example.orchestrator_service.business.models.user.RegisterRequest
+import com.example.orchestrator_service.business.models.user.request.LoginRequest
+import com.example.orchestrator_service.business.models.user.request.RegisterRequest
 import com.example.orchestrator_service.presentation.http.MyError
 import kotlinx.coroutines.runBlocking
 import org.springframework.beans.factory.annotation.Autowired
@@ -24,7 +24,7 @@ class UserController {
         if (result.successfulOperation){
             ResponseEntity.status(result.code).body(result)
         } else {
-            ResponseEntity.status(result.code).body(result.data)
+            ResponseEntity.status(result.code).body(MyError(code = result.code, error = result.error, info = result.message))
         }
     }
 
@@ -36,7 +36,7 @@ class UserController {
         if (result.successfulOperation){
             ResponseEntity.status(result.code).body(result)
         } else {
-            ResponseEntity.status(result.code).body(result.data)
+            ResponseEntity.status(result.code).body(MyError(code = result.code, error = result.error, info = result.message))
         }
     }
 
@@ -48,7 +48,7 @@ class UserController {
         if (result.successfulOperation){
             ResponseEntity.status(result.code).body(result)
         } else {
-            ResponseEntity.status(result.code).body(result.data)
+            ResponseEntity.status(result.code).body(MyError(code = result.code, error = result.error, info = result.message))
         }
     }
 
@@ -60,7 +60,7 @@ class UserController {
         if (result.successfulOperation){
             ResponseEntity.status(result.code).body(result)
         } else {
-            ResponseEntity.status(result.code).body(result.data)
+            ResponseEntity.status(result.code).body(MyError(code = result.code, error = result.error, info = result.message))
         }
     }
 
@@ -73,7 +73,7 @@ class UserController {
         if (result.successfulOperation){
             ResponseEntity.status(result.code).body(result)
         } else {
-            ResponseEntity.status(result.code).body(result.data)
+            ResponseEntity.status(result.code).body(MyError(code = result.code, error = result.error, info = result.message))
         }
     }
 }

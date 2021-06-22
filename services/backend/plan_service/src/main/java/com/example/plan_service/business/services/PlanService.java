@@ -3,9 +3,6 @@ package com.example.plan_service.business.services;
 import com.example.plan_service.business.interfaces.PlanServiceInterface;
 import com.example.plan_service.persistence.entities.*;
 import com.example.plan_service.persistence.pojo.PlanModel;
-import com.example.plan_service.persistence.repositories.MealRecipeRepository;
-import com.example.plan_service.persistence.repositories.MealRepository;
-import com.example.plan_service.persistence.repositories.MenuRepository;
 import com.example.plan_service.persistence.repositories.PlanRepository;
 import com.example.plan_service.presentation.http.Response;
 import com.example.plan_service.presentation.requests.RecipeRequest;
@@ -19,19 +16,10 @@ import java.util.List;
 
 @Service
 public class PlanService implements PlanServiceInterface {
-    private final MealRecipeRepository mealRecipeRepository;
-    private final MealRepository mealRepository;
-    private final MenuRepository menuRepository;
     private final PlanRepository planRepository;
     private final List<String> timeOfDay = new ArrayList<>();
 
-    public PlanService(MealRecipeRepository mealRecipeRepository,
-                       MealRepository mealRepository,
-                       MenuRepository menuRepository,
-                       PlanRepository planRepository) {
-        this.mealRecipeRepository = mealRecipeRepository;
-        this.mealRepository = mealRepository;
-        this.menuRepository = menuRepository;
+    public PlanService(PlanRepository planRepository) {
         this.planRepository = planRepository;
         timeOfDay.add(0, "Breakfast");
         timeOfDay.add(1, "Lunch");

@@ -27,7 +27,7 @@ class ImageController {
                 .contentType(MediaType.IMAGE_JPEG)
                 .body(result.data)
         } else {
-            ResponseEntity.status(result.code).body(result.data)
+            ResponseEntity.status(result.code).body(MyError(code = result.code, error = result.error, info = result.message))
         }
     }
 }
