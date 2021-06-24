@@ -5,8 +5,40 @@ import {Envelope, Person, ShieldLock} from "react-bootstrap-icons";
 import { motion } from "framer-motion"
 import {Link} from 'react-router-dom';
 import '../../shared/styles/autentication/styles-authentication.css';
+import ResponseData from "../../types/models/ResponseData";
+import RegisterModel from "../../types/models/RegisterModel";
+import UserService from '../../services/UserService';
 
 class Register extends React.Component<any, any>{
+    constructor(props: object) {
+        super(props);
+        this.state = {
+            username: null,
+            password: null,
+            checkPassword: null,
+            email: null
+        };
+    }
+
+    async componentDidMount(){
+    }
+
+    async register() {
+        try {
+            let data: ResponseData<RegisterModel> = await UserService.register({
+                username: this.state.username,
+                password: this.state.password,
+                email: this.state.email
+            });
+            if (!data.successfulOperation){
+                throw new Error(data.error);
+            }
+            console.log(data);
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
     render() {
         return (
             <div className={"container-custom py-5"}>
@@ -37,7 +69,11 @@ class Register extends React.Component<any, any>{
                                                 <Person />
                                             </InputGroup.Text>
                                         </InputGroup.Prepend>
-                                        <Form.Control type="text" placeholder="Enter username..." />
+                                        <Form.Control
+                                            type="text"
+                                            placeholder="Enter username..."
+                                            onChange={e=>this.setState({username: e.target.value})}
+                                        />
                                     </InputGroup>
                                 </Row>
                             </Form.Group>
@@ -49,7 +85,11 @@ class Register extends React.Component<any, any>{
                                                 <ShieldLock />
                                             </InputGroup.Text>
                                         </InputGroup.Prepend>
-                                        <Form.Control type="password" placeholder="Password" />
+                                        <Form.Control
+                                            type="password"
+                                            placeholder="Password"
+                                            onChange={e=>this.setState({password: e.target.value})}
+                                        />
                                     </InputGroup>
                                 </Row>
                             </Form.Group>
@@ -61,7 +101,11 @@ class Register extends React.Component<any, any>{
                                                 <ShieldLock />
                                             </InputGroup.Text>
                                         </InputGroup.Prepend>
-                                        <Form.Control type="password" placeholder="Validate password" />
+                                        <Form.Control
+                                            type="password"
+                                            placeholder="Validate password"
+                                            onChange={e=>this.setState({checkPassword: e.target.value})}
+                                        />
                                     </InputGroup>
                                 </Row>
                             </Form.Group>
@@ -73,7 +117,11 @@ class Register extends React.Component<any, any>{
                                                 <Envelope />
                                             </InputGroup.Text>
                                         </InputGroup.Prepend>
-                                        <Form.Control type="email" placeholder="Email" />
+                                        <Form.Control
+                                            type="email"
+                                            placeholder="Email"
+                                            onChange={e=>this.setState({email: e.target.value})}
+                                        />
                                     </InputGroup>
                                 </Row>
                             </Form.Group>
@@ -81,7 +129,7 @@ class Register extends React.Component<any, any>{
                         <Row className={"pt-3 pb-2"}>
                             <button
                                 className={"button-form"}
-                                onClick={() => {console.log("clicked register")}}
+                                onClick={this.register.bind(this)}
                             >
                                 Register
                             </button>
@@ -91,7 +139,7 @@ class Register extends React.Component<any, any>{
                                 className={"link-text-inherit"}
                                 to={"/login"}
                             >
-                                <span className={"span-clickable-form"} onClick={() => {console.log("clicked back to login")}}>
+                                <span className={"span-clickable-form"} >
                                     Go back to log in.
                                 </span>
                             </Link>
