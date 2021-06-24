@@ -8,13 +8,15 @@ import com.example.orchestrator_service.business.interfaces.NutritionServiceInte
 import com.example.orchestrator_service.business.interfaces.PlanServiceInterface
 import com.example.orchestrator_service.business.interfaces.UserServiceInterface
 import com.example.orchestrator_service.business.models.nutrition.request.CreateMealRequest
+import com.example.orchestrator_service.business.models.nutrition.request.MenuRequest
+import com.example.orchestrator_service.business.models.nutrition.request.RecipeMenuRequest
 import com.example.orchestrator_service.business.models.nutrition.response.RecipeLiteResponse
 import com.example.orchestrator_service.business.models.nutrition.response.UserDetailResponse
 import com.example.orchestrator_service.business.models.plan.request.CreateUserPlanRequest
 import com.example.orchestrator_service.business.models.plan.request.DailyMenuRequest
 import com.example.orchestrator_service.business.models.plan.request.RecipeRequest
 import com.example.orchestrator_service.business.models.plan.request.UserPlanRequest
-import com.example.orchestrator_service.business.models.plan.response.PlanModelResponse
+import com.example.orchestrator_service.business.models.plan.response.*
 import com.example.orchestrator_service.business.models.user.response.UserModel
 import com.example.orchestrator_service.presentation.http.Response
 import io.ktor.client.call.*
@@ -27,7 +29,11 @@ import org.springframework.stereotype.Service
 @Service
 class PlanService: PlanServiceInterface {
 
-    private val host = Host("http://localhost:2021/api/planning")
+    private val host = Host(
+        host = "http://${System.getenv("HOST_PLAN") ?: "localhost"}",
+        port = "8080",
+        path = "api/planning"
+    )
 
     @Autowired
     lateinit var httpConsumerService: HttpConsumerServiceInterface
@@ -45,7 +51,7 @@ class PlanService: PlanServiceInterface {
         }
     }
 
-    override suspend fun getUserPlan(token: String): Response<PlanModelResponse> = coroutineScope{
+    override suspend fun getUserPlan(token: String): Response<PlanResponse> = coroutineScope{
         try {
             checkToken(token)
             val user = userService.getUser(token)
@@ -54,12 +60,32 @@ class PlanService: PlanServiceInterface {
                 httpConsumerService.checkResponse(response)
                 response.receive()
             }
-            result
+            result.data ?: throw Exception("No user plan was found.")
+            val menus = result.data.menus.map { menu ->
+                val meals = mutableListOf<RecipeMenuRequest>()
+                menu.meals.forEach{ meal ->
+                    val recipesId = meal.mealRecipe.map { recipe ->
+                        recipe.idRecipe
+                    }
+                    meals.add(RecipeMenuRequest(recipesId, meal.timeOfDay))
+                }
+                val recipesResult = nutritionService.getRecipesForMenu(MenuRequest(meals.toList()), token)
+                recipesResult.data ?: throw Exception("Can't find recipes for menu")
+                val tmpMenu = recipesResult.data.menu.map { menuToken ->
+                    val tmpRecipes = menuToken.recipes.map { recipe ->
+                        MealRecipeResponse(recipe)
+                    }
+                    MealResponse(mealRecipe = tmpRecipes, timeOfDay = menuToken.meal)
+                }
+                MenuResponse(meals = tmpMenu, day = menu.day)
+            }
+            val data = PlanResponse(idUser = result.data.idUser, planDays = result.data.planDays, description = result.data.description, menus = menus)
+            Response(successfulOperation = true, code = 200, data = data)
         }
         catch (e: InvalidJwt){
             Response(
                 successfulOperation = false,
-                code = 400,
+                code = 401,
                 data = null,
                 error = e.toString()
             )
@@ -109,7 +135,7 @@ class PlanService: PlanServiceInterface {
         catch (e: InvalidJwt){
             Response(
                 successfulOperation = false,
-                code = 400,
+                code = 401,
                 data = null,
                 error = e.toString()
             )
@@ -139,7 +165,7 @@ class PlanService: PlanServiceInterface {
         catch (e: InvalidJwt){
             Response(
                 successfulOperation = false,
-                code = 400,
+                code = 401,
                 data = null,
                 error = e.toString()
             )

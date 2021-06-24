@@ -1,6 +1,7 @@
 package com.example.orchestrator_service.presentation.controllers.nutrition
 
 import com.example.orchestrator_service.business.interfaces.NutritionServiceInterface
+import com.example.orchestrator_service.business.models.nutrition.request.UpdateUserDetailsRequest
 import com.example.orchestrator_service.business.models.nutrition.request.UserDetailsRequest
 import com.example.orchestrator_service.presentation.http.MyError
 import kotlinx.coroutines.runBlocking
@@ -83,6 +84,19 @@ class UserDetailsController {
     @Async
     fun getUserDetails(@RequestHeader(name="Authorization", required = false, defaultValue = "") token: String): ResponseEntity<Any> = runBlocking {
         val result = nutritionService.getUserDetails(token)
+        if (result.successfulOperation){
+            ResponseEntity.status(result.code).body(result)
+        } else {
+            ResponseEntity.status(result.code).body(MyError(code = result.code, error = result.error, info = result.message))
+        }
+    }
+
+    @RequestMapping("/userDetails/user", method = [RequestMethod.PATCH])
+    @ResponseBody
+    @Async
+    fun updateUserDetails(@RequestHeader(name="Authorization", required = false, defaultValue = "") token: String,
+                          @RequestBody data: UpdateUserDetailsRequest): ResponseEntity<Any> = runBlocking {
+        val result = nutritionService.updateUserDetails(data, token)
         if (result.successfulOperation){
             ResponseEntity.status(result.code).body(result)
         } else {

@@ -2,6 +2,7 @@ package com.example.nutrition_service.presentation.controllers
 
 import com.example.nutrition_service.business.interfaces.NutritionServiceInterface
 import com.example.nutrition_service.presentation.business_models.CreateMeal
+import com.example.nutrition_service.presentation.business_models.MenuRequest
 import com.example.nutrition_service.presentation.http.MyError
 import com.example.nutrition_service.presentation.http.Response
 import org.springframework.beans.factory.annotation.Autowired
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*
 class NutritionController {
     @Autowired
     lateinit var nutritionService: NutritionServiceInterface
+
 
     @Async
     @RequestMapping(value = ["/ping"], method = [RequestMethod.GET])
@@ -102,10 +104,22 @@ class NutritionController {
     }
 
     @Async
-    @RequestMapping(value = ["/meal"], method = [RequestMethod.GET])
+    @RequestMapping(value = ["/meal"], method = [RequestMethod.POST])
     @ResponseBody
     fun createMeal(@RequestBody data: CreateMeal): ResponseEntity<Any> {
         val response = nutritionService.createMeal(data)
+        return if (response.successfulOperation){
+            ResponseEntity.status(response.code).body(response)
+        } else {
+            ResponseEntity.status(response.code).body(MyError(response.code, response.error, response.message))
+        }
+    }
+
+    @Async
+    @RequestMapping(value = ["recipe/menu"], method = [RequestMethod.POST])
+    @ResponseBody
+    fun getRecipesForMenu(@RequestBody data: MenuRequest): ResponseEntity<Any> {
+        val response = nutritionService.getMenuRecipes(data)
         return if (response.successfulOperation){
             ResponseEntity.status(response.code).body(response)
         } else {

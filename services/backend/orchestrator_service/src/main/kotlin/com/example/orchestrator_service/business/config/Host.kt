@@ -1,9 +1,11 @@
 package com.example.orchestrator_service.business.config
 
 data class Host(
-    val uri: String
+    val host: String,
+    val port: String,
+    val path: String
 ) {
     override fun toString(): String {
-        return uri
+        return "$host:$port/$path"
     }
 }

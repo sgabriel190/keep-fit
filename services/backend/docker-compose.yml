@@ -1,0 +1,35 @@
+version: "3.9"  # optional since v1.27.0
+services:
+  user-service:
+    image: keep-fit/user:1.4.0
+    container_name: user-service
+    ports:
+      - "2022:8080"
+  plan-service:
+    image: keep-fit/plan:1.4.1
+    container_name: plan-service
+    ports:
+      - "2021:8080"
+  nutrition-service:
+    image: keep-fit/nutrition:1.4.3
+    container_name: nutrition-service
+    ports:
+      - "2020:8080"
+  notification-service:
+    image: keep-fit/notification:1.4.0
+    container_name: notification-service
+    environment: 
+      - EMAIL_NAME
+      - EMAIL_PASSWORD
+    ports:
+      - "2030:5000"
+  orchestrator-service:
+    image: keep-fit/orchestrator:1.4.6
+    container_name: orchestrator-service
+    environment:
+      - HOST_USER
+      - HOST_PLAN
+      - HOST_NUTRITION
+      - HOST_NOTIFICATION
+    ports:
+      - "2025:8080"
