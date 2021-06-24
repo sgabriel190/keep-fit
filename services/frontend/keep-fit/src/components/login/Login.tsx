@@ -6,8 +6,43 @@ import {Container, Form, InputGroup, Row} from 'react-bootstrap';
 import {Person, ShieldLock} from "react-bootstrap-icons";
 import {Link} from 'react-router-dom';
 import { motion } from "framer-motion"
+import ResponseData from "../../types/models/ResponseData";
+import AuthModel from "../../types/models/AuthModel";
+import store from "../../helpers/store";
+import addJwt from "../../helpers/actions";
+import UserService from '../../services/UserService';
+import selectJwtValue from "../../helpers/selector";
 
 class Login extends React.Component<any, any>{
+    constructor(props: object) {
+        super(props);
+        this.state = {
+            username: null,
+            password: null
+        };
+    }
+
+    async componentDidMount(){
+    }
+
+    async login() {
+        try {
+            let response: ResponseData<AuthModel> = await UserService.login({
+                username: this.state.username,
+                password: this.state.password
+            });
+            if (!response.successfulOperation){
+                throw new Error(response.error);
+            }
+            store.dispatch(addJwt(response.data.token));
+            console.log(selectJwtValue());
+            this.props.history.push("/");
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+
     render() {
         return (
             <div className={"container-custom py-5"}>
@@ -35,7 +70,11 @@ class Login extends React.Component<any, any>{
                                                 <Person />
                                             </InputGroup.Text>
                                         </InputGroup.Prepend>
-                                        <Form.Control type="text" placeholder="Enter username..." />
+                                        <Form.Control
+                                            type="text"
+                                            placeholder="Enter username..."
+                                            onChange={e=>this.setState({username: e.target.value})}
+                                        />
                                     </InputGroup>
                                 </Row>
                             </Form.Group>
@@ -47,7 +86,11 @@ class Login extends React.Component<any, any>{
                                                 <ShieldLock />
                                             </InputGroup.Text>
                                         </InputGroup.Prepend>
-                                        <Form.Control type="password" placeholder="Password" />
+                                        <Form.Control
+                                            type="password"
+                                            placeholder="Password"
+                                            onChange={e=>this.setState({password: e.target.value})}
+                                        />
                                     </InputGroup>
                                 </Row>
                             </Form.Group>
@@ -58,7 +101,10 @@ class Login extends React.Component<any, any>{
                             </Form.Group>
                         </Row>
                         <Row className={"pb-3"}>
-                            <button className={"button-form"} onClick={() => {console.log("clicked login")}}>
+                            <button
+                                className={"button-form"}
+                                onClick={this.login.bind(this)}
+                            >
                                 Log in
                             </button>
                         </Row>
@@ -70,7 +116,10 @@ class Login extends React.Component<any, any>{
                             </Link>
                         </Row>
                         <Row className={"pt-2"}>
-                                <span className={"span-clickable-form"} onClick={() => {console.log("clicked forgot password")}}>
+                                <span
+                                    className={"span-clickable-form"}
+                                    onClick={() => {console.log("clicked forgot password")}}
+                                >
                                     I have forgot my password.
                                 </span>
                         </Row>

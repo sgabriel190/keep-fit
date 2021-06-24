@@ -6,6 +6,21 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Header from "./shared/header/Header";
 import routes from "./routes/routes";
 import NotFound from "./components/notfound/NotFound";
+import axios from "axios";
+import selectJwtValue from "./helpers/selector";
+
+axios.interceptors.request.use(
+    (request) => {
+        if (request.url?.includes("login") || request.url?.includes("register")){
+            return request;
+        }
+        if(selectJwtValue() !== ""){
+            request.headers["Authorization"] = `Bearer ${selectJwtValue()}`;
+        }
+        return request;
+    },
+    undefined
+);
 
 ReactDOM.render(
     <React.StrictMode>
