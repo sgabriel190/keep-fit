@@ -1,4 +1,4 @@
-package com.example.orchestrator_service.business.models.plan.request
+package com.example.orchestrator_service.business.models.nutrition.request
 
 data class RecipeMenuRequest(
     val recipes: List<Int>,

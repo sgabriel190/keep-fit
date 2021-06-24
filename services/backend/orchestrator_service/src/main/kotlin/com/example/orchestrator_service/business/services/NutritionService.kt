@@ -8,6 +8,8 @@ import com.example.orchestrator_service.business.interfaces.HttpConsumerServiceI
 import com.example.orchestrator_service.business.interfaces.NutritionServiceInterface
 import com.example.orchestrator_service.business.interfaces.UserServiceInterface
 import com.example.orchestrator_service.business.models.nutrition.request.CreateMealRequest
+import com.example.orchestrator_service.business.models.nutrition.request.MenuRequest
+import com.example.orchestrator_service.business.models.nutrition.request.UpdateUserDetailsRequest
 import com.example.orchestrator_service.business.models.nutrition.request.UserDetailsRequest
 import com.example.orchestrator_service.business.models.nutrition.response.*
 import com.example.orchestrator_service.business.models.user.response.UserModel
@@ -30,7 +32,11 @@ class NutritionService: NutritionServiceInterface {
     @Autowired
     lateinit var userService: UserServiceInterface
 
-    private val host = Host("http://localhost:2020/api/nutrition")
+    private val host = Host(
+        host = "http://${System.getenv("HOST_NUTRITION") ?: "localhost"}",
+        port = "8080",
+        path = "api/nutrition"
+    )
 
     private suspend fun checkToken(token: String) {
         val responseValidToken = userService.validateToken(token)
@@ -50,7 +56,7 @@ class NutritionService: NutritionServiceInterface {
         } catch (e: InvalidJwt){
             Response(
                 successfulOperation = false,
-                code = 400,
+                code = 401,
                 data = null,
                 error = e.toString()
             )
@@ -79,7 +85,7 @@ class NutritionService: NutritionServiceInterface {
         } catch (e: InvalidJwt){
             Response(
                 successfulOperation = false,
-                code = 400,
+                code = 401,
                 data = null,
                 error = e.toString()
             )
@@ -106,7 +112,7 @@ class NutritionService: NutritionServiceInterface {
         } catch (e: InvalidJwt){
             Response(
                 successfulOperation = false,
-                code = 400,
+                code = 401,
                 data = null,
                 error = e.toString()
             )
@@ -133,7 +139,7 @@ class NutritionService: NutritionServiceInterface {
         } catch (e: InvalidJwt){
             Response(
                 successfulOperation = false,
-                code = 400,
+                code = 401,
                 data = null,
                 error = e.toString()
             )
@@ -160,7 +166,7 @@ class NutritionService: NutritionServiceInterface {
         } catch (e: InvalidJwt){
             Response(
                 successfulOperation = false,
-                code = 400,
+                code = 401,
                 data = null,
                 error = e.toString()
             )
@@ -179,7 +185,7 @@ class NutritionService: NutritionServiceInterface {
         try {
             checkToken(token)
             val result: Response<List<RecipeLiteResponse>> = httpConsumerService.executeRequest {
-                val response: HttpResponse = httpConsumerService.client.get("$host/meal"){
+                val response: HttpResponse = httpConsumerService.client.post("$host/meal"){
                     this.setBodyJson(data)
                 }
                 httpConsumerService.checkResponse(response)
@@ -189,7 +195,7 @@ class NutritionService: NutritionServiceInterface {
         } catch (e: InvalidJwt){
             Response(
                 successfulOperation = false,
-                code = 400,
+                code = 401,
                 data = null,
                 error = e.toString()
             )
@@ -216,7 +222,7 @@ class NutritionService: NutritionServiceInterface {
         } catch (e: InvalidJwt){
             Response(
                 successfulOperation = false,
-                code = 400,
+                code = 401,
                 data = null,
                 error = e.toString()
             )
@@ -243,7 +249,7 @@ class NutritionService: NutritionServiceInterface {
         } catch (e: InvalidJwt){
             Response(
                 successfulOperation = false,
-                code = 400,
+                code = 401,
                 data = null,
                 error = e.toString()
             )
@@ -270,7 +276,7 @@ class NutritionService: NutritionServiceInterface {
         } catch (e: InvalidJwt){
             Response(
                 successfulOperation = false,
-                code = 400,
+                code = 401,
                 data = null,
                 error = e.toString()
             )
@@ -297,7 +303,7 @@ class NutritionService: NutritionServiceInterface {
         } catch (e: InvalidJwt){
             Response(
                 successfulOperation = false,
-                code = 400,
+                code = 401,
                 data = null,
                 error = e.toString()
             )
@@ -314,7 +320,6 @@ class NutritionService: NutritionServiceInterface {
 
     override suspend fun getUserDetails(token: String): Response<UserDetailResponse> = coroutineScope{
         try {
-            checkToken(token)
             val userResponse = userService.getUser(token)
             val user: UserModel = userResponse.data ?: throw Exception(userResponse.error)
             val result: Response<UserDetailResponse> = httpConsumerService.executeRequest {
@@ -326,7 +331,7 @@ class NutritionService: NutritionServiceInterface {
         } catch (e: InvalidJwt){
             Response(
                 successfulOperation = false,
-                code = 400,
+                code = 401,
                 data = null,
                 error = e.toString()
             )
@@ -343,7 +348,6 @@ class NutritionService: NutritionServiceInterface {
 
     override suspend fun deleteUserDetails(token: String): Response<out Any> = coroutineScope{
         try {
-            checkToken(token)
             val userResponse = userService.getUser(token)
             val user: UserModel = userResponse.data ?: throw Exception(userResponse.error)
             val result: Response<Any> = httpConsumerService.executeRequest {
@@ -357,7 +361,7 @@ class NutritionService: NutritionServiceInterface {
         } catch (e: InvalidJwt){
             Response(
                 successfulOperation = false,
-                code = 400,
+                code = 401,
                 data = null,
                 error = e.toString()
             )
@@ -388,7 +392,67 @@ class NutritionService: NutritionServiceInterface {
         } catch (e: InvalidJwt){
             Response(
                 successfulOperation = false,
+                code = 401,
+                data = null,
+                error = e.toString()
+            )
+        }
+        catch (t: Throwable){
+            Response(
+                successfulOperation = false,
                 code = 400,
+                data = null,
+                error = t.toString()
+            )
+        }
+    }
+
+    override suspend fun updateUserDetails(data: UpdateUserDetailsRequest,
+                                           token: String): Response<UserDetailResponse> = coroutineScope {
+        try {
+            val userResponse = userService.getUser(token)
+            val user: UserModel = userResponse.data ?: throw Exception(userResponse.error)
+            val result: Response<UserDetailResponse> = httpConsumerService.executeRequest {
+                val response: HttpResponse = httpConsumerService.client.patch("$host/userDetails/${user.idUserDetails}"){
+                    this.setBodyJson(data)
+                }
+                httpConsumerService.checkResponse(response)
+                response.receive()
+            }
+            result
+        } catch (e: InvalidJwt){
+            Response(
+                successfulOperation = false,
+                code = 401,
+                data = null,
+                error = e.toString()
+            )
+        }
+        catch (t: Throwable){
+            Response(
+                successfulOperation = false,
+                code = 400,
+                data = null,
+                error = t.toString()
+            )
+        }
+    }
+
+    override suspend fun getRecipesForMenu(data: MenuRequest, token: String): Response<MenuResponse> = coroutineScope {
+        try {
+            checkToken(token)
+            val result: Response<MenuResponse> = httpConsumerService.executeRequest {
+                val response: HttpResponse = httpConsumerService.client.post("$host/recipe/menu"){
+                    this.setBodyJson(data)
+                }
+                httpConsumerService.checkResponse(response)
+                response.receive()
+            }
+            result
+        } catch (e: InvalidJwt){
+            Response(
+                successfulOperation = false,
+                code = 401,
                 data = null,
                 error = e.toString()
             )

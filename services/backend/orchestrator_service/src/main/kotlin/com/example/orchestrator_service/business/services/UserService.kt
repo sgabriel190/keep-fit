@@ -35,7 +35,11 @@ class UserService: UserServiceInterface {
     @Autowired
     lateinit var planService: PlanServiceInterface
 
-    private val host = Host("http://localhost:2022/api/users")
+    private val host = Host(
+        host = "http://${System.getenv("HOST_USER") ?: "localhost"}",
+        port = "8080",
+        path = "api/users"
+    )
 
     private suspend fun checkToken(token: String) {
         val responseValidToken = this.validateToken(token)
@@ -57,7 +61,7 @@ class UserService: UserServiceInterface {
         } catch (e: InvalidJwt){
             Response(
                 successfulOperation = false,
-                code = 400,
+                code = 401,
                 data = null,
                 error = e.toString()
             )
@@ -91,7 +95,7 @@ class UserService: UserServiceInterface {
         } catch (e: InvalidJwt){
             Response(
                 successfulOperation = false,
-                code = 400,
+                code = 401,
                 data = null,
                 error = e.toString()
             )
@@ -120,7 +124,7 @@ class UserService: UserServiceInterface {
         } catch (e: InvalidJwt){
             Response(
                 successfulOperation = false,
-                code = 400,
+                code = 401,
                 data = null,
                 error = e.toString()
             )
@@ -136,27 +140,17 @@ class UserService: UserServiceInterface {
     }
 
     override suspend fun validateToken(token: String): Response<Boolean> = coroutineScope {
-        try {
-            val result: Response<Boolean> = httpConsumerService.executeRequest {
-                val response: HttpResponse = httpConsumerService.client.post("$host/auth/validate"){
-                    headers["Authorization"] = token
-                }
-                httpConsumerService.checkResponse(response)
-                response.receive()
+        val result: Response<Boolean> = httpConsumerService.executeRequest {
+            val response: HttpResponse = httpConsumerService.client.post("$host/auth/validate"){
+                headers["Authorization"] = token
             }
-            if (result.code / 100 != 2){
-                throw Exception("Invalid JWT.")
-            }
-            result
+            httpConsumerService.checkResponse(response)
+            response.receive()
         }
-        catch (t: Throwable){
-            Response(
-                successfulOperation = false,
-                code = 400,
-                data = null,
-                error = t.toString()
-            )
+        if (result.code / 100 != 2){
+            throw Exception("Invalid JWT.")
         }
+        result
     }
 
     override suspend fun deleteUser(token: String): Response<out Any> = coroutineScope {
@@ -176,7 +170,7 @@ class UserService: UserServiceInterface {
         } catch (e: InvalidJwt){
             Response(
                 successfulOperation = false,
-                code = 400,
+                code = 401,
                 data = null,
                 error = e.toString()
             )
@@ -205,7 +199,7 @@ class UserService: UserServiceInterface {
         } catch (e: InvalidJwt){
             Response(
                 successfulOperation = false,
-                code = 400,
+                code = 401,
                 data = null,
                 error = e.toString()
             )

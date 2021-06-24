@@ -1,8 +1,10 @@
 package com.example.orchestrator_service.business.interfaces
 
 import com.example.orchestrator_service.business.models.nutrition.request.CreateMealRequest
+import com.example.orchestrator_service.business.models.nutrition.request.UpdateUserDetailsRequest
 import com.example.orchestrator_service.business.models.nutrition.request.UserDetailsRequest
 import com.example.orchestrator_service.business.models.nutrition.response.*
+import com.example.orchestrator_service.business.models.nutrition.request.MenuRequest
 import com.example.orchestrator_service.presentation.http.Response
 
 interface NutritionServiceInterface {
@@ -19,4 +21,6 @@ interface NutritionServiceInterface {
     suspend fun getUserDetails(token: String): Response<UserDetailResponse>
     suspend fun deleteUserDetails(token: String): Response<out Any>
     suspend fun addUserDetails(data: UserDetailsRequest, token: String): Response<Int>
+    suspend fun updateUserDetails(data: UpdateUserDetailsRequest, token: String): Response<UserDetailResponse>
+    suspend fun getRecipesForMenu(data: MenuRequest, token: String): Response<MenuResponse>
 }

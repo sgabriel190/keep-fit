@@ -15,7 +15,11 @@ class NotificationProducerService: NotificationProducerServiceInterface {
     @Autowired
     lateinit var httpConsumerService: HttpConsumerServiceInterface
 
-    private val host = Host("http://localhost:2030/api/notification")
+    private val host = Host(
+        host = "http://${System.getenv("HOST_NOTIFICATION") ?: "localhost"}",
+        port = "5000",
+        path = "api/notification"
+    )
 
     override suspend fun sendEmail(data: EmailRequest): Response<out Any> {
         return try {
