@@ -2,6 +2,7 @@ package com.example.nutrition_service.business.interfaces
 
 import com.example.nutrition_service.persistence.pojos.*
 import com.example.nutrition_service.presentation.business_models.CreateMeal
+import com.example.nutrition_service.presentation.business_models.MenuRequest
 import com.example.nutrition_service.presentation.http.Response
 
 interface NutritionServiceInterface {
@@ -20,4 +21,5 @@ interface NutritionServiceInterface {
     fun getCategory(id: Int): Response<CategoryModel>
 
     fun createMeal(data: CreateMeal): Response<Any>
+    fun getMenuRecipes(data: MenuRequest): Response<MenuModel>
 }

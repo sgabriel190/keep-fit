@@ -7,6 +7,7 @@ import com.example.nutrition_service.persistence.interfaces.NutritionDAOInterfac
 import com.example.nutrition_service.persistence.pojos.*
 import com.example.nutrition_service.persistence.tables.*
 import com.example.nutrition_service.presentation.business_models.CreateMeal
+import com.example.nutrition_service.presentation.business_models.MenuRequest
 import com.example.nutrition_service.presentation.http.Response
 import org.jetbrains.exposed.sql.*
 import org.springframework.beans.factory.annotation.Autowired
@@ -201,6 +202,23 @@ class NutritionService: NutritionServiceInterface {
 
         } catch (t: Throwable){
             return Response(successfulOperation = false, data = null, code = 400, error = t.toString())
+        }
+    }
+
+    override fun getMenuRecipes(data: MenuRequest): Response<MenuModel> {
+        return try {
+            val result = nutritionDAO.executeQuery {
+                val tmp = data.menu.map { menu ->
+                    val tmp = menu.recipes.map { recipe ->
+                        Recipe.findById(recipe)!!.toRecipeLiteModel()
+                    }
+                    RecipeMenuModel(recipes = tmp, meal = menu.meal)
+                }
+                MenuModel(tmp)
+            }
+            Response(data = result, code = 200, successfulOperation = true)
+        } catch (t: Throwable){
+            Response(successfulOperation = false, data = null, code = 400, error = t.toString())
         }
     }
 }
