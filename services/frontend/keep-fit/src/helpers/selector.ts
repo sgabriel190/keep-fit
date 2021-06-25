@@ -1,5 +1,3 @@
-import store from "./store"
-
-const selectJwtValue = () => store.getState().jwt
+const selectJwtValue = () => sessionStorage.getItem("jwt");
 
 export default selectJwtValue;

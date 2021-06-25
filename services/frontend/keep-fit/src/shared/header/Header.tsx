@@ -1,13 +1,33 @@
 import "./Header.css";
 import React from "react";
-import {Button, Form, FormControl, Nav, Navbar} from "react-bootstrap";
+import { Nav, Navbar} from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import navbarRoutes from "../../routes/navbar-routes";
 import { Link } from "react-router-dom";
-import {BoxArrowInRight} from "react-bootstrap-icons";
+import {BoxArrowInRight, BoxArrowRight} from "react-bootstrap-icons";
+import selectJwtValue from "../../helpers/selector";
+import store from "../../helpers/store";
+import UserService from "../../services/UserService";
 
 class Header extends React.Component<any, any>{
+
+    constructor(props: any) {
+        super(props);
+        this.state = {
+            loggedIn: sessionStorage.getItem("jwt") !== null,
+        };
+    }
+
+    renderIcon(){
+        if (selectJwtValue() === ""){
+            this.setState({loggedIn: false});
+        } else {
+            this.setState({loggedIn: true});
+        }
+    }
+
     render() {
+        store.subscribe(() => this.renderIcon());
         return(
             <Navbar bg={"dark"} variant={"dark"} className={"sticky-top header-custom py-0"}>
                 <Navbar.Brand className={"px-0 py-0 mx-0"}>
@@ -39,17 +59,22 @@ class Header extends React.Component<any, any>{
                             })
                         }
                     </Nav>
-                    <Form inline>
-                        <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                        <Button variant="outline-primary">Search</Button>
-                    </Form>
                 </Navbar.Collapse>
-                <Link
-                    to={"/login"}
-                    className={"login-icon"}
-                >
-                    <BoxArrowInRight/>
-                </Link>
+                {
+                    this.state.loggedIn ?
+                        <Link
+                            to={"/login"}
+                            className={"login-icon"}
+                            onClick={() => UserService.logout()}
+                        >
+                            <BoxArrowRight/>
+                        </Link> : <Link
+                            to={"/login"}
+                            className={"login-icon"}
+                        >
+                            <BoxArrowInRight/>
+                        </Link>
+                }
             </Navbar>
         );
     }

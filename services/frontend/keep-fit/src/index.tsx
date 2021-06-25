@@ -8,13 +8,26 @@ import routes from "./routes/routes";
 import NotFound from "./components/notfound/NotFound";
 import axios from "axios";
 import selectJwtValue from "./helpers/selector";
+import { Toaster } from 'react-hot-toast';
+import {GuardedRoute, GuardProvider} from "react-router-guards";
+import Welcome from "./components/welcome/Welcome";
+import Login from "./components/login/Login";
+import Register from "./components/register/Register";
+
+const requireLogin = (to: any, from: any, next: any) => {
+    if(sessionStorage.getItem("jwt") === null){
+        next.redirect('/login');
+    } else {
+        next();
+    }
+}
 
 axios.interceptors.request.use(
     (request) => {
         if (request.url?.includes("login") || request.url?.includes("register")){
             return request;
         }
-        if(selectJwtValue() !== ""){
+        if(selectJwtValue() !== null){
             request.headers["Authorization"] = `Bearer ${selectJwtValue()}`;
         }
         return request;
@@ -26,24 +39,55 @@ ReactDOM.render(
     <React.StrictMode>
         <Router>
             <Header/>
-            <Switch>
-                {
-                    routes.map( (token, idx) => {
-                            return(
-                                <Route
-                                    key={idx}
-                                    path={token.url}
-                                    exact={true}
-                                    component={token.component}
-                                />
-                            );
-                        }
-                    )
-                }
-                <Route
-                    component={NotFound}
-                />
-            </Switch>
+            <Toaster
+                toastOptions={{
+                    style: {
+                        marginTop: "3.5em"
+                    },
+                    ariaProps: {
+                        role: 'status',
+                        'aria-live': 'polite',
+                    },
+                    duration: 3000,
+                    position: "top-center"
+                }}
+            />
+            <GuardProvider guards={[requireLogin]}>
+                <Switch>
+                    {
+                        routes.map( (token, idx) => {
+                                return(
+                                    <GuardedRoute
+                                        key={idx}
+                                        path={token.url}
+                                        exact={true}
+                                        component={token.component}
+                                        meta={{auth: true}}
+                                    />
+                                );
+                            }
+                        )
+                    }
+                    <Route
+                        path={"/"}
+                        component={Welcome}
+                        exact={true}
+                    />
+                    <Route
+                        path={"/login"}
+                        component={Login}
+                        exact={true}
+                    />
+                    <Route
+                        path={"/register"}
+                        component={Register}
+                        exact={true}
+                    />
+                    <Route
+                        component={NotFound}
+                    />
+                </Switch>
+            </GuardProvider>
         </Router>
     </React.StrictMode>
     ,
