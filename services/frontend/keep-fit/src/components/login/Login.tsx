@@ -2,18 +2,40 @@ import React from 'react';
 import './Login.css';
 import '../../shared/styles/shared.css';
 import '../../shared/styles/autentication/styles-authentication.css';
-import {Container, Form, InputGroup, Row} from 'react-bootstrap';
-import {Person, ShieldLock} from "react-bootstrap-icons";
 import {Link} from 'react-router-dom';
 import { motion } from "framer-motion"
 import ResponseData from "../../types/models/ResponseData";
 import AuthModel from "../../types/models/AuthModel";
-import store from "../../helpers/store";
-import addJwt from "../../helpers/actions";
 import UserService from '../../services/UserService';
-import selectJwtValue from "../../helpers/selector";
+import {toast} from "react-hot-toast";
+import MyError from "../../types/models/MyError";
+import * as Yup from 'yup';
+import { Formik, Form, Field } from 'formik';
+import store from "../../helpers/store";
+import addJwt from "../../helpers/action";
+
+interface FormValues {
+    username: string;
+    password: string;
+}
 
 class Login extends React.Component<any, any>{
+
+    initialValues: FormValues = {username:'', password:''};
+
+    schema = Yup.object().shape({
+        username: Yup
+            .string()
+            .min(3, "Too Short!")
+            .max(20, "Too Long!")
+            .required('Required field'),
+        password: Yup
+            .string()
+            .min(3, "Too Short!")
+            .max(20, "Too Long!")
+            .required('Required field')
+    });
+
     constructor(props: object) {
         super(props);
         this.state = {
@@ -27,30 +49,33 @@ class Login extends React.Component<any, any>{
 
     async login() {
         try {
-            let response: ResponseData<AuthModel> = await UserService.login({
+            let response: ResponseData<any> = await UserService.login({
                 username: this.state.username,
                 password: this.state.password
             });
             if (!response.successfulOperation){
+                response = response as ResponseData<MyError>;
                 throw new Error(response.error);
             }
-            store.dispatch(addJwt(response.data.token));
-            console.log(selectJwtValue());
+            response = response as ResponseData<AuthModel>;
+            sessionStorage.setItem("jwt", response.data.token);
+            store.dispatch(addJwt);
+            toast.success('Login successfully');
             this.props.history.push("/");
         }
         catch (e) {
-            console.log(e);
+            toast.error(`Login failed!\n${e}`)
         }
     }
 
     render() {
         return (
-            <div className={"container-custom py-5"}>
+            <div className={"container-custom"}>
                 <motion.div
                     animate={{ y: 0, opacity: 1 }}
                     initial={{y: -100, opacity: 0}}
                     transition={{ ease: "easeOut", duration: 1 }}
-                    className={"container-main container-login p-5 shadow"}
+                    className={"container-main container-login shadow width-container"}
                 >
                     <motion.p
                         className={"text-container-title"}
@@ -58,72 +83,71 @@ class Login extends React.Component<any, any>{
                         initial={{opacity: 0}}
                         transition={{ ease: "easeOut", duration: 1 }}
                     >Log in</motion.p>
-                    <Form as={Container}
-                          className={"pt-4"}
-                    >
-                        <Row>
-                            <Form.Group>
-                                <Row className={"col-lg-7 my-2"}>
-                                    <InputGroup>
-                                        <InputGroup.Prepend>
-                                            <InputGroup.Text>
-                                                <Person />
-                                            </InputGroup.Text>
-                                        </InputGroup.Prepend>
-                                        <Form.Control
-                                            type="text"
-                                            placeholder="Enter username..."
-                                            onChange={e=>this.setState({username: e.target.value})}
-                                        />
-                                    </InputGroup>
-                                </Row>
-                            </Form.Group>
-                            <Form.Group controlId="formBasicPassword">
-                                <Row className={"col-lg-7 my-2"}>
-                                    <InputGroup>
-                                        <InputGroup.Prepend>
-                                            <InputGroup.Text>
-                                                <ShieldLock />
-                                            </InputGroup.Text>
-                                        </InputGroup.Prepend>
-                                        <Form.Control
-                                            type="password"
-                                            placeholder="Password"
-                                            onChange={e=>this.setState({password: e.target.value})}
-                                        />
-                                    </InputGroup>
-                                </Row>
-                            </Form.Group>
-                            <Form.Group controlId="formBasicCheckbox">
-                                <Row>
-                                    <Form.Check type="checkbox" label="Remember my credentials" />
-                                </Row>
-                            </Form.Group>
-                        </Row>
-                        <Row className={"pb-3"}>
-                            <button
-                                className={"button-form"}
-                                onClick={this.login.bind(this)}
-                            >
-                                Log in
-                            </button>
-                        </Row>
-                        <Row className={"pt-3 pb-2"}>
-                            <Link to={"/register"}>
-                                <button className={"button-form"}>
-                                    Register
-                                </button>
-                            </Link>
-                        </Row>
-                        <Row className={"pt-2"}>
-                                <span
-                                    className={"span-clickable-form"}
-                                    onClick={() => {console.log("clicked forgot password")}}
+                    <Formik
+                        initialValues={this.initialValues}
+                        validationSchema={this.schema}
+                        onSubmit={(values) =>{
+                            this.setState({username: values.username});
+                            this.setState({password: values.password});
+                            this.login().then(r => {});
+                        }}
+                    >{
+                        (
+                            {
+                                touched,
+                                errors,
+                            }
+                        )=>(
+                            <Form className={"container"}>
+                                <div className={"form-group y-margin"}>
+                                    <label htmlFor="username">
+                                        Username
+                                    </label>
+                                    <Field
+                                        id="username"
+                                        name="username"
+                                        placeholder="Username..."
+                                        type={"text"}
+                                        className={"input-text"}
+                                    />
+                                    {
+                                        errors.username && touched.username ?
+                                            (<p className={"error-text"}>{errors.username}</p>)
+                                            : null
+                                    }
+                                </div>
+                                <div className={"form-group y-margin"}>
+                                    <label htmlFor="password">
+                                        Password
+                                    </label>
+                                    <Field
+                                        id="password"
+                                        name="password"
+                                        placeholder="Password..."
+                                        type={"password"}
+                                        className={"input-text"}
+                                    />
+                                    {
+                                        errors.password && touched.password ?
+                                            (<p className={"error-text"}>{errors.password}</p>)
+                                            : null
+                                    }
+                                </div>
+                                <button
+                                    className={"button-form y-margin"}
+                                    type="submit"
                                 >
-                                    I have forgot my password.
-                                </span>
-                        </Row>
-                    </Form>
+                                    Log in
+                                </button>
+                                <Link to={"/register"}>
+                                    <button className={"button-form y-margin"}>
+                                        Register
+                                    </button>
+                                </Link>
+                            </Form>
+                        )
+                    }
+                    </Formik>
                 </motion.div>
             </div>
         );

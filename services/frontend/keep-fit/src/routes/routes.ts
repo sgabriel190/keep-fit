@@ -7,14 +7,6 @@ const routes: RouterModel[] = [
         component: loadable(() => import("../components/dashboard/Dashboard")),
     },
     {
-        url: "/login",
-        component: loadable(() => import("../components/login/Login")),
-    },
-    {
-        url: "/register",
-        component: loadable(() => import("../components/register/Register")),
-    },
-    {
         url: "/recipes",
         component: loadable(() => import("../components/recipes/Recipes")),
     },
@@ -25,11 +17,7 @@ const routes: RouterModel[] = [
     {
         url: "/profile",
         component: loadable(() => import("../components/profile/Profile")),
-    },
-    {
-        url: "/",
-        component: loadable(() => import("../components/welcome/Welcome")),
-    },
+    }
 ];
 
 export default routes;

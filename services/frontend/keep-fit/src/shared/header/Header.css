@@ -1,5 +1,5 @@
 .text-link-decoration {
-    text-decoration: inherit !important;
+    text-decoration: none !important;
     color: rgba(255,255,255, .8) !important;
     transition: 0.3s;
 }

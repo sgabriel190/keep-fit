@@ -1,152 +1,235 @@
 import React from 'react';
 import './Register.css';
-import {Container, Form, InputGroup, Row} from "react-bootstrap";
-import {Envelope, Person, ShieldLock} from "react-bootstrap-icons";
 import { motion } from "framer-motion"
 import {Link} from 'react-router-dom';
 import '../../shared/styles/autentication/styles-authentication.css';
 import ResponseData from "../../types/models/ResponseData";
 import RegisterModel from "../../types/models/RegisterModel";
 import UserService from '../../services/UserService';
+import {toast} from "react-hot-toast";
+import MyError from "../../types/models/MyError";
+import * as Yup from 'yup';
+import { Formik, Form, Field } from 'formik';
+// @ts-ignore
+import LoadingMask from "react-loadingmask";
+import "react-loadingmask/dist/react-loadingmask.css";
+
+interface FormValues {
+    username: string;
+    password: string;
+    validatePassword: string;
+    email: string;
+}
 
 class Register extends React.Component<any, any>{
+
+    initialValues: FormValues = {username:'', password:'', validatePassword:'', email:''};
+
+    schema = Yup.object().shape({
+        username: Yup
+            .string()
+            .min(3, "Too Short!")
+            .max(20, "Too Long!")
+            .required('Required field'),
+        password: Yup
+            .string()
+            .min(3, "Too Short!")
+            .max(20, "Too Long!")
+            .required('Required field'),
+        validatePassword: Yup
+            .string()
+            .min(3, "Too Short!")
+            .max(20, "Too Long!")
+            .required('Required field'),
+        email: Yup
+            .string()
+            .email('Invalid email!')
+            .required('Required field')
+    });
+
     constructor(props: object) {
         super(props);
         this.state = {
             username: null,
             password: null,
-            checkPassword: null,
-            email: null
+            email: null,
+            isLoading: false
         };
-    }
-
-    async componentDidMount(){
     }
 
     async register() {
         try {
-            let data: ResponseData<RegisterModel> = await UserService.register({
+            this.setState({isLoading: true});
+            let response: ResponseData<any> = await UserService.register({
                 username: this.state.username,
                 password: this.state.password,
                 email: this.state.email
             });
-            if (!data.successfulOperation){
-                throw new Error(data.error);
+            if (!response.successfulOperation){
+                response = response as ResponseData<MyError>
+                this.setState({isLoading: false});
+                throw new Error();
             }
-            console.log(data);
+            response = response as ResponseData<RegisterModel>;
+            this.setState({isLoading: false});
+            toast.success('Register successfully');
+            this.props.history.push("/login");
         }
         catch (e) {
-            console.log(e);
+            toast.error(`Register failed!`)
         }
     }
     render() {
         return (
-            <div className={"container-custom py-5"}>
-                <motion.div
-                    animate={{ y: 0, opacity: 1 }}
-                    initial={{y: -100, opacity: 0}}
-                    transition={{ ease: "easeOut", duration: 1 }}
-                    className={"container-main container-register p-5 shadow"}
-                >
-                    <motion.p
-                        className={"text-container-title"}
-                        animate={{opacity: 1 }}
-                        initial={{opacity: 0}}
+            <LoadingMask
+                className={"container-custom"}
+                loading={this.state.isLoading}
+                text="Loading"
+            >
+                <div className={"container-custom"}>
+                    <motion.div
+                        animate={{ y: 0, opacity: 1 }}
+                        initial={{y: -100, opacity: 0}}
                         transition={{ ease: "easeOut", duration: 1 }}
+                        className={"container-main container-register width-container shadow"}
                     >
-                        Register
-                    </motion.p>
-                    <Form
-                        as={Container}
-                        className={"pt-4"}
-                    >
-                        <Row>
-                            <Form.Group>
-                                <Row className={"col-lg-7 my-2"}>
-                                    <InputGroup>
-                                        <InputGroup.Prepend>
-                                            <InputGroup.Text>
-                                                <Person />
-                                            </InputGroup.Text>
-                                        </InputGroup.Prepend>
-                                        <Form.Control
-                                            type="text"
-                                            placeholder="Enter username..."
-                                            onChange={e=>this.setState({username: e.target.value})}
+                        <motion.p
+                            className={"text-container-title"}
+                            animate={{opacity: 1 }}
+                            initial={{opacity: 0}}
+                            transition={{ ease: "easeOut", duration: 1 }}
+                        >
+                            Register
+                        </motion.p>
+                        <Formik
+                            initialValues={this.initialValues}
+                            validationSchema={this.schema}
+                            onSubmit={(values, actions) =>{
+                                this.setState({username: values.username});
+                                this.setState({password: values.password});
+                                this.setState({email: values.email});
+                                this.register().then(r => {});
+                            }}
+                        >{
+                            (
+                                {
+                                    handleSubmit,
+                                    handleChange,
+                                    handleBlur,
+                                    values,
+                                    touched,
+                                    isValid,
+                                    errors,
+                                }
+                            )=>(
+                                <Form
+                                    className={"container"}
+                                >
+                                    <div
+                                        className={"form-group y-margin"}
+                                    >
+                                        <label
+                                            htmlFor="username"
+                                        >
+                                            Username
+                                        </label>
+                                        <Field
+                                            id="username"
+                                            name="username"
+                                            placeholder="Username..."
+                                            type={"text"}
+                                            className={"input-text"}
                                         />
-                                    </InputGroup>
-                                </Row>
-                            </Form.Group>
-                            <Form.Group controlId="formBasicPassword">
-                                <Row className={"col-lg-7 my-2"}>
-                                    <InputGroup>
-                                        <InputGroup.Prepend>
-                                            <InputGroup.Text>
-                                                <ShieldLock />
-                                            </InputGroup.Text>
-                                        </InputGroup.Prepend>
-                                        <Form.Control
-                                            type="password"
-                                            placeholder="Password"
-                                            onChange={e=>this.setState({password: e.target.value})}
+                                        {
+                                            errors.username && touched.username ?
+                                                (<p className={"error-text"}>{errors.username}</p>)
+                                                : null
+                                        }
+                                    </div>
+                                    <div
+                                        className={"form-group y-margin"}
+                                    >
+                                        <label
+                                            htmlFor="password"
+                                        >
+                                            Password
+                                        </label>
+                                        <Field
+                                            id="password"
+                                            name="password"
+                                            placeholder="Password..."
+                                            type={"password"}
+                                            className={"input-text"}
                                         />
-                                    </InputGroup>
-                                </Row>
-                            </Form.Group>
-                            <Form.Group>
-                                <Row className={"col-lg-7 my-2"}>
-                                    <InputGroup>
-                                        <InputGroup.Prepend>
-                                            <InputGroup.Text>
-                                                <ShieldLock />
-                                            </InputGroup.Text>
-                                        </InputGroup.Prepend>
-                                        <Form.Control
-                                            type="password"
-                                            placeholder="Validate password"
-                                            onChange={e=>this.setState({checkPassword: e.target.value})}
+                                        {
+                                            errors.password && touched.password ?
+                                                (<p className={"error-text"}>{errors.password}</p>)
+                                                : null
+                                        }
+                                    </div>
+                                    <div
+                                        className={"form-group y-margin"}
+                                    >
+                                        <label
+                                            htmlFor="validatePassword"
+                                        >
+                                            Validate password
+                                        </label>
+                                        <Field
+                                            id="validatePassword"
+                                            name="validatePassword"
+                                            placeholder="Retype password"
+                                            type={"password"}
+                                            className={"input-text"}
                                         />
-                                    </InputGroup>
-                                </Row>
-                            </Form.Group>
-                            <Form.Group>
-                                <Row className={"col-lg-7 my-2"}>
-                                    <InputGroup>
-                                        <InputGroup.Prepend>
-                                            <InputGroup.Text>
-                                                <Envelope />
-                                            </InputGroup.Text>
-                                        </InputGroup.Prepend>
-                                        <Form.Control
-                                            type="email"
-                                            placeholder="Email"
-                                            onChange={e=>this.setState({email: e.target.value})}
+                                        {
+                                            errors.validatePassword && touched.validatePassword?
+                                                (<p className={"error-text"}>{errors.validatePassword}</p>)
+                                                : null
+                                        }
+                                    </div>
+                                    <div
+                                        className={"form-group y-margin"}
+                                    >
+                                        <label
+                                            htmlFor="validatePassword"
+                                        >
+                                            Email
+                                        </label>
+                                        <Field
+                                            id="email"
+                                            name="email"
+                                            placeholder="Email..."
+                                            type={"email"}
+                                            className={"input-text"}
                                         />
-                                    </InputGroup>
-                                </Row>
-                            </Form.Group>
-                        </Row>
-                        <Row className={"pt-3 pb-2"}>
-                            <button
-                                className={"button-form"}
-                                onClick={this.register.bind(this)}
-                            >
-                                Register
-                            </button>
-                        </Row>
-                        <Row className={"pt-2"}>
-                            <Link
-                                className={"link-text-inherit"}
-                                to={"/login"}
-                            >
-                                <span className={"span-clickable-form"} >
-                                    Go back to log in.
-                                </span>
-                            </Link>
-                        </Row>
-                    </Form>
-                </motion.div>
-            </div>
+                                        {
+                                            errors.email && touched.email ?
+                                                (<p className={"error-text"}>{errors.email}</p>)
+                                                : null
+                                        }
+                                    </div>
+                                    <button
+                                        className={"button-form y-margin"}
+                                        type="submit"
+                                    >
+                                        Register
+                                    </button>
+                                    <Link
+                                        className={"link-text-inherit y-margin"}
+                                        to={"/login"}
+                                    >
+                                    <span className={"span-clickable-form"} >
+                                        Go back to log in.
+                                    </span>
+                                    </Link>
+                                </Form>
+                            )
+                        }
+                        </Formik>
+                    </motion.div>
+                </div>
+            </LoadingMask>
         );
     }
 }

@@ -1,6 +1,8 @@
 import LoggerService from "./LoggerService";
 import WebInfo from "./WebInfo";
 import axios from "axios";
+import store from "../helpers/store";
+import removeJwt from "../helpers/actionLogout";
 
 class UserService {
 
@@ -14,6 +16,9 @@ class UserService {
                     return response.data;
                 })
             .catch((error) => {
+                if(error.response){
+                    return error.response.data;
+                }
                 console.log(error);
             });
     }
@@ -28,6 +33,9 @@ class UserService {
                 return response.data;
             })
             .catch((error) => {
+                if(error.response){
+                    return error.response.data;
+                }
                 console.log(error);
             });
     }
@@ -41,8 +49,15 @@ class UserService {
                 return response.data;
             })
             .catch((error) => {
+                if(error.response){
+                    return error.response.data;
+                }
                 console.log(error);
             });
+    }
+    logout(){
+        sessionStorage.removeItem("jwt");
+        store.dispatch(removeJwt);
     }
 }
 
