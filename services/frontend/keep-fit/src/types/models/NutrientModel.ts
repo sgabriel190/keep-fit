@@ -1,5 +1,8 @@
-interface NutrientModel {
+import MacronutrientModel from "./MacronutrientModel";
 
+interface NutrientModel {
+    calories: number;
+    macronutrients: MacronutrientModel;
 }
 
-export default Nutrien
+export default NutrientModel;

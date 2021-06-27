@@ -13,6 +13,7 @@ import {GuardedRoute, GuardProvider} from "react-router-guards";
 import Welcome from "./components/welcome/Welcome";
 import Login from "./components/login/Login";
 import Register from "./components/register/Register";
+import Recipe from "./components/recipes/Recipe/Recipe";
 
 const requireLogin = (to: any, from: any, next: any) => {
     if(sessionStorage.getItem("jwt") === null){
@@ -68,6 +69,12 @@ ReactDOM.render(
                             }
                         )
                     }
+                    <GuardedRoute
+                        path={"/recipe/:recipeId"}
+                        exact={true}
+                        component={Recipe}
+                        meta={{auth: true}}
+                    />
                     <Route
                         path={"/"}
                         component={Welcome}
