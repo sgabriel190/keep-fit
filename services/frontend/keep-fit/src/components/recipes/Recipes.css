@@ -6,3 +6,7 @@
     margin: 20px 0;
     max-width: 80%;
 }
+
+.button-group-custom{
+    display: flex !important;
+}

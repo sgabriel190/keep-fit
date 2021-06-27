@@ -45,9 +45,8 @@ class NutritionService: NutritionServiceInterface {
         }
     }
 
-    override suspend fun getImage(imagePath: String, token: String): Response<out Any> = coroutineScope{
+    override suspend fun getImage(imagePath: String): Response<out Any> = coroutineScope{
         try {
-            checkToken(token)
             val result = httpConsumerService.executeRequest {
                 val response: ByteArray = httpConsumerService.client.get("$host/image/$imagePath")
                 response

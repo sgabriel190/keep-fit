@@ -2,20 +2,402 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2980abcb-0aa4-4b9d-b9c8-c6433d4e5abf" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../plan_service/src/main/java/com/example/plan_service/presentation/controllers/HealthController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/components/recipes/Recipe/Recipe.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/components/recipes/Recipe/Recipe.test.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/components/recipes/Recipe/Recipe.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/types/models/ImagesModel.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/types/models/IngredientModel.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/types/models/InstructionModel.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/types/models/MacronutrientModel.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/types/models/NutrientModel.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/types/models/RecipeModel.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database_connector/sqlite_connector_methods.py" beforeDir="false" afterPath="$PROJECT_DIR$/database_connector/sqlite_connector_methods.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logger/log.info" beforeDir="false" afterPath="$PROJECT_DIR$/logger/log.info" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nutrition.db" beforeDir="false" afterPath="$PROJECT_DIR$/nutrition.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/plan.db" beforeDir="false" afterPath="$PROJECT_DIR$/plan.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sql_scripts/plan/create_tables_plan.sql" beforeDir="false" afterPath="$PROJECT_DIR$/sql_scripts/plan/create_tables_plan.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sql_scripts/nutrition/delete_tables_nutrition.sql" beforeDir="false" afterPath="$PROJECT_DIR$/sql_scripts/nutrition/delete_tables_nutrition.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user.db" beforeDir="false" afterPath="$PROJECT_DIR$/user.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/business/interfaces/PlanServiceInterface.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/business/interfaces/PlanServiceInterface.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/business/services/PlanService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/business/services/PlanService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/presentation/controllers/planning/PlanController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/presentation/controllers/planning/PlanController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/20 Minute Garlic Parmesan Rigatoni with Chicken Sausage &amp;amp; Broccoli/garlicparmesanrigatonisq-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/20 Minute Garlic Parmesan Rigatoni with Chicken Sausage &amp;amp; Broccoli/garlicparmesanrigatonisq-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/20 Minute Garlic Parmesan Rigatoni with Chicken Sausage &amp;amp; Broccoli/garlicparmesanrigatonisq-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/20 Minute Garlic Parmesan Rigatoni with Chicken Sausage &amp;amp; Broccoli/garlicparmesanrigatonisq.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/30-Minute Leftover Sweet Potato &amp;amp; Turkey Enchilada Skillet/turkeyenchiladaskillet-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/30-Minute Leftover Sweet Potato &amp;amp; Turkey Enchilada Skillet/turkeyenchiladaskillet-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/30-Minute Leftover Sweet Potato &amp;amp; Turkey Enchilada Skillet/turkeyenchiladaskillet-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/30-Minute Leftover Sweet Potato &amp;amp; Turkey Enchilada Skillet/turkeyenchiladaskillet.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/30-minute Spicy Thai Peanut Chicken &amp;amp; Sweet Potato Noodle Stir Fry/noodles2-6-2-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/30-minute Spicy Thai Peanut Chicken &amp;amp; Sweet Potato Noodle Stir Fry/noodles2-6-2-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/30-minute Spicy Thai Peanut Chicken &amp;amp; Sweet Potato Noodle Stir Fry/noodles2-6-2-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/30-minute Spicy Thai Peanut Chicken &amp;amp; Sweet Potato Noodle Stir Fry/noodles2-6-2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/4-Ingredient Oatmeal Chocolate Chip Cookie Dough Bites (vegan &amp;amp; gluten-free)/oatmeal-cookie-dough-bites-725x725-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/4-Ingredient Oatmeal Chocolate Chip Cookie Dough Bites (vegan &amp;amp; gluten-free)/oatmeal-cookie-dough-bites-725x725-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/4-Ingredient Oatmeal Chocolate Chip Cookie Dough Bites (vegan &amp;amp; gluten-free)/oatmeal-cookie-dough-bites-725x725-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/4-Ingredient Oatmeal Chocolate Chip Cookie Dough Bites (vegan &amp;amp; gluten-free)/oatmeal-cookie-dough-bites-725x725.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/5-Ingredient Chia &amp;amp; Peanut Butter Granola/PB-Chia-Granola-5-1-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/5-Ingredient Chia &amp;amp; Peanut Butter Granola/PB-Chia-Granola-5-1-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/5-Ingredient Chia &amp;amp; Peanut Butter Granola/PB-Chia-Granola-5-1-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/5-Ingredient Chia &amp;amp; Peanut Butter Granola/PB-Chia-Granola-5-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Almond Butter, Strawberry &amp;amp; Banana Overnight Oats with Chia/Almond-Butter-Strawberry-Banana-Overnight-Oats-4-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Almond Butter, Strawberry &amp;amp; Banana Overnight Oats with Chia/Almond-Butter-Strawberry-Banana-Overnight-Oats-4-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Almond Butter, Strawberry &amp;amp; Banana Overnight Oats with Chia/Almond-Butter-Strawberry-Banana-Overnight-Oats-4-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Almond Butter, Strawberry &amp;amp; Banana Overnight Oats with Chia/Almond-Butter-Strawberry-Banana-Overnight-Oats-4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Apple &amp;amp; Brie Crostini with Hot Honey/Apple-Brie-Crostini-with-Hot-Honey-5-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Apple &amp;amp; Brie Crostini with Hot Honey/Apple-Brie-Crostini-with-Hot-Honey-5-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Apple &amp;amp; Brie Crostini with Hot Honey/Apple-Brie-Crostini-with-Hot-Honey-5-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Apple &amp;amp; Brie Crostini with Hot Honey/Apple-Brie-Crostini-with-Hot-Honey-5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Avocado Basil Pesto Zucchini Noodles + Learn How I Eat &amp;amp; Exercise/pesto-zucchini-noodles-1-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Avocado Basil Pesto Zucchini Noodles + Learn How I Eat &amp;amp; Exercise/pesto-zucchini-noodles-1-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Avocado Basil Pesto Zucchini Noodles + Learn How I Eat &amp;amp; Exercise/pesto-zucchini-noodles-1-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Avocado Basil Pesto Zucchini Noodles + Learn How I Eat &amp;amp; Exercise/pesto-zucchini-noodles-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Beetroot &amp;amp; red onion tarte tatin/beetroot-star-anise-red-onion-tart-tatin-6617a3f.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Black Bean Avocado Chocolate Chip Fudge Brownies {gluten-free &amp;amp; low-fat}/fudge-brownies-725x725-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Black Bean Avocado Chocolate Chip Fudge Brownies {gluten-free &amp;amp; low-fat}/fudge-brownies-725x725-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Black Bean Avocado Chocolate Chip Fudge Brownies {gluten-free &amp;amp; low-fat}/fudge-brownies-725x725-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Black Bean Avocado Chocolate Chip Fudge Brownies {gluten-free &amp;amp; low-fat}/fudge-brownies-725x725.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Black Bean, Sweet Potato &amp;amp; Quinoa Stuffed Bell Peppers/Black-Bean-Sweet-Potato-Quinoa-Stuffed-Bell-Peppers-square-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Black Bean, Sweet Potato &amp;amp; Quinoa Stuffed Bell Peppers/Black-Bean-Sweet-Potato-Quinoa-Stuffed-Bell-Peppers-square-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Black Bean, Sweet Potato &amp;amp; Quinoa Stuffed Bell Peppers/Black-Bean-Sweet-Potato-Quinoa-Stuffed-Bell-Peppers-square-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Black Bean, Sweet Potato &amp;amp; Quinoa Stuffed Bell Peppers/Black-Bean-Sweet-Potato-Quinoa-Stuffed-Bell-Peppers-square.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Blackberry Peach Oat Bran Muffins with Chia + Flax {vegan &amp;amp; gluten free}/Blackberry-Peach-Oat-Bran-Muffins-with-Chia-Flax-square-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Blackberry Peach Oat Bran Muffins with Chia + Flax {vegan &amp;amp; gluten free}/Blackberry-Peach-Oat-Bran-Muffins-with-Chia-Flax-square-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Blackberry Peach Oat Bran Muffins with Chia + Flax {vegan &amp;amp; gluten free}/Blackberry-Peach-Oat-Bran-Muffins-with-Chia-Flax-square-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Blackberry Peach Oat Bran Muffins with Chia + Flax {vegan &amp;amp; gluten free}/Blackberry-Peach-Oat-Bran-Muffins-with-Chia-Flax-square.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Blackened Salmon Tacos with Forbidden Rice &amp;amp; Mango Guacamole/FebruaryPhotos-45-725x725-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Blackened Salmon Tacos with Forbidden Rice &amp;amp; Mango Guacamole/FebruaryPhotos-45-725x725-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Blackened Salmon Tacos with Forbidden Rice &amp;amp; Mango Guacamole/FebruaryPhotos-45-725x725-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Blackened Salmon Tacos with Forbidden Rice &amp;amp; Mango Guacamole/FebruaryPhotos-45-725x725.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Breakfast Baked Sweet Potatoes with Almond Butter, Banana &amp;amp; Chia/breakfast-sweet-potatoes-4-725x725-1-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Breakfast Baked Sweet Potatoes with Almond Butter, Banana &amp;amp; Chia/breakfast-sweet-potatoes-4-725x725-1-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Breakfast Baked Sweet Potatoes with Almond Butter, Banana &amp;amp; Chia/breakfast-sweet-potatoes-4-725x725-1-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Breakfast Baked Sweet Potatoes with Almond Butter, Banana &amp;amp; Chia/breakfast-sweet-potatoes-4-725x725-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Broccoli &amp;amp; White Cheddar Quinoa Mac and Cheese/QuinoaMacnCheese-725x725-1-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Broccoli &amp;amp; White Cheddar Quinoa Mac and Cheese/QuinoaMacnCheese-725x725-1-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Broccoli &amp;amp; White Cheddar Quinoa Mac and Cheese/QuinoaMacnCheese-725x725-1-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Broccoli &amp;amp; White Cheddar Quinoa Mac and Cheese/QuinoaMacnCheese-725x725-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Butternut Squash, Chickpea &amp;amp; Lentil Moroccan Stew/Butternut-Squash-Chickpea-Lentil-Moroccan-Stew-5-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Butternut Squash, Chickpea &amp;amp; Lentil Moroccan Stew/Butternut-Squash-Chickpea-Lentil-Moroccan-Stew-5-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Butternut Squash, Chickpea &amp;amp; Lentil Moroccan Stew/Butternut-Squash-Chickpea-Lentil-Moroccan-Stew-5-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Butternut Squash, Chickpea &amp;amp; Lentil Moroccan Stew/Butternut-Squash-Chickpea-Lentil-Moroccan-Stew-5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Cheap &amp;amp; Healthy Meal Prep Idea: Better Than Chipotle DIY Chicken Burrito Bowls/BurritoBowls-2-725x725-1-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Cheap &amp;amp; Healthy Meal Prep Idea: Better Than Chipotle DIY Chicken Burrito Bowls/BurritoBowls-2-725x725-1-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Cheap &amp;amp; Healthy Meal Prep Idea: Better Than Chipotle DIY Chicken Burrito Bowls/BurritoBowls-2-725x725-1-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Cheap &amp;amp; Healthy Meal Prep Idea: Better Than Chipotle DIY Chicken Burrito Bowls/BurritoBowls-2-725x725-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Chia, Lemon &amp;amp; Strawberry Zucchini Muffins/IMG_8771-725x725-1-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Chia, Lemon &amp;amp; Strawberry Zucchini Muffins/IMG_8771-725x725-1-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Chia, Lemon &amp;amp; Strawberry Zucchini Muffins/IMG_8771-725x725-1-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Chia, Lemon &amp;amp; Strawberry Zucchini Muffins/IMG_8771-725x725-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Chicken Kale Waldorf Salad with Avocado &amp;amp; Goat Cheese/Monique-Kale-Waldorff-Salad-3-1-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Chicken Kale Waldorf Salad with Avocado &amp;amp; Goat Cheese/Monique-Kale-Waldorff-Salad-3-1-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Chicken Kale Waldorf Salad with Avocado &amp;amp; Goat Cheese/Monique-Kale-Waldorff-Salad-3-1-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Chicken Kale Waldorf Salad with Avocado &amp;amp; Goat Cheese/Monique-Kale-Waldorff-Salad-3-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Chocolate Peanut Butter Freezer Fudge (vegan &amp;amp; gluten free!)/freezer-fudge-3-725x725-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Chocolate Peanut Butter Freezer Fudge (vegan &amp;amp; gluten free!)/freezer-fudge-3-725x725-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Chocolate Peanut Butter Freezer Fudge (vegan &amp;amp; gluten free!)/freezer-fudge-3-725x725-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Chocolate Peanut Butter Freezer Fudge (vegan &amp;amp; gluten free!)/freezer-fudge-3-725x725.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Chole with cumin rice &amp;amp; raita/Chole-with-cumin-rice-and-raita-b00cba7.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Coconut &amp;amp; Chocolate Peanut Butter Protein Bars/pbproteinbars-2-1-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Coconut &amp;amp; Chocolate Peanut Butter Protein Bars/pbproteinbars-2-1-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Coconut &amp;amp; Chocolate Peanut Butter Protein Bars/pbproteinbars-2-1-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Coconut &amp;amp; Chocolate Peanut Butter Protein Bars/pbproteinbars-2-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Comforting &amp; Healthy Slow Cooker Chicken Noodle Soup (with a hint of lemon &amp;amp; rosemary)/slow-cooker-chicken-noodle-soup-1-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Comforting &amp; Healthy Slow Cooker Chicken Noodle Soup (with a hint of lemon &amp;amp; rosemary)/slow-cooker-chicken-noodle-soup-1-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Comforting &amp; Healthy Slow Cooker Chicken Noodle Soup (with a hint of lemon &amp;amp; rosemary)/slow-cooker-chicken-noodle-soup-1-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Comforting &amp; Healthy Slow Cooker Chicken Noodle Soup (with a hint of lemon &amp;amp; rosemary)/slow-cooker-chicken-noodle-soup-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Creamy Roasted Butternut Squash Pasta with Peas (vegan &amp;amp; gluten free!)/butternut-squash-pasta-1-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Creamy Roasted Butternut Squash Pasta with Peas (vegan &amp;amp; gluten free!)/butternut-squash-pasta-1-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Creamy Roasted Butternut Squash Pasta with Peas (vegan &amp;amp; gluten free!)/butternut-squash-pasta-1-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Creamy Roasted Butternut Squash Pasta with Peas (vegan &amp;amp; gluten free!)/butternut-squash-pasta-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Curry Roasted Cauliflower Sweet Potato Salad (whole30, vegan &amp;amp; gluten free)/Curry-Roasted-Sweet-Potato-Cauliflower-Salad-3-1-725x725-1-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Curry Roasted Cauliflower Sweet Potato Salad (whole30, vegan &amp;amp; gluten free)/Curry-Roasted-Sweet-Potato-Cauliflower-Salad-3-1-725x725-1-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Curry Roasted Cauliflower Sweet Potato Salad (whole30, vegan &amp;amp; gluten free)/Curry-Roasted-Sweet-Potato-Cauliflower-Salad-3-1-725x725-1-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Curry Roasted Cauliflower Sweet Potato Salad (whole30, vegan &amp;amp; gluten free)/Curry-Roasted-Sweet-Potato-Cauliflower-Salad-3-1-725x725-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Dad’s Creamy &amp;amp; Cheesy Au Gratin Potatoes/Au-Gratin-Potatoes-7-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Dad’s Creamy &amp;amp; Cheesy Au Gratin Potatoes/Au-Gratin-Potatoes-7-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Dad’s Creamy &amp;amp; Cheesy Au Gratin Potatoes/Au-Gratin-Potatoes-7-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Dad’s Creamy &amp;amp; Cheesy Au Gratin Potatoes/Au-Gratin-Potatoes-7.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Dark Chocolate, Almond &amp;amp; Sea Salt Banana Baked Oatmeal/BananaBakedOatmeal-4-725x725-1-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Dark Chocolate, Almond &amp;amp; Sea Salt Banana Baked Oatmeal/BananaBakedOatmeal-4-725x725-1-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Dark Chocolate, Almond &amp;amp; Sea Salt Banana Baked Oatmeal/BananaBakedOatmeal-4-725x725-1-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Dark Chocolate, Almond &amp;amp; Sea Salt Banana Baked Oatmeal/BananaBakedOatmeal-4-725x725-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Easy Vegan Mac &amp;amp; Cheese/veganmacandcheese-5-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Easy Vegan Mac &amp;amp; Cheese/veganmacandcheese-5-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Easy Vegan Mac &amp;amp; Cheese/veganmacandcheese-5-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Easy Vegan Mac &amp;amp; Cheese/veganmacandcheese-5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Enchilada Chicken &amp;amp; Quinoa Stuffed Bell Peppers/YoC-Stuffed-Peppers-2-2-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Enchilada Chicken &amp;amp; Quinoa Stuffed Bell Peppers/YoC-Stuffed-Peppers-2-2-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Enchilada Chicken &amp;amp; Quinoa Stuffed Bell Peppers/YoC-Stuffed-Peppers-2-2-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Enchilada Chicken &amp;amp; Quinoa Stuffed Bell Peppers/YoC-Stuffed-Peppers-2-2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Flourless Chocolate Chip Chickpea Blondies with Sea Salt {vegan, gluten-free &amp;amp; healthy}/Flourless-Chocolate-Chip-Chickpea-Blondies-5-1-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Flourless Chocolate Chip Chickpea Blondies with Sea Salt {vegan, gluten-free &amp;amp; healthy}/Flourless-Chocolate-Chip-Chickpea-Blondies-5-1-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Flourless Chocolate Chip Chickpea Blondies with Sea Salt {vegan, gluten-free &amp;amp; healthy}/Flourless-Chocolate-Chip-Chickpea-Blondies-5-1-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Flourless Chocolate Chip Chickpea Blondies with Sea Salt {vegan, gluten-free &amp;amp; healthy}/Flourless-Chocolate-Chip-Chickpea-Blondies-5-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Fresh &amp;amp; Healthy 7-Layer Dip/7layerdip-7-725x725-1-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Fresh &amp;amp; Healthy 7-Layer Dip/7layerdip-7-725x725-1-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Fresh &amp;amp; Healthy 7-Layer Dip/7layerdip-7-725x725-1-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Fresh &amp;amp; Healthy 7-Layer Dip/7layerdip-7-725x725-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Fresh Strawberry Basil Quinoa Salad with Goat Cheese, Sunflower Seeds &amp;amp; Lemon Vinaigrette/basil-quinoa-salad-683x725-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Fresh Strawberry Basil Quinoa Salad with Goat Cheese, Sunflower Seeds &amp;amp; Lemon Vinaigrette/basil-quinoa-salad-683x725-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Fresh Strawberry Basil Quinoa Salad with Goat Cheese, Sunflower Seeds &amp;amp; Lemon Vinaigrette/basil-quinoa-salad-683x725-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Fresh Strawberry Basil Quinoa Salad with Goat Cheese, Sunflower Seeds &amp;amp; Lemon Vinaigrette/basil-quinoa-salad-683x725.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Garlic Parmesan Pasta with Chicken &amp;amp; Roasted Bell Peppers/garlic-parmesan-pasta-667x725-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Garlic Parmesan Pasta with Chicken &amp;amp; Roasted Bell Peppers/garlic-parmesan-pasta-667x725-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Garlic Parmesan Pasta with Chicken &amp;amp; Roasted Bell Peppers/garlic-parmesan-pasta-667x725-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Garlic Parmesan Pasta with Chicken &amp;amp; Roasted Bell Peppers/garlic-parmesan-pasta-667x725.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Garlic Roasted Sweet Potato &amp;amp; Arugula Salad with Turmeric Honey Mustard Yogurt Dressing/sweet-potato-arugula-1-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Garlic Roasted Sweet Potato &amp;amp; Arugula Salad with Turmeric Honey Mustard Yogurt Dressing/sweet-potato-arugula-1-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Garlic Roasted Sweet Potato &amp;amp; Arugula Salad with Turmeric Honey Mustard Yogurt Dressing/sweet-potato-arugula-1-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Garlic Roasted Sweet Potato &amp;amp; Arugula Salad with Turmeric Honey Mustard Yogurt Dressing/sweet-potato-arugula-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Goat Cheese &amp;amp; Spinach Stuffed Chicken Breast with Caramelized Onions + Mushrooms/Spinach-and-Goat-Cheese-Stuffed-Chicken-3sq-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Goat Cheese &amp;amp; Spinach Stuffed Chicken Breast with Caramelized Onions + Mushrooms/Spinach-and-Goat-Cheese-Stuffed-Chicken-3sq-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Goat Cheese &amp;amp; Spinach Stuffed Chicken Breast with Caramelized Onions + Mushrooms/Spinach-and-Goat-Cheese-Stuffed-Chicken-3sq-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Goat Cheese &amp;amp; Spinach Stuffed Chicken Breast with Caramelized Onions + Mushrooms/Spinach-and-Goat-Cheese-Stuffed-Chicken-3sq.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Healthy Baked French Fries with Garlic, Parmesan &amp;amp; Truffle Oil/french-fries-10-725x725-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Healthy Baked French Fries with Garlic, Parmesan &amp;amp; Truffle Oil/french-fries-10-725x725-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Healthy Baked French Fries with Garlic, Parmesan &amp;amp; Truffle Oil/french-fries-10-725x725-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Healthy Baked French Fries with Garlic, Parmesan &amp;amp; Truffle Oil/french-fries-10-725x725.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Healthy Banana Bread Chocolate Chip Oat Breakfast Bars {vegan &amp;amp; gluten free}/chip-oat-breakfast-bars-683x725-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Healthy Banana Bread Chocolate Chip Oat Breakfast Bars {vegan &amp;amp; gluten free}/chip-oat-breakfast-bars-683x725-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Healthy Banana Bread Chocolate Chip Oat Breakfast Bars {vegan &amp;amp; gluten free}/chip-oat-breakfast-bars-683x725-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Healthy Banana Bread Chocolate Chip Oat Breakfast Bars {vegan &amp;amp; gluten free}/chip-oat-breakfast-bars-683x725.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Healthy Chicken Burgers with Spinach Basil Pesto &amp;amp; Mozzarella/chickenburgers-2-1-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Healthy Chicken Burgers with Spinach Basil Pesto &amp;amp; Mozzarella/chickenburgers-2-1-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Healthy Chicken Burgers with Spinach Basil Pesto &amp;amp; Mozzarella/chickenburgers-2-1-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Healthy Chicken Burgers with Spinach Basil Pesto &amp;amp; Mozzarella/chickenburgers-2-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Healthy Double Chocolate Zucchini Bread (nut free, vegan &amp;amp; gluten free!)/ChocolateZucchiniBread-8-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Healthy Double Chocolate Zucchini Bread (nut free, vegan &amp;amp; gluten free!)/ChocolateZucchiniBread-8-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Healthy Double Chocolate Zucchini Bread (nut free, vegan &amp;amp; gluten free!)/ChocolateZucchiniBread-8-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Healthy Double Chocolate Zucchini Bread (nut free, vegan &amp;amp; gluten free!)/ChocolateZucchiniBread-8.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Healthy Lemon Bars (gluten free, dairy free &amp;amp; paleo!)/lemonbars-5-1-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Healthy Lemon Bars (gluten free, dairy free &amp;amp; paleo!)/lemonbars-5-1-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Healthy Lemon Bars (gluten free, dairy free &amp;amp; paleo!)/lemonbars-5-1-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Healthy Lemon Bars (gluten free, dairy free &amp;amp; paleo!)/lemonbars-5-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Healthy Oatmeal Chocolate Chip Cookies (vegan &amp;amp; gluten free!)/One-Bowl-Vegan-Gluten-Free-Coconut-Chocolate-Chip-Oatmeal-Cookies-1-725x725-1-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Healthy Oatmeal Chocolate Chip Cookies (vegan &amp;amp; gluten free!)/One-Bowl-Vegan-Gluten-Free-Coconut-Chocolate-Chip-Oatmeal-Cookies-1-725x725-1-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Healthy Oatmeal Chocolate Chip Cookies (vegan &amp;amp; gluten free!)/One-Bowl-Vegan-Gluten-Free-Coconut-Chocolate-Chip-Oatmeal-Cookies-1-725x725-1-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Healthy Oatmeal Chocolate Chip Cookies (vegan &amp;amp; gluten free!)/One-Bowl-Vegan-Gluten-Free-Coconut-Chocolate-Chip-Oatmeal-Cookies-1-725x725-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Homemade Cashew Butter with Vanilla Bean &amp;amp; Sea Salt/cashew-butter-4-725x725-1-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Homemade Cashew Butter with Vanilla Bean &amp;amp; Sea Salt/cashew-butter-4-725x725-1-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Homemade Cashew Butter with Vanilla Bean &amp;amp; Sea Salt/cashew-butter-4-725x725-1-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Homemade Cashew Butter with Vanilla Bean &amp;amp; Sea Salt/cashew-butter-4-725x725-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Homemade Super Chunky Healthy Granola (vegan &amp;amp; gluten free!)/Homemade-Chunky-Granola-2sq-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Homemade Super Chunky Healthy Granola (vegan &amp;amp; gluten free!)/Homemade-Chunky-Granola-2sq-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Homemade Super Chunky Healthy Granola (vegan &amp;amp; gluten free!)/Homemade-Chunky-Granola-2sq-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Homemade Super Chunky Healthy Granola (vegan &amp;amp; gluten free!)/Homemade-Chunky-Granola-2sq.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Jalapeño, Pepper Jack &amp;amp; Turkey Bacon Quiche with Potato Crust/quiche-2-1-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Jalapeño, Pepper Jack &amp;amp; Turkey Bacon Quiche with Potato Crust/quiche-2-1-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Jalapeño, Pepper Jack &amp;amp; Turkey Bacon Quiche with Potato Crust/quiche-2-1-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Jalapeño, Pepper Jack &amp;amp; Turkey Bacon Quiche with Potato Crust/quiche-2-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Kung Pao Chickpea &amp;amp; Brussels Sprouts Stir Fry/kungpao-4-1-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Kung Pao Chickpea &amp;amp; Brussels Sprouts Stir Fry/kungpao-4-1-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Kung Pao Chickpea &amp;amp; Brussels Sprouts Stir Fry/kungpao-4-1-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Kung Pao Chickpea &amp;amp; Brussels Sprouts Stir Fry/kungpao-4-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Layered BBQ Chicken &amp;amp; Sweet Potato Enchilada Casserole/Layered-BBQ-Chicken-Sweet-Potato-Enchilada-Casserole-square-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Layered BBQ Chicken &amp;amp; Sweet Potato Enchilada Casserole/Layered-BBQ-Chicken-Sweet-Potato-Enchilada-Casserole-square-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Layered BBQ Chicken &amp;amp; Sweet Potato Enchilada Casserole/Layered-BBQ-Chicken-Sweet-Potato-Enchilada-Casserole-square-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Layered BBQ Chicken &amp;amp; Sweet Potato Enchilada Casserole/Layered-BBQ-Chicken-Sweet-Potato-Enchilada-Casserole-square.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Layered Roasted Veggie, Sweet Potato &amp;amp; Black Bean Tortilla Pie (+ homemade enchilada sauce!)/vegetarian-tortilla-pie-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Layered Roasted Veggie, Sweet Potato &amp;amp; Black Bean Tortilla Pie (+ homemade enchilada sauce!)/vegetarian-tortilla-pie-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Layered Roasted Veggie, Sweet Potato &amp;amp; Black Bean Tortilla Pie (+ homemade enchilada sauce!)/vegetarian-tortilla-pie-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Layered Roasted Veggie, Sweet Potato &amp;amp; Black Bean Tortilla Pie (+ homemade enchilada sauce!)/vegetarian-tortilla-pie.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Lean Turkey Apple &amp;amp; Maple Sausage Breakfast Patties/maple-sausages-718x725-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Lean Turkey Apple &amp;amp; Maple Sausage Breakfast Patties/maple-sausages-718x725-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Lean Turkey Apple &amp;amp; Maple Sausage Breakfast Patties/maple-sausages-718x725-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Lean Turkey Apple &amp;amp; Maple Sausage Breakfast Patties/maple-sausages-718x725.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Lemon &amp;amp; herb chicken traybake with butter beans &amp;amp; potato wedges/Lemon-and-herb-chicken-traybake-9bff51c.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Lentil &amp;amp; Quinoa Chili {vegan &amp;amp; gluten free}/lentil-quinoa-chili-719x725-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Lentil &amp;amp; Quinoa Chili {vegan &amp;amp; gluten free}/lentil-quinoa-chili-719x725-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Lentil &amp;amp; Quinoa Chili {vegan &amp;amp; gluten free}/lentil-quinoa-chili-719x725-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Lentil &amp;amp; Quinoa Chili {vegan &amp;amp; gluten free}/lentil-quinoa-chili-719x725.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Low-Carb Pesto &amp;amp; Turkey Cucumber Roll-Ups/Low-Carb-Pesto-Turkey-Cucumber-Roll-Ups-square-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Low-Carb Pesto &amp;amp; Turkey Cucumber Roll-Ups/Low-Carb-Pesto-Turkey-Cucumber-Roll-Ups-square-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Low-Carb Pesto &amp;amp; Turkey Cucumber Roll-Ups/Low-Carb-Pesto-Turkey-Cucumber-Roll-Ups-square-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Low-Carb Pesto &amp;amp; Turkey Cucumber Roll-Ups/Low-Carb-Pesto-Turkey-Cucumber-Roll-Ups-square.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/One Pan Thai Coconut Yellow Curry Chicken &amp;amp; Rice/thaichicken-2-1-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/One Pan Thai Coconut Yellow Curry Chicken &amp;amp; Rice/thaichicken-2-1-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/One Pan Thai Coconut Yellow Curry Chicken &amp;amp; Rice/thaichicken-2-1-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/One Pan Thai Coconut Yellow Curry Chicken &amp;amp; Rice/thaichicken-2-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/One Pot Moroccan Chicken Stew with Sweet Potato &amp;amp; Couscous/One-Pot-Moroccan-Chicken-Stew-5-1-725x725-1-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/One Pot Moroccan Chicken Stew with Sweet Potato &amp;amp; Couscous/One-Pot-Moroccan-Chicken-Stew-5-1-725x725-1-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/One Pot Moroccan Chicken Stew with Sweet Potato &amp;amp; Couscous/One-Pot-Moroccan-Chicken-Stew-5-1-725x725-1-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/One Pot Moroccan Chicken Stew with Sweet Potato &amp;amp; Couscous/One-Pot-Moroccan-Chicken-Stew-5-1-725x725-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/One-pot prawn &amp;amp; lentil curry/Prawn-and-lentil-curry-a726c9f.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Pea &amp;amp; mint soup with crispy prosciutto strips/pea-soup-ff0bb68.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Peach, Goat Cheese &amp;amp; Basil Wonton Bites/wontonparty-5-725x725-1-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Peach, Goat Cheese &amp;amp; Basil Wonton Bites/wontonparty-5-725x725-1-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Peach, Goat Cheese &amp;amp; Basil Wonton Bites/wontonparty-5-725x725-1-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Peach, Goat Cheese &amp;amp; Basil Wonton Bites/wontonparty-5-725x725-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Peach, Tomato &amp;amp; Corn Arugula Pasta Salad/tomatopeacharugulasalad-3-725x725-1-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Peach, Tomato &amp;amp; Corn Arugula Pasta Salad/tomatopeacharugulasalad-3-725x725-1-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Peach, Tomato &amp;amp; Corn Arugula Pasta Salad/tomatopeacharugulasalad-3-725x725-1-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Peach, Tomato &amp;amp; Corn Arugula Pasta Salad/tomatopeacharugulasalad-3-725x725-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Peanut Butter, Strawberry, &amp;amp; Banana Quesadillas/berrie-quesadillas-725x725-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Peanut Butter, Strawberry, &amp;amp; Banana Quesadillas/berrie-quesadillas-725x725-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Peanut Butter, Strawberry, &amp;amp; Banana Quesadillas/berrie-quesadillas-725x725-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Peanut Butter, Strawberry, &amp;amp; Banana Quesadillas/berrie-quesadillas-725x725.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Pumpkin Pie Bars with Brown Sugar Oatmeal Crust (gluten free &amp;amp; dairy free!)/pumpkin-pie-bars-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Pumpkin Pie Bars with Brown Sugar Oatmeal Crust (gluten free &amp;amp; dairy free!)/pumpkin-pie-bars-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Pumpkin Pie Bars with Brown Sugar Oatmeal Crust (gluten free &amp;amp; dairy free!)/pumpkin-pie-bars-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Pumpkin Pie Bars with Brown Sugar Oatmeal Crust (gluten free &amp;amp; dairy free!)/pumpkin-pie-bars.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Quick &amp;amp; Easy Black Bean Soup/Quick-Easy-Black-Bean-Soup-square-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Quick &amp;amp; Easy Black Bean Soup/Quick-Easy-Black-Bean-Soup-square-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Quick &amp;amp; Easy Black Bean Soup/Quick-Easy-Black-Bean-Soup-square-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Quick &amp;amp; Easy Black Bean Soup/Quick-Easy-Black-Bean-Soup-square.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Quinoa-coated salmon &amp;amp; sweet potato fishcakes/Quinoa-coated-fishcakes-a9585a2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Raspberry, Almond Butter &amp;amp; Banana Oatmeal Muffins/RaspberryBananaMuffins-2-725x725-1-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Raspberry, Almond Butter &amp;amp; Banana Oatmeal Muffins/RaspberryBananaMuffins-2-725x725-1-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Raspberry, Almond Butter &amp;amp; Banana Oatmeal Muffins/RaspberryBananaMuffins-2-725x725-1-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Raspberry, Almond Butter &amp;amp; Banana Oatmeal Muffins/RaspberryBananaMuffins-2-725x725-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Roasted Sweet Potato, Pear &amp;amp; Pomegranate Spinach Salad/pearsalad-4-1-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Roasted Sweet Potato, Pear &amp;amp; Pomegranate Spinach Salad/pearsalad-4-1-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Roasted Sweet Potato, Pear &amp;amp; Pomegranate Spinach Salad/pearsalad-4-1-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Roasted Sweet Potato, Pear &amp;amp; Pomegranate Spinach Salad/pearsalad-4-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Roasted Veggie, Chickpea &amp;amp; Pesto Quinoa Salad/pesto-quinoa-4-1-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Roasted Veggie, Chickpea &amp;amp; Pesto Quinoa Salad/pesto-quinoa-4-1-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Roasted Veggie, Chickpea &amp;amp; Pesto Quinoa Salad/pesto-quinoa-4-1-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Roasted Veggie, Chickpea &amp;amp; Pesto Quinoa Salad/pesto-quinoa-4-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Sheet Pan Kickin’ Curry Honey Mustard Chicken &amp;amp; Veggies/Sheet-Pan-Kickin-Curry-Honey-Mustard-Chicken-Veggies-3-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Sheet Pan Kickin’ Curry Honey Mustard Chicken &amp;amp; Veggies/Sheet-Pan-Kickin-Curry-Honey-Mustard-Chicken-Veggies-3-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Sheet Pan Kickin’ Curry Honey Mustard Chicken &amp;amp; Veggies/Sheet-Pan-Kickin-Curry-Honey-Mustard-Chicken-Veggies-3-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Sheet Pan Kickin’ Curry Honey Mustard Chicken &amp;amp; Veggies/Sheet-Pan-Kickin-Curry-Honey-Mustard-Chicken-Veggies-3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Sheet Pan Moroccan Chicken with Sweet Potatoes &amp;amp; Cauliflower/Sheet-Pan-Moroccan-Chicken-with-Sweet-Potatoes-2-1-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Sheet Pan Moroccan Chicken with Sweet Potatoes &amp;amp; Cauliflower/Sheet-Pan-Moroccan-Chicken-with-Sweet-Potatoes-2-1-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Sheet Pan Moroccan Chicken with Sweet Potatoes &amp;amp; Cauliflower/Sheet-Pan-Moroccan-Chicken-with-Sweet-Potatoes-2-1-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Sheet Pan Moroccan Chicken with Sweet Potatoes &amp;amp; Cauliflower/Sheet-Pan-Moroccan-Chicken-with-Sweet-Potatoes-2-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Shredded Brussels Sprouts &amp;amp; Kale Salad with Apple, Gorgonzola &amp;amp; Candied Pecans/Shredded-Brussels-Sprouts-Kale-Salad-with-Apple-Gorgonzola-Candied-Pecans-square-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Shredded Brussels Sprouts &amp;amp; Kale Salad with Apple, Gorgonzola &amp;amp; Candied Pecans/Shredded-Brussels-Sprouts-Kale-Salad-with-Apple-Gorgonzola-Candied-Pecans-square-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Shredded Brussels Sprouts &amp;amp; Kale Salad with Apple, Gorgonzola &amp;amp; Candied Pecans/Shredded-Brussels-Sprouts-Kale-Salad-with-Apple-Gorgonzola-Candied-Pecans-square-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Shredded Brussels Sprouts &amp;amp; Kale Salad with Apple, Gorgonzola &amp;amp; Candied Pecans/Shredded-Brussels-Sprouts-Kale-Salad-with-Apple-Gorgonzola-Candied-Pecans-square.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Slow Cooker Black Bean, Quinoa &amp;amp; Chicken Tortilla Soup/chicken-tortilla-soup-714x725-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Slow Cooker Black Bean, Quinoa &amp;amp; Chicken Tortilla Soup/chicken-tortilla-soup-714x725-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Slow Cooker Black Bean, Quinoa &amp;amp; Chicken Tortilla Soup/chicken-tortilla-soup-714x725-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Slow Cooker Black Bean, Quinoa &amp;amp; Chicken Tortilla Soup/chicken-tortilla-soup-714x725.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Slow Cooker Sweet &amp;amp; Spicy BBQ Cranberry Turkey Meatballs/Slow-Cooker-Spicy-BBQ-Cranberry-Turkey-Meatballs-Edited-4-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Slow Cooker Sweet &amp;amp; Spicy BBQ Cranberry Turkey Meatballs/Slow-Cooker-Spicy-BBQ-Cranberry-Turkey-Meatballs-Edited-4-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Slow Cooker Sweet &amp;amp; Spicy BBQ Cranberry Turkey Meatballs/Slow-Cooker-Spicy-BBQ-Cranberry-Turkey-Meatballs-Edited-4-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Slow Cooker Sweet &amp;amp; Spicy BBQ Cranberry Turkey Meatballs/Slow-Cooker-Spicy-BBQ-Cranberry-Turkey-Meatballs-Edited-4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Smashed Avocado, Roasted Bell Pepper &amp;amp; Pepper Jack Quesadillas/avocado-bell-pepper-and-pepper-jack-quesadillas-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Smashed Avocado, Roasted Bell Pepper &amp;amp; Pepper Jack Quesadillas/avocado-bell-pepper-and-pepper-jack-quesadillas-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Smashed Avocado, Roasted Bell Pepper &amp;amp; Pepper Jack Quesadillas/avocado-bell-pepper-and-pepper-jack-quesadillas-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Smashed Avocado, Roasted Bell Pepper &amp;amp; Pepper Jack Quesadillas/avocado-bell-pepper-and-pepper-jack-quesadillas.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Spicy Maple Roasted Butternut Squash &amp;amp; Brussels Sprouts with Crispy Bacon/brusselssq-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Spicy Maple Roasted Butternut Squash &amp;amp; Brussels Sprouts with Crispy Bacon/brusselssq-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Spicy Maple Roasted Butternut Squash &amp;amp; Brussels Sprouts with Crispy Bacon/brusselssq-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Spicy Maple Roasted Butternut Squash &amp;amp; Brussels Sprouts with Crispy Bacon/brusselssq.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Spinach &amp;amp; Goat Cheese Quiche with Sweet Potato Crust/eggquiche-5-1-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Spinach &amp;amp; Goat Cheese Quiche with Sweet Potato Crust/eggquiche-5-1-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Spinach &amp;amp; Goat Cheese Quiche with Sweet Potato Crust/eggquiche-5-1-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Spinach &amp;amp; Goat Cheese Quiche with Sweet Potato Crust/eggquiche-5-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Squash &amp;amp; halloumi flatbreads with sweet chilli beetroot jam/Squash-and-halloumi-flatbreads-b6efd2c.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Squid, prawn &amp;amp; chickpea nduja stew/Squid-prawn-and-chickpea-nduja-stew-b40cc78.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/St. Nick’s Naughty &amp;amp; Nice Chocolate Peppermint Smoothie/Chocolate-Peppermint-Smoothie-2-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/St. Nick’s Naughty &amp;amp; Nice Chocolate Peppermint Smoothie/Chocolate-Peppermint-Smoothie-2-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/St. Nick’s Naughty &amp;amp; Nice Chocolate Peppermint Smoothie/Chocolate-Peppermint-Smoothie-2-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/St. Nick’s Naughty &amp;amp; Nice Chocolate Peppermint Smoothie/Chocolate-Peppermint-Smoothie-2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Steak &amp;amp; mushroom bakes/Steak-bake-40fbfcd.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Sticky tamarind tomato &amp;amp; spinach whirl/Tamarind-tomato-and-spinach-whirl-fe414fd.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Sticky, Sweet &amp;amp; Spicy Grilled Ginger Chicken/gingerchicken-7-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Sticky, Sweet &amp;amp; Spicy Grilled Ginger Chicken/gingerchicken-7-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Sticky, Sweet &amp;amp; Spicy Grilled Ginger Chicken/gingerchicken-7-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Sticky, Sweet &amp;amp; Spicy Grilled Ginger Chicken/gingerchicken-7.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Stout-braised short ribs with horseradish &amp;amp; carrots/Stout-braised-short-ribs-with-horseradish-8cdccd3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Strawberry &amp;amp; Mango Chopped Spinach Quinoa Salad with Sesame-Lime Vinaigrette/Strawberry-Mango-Chopped-Spinach-Quinoa-Salad-with-Sesame-Lime-Vinaigrette-square-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Strawberry &amp;amp; Mango Chopped Spinach Quinoa Salad with Sesame-Lime Vinaigrette/Strawberry-Mango-Chopped-Spinach-Quinoa-Salad-with-Sesame-Lime-Vinaigrette-square-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Strawberry &amp;amp; Mango Chopped Spinach Quinoa Salad with Sesame-Lime Vinaigrette/Strawberry-Mango-Chopped-Spinach-Quinoa-Salad-with-Sesame-Lime-Vinaigrette-square-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Strawberry &amp;amp; Mango Chopped Spinach Quinoa Salad with Sesame-Lime Vinaigrette/Strawberry-Mango-Chopped-Spinach-Quinoa-Salad-with-Sesame-Lime-Vinaigrette-square.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Street Corn Pasta Salad with Cilantro Pesto &amp;amp; Goat Cheese/Street-Corn-Pasta-Salad-4-725x725-1-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Street Corn Pasta Salad with Cilantro Pesto &amp;amp; Goat Cheese/Street-Corn-Pasta-Salad-4-725x725-1-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Street Corn Pasta Salad with Cilantro Pesto &amp;amp; Goat Cheese/Street-Corn-Pasta-Salad-4-725x725-1-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Street Corn Pasta Salad with Cilantro Pesto &amp;amp; Goat Cheese/Street-Corn-Pasta-Salad-4-725x725-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Stuffed Poblano Peppers with Black Bean, Corn &amp;amp; Sweet Potato/stuffed-poblano-peppers-2-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Stuffed Poblano Peppers with Black Bean, Corn &amp;amp; Sweet Potato/stuffed-poblano-peppers-2-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Stuffed Poblano Peppers with Black Bean, Corn &amp;amp; Sweet Potato/stuffed-poblano-peppers-2-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Stuffed Poblano Peppers with Black Bean, Corn &amp;amp; Sweet Potato/stuffed-poblano-peppers-2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Superfood Coconut Oil Granola with Chia &amp;amp; Flax/Superfood-Coconut-Oil-Granola-with-Chia-Flax-square-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Superfood Coconut Oil Granola with Chia &amp;amp; Flax/Superfood-Coconut-Oil-Granola-with-Chia-Flax-square-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Superfood Coconut Oil Granola with Chia &amp;amp; Flax/Superfood-Coconut-Oil-Granola-with-Chia-Flax-square-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Superfood Coconut Oil Granola with Chia &amp;amp; Flax/Superfood-Coconut-Oil-Granola-with-Chia-Flax-square.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Superwoman Nut &amp;amp; Seed Granola/Superwoman-Cluster-Granola-4-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Superwoman Nut &amp;amp; Seed Granola/Superwoman-Cluster-Granola-4-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Superwoman Nut &amp;amp; Seed Granola/Superwoman-Cluster-Granola-4-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Superwoman Nut &amp;amp; Seed Granola/Superwoman-Cluster-Granola-4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Sweet &amp;amp; Spicy BBQ Bacon Hawaiian Turkey Burgers/Sweet-Spicy-BBQ-Bacon-Hawaiian-Turkey-Burgers-square-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Sweet &amp;amp; Spicy BBQ Bacon Hawaiian Turkey Burgers/Sweet-Spicy-BBQ-Bacon-Hawaiian-Turkey-Burgers-square-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Sweet &amp;amp; Spicy BBQ Bacon Hawaiian Turkey Burgers/Sweet-Spicy-BBQ-Bacon-Hawaiian-Turkey-Burgers-square-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Sweet &amp;amp; Spicy BBQ Bacon Hawaiian Turkey Burgers/Sweet-Spicy-BBQ-Bacon-Hawaiian-Turkey-Burgers-square.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Sweet &amp;amp; Spicy Quinoa Beet Burgers with Mango &amp;amp; Sprouts/QuinoaBeetBurgers-5-copy-1-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Sweet &amp;amp; Spicy Quinoa Beet Burgers with Mango &amp;amp; Sprouts/QuinoaBeetBurgers-5-copy-1-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Sweet &amp;amp; Spicy Quinoa Beet Burgers with Mango &amp;amp; Sprouts/QuinoaBeetBurgers-5-copy-1-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Sweet &amp;amp; Spicy Quinoa Beet Burgers with Mango &amp;amp; Sprouts/QuinoaBeetBurgers-5-copy-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Sweet Corn Honey Jalapeno Zucchini Cornbread Waffles with Turkey Bacon &amp;amp; Eggs/zucchiniwaffles-3-1-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Sweet Corn Honey Jalapeno Zucchini Cornbread Waffles with Turkey Bacon &amp;amp; Eggs/zucchiniwaffles-3-1-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Sweet Corn Honey Jalapeno Zucchini Cornbread Waffles with Turkey Bacon &amp;amp; Eggs/zucchiniwaffles-3-1-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Sweet Corn Honey Jalapeno Zucchini Cornbread Waffles with Turkey Bacon &amp;amp; Eggs/zucchiniwaffles-3-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Sweet Potato, Black Bean &amp;amp; Egg White Breakfast Burritos/healthybreakfastburritos-725x725-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Sweet Potato, Black Bean &amp;amp; Egg White Breakfast Burritos/healthybreakfastburritos-725x725-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Sweet Potato, Black Bean &amp;amp; Egg White Breakfast Burritos/healthybreakfastburritos-725x725-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Sweet Potato, Black Bean &amp;amp; Egg White Breakfast Burritos/healthybreakfastburritos-725x725.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Sweet Potato, Egg &amp;amp; Green Chile Breakfast Quesadillas/quesadilla-3-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Sweet Potato, Egg &amp;amp; Green Chile Breakfast Quesadillas/quesadilla-3-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Sweet Potato, Egg &amp;amp; Green Chile Breakfast Quesadillas/quesadilla-3-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Sweet Potato, Egg &amp;amp; Green Chile Breakfast Quesadillas/quesadilla-3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Thai Peanut Chicken, Edamame &amp;amp; Quinoa Stir Fry/thai-peanut-chicken-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Thai Peanut Chicken, Edamame &amp;amp; Quinoa Stir Fry/thai-peanut-chicken-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Thai Peanut Chicken, Edamame &amp;amp; Quinoa Stir Fry/thai-peanut-chicken-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Thai Peanut Chicken, Edamame &amp;amp; Quinoa Stir Fry/thai-peanut-chicken.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Toasted Quinoa, Dried Fig &amp;amp; Dark Chocolate Nut Free Granola Bars/nut-free-granola-bars-2-1-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Toasted Quinoa, Dried Fig &amp;amp; Dark Chocolate Nut Free Granola Bars/nut-free-granola-bars-2-1-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Toasted Quinoa, Dried Fig &amp;amp; Dark Chocolate Nut Free Granola Bars/nut-free-granola-bars-2-1-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Toasted Quinoa, Dried Fig &amp;amp; Dark Chocolate Nut Free Granola Bars/nut-free-granola-bars-2-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Vegan &amp;amp; Gluten Free Curry Chickpea Pot Pie with Sweet Potato 'Crust'/Curry-Chickpea-Pot-Pie-Sweet-Potato-Crust-3-2-1-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Vegan &amp;amp; Gluten Free Curry Chickpea Pot Pie with Sweet Potato 'Crust'/Curry-Chickpea-Pot-Pie-Sweet-Potato-Crust-3-2-1-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Vegan &amp;amp; Gluten Free Curry Chickpea Pot Pie with Sweet Potato 'Crust'/Curry-Chickpea-Pot-Pie-Sweet-Potato-Crust-3-2-1-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Vegan &amp;amp; Gluten Free Curry Chickpea Pot Pie with Sweet Potato 'Crust'/Curry-Chickpea-Pot-Pie-Sweet-Potato-Crust-3-2-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Vegan &amp;amp; Paleo Pecan Pie Bars/Paleo-Pecan-Pie-Bars-7-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Vegan &amp;amp; Paleo Pecan Pie Bars/Paleo-Pecan-Pie-Bars-7-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Vegan &amp;amp; Paleo Pecan Pie Bars/Paleo-Pecan-Pie-Bars-7-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Vegan &amp;amp; Paleo Pecan Pie Bars/Paleo-Pecan-Pie-Bars-7.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Vegan Curry-Spiced Sweet Potato &amp;amp; Wild Rice Burgers/Vegan-Curry-Spiced-Sweet-Potato-Wild-Rice-Burgers-square-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Vegan Curry-Spiced Sweet Potato &amp;amp; Wild Rice Burgers/Vegan-Curry-Spiced-Sweet-Potato-Wild-Rice-Burgers-square-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Vegan Curry-Spiced Sweet Potato &amp;amp; Wild Rice Burgers/Vegan-Curry-Spiced-Sweet-Potato-Wild-Rice-Burgers-square-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Vegan Curry-Spiced Sweet Potato &amp;amp; Wild Rice Burgers/Vegan-Curry-Spiced-Sweet-Potato-Wild-Rice-Burgers-square.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Vegetarian Plantain &amp;amp; Black Bean Taco Cups/taco-cups-2-2-1-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Vegetarian Plantain &amp;amp; Black Bean Taco Cups/taco-cups-2-2-1-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Vegetarian Plantain &amp;amp; Black Bean Taco Cups/taco-cups-2-2-1-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Vegetarian Plantain &amp;amp; Black Bean Taco Cups/taco-cups-2-2-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Whipped Feta &amp;amp; Avocado Crostini with Pomegranate/avocado-crostini-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Whipped Feta &amp;amp; Avocado Crostini with Pomegranate/avocado-crostini-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Whipped Feta &amp;amp; Avocado Crostini with Pomegranate/avocado-crostini-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Whipped Feta &amp;amp; Avocado Crostini with Pomegranate/avocado-crostini.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/White Bean, Spinach &amp;amp; Turkey Stuffed Bell Peppers with Burrata/stuffed-peppers-27-725x725-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/White Bean, Spinach &amp;amp; Turkey Stuffed Bell Peppers with Burrata/stuffed-peppers-27-725x725-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/White Bean, Spinach &amp;amp; Turkey Stuffed Bell Peppers with Burrata/stuffed-peppers-27-725x725-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/White Bean, Spinach &amp;amp; Turkey Stuffed Bell Peppers with Burrata/stuffed-peppers-27-725x725.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Whole Wheat Coconut Banana Waffles with chocolate chips &amp;amp; roasted almonds/Whole-Wheat-Coconut-Banana-Waffles-with-Chocolate-Chips-Roasted-Almonds-square-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Whole Wheat Coconut Banana Waffles with chocolate chips &amp;amp; roasted almonds/Whole-Wheat-Coconut-Banana-Waffles-with-Chocolate-Chips-Roasted-Almonds-square-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Whole Wheat Coconut Banana Waffles with chocolate chips &amp;amp; roasted almonds/Whole-Wheat-Coconut-Banana-Waffles-with-Chocolate-Chips-Roasted-Almonds-square-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Whole Wheat Coconut Banana Waffles with chocolate chips &amp;amp; roasted almonds/Whole-Wheat-Coconut-Banana-Waffles-with-Chocolate-Chips-Roasted-Almonds-square.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Wonderful Roasted Veggies with Parmesan, Olive Oil &amp;amp; Garlic/Wonderful-Roasted-Veggies-with-Parmesan-Olive-Oil-Garlic-square-480x270.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Wonderful Roasted Veggies with Parmesan, Olive Oil &amp;amp; Garlic/Wonderful-Roasted-Veggies-with-Parmesan-Olive-Oil-Garlic-square-500x375.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Wonderful Roasted Veggies with Parmesan, Olive Oil &amp;amp; Garlic/Wonderful-Roasted-Veggies-with-Parmesan-Olive-Oil-Garlic-square-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/images/Wonderful Roasted Veggies with Parmesan, Olive Oil &amp;amp; Garlic/Wonderful-Roasted-Veggies-with-Parmesan-Olive-Oil-Garlic-square.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/nutrition.db" beforeDir="false" afterPath="$PROJECT_DIR$/../nutrition_service/nutrition.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/src/main/kotlin/com/example/nutrition_service/business/services/NutritionService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../nutrition_service/src/main/kotlin/com/example/nutrition_service/business/services/NutritionService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/src/main/kotlin/com/example/nutrition_service/persistence/entities/Recipe.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../nutrition_service/src/main/kotlin/com/example/nutrition_service/persistence/entities/Recipe.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/src/main/kotlin/com/example/nutrition_service/persistence/pojos/RecipeLiteModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../nutrition_service/src/main/kotlin/com/example/nutrition_service/persistence/pojos/RecipeLiteModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nutrition_service/src/main/kotlin/com/example/nutrition_service/persistence/tables/Images.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../nutrition_service/src/main/kotlin/com/example/nutrition_service/persistence/tables/Images.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/business/interfaces/NutritionServiceInterface.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/business/interfaces/NutritionServiceInterface.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/business/models/nutrition/response/RecipeLiteResponse.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/business/models/nutrition/response/RecipeLiteResponse.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/business/services/NutritionService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/business/services/NutritionService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/presentation/controllers/nutrition/ImageController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/presentation/controllers/nutrition/ImageController.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../plan_service/plan.db" beforeDir="false" afterPath="$PROJECT_DIR$/../plan_service/plan.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plan_service/src/main/java/com/example/plan_service/business/interfaces/PlanServiceInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/../plan_service/src/main/java/com/example/plan_service/business/interfaces/PlanServiceInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plan_service/src/main/java/com/example/plan_service/business/services/PlanService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../plan_service/src/main/java/com/example/plan_service/business/services/PlanService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plan_service/src/main/java/com/example/plan_service/presentation/controllers/PlanController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../plan_service/src/main/java/com/example/plan_service/presentation/controllers/PlanController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user_service/user.db" beforeDir="false" afterPath="$PROJECT_DIR$/../user_service/user.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/keep-fit/src/components/recipes/Recipes.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/components/recipes/Recipes.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/keep-fit/src/components/recipes/Recipes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/components/recipes/Recipes.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/keep-fit/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/keep-fit/src/services/NutritionService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/services/NutritionService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/keep-fit/src/types/models/RecipeLiteModel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/types/models/RecipeLiteModel.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,6 +503,9 @@
       <workItem from="1624201042231" duration="920000" />
       <workItem from="1624221672527" duration="105000" />
       <workItem from="1624291840770" duration="105000" />
+      <workItem from="1624823055259" duration="197000" />
+      <workItem from="1624824319295" duration="125000" />
+      <workItem from="1624833699135" duration="1500000" />
     </task>
     <servers />
   </component>
@@ -140,6 +525,15 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/database_connector/sqlite_connector_methods.py</url>
+          <line>142</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
         <watch expression="logger" language="Python" />
@@ -148,7 +542,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/database_scripts$create_database.coverage" NAME="create-database Coverage Results" MODIFIED="1614776108029" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/database_scripts$create_databases.coverage" NAME="create-databases Coverage Results" MODIFIED="1624291876639" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/database_scripts$create_databases.coverage" NAME="create-databases Coverage Results" MODIFIED="1624835130209" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/database_scripts$create_database_nutrition.coverage" NAME="create-databases Coverage Results" MODIFIED="1616339618191" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

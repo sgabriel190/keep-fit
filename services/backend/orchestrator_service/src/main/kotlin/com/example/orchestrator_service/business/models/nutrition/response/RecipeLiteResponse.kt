@@ -6,5 +6,6 @@ data class RecipeLiteResponse(
     val name: String,
     val description: String,
     val keywords: String,
-    val categories: List<CategoryResponse>
+    val categories: List<CategoryResponse>,
+    val images: List<ImageResponse>
 )

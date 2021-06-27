@@ -27,7 +27,7 @@ class NutritionService: NutritionServiceInterface {
                 Recipe.findById(id)!!.toRecipeModel()
             }
             val imageResult = nutritionDAO.executeQuery {
-                Image.find { Images.idRecipe eq id }.toList().map { it.toImageModel() }
+                Image.find { Images.recipe eq id }.toList().map { it.toImageModel() }
             }
             val instructionResult = nutritionDAO.executeQuery {
                 Instruction.find { Instructions.idRecipe eq id }.toList().map { it.toInstructionModel() }
@@ -138,7 +138,7 @@ class NutritionService: NutritionServiceInterface {
     override fun getImages(idRecipe: Int): Response<List<ImageModel>> {
         return try{
             val result = nutritionDAO.executeQuery {
-                Image.find { Images.idRecipe eq idRecipe }.toList().map { it.toImageModel() }
+                Image.find { Images.recipe eq idRecipe }.toList().map { it.toImageModel() }
             }
             Response(data = result, code = 200, successfulOperation = true)
         } catch (t: Throwable){

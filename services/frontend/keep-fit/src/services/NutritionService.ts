@@ -20,6 +20,23 @@ class NutritionService{
                 }
             );
     }
+
+    getRecipe(id: number){
+        return axios.get(`http://${WebInfo.HOST}:${WebInfo.PORT}/api/backend/nutrition/recipe/${id}`)
+            .then(
+                response => {
+                    return response.data
+                }
+            )
+            .catch(
+                error => {
+                    if (error.response){
+                        return error.response.data;
+                    }
+                    console.log(error);
+                }
+            );
+    }
 }
 
 const nutritionService = new NutritionService();
