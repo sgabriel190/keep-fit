@@ -8,7 +8,7 @@ import com.example.orchestrator_service.business.models.nutrition.request.MenuRe
 import com.example.orchestrator_service.presentation.http.Response
 
 interface NutritionServiceInterface {
-    suspend fun getImage(imagePath: String, token: String): Response<out Any>
+    suspend fun getImage(imagePath: String): Response<out Any>
     suspend fun getRecipes(params: Map<String, Any>, token: String): Response<List<RecipeLiteResponse>>
     suspend fun getRecipe(id: Int, token: String): Response<RecipeResponse>
     suspend fun getGenders(token: String): Response<List<GenderResponse>>
