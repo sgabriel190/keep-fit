@@ -50,8 +50,11 @@ def create_genders(connection: Connection) -> None:
 def insert_data(connection: Connection, data: List[Dict]) -> None:
     logger.log('Insert data into tables.')
     idx = 1
+    count = 0
     list_categories = []
     for item in data:
+        if item["name"] == "Chicken schnitzel with brown butter & capers":
+            count += 1
         ok_time = True
         # Create queries
         query_list = [idx]
@@ -111,13 +114,15 @@ def insert_data(connection: Connection, data: List[Dict]) -> None:
 
         # Recipes TABLE
         if ok_time:
+            tmp = item['name'].replace("&amp;", "&")
             sql_query_recipes = 'INSERT INTO recipes(ID, ID_nutrients, ID_time_total, name, description, keywords) ' \
                                 'VALUES(?, ?, ?, ?, ?, ?)'
-            sql_parameters_recipes = (idx, idx, idx, item['name'], item['description'], item['keywords'])
+            sql_parameters_recipes = (idx, idx, idx, tmp, item['description'], item['keywords'])
         else:
+            tmp = item['name'].replace("&amp;", "&")
             sql_query_recipes = 'INSERT INTO recipes(ID, ID_nutrients, name, description, keywords) ' \
                                 'VALUES(?, ?, ?, ?, ?, ?)'
-            sql_parameters_recipes = (idx, idx, item['name'], item['description'], item['keywords'])
+            sql_parameters_recipes = (idx, idx, tmp, item['description'], item['keywords'])
 
         # Execute queries
         if ok_time:
@@ -128,17 +133,19 @@ def insert_data(connection: Connection, data: List[Dict]) -> None:
 
         # Images TABLE
         for token in item['image']:
+            tmp = item['name'].replace("&amp;", "&")
             sql_query_image = 'INSERT INTO images(image_path, ID_recipe) ' \
                               'VALUES(?, ?)'
-            sql_parameters_image = (item['name'] + "/" + token.split("/")[-1], idx)
+            sql_parameters_image = (tmp + "/" + token.split("/")[-1], idx)
             connection.execute(sql_query_image, sql_parameters_image)
 
-        # Images TABLE
+        # Ingredients TABLE
         for token in item['recipeIngredient']:
-            sql_query_image = 'INSERT INTO ingredients(name, ID_recipe) ' \
-                              'VALUES(?, ?)'
-            sql_parameters_image = (token, idx)
-            connection.execute(sql_query_image, sql_parameters_image)
+            tmp = token.replace("&amp;", "&")
+            sql_query_ingredients = 'INSERT INTO ingredients(name, ID_recipe) ' \
+                                    'VALUES(?, ?)'
+            sql_parameters_ingredients = (tmp, idx)
+            connection.execute(sql_query_ingredients, sql_parameters_ingredients)
 
         # Instructions TABLE
         for token in item['recipeInstructions']:
@@ -146,6 +153,7 @@ def insert_data(connection: Connection, data: List[Dict]) -> None:
                                     'VALUES(?, ?)'
             sql_parameters_instruction = (token, idx)
             connection.execute(sql_query_instruction, sql_parameters_instruction)
+
         # Categories TABLE
         if type(item['recipeCategory']) == list:
             tmp_cat = item['recipeCategory']
@@ -166,4 +174,5 @@ def insert_data(connection: Connection, data: List[Dict]) -> None:
             connection.execute(sql_query_recipe_to_cat, sql_parameters_recipe_to_cat)
 
         idx += 1
+    print(count)
     connection.commit()

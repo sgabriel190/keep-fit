@@ -1,18 +1,18 @@
-19:11:17 - [INFO] - Connected to the NUTRITION database successfully.
-19:11:17 - [INFO] - Deleted successfully all the tables in database NUTRITION.
-19:11:17 - [INFO] - Created successfully all the tables in database NUTRITION.
-19:11:17 - [INFO] - Create activity types.
-19:11:17 - [INFO] - Create diet types.
-19:11:17 - [INFO] - Create gender.
-19:11:17 - [INFO] - Insert data into tables.
-19:11:18 - [INFO] - Inserted successfully data in tables in database NUTRITION.
-19:11:18 - [INFO] - Closed the NUTRITION database connection successfully.
-19:11:19 - [INFO] - Connected to the USER database successfully.
-19:11:19 - [INFO] - Deleted successfully all the tables in database USER.
-19:11:19 - [INFO] - Created successfully all the tables in database USER.
-19:11:19 - [INFO] - Inserted successfully data in tables in database USER.
-19:11:19 - [INFO] - Closed the USER database connection successfully.
-19:11:19 - [INFO] - Connected to the PLAN database successfully.
-19:11:19 - [INFO] - Deleted successfully all the tables in database PLAN.
-19:11:19 - [INFO] - Created successfully all the tables in database PLAN.
-19:11:19 - [INFO] - Closed the PLAN database connection successfully.
+02:06:40 - [INFO] - Connected to the NUTRITION database successfully.
+02:06:41 - [INFO] - Deleted successfully all the tables in database NUTRITION.
+02:06:41 - [INFO] - Created successfully all the tables in database NUTRITION.
+02:06:41 - [INFO] - Create activity types.
+02:06:41 - [INFO] - Create diet types.
+02:06:41 - [INFO] - Create gender.
+02:06:41 - [INFO] - Insert data into tables.
+02:06:42 - [INFO] - Inserted successfully data in tables in database NUTRITION.
+02:06:42 - [INFO] - Closed the NUTRITION database connection successfully.
+02:06:42 - [INFO] - Connected to the USER database successfully.
+02:06:42 - [INFO] - Deleted successfully all the tables in database USER.
+02:06:42 - [INFO] - Created successfully all the tables in database USER.
+02:06:42 - [INFO] - Inserted successfully data in tables in database USER.
+02:06:42 - [INFO] - Closed the USER database connection successfully.
+02:06:42 - [INFO] - Connected to the PLAN database successfully.
+02:06:42 - [INFO] - Deleted successfully all the tables in database PLAN.
+02:06:42 - [INFO] - Created successfully all the tables in database PLAN.
+02:06:42 - [INFO] - Closed the PLAN database connection successfully.

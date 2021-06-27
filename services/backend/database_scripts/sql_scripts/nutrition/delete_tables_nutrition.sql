@@ -5,6 +5,7 @@ DROP TABLE IF EXISTS diet_types;
 DROP TABLE IF EXISTS recipe_to_category;
 DROP TABLE IF EXISTS categories;
 DROP TABLE IF EXISTS instructions;
+DROP TABLE IF EXISTS ingredients;
 DROP TABLE IF EXISTS images;
 DROP TABLE IF EXISTS recipes;
 DROP TABLE IF EXISTS time_total;
