@@ -19,3 +19,11 @@
     font-size: 30px;
     text-align: center;
 }
+
+.text-title{
+    font-family: Arial, sans-serif;
+    font-size: 50px;
+    font-weight: bold;
+    text-shadow: black 1px 1px 1px;
+    border-bottom: #8B2635 4px solid;
+}

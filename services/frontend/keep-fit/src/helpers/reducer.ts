@@ -8,7 +8,7 @@ const jwtReducer = (state = initialState, action: any) =>{
     }
     if(action.type === "logout"){
         return {
-            jwt: ""
+            jwt: action.payload
         };
     }
     return state;

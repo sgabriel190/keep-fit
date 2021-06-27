@@ -19,7 +19,7 @@ class Header extends React.Component<any, any>{
     }
 
     renderIcon(){
-        if (selectJwtValue() === ""){
+        if (selectJwtValue() === null){
             this.setState({loggedIn: false});
         } else {
             this.setState({loggedIn: true});
@@ -33,10 +33,10 @@ class Header extends React.Component<any, any>{
                 <Navbar.Brand className={"px-0 py-0 mx-0"}>
                     <Link
                         className={"mx-1"}
-                        to={"/"}
+                        to={ !this.state.loggedIn ? "/" : "/dashboard"}
                     >
                         <img
-                            alt=""
+                            alt="logo"
                             src="/logo-navbar.png"
                             className="d-inline-block align-top text-link-decoration py-2 "
                         />
@@ -44,21 +44,25 @@ class Header extends React.Component<any, any>{
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav>
-                        {
-                            navbarRoutes.map( (token, idx) => {
-                                return(
-                                    <Link
-                                        className={"text-link-decoration px-3 py-3 mx-2"}
-                                        to={token.url}
-                                        key={idx}
-                                    >
-                                        {token.name}
-                                    </Link>
-                                );
-                            })
-                        }
-                    </Nav>
+                    {
+                        this.state.loggedIn ?
+                            <Nav>
+                                {
+                                    navbarRoutes.map( (token, idx) => {
+                                        return(
+                                            <Link
+                                                className={"text-link-decoration px-3 py-3 mx-2"}
+                                                to={token.url}
+                                                key={idx}
+                                            >
+                                                {token.name}
+                                            </Link>
+                                        );
+                                    })
+                                }
+                            </Nav>
+                            : null
+                    }
                 </Navbar.Collapse>
                 {
                     this.state.loggedIn ?
