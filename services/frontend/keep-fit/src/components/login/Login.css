@@ -18,7 +18,11 @@
 }
 
 .form-group{
-    width: 90%;
+    width: 60%;
+}
+
+.container-text-input{
+    width: 60%;
 }
 
 .container, .form-group{
@@ -38,7 +42,13 @@
 }
 
 .y-margin{
-    margin: 1em 0;
+    margin: 1em 0 !important;
+}
+
+.input-paper{
+    width: 70%;
+    padding: 2em 10px;
+    margin: 2em 0;
 }
 
 .error-text{

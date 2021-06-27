@@ -1,13 +1,18 @@
 import React from 'react';
 import './Welcome.css';
 import '../../shared/styles/shared.css';
+import {motion} from "framer-motion";
 
 class Welcome extends React.Component<any, any>{
 
     render() {
         return (
             <div className={"container-custom"}>
-                <div className={"container-main shadow container-welcome container-margin"}>
+                <motion.div
+                    animate={{ y: 0, opacity: 1 }}
+                    initial={{y: -100, opacity: 0}}
+                    transition={{ ease: "easeOut", duration: 1 }}
+                    className={"container-main shadow container-welcome container-margin"}>
                     <div className={"container-title"}>
                         <img
                             alt=""
@@ -48,7 +53,7 @@ class Welcome extends React.Component<any, any>{
                                 your calorie index intake +- 100. The meals should not be strict as you should consume exactly X calories.</p>
                         </div>
                     </div>
-                </div>
+                </motion.div>
             </div>
         );
     }

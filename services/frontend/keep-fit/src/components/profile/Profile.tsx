@@ -6,6 +6,10 @@ import '../../shared/styles/shared.css';
 import MyError from "../../types/http/MyError";
 import {toast} from "react-hot-toast";
 import UserProfileModel from "../../types/models/UserProfileModel";
+import {motion} from "framer-motion";
+import Button from "@material-ui/core/Button";
+import {Backdrop, CircularProgress, Grid, Paper} from "@material-ui/core";
+import {Link} from 'react-router-dom';
 
 
 class Profile extends React.Component<any, any>{
@@ -29,7 +33,7 @@ class Profile extends React.Component<any, any>{
             this.setState({ready: true});
         }
         catch (e) {
-            toast.error(`Login failed!\n${e}`)
+            toast.error(`Loading profile failed!\n${e}`)
         }
     }
 
@@ -38,64 +42,133 @@ class Profile extends React.Component<any, any>{
             <div className={"container-custom"}>
                 {
                     this.state.ready ?
-                        <div className={"container-main shadow container-profile"}>
+                        <motion.div
+                            animate={{ y: 0, opacity: 1 }}
+                            initial={{y: -100, opacity: 0}}
+                            transition={{ ease: "easeOut", duration: 1 }}
+                            className={"container-main shadow container-profile"}>
                             <div className={"container-title"}>
                                 <p className={"text-title custom-title-text"}>User profile</p>
                             </div>
                             <div className={"container-content"}>
-                                <div className={"container-data"}>
-                                    <div className={"text-40"}>Username:</div>
-                                    <div className={"text-60"}>{this.state.userData.username}</div>
-                                </div>
-                                <div className={"container-data"}>
-                                    <div className={"text-40"}>Email:</div>
-                                    <div className={"text-60"}>{this.state.userData.email}</div>
-                                </div>
-                                <div className={"container-data"}>
-                                    <div className={"text-40"}>Age:</div>
-                                    <div className={"text-60"}>{this.state.userData.userDetails.age}</div>
-                                </div>
-                                <div className={"container-data"}>
-                                    <div className={"text-40"}>BMI:</div>
-                                    <div className={"text-60"}>{this.state.userData.userDetails.bmi}</div>
-                                </div>
-                                <div className={"container-data"}>
-                                    <div className={"text-40"}>Calories:</div>
-                                    <div className={"text-60"}>{this.state.userData.userDetails.calories} kcal</div>
-                                </div>
-                                <div className={"container-data"}>
-                                    <div className={"text-40"}>Height:</div>
-                                    <div className={"text-60"}>{this.state.userData.userDetails.height /100} m</div>
-                                </div>
-                                <div className={"container-data"}>
-                                    <div className={"text-40"}>Ideal weight:</div>
-                                    <div className={"text-60 "}>{this.state.userData.userDetails.idealWeight} kg</div>
-                                </div>
-                                <div className={"container-data"}>
-                                    <div className={"text-40"}>Weight</div>
-                                    <div className={"text-60"}>{this.state.userData.userDetails.weight} kg</div>
-                                </div>
-                                <div className={"container-data"}>
-                                    <div className={"text-40"}>WND:</div>
-                                    <div className={"text-60"}>{this.state.userData.userDetails.wnd} ml</div>
-                                </div>
-                                <div className={"container-data"}>
-                                    <div className={"text-40"}>Gender:</div>
-                                    <div className={"text-60"}>{this.state.userData.userDetails.gender.name}</div>
-                                </div>
-                                <div className={"container-data"}>
-                                    <div className={"text-40"}>Activity type:</div>
-                                    <div className={"text-60"}>{this.state.userData.userDetails.activityType.name}</div>
-                                </div>
-                                <div className={"container-data"}>
-                                    <div className={"text-40"}>Diet type:</div>
-                                    <div className={"text-60"}>{this.state.userData.userDetails.dietType.name}</div>
-                                </div>
-                                <div className={"container-buttons"}>
-                                    buttons
-                                </div>
+                                <Grid
+                                    className={"grid-margin"}
+                                    container
+                                    direction="row"
+                                    justify="space-evenly"
+                                    alignItems="center">
+                                    <Grid item xs={3}>
+                                        <Paper className={"paper-text"} elevation={3}>
+                                            Username: {this.state.userData.username}
+                                        </Paper>
+                                    </Grid>
+                                    <Grid item xs={3}>
+                                        <Paper className={"paper-text"} elevation={3}>
+                                            Email: {this.state.userData.email}
+                                        </Paper>
+                                    </Grid>
+                                    <Grid item xs={3}>
+                                        <Paper className={"paper-text"} elevation={3}>
+                                            Age: {this.state.userData.userDetails.age}
+                                        </Paper>
+                                    </Grid>
+                                </Grid>
+                                <Grid
+                                    className={"grid-margin"}
+                                    container
+                                    direction="row"
+                                    justify="space-evenly"
+                                    alignItems="center">
+                                    <Grid item xs={3}>
+                                        <Paper className={"paper-text"} elevation={3}>
+                                            BMI: {this.state.userData.userDetails.bmi}
+                                        </Paper>
+                                    </Grid>
+                                    <Grid item xs={3}>
+                                        <Paper className={"paper-text"} elevation={3}>
+                                            Calories: {this.state.userData.userDetails.calories} kcal
+                                        </Paper>
+                                    </Grid>
+                                    <Grid item xs={3}>
+                                        <Paper className={"paper-text"} elevation={3}>
+                                            Height: {this.state.userData.userDetails.height /100} m
+                                        </Paper>
+                                    </Grid>
+                                </Grid>
+                                <Grid
+                                    className={"grid-margin"}
+                                    container
+                                    direction="row"
+                                    justify="space-evenly"
+                                    alignItems="center">
+                                    <Grid item xs={3}>
+                                        <Paper className={"paper-text"} elevation={3}>
+                                            BMI: {this.state.userData.userDetails.bmi}
+                                        </Paper>
+                                    </Grid>
+                                    <Grid item xs={3}>
+                                        <Paper className={"paper-text"} elevation={3}>
+                                            Ideal weight: {this.state.userData.userDetails.idealWeight} kg
+                                        </Paper>
+                                    </Grid>
+                                    <Grid item xs={3}>
+                                        <Paper className={"paper-text"} elevation={3}>
+                                            Weight: {this.state.userData.userDetails.weight} kg
+                                        </Paper>
+                                    </Grid>
+                                </Grid>
+                                <Grid
+                                    className={"grid-margin"}
+                                    container
+                                    direction="row"
+                                    justify="space-evenly"
+                                    alignItems="center">
+                                    <Grid item xs={3}>
+                                        <Paper className={"paper-text"} elevation={3}>
+                                            Water need per day: {this.state.userData.userDetails.wnd} ml
+                                        </Paper>
+                                    </Grid>
+                                    <Grid item xs={3}>
+                                        <Paper className={"paper-text"} elevation={3}>
+                                            Gender: {this.state.userData.userDetails.gender.name}
+                                        </Paper>
+                                    </Grid>
+                                    <Grid item xs={3}>
+                                        <Paper className={"paper-text"} elevation={3}>
+                                            Activity type: {this.state.userData.userDetails.activityType.name}
+                                        </Paper>
+                                    </Grid>
+                                </Grid>
+                                <Grid
+                                    className={"grid-margin"}
+                                    container
+                                    direction="row"
+                                    justify="space-evenly"
+                                    alignItems="center">
+                                    <Grid item xs={3}>
+                                        <Paper className={"paper-text"} elevation={3}>
+                                            Diet type: {this.state.userData.userDetails.dietType.name}
+                                        </Paper>
+                                    </Grid>
+                                </Grid>
                             </div>
-                        </div> : null
+                            <Grid className={"margin-y"} container spacing={2} >
+                                <Grid item xs={12}>
+                                    <Grid container justify={"center"} spacing={3}>
+                                        <Grid item>
+                                            <Link
+                                                to={"/"}
+                                            >
+                                                <Button variant="contained" color={"primary"}>Update user details</Button>
+                                            </Link>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </motion.div> :
+                        <Backdrop  open={this.state.ready}>
+                            <CircularProgress color="inherit" />
+                        </Backdrop>
                 }
             </div>
         );

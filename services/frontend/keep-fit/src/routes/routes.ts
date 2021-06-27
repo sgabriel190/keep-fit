@@ -3,10 +3,6 @@ import RouterModel from "../types/routes/RouterModel";
 
 const routes: RouterModel[] = [
     {
-        url: "/dashboard",
-        component: loadable(() => import("../components/dashboard/Dashboard")),
-    },
-    {
         url: "/recipes",
         component: loadable(() => import("../components/recipes/Recipes")),
     },
