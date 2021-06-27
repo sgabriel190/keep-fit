@@ -33,7 +33,7 @@ class Header extends React.Component<any, any>{
                 <Navbar.Brand className={"px-0 py-0 mx-0"}>
                     <Link
                         className={"mx-1"}
-                        to={ !this.state.loggedIn ? "/" : "/dashboard"}
+                        to={"/"}
                     >
                         <img
                             alt="logo"

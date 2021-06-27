@@ -10,9 +10,12 @@ import UserService from '../../services/UserService';
 import {toast} from "react-hot-toast";
 import MyError from "../../types/http/MyError";
 import * as Yup from 'yup';
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form } from 'formik';
 import store from "../../helpers/store";
 import addJwt from "../../helpers/action";
+import {Backdrop, Button, CircularProgress, Grid, Paper, TextField, Typography} from "@material-ui/core";
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import LockIcon from '@material-ui/icons/Lock';
 
 interface FormValues {
     username: string;
@@ -40,7 +43,8 @@ class Login extends React.Component<any, any>{
         super(props);
         this.state = {
             username: null,
-            password: null
+            password: null,
+            isLoading: false
         };
     }
 
@@ -49,10 +53,12 @@ class Login extends React.Component<any, any>{
 
     async login() {
         try {
+            this.setState({isLoading: true});
             let response: ResponseData<any> = await UserService.login({
                 username: this.state.username,
                 password: this.state.password
             });
+            this.setState({isLoading: false});
             if (!response.successfulOperation){
                 response = response as ResponseData<MyError>;
                 throw new Error(response.error);
@@ -71,21 +77,42 @@ class Login extends React.Component<any, any>{
     render() {
         return (
             <div className={"container-custom"}>
+                {
+                    this.state.isLoading ?
+                        <Backdrop
+                            style={{
+                                zIndex: 1
+                            }}
+                            open={this.state.isLoading}>
+                            <CircularProgress color="inherit" />
+                        </Backdrop> : null
+                }
                 <motion.div
                     animate={{ y: 0, opacity: 1 }}
                     initial={{y: -100, opacity: 0}}
                     transition={{ ease: "easeOut", duration: 1 }}
                     className={"container-main container-login shadow width-container"}
                 >
-                    <motion.p
-                        className={"text-container-title"}
-                        animate={{opacity: 1 }}
-                        initial={{opacity: 0}}
-                        transition={{ ease: "easeOut", duration: 1 }}
-                    >Log in</motion.p>
+                    <Typography
+                        align={"center"}
+                        gutterBottom={true}
+                        variant={"h3"}
+                    >
+                        <motion.p
+                            animate={{opacity: 1 }}
+                            initial={{opacity: 0}}
+                            transition={{ ease: "easeOut", duration: 1 }}
+                        >
+                            Log in
+                        </motion.p>
+                    </Typography>
                     <Formik
                         initialValues={this.initialValues}
-                        validationSchema={this.schema}
+                        validateOnChange={false}
+                        validateOnBlur={false}
+                        validationSchema={
+                            this.schema
+                        }
                         onSubmit={(values) =>{
                             this.setState({username: values.username});
                             this.setState({password: values.password});
@@ -94,56 +121,81 @@ class Login extends React.Component<any, any>{
                     >{
                         (
                             {
+                                values,
                                 touched,
                                 errors,
+                                handleChange
                             }
                         )=>(
-                            <Form className={"container"}>
-                                <div className={"form-group y-margin"}>
-                                    <label htmlFor="username">
-                                        Username
-                                    </label>
-                                    <Field
-                                        id="username"
-                                        name="username"
-                                        placeholder="Username..."
-                                        type={"text"}
-                                        className={"input-text"}
-                                    />
-                                    {
-                                        errors.username && touched.username ?
-                                            (<p className={"error-text"}>{errors.username}</p>)
-                                            : null
-                                    }
-                                </div>
-                                <div className={"form-group y-margin"}>
-                                    <label htmlFor="password">
-                                        Password
-                                    </label>
-                                    <Field
-                                        id="password"
-                                        name="password"
-                                        placeholder="Password..."
-                                        type={"password"}
-                                        className={"input-text"}
-                                    />
-                                    {
-                                        errors.password && touched.password ?
-                                            (<p className={"error-text"}>{errors.password}</p>)
-                                            : null
-                                    }
-                                </div>
-                                <button
-                                    className={"button-form y-margin"}
-                                    type="submit"
-                                >
-                                    Log in
-                                </button>
-                                <Link to={"/register"}>
-                                    <button className={"button-form y-margin"}>
-                                        Register
-                                    </button>
-                                </Link>
+                            <Form className={"container"} autoComplete={"off"}>
+                                <Paper className={"container input-paper"}>
+                                    <Grid className={"y-margin"} container spacing={1} alignItems="center" justify={"center"}>
+                                        <Grid item>
+                                            <AccountCircleIcon
+                                                fontSize={"large"}
+                                            />
+                                        </Grid>
+                                        <Grid item xs={7}>
+                                            <TextField
+                                                fullWidth={true}
+                                                variant={"filled"}
+                                                id="username"
+                                                name="username"
+                                                label={"Username"}
+                                                value={values.username}
+                                                error={!!errors.username && touched.username}
+                                                onChange={handleChange("username")}
+                                                helperText={errors.username}
+                                                type={"text"}
+                                            />
+                                        </Grid>
+                                    </Grid>
+                                    <Grid className={"y-margin"} container spacing={1} alignItems="center" justify={"center"}>
+                                        <Grid item>
+                                            <LockIcon
+                                                fontSize={"large"}
+                                            />
+                                        </Grid>
+                                        <Grid item xs={7}>
+                                            <TextField
+                                                fullWidth={true}
+                                                variant={"filled"}
+                                                id="password"
+                                                name="password"
+                                                label="Password"
+                                                value={values.password}
+                                                error={Boolean(errors.password) && touched.password}
+                                                onChange={handleChange("password")}
+                                                helperText={errors.password}
+                                                type={"password"}
+                                            />
+                                        </Grid>
+                                    </Grid>
+                                </Paper>
+                                <Grid container justify={"center"} spacing={7}>
+                                    <Grid item>
+                                        <Button
+                                            size={"large"}
+                                            variant={"contained"}
+                                            className={"y-margin"}
+                                            color={"primary"}
+                                            type="submit"
+                                        >
+                                            Log in
+                                        </Button>
+                                    </Grid>
+                                    <Grid item>
+                                        <Link to={"/register"}>
+                                            <Button
+                                                size={"large"}
+                                                color={"primary"}
+                                                variant={"contained"}
+                                                className={"y-margin"}>
+                                                Register
+                                            </Button>
+                                        </Link>
+                                    </Grid>
+                                </Grid>
                             </Form>
                         )
                     }

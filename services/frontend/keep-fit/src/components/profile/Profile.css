@@ -1,13 +1,17 @@
 .container-profile{
-    width: 65%;
     padding: 2em 0;
     min-height: auto;
     min-width: auto;
+    width: 60%;
 }
 
 .custom-title-text{
     text-align: center;
     width: 90%;
+}
+
+.grid-margin{
+    margin-top: 10px !important;
 }
 
 .container-title{
@@ -23,8 +27,9 @@
 .container-content{
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
+    height: 450px;
 }
 
 .container-data{
@@ -33,10 +38,8 @@
     align-items: center;
     width: 50%;
     border-radius: 12px;
-    background: #00487C;
     margin: 5px 0;
     padding: 5px 0;
-    font-size: 20px;
 }
 
 .container-buttons{
@@ -49,20 +52,18 @@
     background: black;
 }
 
+.margin-y{
+    margin-top: 15px !important;
+}
+
 .info-text{
     color: #8B2635;
 }
 
-.text-40{
-    width: 40%;
+.paper-text{
+    padding: 10px 10px;
     text-align: center;
-}
-
-.text-60{
-    width: 60%;
-    text-align: center;
-}
-
-.test{
-    background: #0c5460;
+    background: #00487C !important;
+    color: white !important;
+    font-size: 17px;
 }
