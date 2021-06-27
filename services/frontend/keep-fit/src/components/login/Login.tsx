@@ -4,11 +4,11 @@ import '../../shared/styles/shared.css';
 import '../../shared/styles/autentication/styles-authentication.css';
 import {Link} from 'react-router-dom';
 import { motion } from "framer-motion"
-import ResponseData from "../../types/models/ResponseData";
+import ResponseData from "../../types/http/ResponseData";
 import AuthModel from "../../types/models/AuthModel";
 import UserService from '../../services/UserService';
 import {toast} from "react-hot-toast";
-import MyError from "../../types/models/MyError";
+import MyError from "../../types/http/MyError";
 import * as Yup from 'yup';
 import { Formik, Form, Field } from 'formik';
 import store from "../../helpers/store";

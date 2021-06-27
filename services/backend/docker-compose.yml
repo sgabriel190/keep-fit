@@ -24,7 +24,7 @@ services:
     ports:
       - "2030:5000"
   orchestrator-service:
-    image: keep-fit/orchestrator:1.4.6
+    image: keep-fit/orchestrator:1.5.0
     container_name: orchestrator-service
     environment:
       - HOST_USER

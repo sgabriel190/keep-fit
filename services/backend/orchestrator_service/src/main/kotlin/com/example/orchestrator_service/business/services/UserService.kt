@@ -5,11 +5,13 @@ import com.example.orchestrator_service.business.config.InvalidJwt
 import com.example.orchestrator_service.business.config.setBodyJson
 import com.example.orchestrator_service.business.interfaces.*
 import com.example.orchestrator_service.business.models.notification.EmailRequest
+import com.example.orchestrator_service.business.models.nutrition.response.UserDetailResponse
 import com.example.orchestrator_service.business.models.user.request.LoginRequest
 import com.example.orchestrator_service.business.models.user.request.RegisterRequest
 import com.example.orchestrator_service.business.models.user.response.AuthenticationResponse
 import com.example.orchestrator_service.business.models.user.response.RegisterResponse
 import com.example.orchestrator_service.business.models.user.response.UserModel
+import com.example.orchestrator_service.business.models.user.response.UserProfileResponse
 import com.example.orchestrator_service.presentation.http.MyError
 import com.example.orchestrator_service.presentation.http.Response
 import io.ktor.client.call.*
@@ -112,7 +114,6 @@ class UserService: UserServiceInterface {
 
     override suspend fun getUser(token: String): Response<UserModel> = coroutineScope{
         try {
-            checkToken(token)
             val result: Response<UserModel> = httpConsumerService.executeRequest {
                 val response: HttpResponse = httpConsumerService.client.get("$host/user"){
                     headers["Authorization"] = token
@@ -121,6 +122,42 @@ class UserService: UserServiceInterface {
                 response.receive()
             }
             result
+        } catch (e: InvalidJwt){
+            Response(
+                successfulOperation = false,
+                code = 401,
+                data = null,
+                error = e.toString()
+            )
+        }
+        catch (t: Throwable){
+            Response(
+                successfulOperation = false,
+                code = 400,
+                data = null,
+                error = t.toString()
+            )
+        }
+    }
+
+    override suspend fun getUserProfile(token: String): Response<UserProfileResponse> = coroutineScope{
+        try {
+            val resultUser = getUser(token)
+            if (!resultUser.successfulOperation) throw Exception(resultUser.error)
+            resultUser.data ?: throw Exception("User info data is null")
+            val resultUserDetails = nutritionService.getUserDetails(token)
+            if (!resultUserDetails.successfulOperation) throw Exception(resultUserDetails.error)
+            resultUserDetails.data ?: throw Exception("User details data is null")
+            Response(
+                successfulOperation = true,
+                code = 200,
+                data = UserProfileResponse(
+                    id = resultUser.data.id,
+                    username = resultUser.data.username,
+                    email = resultUser.data.email,
+                    userDetails = resultUserDetails.data
+                )
+            )
         } catch (e: InvalidJwt){
             Response(
                 successfulOperation = false,

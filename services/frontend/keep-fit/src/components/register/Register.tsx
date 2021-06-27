@@ -3,11 +3,11 @@ import './Register.css';
 import { motion } from "framer-motion"
 import {Link} from 'react-router-dom';
 import '../../shared/styles/autentication/styles-authentication.css';
-import ResponseData from "../../types/models/ResponseData";
+import ResponseData from "../../types/http/ResponseData";
 import RegisterModel from "../../types/models/RegisterModel";
 import UserService from '../../services/UserService';
 import {toast} from "react-hot-toast";
-import MyError from "../../types/models/MyError";
+import MyError from "../../types/http/MyError";
 import * as Yup from 'yup';
 import { Formik, Form, Field } from 'formik';
 // @ts-ignore

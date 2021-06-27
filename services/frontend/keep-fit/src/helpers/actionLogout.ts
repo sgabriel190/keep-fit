@@ -1,5 +1,6 @@
 const removeJwt = {
-    type: "logout"
+    type: "logout",
+    payload: ""
 }
 
 export default removeJwt;

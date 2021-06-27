@@ -40,7 +40,7 @@ class UserService {
             });
     }
 
-    getUser(){
+    getUserProfile(){
         LoggerService.formatLog(this.constructor.name.toString(), "getUser()")
         return axios.get(
             `http://${WebInfo.HOST}:${WebInfo.PORT}/api/backend/users/user`
