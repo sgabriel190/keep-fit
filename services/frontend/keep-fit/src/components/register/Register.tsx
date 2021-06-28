@@ -101,19 +101,19 @@ class Register extends React.Component<any, any>{
                     transition={{ ease: "easeOut", duration: 1 }}
                     className={"container-main container-register width-container shadow"}
                 >
-                    <Typography
-                        align={"center"}
-                        gutterBottom={true}
-                        variant={"h3"}
+                    <Grid
+                        container
+                        justify={"center"}
                     >
                         <motion.p
+                            className={"text-title custom-title-text"}
                             animate={{opacity: 1 }}
                             initial={{opacity: 0}}
                             transition={{ ease: "easeOut", duration: 1 }}
                         >
                             Register
                         </motion.p>
-                    </Typography>
+                    </Grid>
                     <Formik
                         initialValues={this.initialValues}
                         validationSchema={this.schema}

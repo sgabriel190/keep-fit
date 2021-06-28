@@ -12,10 +12,12 @@ import {
     CardActionArea,
     CardContent,
     CardMedia,
-    CircularProgress,
-    Grid,
+    CircularProgress, Divider, FormControl,
+    Grid, IconButton, InputBase, InputLabel, MenuItem, Paper, Select,
     Typography
 } from "@material-ui/core";
+import CategoryModel from "../../types/models/CategoryModel";
+import SearchIcon from '@material-ui/icons/Search';
 
 
 class Recipes extends React.Component<any, any>{
@@ -24,9 +26,11 @@ class Recipes extends React.Component<any, any>{
         super(props);
         this.state = {
             data: null,
+            dataCategory: null,
             isLoading: true,
             page: 1,
             pageSize: 12,
+            categorySelected: "",
             tmpData: null
         };
     }
@@ -34,12 +38,19 @@ class Recipes extends React.Component<any, any>{
     async componentDidMount(){
         try {
             let response: ResponseData<any> = await NutritionService.getRecipes({pagSize: this.state.pageSize, pagNumber: this.state.page});
+            let responseCategories: ResponseData<any> = await NutritionService.getCategories();
             if (!response.successfulOperation){
                 response = response as ResponseData<MyError>;
                 throw new Error(response.error);
             }
+            if (!responseCategories.successfulOperation){
+                responseCategories = responseCategories as ResponseData<MyError>;
+                throw new Error(responseCategories.error);
+            }
+            responseCategories = responseCategories as ResponseData<CategoryModel[]>;
             response = response as ResponseData<RecipeLiteModel[]>;
             this.setState({data: response.data});
+            this.setState({dataCategory: responseCategories.data});
             this.setState({tmpData: response.data});
             this.setState({isLoading: false});
         }
@@ -66,7 +77,20 @@ class Recipes extends React.Component<any, any>{
         this.setState({page: page});
     }
 
+
     render() {
+        const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+            this.setState({categorySelected: event.target.value as string}, () => {
+                if(this.state.categorySelected !== ""){
+                NutritionService.getRecipes({pagSize: this.state.pageSize, pagNumber: 1, categoryName: this.state.categorySelected})
+                    .then((data: ResponseData<RecipeLiteModel[]>)=>{
+                    this.setState({data: data.data});
+                    this.setState({page: 1});
+                    this.setState({tmpData: data.data});
+                });
+            }
+            });
+        };
         return (
             <div className={"container-custom"}>
                 {
@@ -78,28 +102,95 @@ class Recipes extends React.Component<any, any>{
                             className={"container-main shadow container-recipes container-size"}>
                             <Grid
                                 container
-                                spacing={5}
+                                spacing={6}
                             >
-                                <Grid container justify={"space-evenly"} alignItems={"center"} spacing={2}>
-                                    <Grid item xs={5}>
+                                <Grid
+                                    container
+                                    justify={"center"}
+                                >
+                                    <p className={"text-title custom-title-text"}>Recipes</p>
+                                </Grid>
+                                <Grid container justify={"space-evenly"} alignItems={"center"} spacing={3}>
+                                    <Grid
+                                        item
+                                        xs={12}
+                                    >
+                                        <Grid
+                                            container
+                                            justify={"center"}
+                                        >
+                                            <Paper
+                                                className={"paper-search"}
+                                            >
+                                                <InputBase
+                                                    placeholder={"Search recipes"}
+                                                />
+                                                <Divider orientation={"vertical"}/>
+                                                <IconButton
+                                                    color="primary"
+                                                    onClick={()=>{console.log("click")}}
+                                                >
+                                                    <SearchIcon/>
+                                                </IconButton>
+                                            </Paper>
+                                        </Grid>
+                                    </Grid>
+                                    <Grid
+                                        item
+                                        xs={12}
+                                    >
+                                        <Grid
+                                            container
+                                            justify={"center"}
+                                        >
+                                            <Paper
+                                                className={"select-width"}
+                                            >
+                                            <FormControl
+                                                style={{
+                                                    width: "100%"
+                                                }}
+                                                color={"primary"}
+                                                variant={"filled"}
+                                            >
+                                                <InputLabel>Category</InputLabel>
+                                                <Select
+                                                    autoWidth={true}
+                                                    value={this.state.categorySelected}
+                                                    onChange={handleChange}
+                                                >
+                                                    <MenuItem value={""}>No category selected</MenuItem>
+                                                    {
+                                                        this.state.dataCategory.map(
+                                                            (data: CategoryModel) => (
+                                                                <MenuItem value={data.category}>{data.category}</MenuItem>
+                                                            )
+                                                        )
+                                                    }
+                                                </Select>
+                                            </FormControl>
+                                            </Paper>
+                                        </Grid>
+                                    </Grid>
+                                    <Grid item xs={6}>
                                         <Typography
                                             align={"center"}
                                             color="textSecondary"
                                             variant={"h4"}
                                         >
-                                            Pagination
+                                            Recipes per page
                                         </Typography>
                                     </Grid>
-                                    <Grid item xs={5}>
+                                    <Grid item xs={6}>
                                         <Typography
                                             align={"center"}
                                             color="textSecondary"
                                             variant={"h4"}
                                         >
-                                            Navigate
+                                            Page {this.state.page}
                                         </Typography>
                                     </Grid>
-                                    <Grid item xs={5} className={"button-group-custom"} justify={"center"}>
+                                    <Grid item xs={6} className={"button-group-custom"} justify={"center"}>
                                         <ButtonGroup
                                             variant="contained"
                                             color="primary"
@@ -123,7 +214,7 @@ class Recipes extends React.Component<any, any>{
                                             </Button>
                                         </ButtonGroup>
                                     </Grid>
-                                    <Grid item xs={5} className={"button-group-custom"} justify={"center"}>
+                                    <Grid item xs={6} className={"button-group-custom"} justify={"center"}>
                                         <ButtonGroup
                                             variant="contained"
                                             color="primary"
@@ -176,6 +267,7 @@ class Recipes extends React.Component<any, any>{
                                                             {value.name}
                                                         </Typography>
                                                     </CardActionArea>
+                                                    <Divider />
                                                     <CardContent>
                                                         <Typography
                                                             variant={"subtitle2"}
@@ -188,10 +280,12 @@ class Recipes extends React.Component<any, any>{
                                                         <Typography
                                                             align={"center"}
                                                             variant="subtitle2"
+                                                            noWrap={true}
                                                             gutterBottom
                                                         >
-                                                            Keywords: {value.keywords}
+                                                            <b>Keywords</b>: {value.keywords}
                                                         </Typography>
+                                                        <Divider />
                                                         <Typography
                                                             align={"center"}
                                                             variant="body2"
@@ -212,6 +306,21 @@ class Recipes extends React.Component<any, any>{
                                                             gutterBottom
                                                         >
                                                             <b>Total time</b>: {value.timeTotal.totalTime === "" ? "Unknown" : value.timeTotal.totalTime}
+                                                        </Typography>
+                                                        <Divider />
+                                                        <Typography
+                                                            align={"center"}
+                                                            variant="body2"
+                                                            gutterBottom
+                                                        >
+                                                            <b>Categories</b>:
+                                                            {
+                                                                value.categories.map(
+                                                                    (category: CategoryModel) => (
+                                                                        category.category + ", "
+                                                                    )
+                                                                )
+                                                            }
                                                         </Typography>
                                                     </CardContent>
                                                 </Card>
