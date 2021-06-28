@@ -11,7 +11,7 @@ services:
     ports:
       - "2021:8080"
   nutrition-service:
-    image: keep-fit/nutrition:1.6.1
+    image: keep-fit/nutrition:1.6.2
     container_name: nutrition-service
     ports:
       - "2020:8080"

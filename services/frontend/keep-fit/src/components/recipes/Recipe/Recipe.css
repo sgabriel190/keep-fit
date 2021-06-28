@@ -1,6 +1,18 @@
 .container-recipe{
     margin: 20px 0;
-    max-width: 80%;
+    width: 80%;
+}
+
+.image-size{
+    height: 90%;
+}
+
+.card-size{
+    padding: 2em 2em;
+}
+
+.flex-grid{
+    display: flex;
 }
 
 .container-size{

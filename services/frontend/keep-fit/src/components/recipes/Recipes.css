@@ -10,3 +10,13 @@
 .button-group-custom{
     display: flex !important;
 }
+
+.select-width{
+    width: 20%;
+}
+
+.paper-search{
+    padding: 0.5em 0.5em;
+    display: flex;
+    align-items: center;
+}

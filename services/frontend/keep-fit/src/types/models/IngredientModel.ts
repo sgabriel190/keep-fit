@@ -1,5 +1,5 @@
 type IngredientModel = {
-    instruction: string;
+    ingredient: string;
 };
 
 export default IngredientModel;

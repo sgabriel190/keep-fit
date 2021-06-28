@@ -37,6 +37,23 @@ class NutritionService{
                 }
             );
     }
+
+    getCategories(){
+        return axios.get(`http://${WebInfo.HOST}:${WebInfo.PORT}/api/backend/nutrition/recipe/category`)
+            .then(
+                response => {
+                    return response.data
+                }
+            )
+            .catch(
+                error => {
+                    if (error.response){
+                        return error.response.data;
+                    }
+                    console.log(error);
+                }
+            );
+    }
 }
 
 const nutritionService = new NutritionService();
