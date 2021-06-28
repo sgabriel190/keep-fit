@@ -114,6 +114,7 @@ class UserService: UserServiceInterface {
 
     override suspend fun getUser(token: String): Response<UserModel> = coroutineScope{
         try {
+            validateToken(token)
             val result: Response<UserModel> = httpConsumerService.executeRequest {
                 val response: HttpResponse = httpConsumerService.client.get("$host/user"){
                     headers["Authorization"] = token
@@ -142,6 +143,7 @@ class UserService: UserServiceInterface {
 
     override suspend fun getUserProfile(token: String): Response<UserProfileResponse> = coroutineScope{
         try {
+            validateToken(token)
             val resultUser = getUser(token)
             if (!resultUser.successfulOperation) throw Exception(resultUser.error)
             resultUser.data ?: throw Exception("User info data is null")
@@ -176,22 +178,22 @@ class UserService: UserServiceInterface {
         }
     }
 
-    override suspend fun validateToken(token: String): Response<Boolean> = coroutineScope {
-        val result: Response<Boolean> = httpConsumerService.executeRequest {
+    override suspend fun validateToken(token: String): Response<Any> = coroutineScope {
+        val result: HttpResponse = httpConsumerService.executeRequest {
             val response: HttpResponse = httpConsumerService.client.post("$host/auth/validate"){
                 headers["Authorization"] = token
             }
-            httpConsumerService.checkResponse(response)
-            response.receive()
+            response
         }
-        if (result.code / 100 != 2){
-            throw Exception("Invalid JWT.")
+        if (result.status.value / 100 != 2){
+            throw InvalidJwt("Invalid JWT.")
         }
-        result
+        result.receive()
     }
 
     override suspend fun deleteUser(token: String): Response<out Any> = coroutineScope {
         try {
+            validateToken(token)
             nutritionService.deleteUserDetails(token)
             planService.deleteUserPlan(token)
             val result = httpConsumerService.executeRequest {

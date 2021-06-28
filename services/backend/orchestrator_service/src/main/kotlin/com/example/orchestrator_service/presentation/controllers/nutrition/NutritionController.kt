@@ -34,6 +34,7 @@ class NutritionController {
     @Async
     fun getRecipes(@RequestParam(required = false) categoryId: Int?,
                    @RequestParam(required = false) categoryName: String?,
+                   @RequestParam(required = false) recipeName: String?,
                    @RequestParam(required = false) pagNumber: Int?,
                    @RequestParam(required = false) pagSize: Int?,
                    @RequestParam(required = false) calories: Int?,
@@ -43,7 +44,8 @@ class NutritionController {
             "categoryName" to categoryName,
             "pagNumber" to pagNumber,
             "pagSize" to pagSize,
-            "calories" to calories
+            "calories" to calories,
+            "recipeName" to recipeName
         )
         val tmp = params.filter {
             it.value != null
