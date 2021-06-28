@@ -1,6 +1,6 @@
-import {configureStore} from "@reduxjs/toolkit";
+import { createStore} from "@reduxjs/toolkit";
 import jwtReducer from "./reducer";
 
-const store = configureStore({ reducer: jwtReducer });
+const store = createStore(jwtReducer);
 
 export default store;

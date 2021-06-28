@@ -114,6 +114,26 @@ class NutritionService: NutritionServiceInterface {
         }
     }
 
+    override fun getRecipeByName(recipeName: String, pag: Int, items: Int): Response<List<RecipeLiteModel>> {
+        return try {
+            val result = nutritionDAO.executeQuery {
+                val regex = "%" + recipeName.split(" ").map{
+                    it.lowercase()
+                }.reduce{
+                    a, b -> "$a%$b%"
+                }
+                Recipe.find { Recipes.name.lowerCase().like(regex) or( Recipes.keywords.lowerCase().like(regex)) }
+                    .limit(items, ((pag - 1)  * items).toLong())
+                    .map {
+                        it.toRecipeLiteModel()
+                    }
+            }
+            Response(successfulOperation = true, code = 200, data = result)
+        } catch (t: Throwable){
+            Response(successfulOperation = false, data = null, code = 400, error = t.toString())
+        }
+    }
+
     override fun getRecipeByCategoryName(nameCategory: String, pag: Int, items: Int): Response<List<RecipeLiteModel>> {
         try {
             val result = nutritionDAO.executeQuery {

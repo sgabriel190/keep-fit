@@ -11,7 +11,7 @@ import MyError from "../../types/http/MyError";
 import * as Yup from 'yup';
 import { Formik, Form } from 'formik';
 import "react-loadingmask/dist/react-loadingmask.css";
-import {Backdrop, Button, CircularProgress, Grid, Paper, TextField, Typography} from "@material-ui/core";
+import {Backdrop, Button, CircularProgress, Grid, Paper, TextField} from "@material-ui/core";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import LockIcon from "@material-ui/icons/Lock";
 import EmailIcon from '@material-ui/icons/Email';
@@ -69,11 +69,9 @@ class Register extends React.Component<any, any>{
                 email: this.state.email
             });
             if (!response.successfulOperation){
-                response = response as ResponseData<MyError>
                 this.setState({isLoading: false});
                 throw new Error();
             }
-            response = response as ResponseData<RegisterModel>;
             this.setState({isLoading: false});
             toast.success('Register successfully');
             this.props.history.push("/login");
@@ -92,7 +90,10 @@ class Register extends React.Component<any, any>{
                                 zIndex: 1
                             }}
                             open={this.state.isLoading}>
-                            <CircularProgress color="inherit" />
+                            <CircularProgress
+                                disableShrink
+                                size={"100px"}
+                            />
                         </Backdrop> : null
                 }
                 <motion.div

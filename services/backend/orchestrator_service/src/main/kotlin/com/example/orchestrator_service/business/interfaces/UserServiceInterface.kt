@@ -13,7 +13,7 @@ interface UserServiceInterface {
     suspend fun registerUser(data: RegisterRequest): Response<RegisterResponse>
     suspend fun getUser(token: String): Response<UserModel>
     suspend fun getUserProfile(token: String): Response<UserProfileResponse>
-    suspend fun validateToken(token: String): Response<Boolean>
+    suspend fun validateToken(token: String): Response<Any>
     suspend fun deleteUser(token: String): Response<out Any>
     suspend fun updateUserDetails(token: String, userDetailsId: Int): Response<UserModel>
 }
