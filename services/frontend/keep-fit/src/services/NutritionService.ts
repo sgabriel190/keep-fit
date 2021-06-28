@@ -1,9 +1,9 @@
-import axios from "axios";
 import WebInfo from "./WebInfo";
 
 class NutritionService{
     getRecipes(params: any = null){
-        return axios.get(`http://${WebInfo.HOST}:${WebInfo.PORT}/api/backend/nutrition/recipe`,{
+        return WebInfo.httpClient.get(
+            `/nutrition/recipe`,{
             params: params
         })
             .then(
@@ -22,7 +22,8 @@ class NutritionService{
     }
 
     getRecipe(id: number){
-        return axios.get(`http://${WebInfo.HOST}:${WebInfo.PORT}/api/backend/nutrition/recipe/${id}`)
+        return WebInfo.httpClient.get(
+            `/nutrition/recipe/${id}`)
             .then(
                 response => {
                     return response.data
@@ -39,7 +40,8 @@ class NutritionService{
     }
 
     getCategories(){
-        return axios.get(`http://${WebInfo.HOST}:${WebInfo.PORT}/api/backend/nutrition/recipe/category`)
+        return WebInfo.httpClient.get(
+            `/nutrition/recipe/category`)
             .then(
                 response => {
                     return response.data

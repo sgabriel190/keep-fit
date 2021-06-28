@@ -6,16 +6,32 @@ import navbarRoutes from "../../routes/navbar-routes";
 import { Link } from "react-router-dom";
 import {BoxArrowInRight, BoxArrowRight} from "react-bootstrap-icons";
 import selectJwtValue from "../../helpers/selector";
-import store from "../../helpers/store";
 import UserService from "../../services/UserService";
+import {toast} from "react-hot-toast";
+import store from "../../helpers/store";
+import WebInfo from "../../services/WebInfo";
 
 class Header extends React.Component<any, any>{
+
+    unsubscribe;
+    interceptorId: number;
 
     constructor(props: any) {
         super(props);
         this.state = {
-            loggedIn: sessionStorage.getItem("jwt") !== null,
+            loggedIn: sessionStorage.getItem("jwt") !== null
         };
+        this.interceptorId = WebInfo.httpClient.interceptors.response.use(
+            undefined,
+            (error: any) => {
+                if(error.response.data.code === 401){
+                    UserService.logout();
+                    this.props.history.push("/login");
+                }
+                return Promise.reject(error);
+            }
+        );
+        this.unsubscribe = store.subscribe(() => this.renderIcon());
     }
 
     renderIcon(){
@@ -26,8 +42,13 @@ class Header extends React.Component<any, any>{
         }
     }
 
+    componentWillUnmount() {
+        // Clear the subscription
+        this.unsubscribe();
+        WebInfo.httpClient.interceptors.response.eject(this.interceptorId);
+    }
+
     render() {
-        store.subscribe(() => this.renderIcon());
         return(
             <Navbar bg={"dark"} variant={"dark"} className={"sticky-top header-custom py-0"}>
                 <Navbar.Brand className={"px-0 py-0 mx-0"}>
@@ -69,7 +90,7 @@ class Header extends React.Component<any, any>{
                         <Link
                             to={"/login"}
                             className={"login-icon"}
-                            onClick={() => UserService.logout()}
+                            onClick={() => {UserService.logout(); toast.success("Successfully logged out.");}}
                         >
                             <BoxArrowRight/>
                         </Link> : <Link

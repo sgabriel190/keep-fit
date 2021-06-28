@@ -13,7 +13,7 @@ import * as Yup from 'yup';
 import { Formik, Form } from 'formik';
 import store from "../../helpers/store";
 import addJwt from "../../helpers/action";
-import {Backdrop, Button, CircularProgress, Grid, Paper, TextField, Typography} from "@material-ui/core";
+import {Backdrop, Button, CircularProgress, Grid, Paper, TextField} from "@material-ui/core";
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import LockIcon from '@material-ui/icons/Lock';
 
@@ -84,7 +84,10 @@ class Login extends React.Component<any, any>{
                                 zIndex: 1
                             }}
                             open={this.state.isLoading}>
-                            <CircularProgress color="inherit" />
+                            <CircularProgress
+                                disableShrink
+                                size={"100px"}
+                            />
                         </Backdrop> : null
                 }
                 <motion.div

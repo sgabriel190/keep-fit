@@ -13,6 +13,10 @@ const routes: RouterModel[] = [
     {
         url: "/profile",
         component: loadable(() => import("../components/profile/Profile")),
+    },
+    {
+        url: "/recipe/:recipeId",
+        component: loadable(() => import("../components/recipes/Recipe/Recipe")),
     }
 ];
 

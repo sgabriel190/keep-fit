@@ -22,7 +22,6 @@ import IngredientModel from "../../../types/models/IngredientModel";
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import InstructionModel from "../../../types/models/InstructionModel";
-import ImagesModel from "../../../types/models/ImagesModel";
 
 class Recipe extends Component<any, any>{
 
@@ -33,7 +32,7 @@ class Recipe extends Component<any, any>{
         this.state = {
             data: null,
             id: this.props.match.params.recipeId,
-            isLoading: true
+            isLoading: true,
         };
     }
 
@@ -42,10 +41,9 @@ class Recipe extends Component<any, any>{
             let response: ResponseData<any> = await NutritionService.getRecipe(this.state.id);
             if (!response.successfulOperation){
                 response = response as ResponseData<MyError>;
-                throw new Error(response.error);
+                throw new Error(response.error.split(" ").slice(1).join(" "));
             }
             response = response as ResponseData<RecipeModel>;
-            console.log(response.data);
             this.setState({data: response.data});
             this.setState({isLoading: false});
         }

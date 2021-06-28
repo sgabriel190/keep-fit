@@ -20,6 +20,7 @@ import CategoryModel from "../../types/models/CategoryModel";
 import SearchIcon from '@material-ui/icons/Search';
 
 
+
 class Recipes extends React.Component<any, any>{
 
     constructor(props: object) {
@@ -31,8 +32,10 @@ class Recipes extends React.Component<any, any>{
             page: 1,
             pageSize: 12,
             categorySelected: "",
-            tmpData: null
+            tmpData: null,
+            searchValue: ""
         };
+
     }
 
     async componentDidMount(){
@@ -41,11 +44,13 @@ class Recipes extends React.Component<any, any>{
             let responseCategories: ResponseData<any> = await NutritionService.getCategories();
             if (!response.successfulOperation){
                 response = response as ResponseData<MyError>;
-                throw new Error(response.error);
+                let message = response.error.split(" ").slice(1).join(" ");
+                throw new Error(message);
             }
             if (!responseCategories.successfulOperation){
                 responseCategories = responseCategories as ResponseData<MyError>;
-                throw new Error(responseCategories.error);
+                let message = responseCategories.error.split(" ").slice(1).join(" ");
+                throw new Error(message);
             }
             responseCategories = responseCategories as ResponseData<CategoryModel[]>;
             response = response as ResponseData<RecipeLiteModel[]>;
@@ -77,6 +82,15 @@ class Recipes extends React.Component<any, any>{
         this.setState({page: page});
     }
 
+    getRecipesByName(){
+        if(this.state.searchValue !== ""){
+            NutritionService.getRecipes({pagSize: this.state.pageSize, pagNumber: 1, recipeName: this.state.searchValue}).then((data: ResponseData<RecipeLiteModel[]>)=>{
+                this.setState({data: data.data});
+                this.setState({tmpData: data.data});
+                this.setState({page: 1});
+            });
+        }
+    }
 
     render() {
         const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
@@ -124,11 +138,12 @@ class Recipes extends React.Component<any, any>{
                                             >
                                                 <InputBase
                                                     placeholder={"Search recipes"}
+                                                    onChange={(data) => {this.setState({searchValue: data.target.value})}}
                                                 />
                                                 <Divider orientation={"vertical"}/>
                                                 <IconButton
                                                     color="primary"
-                                                    onClick={()=>{console.log("click")}}
+                                                    onClick={this.getRecipesByName.bind(this)}
                                                 >
                                                     <SearchIcon/>
                                                 </IconButton>
@@ -331,7 +346,10 @@ class Recipes extends React.Component<any, any>{
                             </Grid>
                         </motion.div>
                         : <Backdrop  open={this.state.isLoading}>
-                            <CircularProgress color="inherit" />
+                            <CircularProgress
+                                disableShrink
+                                size={"100px"}
+                            />
                         </Backdrop>
                 }
             </div>

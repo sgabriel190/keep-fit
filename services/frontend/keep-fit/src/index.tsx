@@ -2,18 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import {Router, Route, Switch} from "react-router-dom";
 import Header from "./shared/header/Header";
 import routes from "./routes/routes";
 import NotFound from "./components/notfound/NotFound";
-import axios from "axios";
-import selectJwtValue from "./helpers/selector";
 import { Toaster } from 'react-hot-toast';
 import {GuardedRoute, GuardProvider} from "react-router-guards";
 import Welcome from "./components/welcome/Welcome";
 import Login from "./components/login/Login";
 import Register from "./components/register/Register";
-import Recipe from "./components/recipes/Recipe/Recipe";
+import requestAccept from "./interceptors/RequestAccept";
+import WebInfo from "./services/WebInfo";
+import history from "./helpers/History";
+
 
 const requireLogin = (to: any, from: any, next: any) => {
     if(sessionStorage.getItem("jwt") === null){
@@ -23,23 +24,21 @@ const requireLogin = (to: any, from: any, next: any) => {
     }
 }
 
-axios.interceptors.request.use(
-    (request) => {
-        if (request.url?.includes("login") || request.url?.includes("register")){
-            return request;
-        }
-        if(selectJwtValue() !== null){
-            request.headers["Authorization"] = `Bearer ${selectJwtValue()}`;
-        }
-        return request;
-    },
-    undefined
+
+WebInfo.httpClient.interceptors.request.use(
+    requestAccept
 );
+
+WebInfo.httpClient.interceptors.response.use();
 
 ReactDOM.render(
     <React.StrictMode>
-        <Router>
-            <Header/>
+        <Router
+            history={history}
+        >
+            <Header
+                history={history}
+            />
             <Toaster
                 toastOptions={{
                     style: {
@@ -69,12 +68,6 @@ ReactDOM.render(
                             }
                         )
                     }
-                    <GuardedRoute
-                        path={"/recipe/:recipeId"}
-                        exact={true}
-                        component={Recipe}
-                        meta={{auth: true}}
-                    />
                     <Route
                         path={"/"}
                         component={Welcome}

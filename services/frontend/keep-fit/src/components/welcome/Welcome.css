@@ -1,8 +1,7 @@
-.container-welcome{
+.container-welcome {
     width: 80%;
     padding: 2em 0;
-    min-height: auto;
-    min-width: auto;
+    height: auto;
 }
 
 .container-title{

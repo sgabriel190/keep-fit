@@ -1,6 +1,5 @@
 import LoggerService from "./LoggerService";
 import WebInfo from "./WebInfo";
-import axios from "axios";
 import store from "../helpers/store";
 import removeJwt from "../helpers/actionLogout";
 
@@ -8,8 +7,8 @@ class UserService {
 
     login(data: object){
         LoggerService.formatLog(this.constructor.name.toString(), "login")
-        return axios.post(
-            `http://${WebInfo.HOST}:${WebInfo.PORT}/api/backend/users/login`,
+        return WebInfo.httpClient.post(
+            `/users/login`,
             data
             ).then(
                 (response) => {
@@ -25,8 +24,8 @@ class UserService {
 
     register(data: object){
         LoggerService.formatLog(this.constructor.name.toString(), "register()")
-        return axios.put(
-            `http://${WebInfo.HOST}:${WebInfo.PORT}/api/backend/users/register`,
+        return WebInfo.httpClient.put(
+            `/users/register`,
             data
         ).then(
             (response) => {
@@ -41,9 +40,9 @@ class UserService {
     }
 
     getUserProfile(){
-        LoggerService.formatLog(this.constructor.name.toString(), "getUser()")
-        return axios.get(
-            `http://${WebInfo.HOST}:${WebInfo.PORT}/api/backend/users/user`
+        LoggerService.formatLog(this.constructor.name.toString(), "getUserProfile()")
+        return WebInfo.httpClient.get(
+            `/users/user`
         ).then(
             (response) => {
                 return response.data;
@@ -52,7 +51,7 @@ class UserService {
                 if(error.response){
                     return error.response.data;
                 }
-                console.log(error);
+                return error;
             });
     }
     logout(){

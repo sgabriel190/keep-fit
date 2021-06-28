@@ -17,7 +17,7 @@ class Profile extends React.Component<any, any>{
         super(props);
         this.state = {
             userData: null,
-            ready: false
+            ready: false,
         };
     }
 
@@ -26,14 +26,15 @@ class Profile extends React.Component<any, any>{
             let response: ResponseData<any> = await UserService.getUserProfile();
             if (!response.successfulOperation){
                 response = response as ResponseData<MyError>;
-                throw new Error(response.error);
+                let message = response.error.split(" ").slice(1).join(" ");
+                throw new Error(message);
             }
             response = response as ResponseData<UserProfileModel>;
             this.setState({userData: response.data});
             this.setState({ready: true});
         }
-        catch (e) {
-            toast.error(`Loading profile failed!\n${e}`)
+        catch (err) {
+            toast.error(`Loading profile failed! ${err.message}`);
         }
     }
 
@@ -167,7 +168,10 @@ class Profile extends React.Component<any, any>{
                             </Grid>
                         </motion.div> :
                         <Backdrop  open={this.state.ready}>
-                            <CircularProgress color="inherit" />
+                            <CircularProgress
+                                disableShrink
+                                size={"100px"}
+                            />
                         </Backdrop>
                 }
             </div>
