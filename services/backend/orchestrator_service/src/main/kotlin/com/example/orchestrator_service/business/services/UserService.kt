@@ -1,25 +1,22 @@
 package com.example.orchestrator_service.business.services
 
 import com.example.orchestrator_service.business.config.Host
-import com.example.orchestrator_service.business.config.InvalidJwt
+import com.example.orchestrator_service.business.config.exceptions.InvalidJwt
+import com.example.orchestrator_service.business.config.exceptions.NoUserDetails
 import com.example.orchestrator_service.business.config.setBodyJson
 import com.example.orchestrator_service.business.interfaces.*
 import com.example.orchestrator_service.business.models.notification.EmailRequest
-import com.example.orchestrator_service.business.models.nutrition.response.UserDetailResponse
 import com.example.orchestrator_service.business.models.user.request.LoginRequest
 import com.example.orchestrator_service.business.models.user.request.RegisterRequest
 import com.example.orchestrator_service.business.models.user.response.AuthenticationResponse
 import com.example.orchestrator_service.business.models.user.response.RegisterResponse
 import com.example.orchestrator_service.business.models.user.response.UserModel
 import com.example.orchestrator_service.business.models.user.response.UserProfileResponse
-import com.example.orchestrator_service.presentation.http.MyError
 import com.example.orchestrator_service.presentation.http.Response
 import io.ktor.client.call.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.launch
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
@@ -148,6 +145,7 @@ class UserService: UserServiceInterface {
             if (!resultUser.successfulOperation) throw Exception(resultUser.error)
             resultUser.data ?: throw Exception("User info data is null")
             val resultUserDetails = nutritionService.getUserDetails(token)
+            if (resultUserDetails.code == 404 ) throw NoUserDetails(resultUserDetails.error)
             if (!resultUserDetails.successfulOperation) throw Exception(resultUserDetails.error)
             resultUserDetails.data ?: throw Exception("User details data is null")
             Response(
@@ -159,6 +157,13 @@ class UserService: UserServiceInterface {
                     email = resultUser.data.email,
                     userDetails = resultUserDetails.data
                 )
+            )
+        } catch (e: NoUserDetails){
+            Response(
+                successfulOperation = false,
+                code = 404,
+                data = null,
+                error = e.message!!
             )
         } catch (e: InvalidJwt){
             Response(

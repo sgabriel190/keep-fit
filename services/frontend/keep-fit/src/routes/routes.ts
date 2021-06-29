@@ -7,6 +7,10 @@ const routes: RouterModel[] = [
         component: loadable(() => import("../components/recipes/Recipes")),
     },
     {
+        url: "/user/details",
+        component: loadable(() => import("../components/user-details/UserDetails")),
+    },
+    {
         url: "/plan",
         component: loadable(() => import("../components/mealplan/MealPlan")),
     },

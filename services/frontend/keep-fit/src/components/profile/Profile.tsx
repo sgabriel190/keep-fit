@@ -158,9 +158,11 @@ class Profile extends React.Component<any, any>{
                                     <Grid container justify={"center"} spacing={3}>
                                         <Grid item>
                                             <Link
-                                                to={"/"}
+                                                to={"/user/details"}
                                             >
-                                                <Button variant="contained" color={"primary"}>Update user details</Button>
+                                                <Button
+                                                    variant="contained"
+                                                    color={"primary"}>Update user details</Button>
                                             </Link>
                                         </Grid>
                                     </Grid>

@@ -56,7 +56,7 @@ class Recipes extends React.Component<any, any>{
             response = response as ResponseData<RecipeLiteModel[]>;
             this.setState({data: response.data});
             this.setState({dataCategory: responseCategories.data});
-            this.setState({tmpData: response.data});
+            this.setState({tmpData: Object.assign({}, response.data)});
             this.setState({isLoading: false});
         }
         catch (e) {
