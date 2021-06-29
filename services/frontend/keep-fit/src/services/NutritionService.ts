@@ -56,6 +56,97 @@ class NutritionService{
                 }
             );
     }
+
+    getUserDetails(){
+        return WebInfo.httpClient.get(
+            `/nutrition/userDetails/user`)
+            .then(
+                response => {
+                    return response.data
+                }
+            )
+            .catch(
+                error => {
+                    if (error.response){
+                        return error.response.data;
+                    }
+                    console.log(error);
+                }
+            );
+    }
+
+    getGenders(){
+        return WebInfo.httpClient.get(
+            `/nutrition/gender`)
+            .then(
+                response => {
+                    return response.data
+                }
+            )
+            .catch(
+                error => {
+                    if (error.response){
+                        return error.response.data;
+                    }
+                    console.log(error);
+                }
+            );
+    }
+
+    getDietTypes(){
+        return WebInfo.httpClient.get(
+            `/nutrition/dietType`)
+            .then(
+                response => {
+                    return response.data
+                }
+            )
+            .catch(
+                error => {
+                    if (error.response){
+                        return error.response.data;
+                    }
+                    console.log(error);
+                }
+            );
+    }
+
+    getActivityType(){
+        return WebInfo.httpClient.get(
+            `/nutrition/activityType`)
+            .then(
+                response => {
+                    return response.data
+                }
+            )
+            .catch(
+                error => {
+                    if (error.response){
+                        return error.response.data;
+                    }
+                    console.log(error);
+                }
+            );
+    }
+
+    patchUserDetails(body: object){
+        return WebInfo.httpClient.patch(
+            `/nutrition/userDetails/user`,
+            body)
+            .then(
+                response => {
+                    return response.data
+                }
+            )
+            .catch(
+                error => {
+                    if (error.response){
+                        return error.response.data;
+                    }
+                    console.log(error);
+                }
+            );
+    }
 }
 
 const nutritionService = new NutritionService();
