@@ -1,5 +1,7 @@
 package com.example.orchestrator_service.business.interfaces
 
+import com.example.orchestrator_service.business.config.exceptions.NoUserDetails
+import com.example.orchestrator_service.business.config.exceptions.NoUserPlan
 import com.example.orchestrator_service.presentation.http.MyError
 import com.example.orchestrator_service.presentation.http.Response
 import io.ktor.client.*
@@ -24,6 +26,12 @@ abstract class HttpConsumerServiceInterface {
             true
         } else {
             val tmp = response.receive<MyError>()
+            if(response.request.url.host == "nutrition-service" && response.status.value == 404){
+                throw NoUserDetails(tmp.error)
+            }
+            if(response.request.url.host == "plan-service" && tmp.error == "The user plan is not created yet."){
+                throw NoUserPlan(tmp.error)
+            }
             throw Exception(tmp.error)
         }
     }

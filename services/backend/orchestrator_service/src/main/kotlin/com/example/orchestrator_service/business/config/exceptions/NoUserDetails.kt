@@ -1,4 +1,4 @@
 package com.example.orchestrator_service.business.config.exceptions
 
-class NoUserDetails {
+class NoUserDetails(message: String) : Exception(message) {
 }
