@@ -11,6 +11,7 @@ import com.example.nutrition_service.presentation.business_models.UpdateUserDeta
 import com.example.nutrition_service.presentation.http.Response
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import java.lang.NullPointerException
 import java.math.BigDecimal
 import java.math.RoundingMode
 import kotlin.math.round
@@ -51,6 +52,8 @@ class UserDetailsService: UserDetailsServiceInterface {
                 UserDetail.findById(id)!!.toUserDetailModel()
             }
             Response(data = result, code = 200, successfulOperation = true)
+        } catch (e: NullPointerException){
+            Response(successfulOperation = false, data = null, code = 404, error = "Record doesn't exist")
         } catch (t: Throwable){
             Response(successfulOperation = false, data = null, code = 400, error = t.toString())
         }
@@ -99,6 +102,8 @@ class UserDetailsService: UserDetailsServiceInterface {
                 UserDetail.findById(id)!!.delete()
             }
             Response(data = null, code = 204, successfulOperation = true)
+        } catch (e: NullPointerException){
+            Response(successfulOperation = false, data = null, code = 404, error = "Record doesn't exist")
         } catch (t: Throwable){
             Response(successfulOperation = false, data = null, code = 400, error = t.toString())
         }
