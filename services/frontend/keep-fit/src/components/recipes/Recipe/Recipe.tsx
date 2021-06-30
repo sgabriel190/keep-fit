@@ -16,16 +16,15 @@ import {
 } from "@material-ui/core";
 import {motion} from "framer-motion";
 import './Recipe.css';
-import RecipeModel from "../../../types/models/RecipeModel";
-import CategoryModel from "../../../types/models/CategoryModel";
-import IngredientModel from "../../../types/models/IngredientModel";
+import RecipeModel from "../../../types/models/nutrition/RecipeModel";
+import CategoryModel from "../../../types/models/nutrition/CategoryModel";
+import IngredientModel from "../../../types/models/nutrition/IngredientModel";
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import InstructionModel from "../../../types/models/InstructionModel";
+import InstructionModel from "../../../types/models/nutrition/InstructionModel";
+import WebInfo from "../../../services/WebInfo";
 
 class Recipe extends Component<any, any>{
-
-    imageSrc: string = "http://localhost:2025/api/backend/nutrition/image/";
 
     constructor(props: object) {
         super(props);
@@ -75,7 +74,7 @@ class Recipe extends Component<any, any>{
                                         className={"image-size"}
                                     >
                                         <CardMedia
-                                            src={`${this.imageSrc}${this.state.data.images[0].imagePath}`}
+                                            src={`${WebInfo.HOST_IMAGE}${this.state.data.images[0].imagePath}`}
                                             title={"Title"}
                                             component={"img"}
                                             alt={"Recipe image"}

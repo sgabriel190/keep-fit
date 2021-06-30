@@ -5,7 +5,7 @@ import InstructionModel from "./InstructionModel";
 import IngredientModel from "./IngredientModel";
 import NutrientModel from "./NutrientModel";
 
-type RecipeLiteModel = {
+type RecipeModel = {
     id: number;
     timeTotal: TimeTotalModel;
     name: string;
@@ -18,4 +18,4 @@ type RecipeLiteModel = {
     nutrients: NutrientModel;
 };
 
-export default RecipeLiteModel;
+export default RecipeModel;

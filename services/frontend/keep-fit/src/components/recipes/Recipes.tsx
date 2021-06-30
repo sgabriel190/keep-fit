@@ -4,7 +4,7 @@ import ResponseData from "../../types/http/ResponseData";
 import MyError from "../../types/http/MyError";
 import {toast} from "react-hot-toast";
 import NutritionService from "../../services/NutritionService";
-import RecipeLiteModel from "../../types/models/RecipeLiteModel";
+import RecipeLiteModel from "../../types/models/nutrition/RecipeLiteModel";
 import {motion} from "framer-motion";
 import {
     Backdrop, Button, ButtonGroup,
@@ -16,8 +16,9 @@ import {
     Grid, IconButton, InputBase, InputLabel, MenuItem, Paper, Select,
     Typography
 } from "@material-ui/core";
-import CategoryModel from "../../types/models/CategoryModel";
+import CategoryModel from "../../types/models/nutrition/CategoryModel";
 import SearchIcon from '@material-ui/icons/Search';
+import WebInfo from "../../services/WebInfo";
 
 
 
@@ -30,10 +31,12 @@ class Recipes extends React.Component<any, any>{
             dataCategory: null,
             isLoading: true,
             page: 1,
+            pageTmp: 1,
             pageSize: 12,
             categorySelected: "",
             tmpData: null,
-            searchValue: ""
+            searchValue: "",
+            searchValueTmp: ""
         };
 
     }
@@ -55,8 +58,8 @@ class Recipes extends React.Component<any, any>{
             responseCategories = responseCategories as ResponseData<CategoryModel[]>;
             response = response as ResponseData<RecipeLiteModel[]>;
             this.setState({data: response.data});
+            this.setState({tmpData: Object.assign([], response.data)});
             this.setState({dataCategory: responseCategories.data});
-            this.setState({tmpData: Object.assign({}, response.data)});
             this.setState({isLoading: false});
         }
         catch (e) {
@@ -71,39 +74,50 @@ class Recipes extends React.Component<any, any>{
         });
     }
 
-    getRecipes(page: number){
-        if (page < 1){
-            return;
+    async getRecipesChangeField(){
+        const data: Record<string, any> = {
+            pagSize: this.state.pageSize,
+            pagNumber: 1
         }
-        NutritionService.getRecipes({pagSize: this.state.pageSize, pagNumber: page}).then((data: ResponseData<RecipeLiteModel[]>)=>{
-            this.setState({data: data.data});
-            this.setState({tmpData: data.data});
-        });
-        this.setState({page: page});
+        if(this.state.searchValueTmp !== "") {
+            data["recipeName"] = this.state.searchValueTmp;
+        }
+        if(this.state.categorySelected !== ""){
+            data["categoryName"] = this.state.categorySelected;
+        }
+        let response: ResponseData<RecipeLiteModel[]> = await NutritionService.getRecipes(data);
+        this.setState({data: response.data});
+        this.setState({tmpData: response.data});
+        this.setState({page: 1});
+        this.setState({pageTmp: 1});
+        this.setState({searchValue: this.state.searchValueTmp});
     }
 
-    getRecipesByName(){
-        if(this.state.searchValue !== ""){
-            NutritionService.getRecipes({pagSize: this.state.pageSize, pagNumber: 1, recipeName: this.state.searchValue}).then((data: ResponseData<RecipeLiteModel[]>)=>{
-                this.setState({data: data.data});
-                this.setState({tmpData: data.data});
-                this.setState({page: 1});
-            });
+    async getRecipesNextPage(){
+        if (this.state.pageTmp < 1){
+            this.setState({pageTmp: this.state.pageTmp + 1});
+            return;
         }
+        const data: Record<string, any> = {
+            pagSize: this.state.pageSize,
+            pagNumber: this.state.pageTmp
+        }
+
+        if(this.state.searchValue !== "") {
+            data["recipeName"] = this.state.searchValue;
+        }
+        if(this.state.categorySelected !== ""){
+            data["categoryName"] = this.state.categorySelected;
+        }
+        let response: ResponseData<RecipeLiteModel[]> = await NutritionService.getRecipes(data);
+        this.setState({data: response.data});
+        this.setState({tmpData: response.data});
+        this.setState({page: this.state.pageTmp});
     }
 
     render() {
         const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-            this.setState({categorySelected: event.target.value as string}, () => {
-                if(this.state.categorySelected !== ""){
-                NutritionService.getRecipes({pagSize: this.state.pageSize, pagNumber: 1, categoryName: this.state.categorySelected})
-                    .then((data: ResponseData<RecipeLiteModel[]>)=>{
-                    this.setState({data: data.data});
-                    this.setState({page: 1});
-                    this.setState({tmpData: data.data});
-                });
-            }
-            });
+            this.setState({categorySelected: event.target.value as string});
         };
         return (
             <div className={"container-custom"}>
@@ -138,12 +152,12 @@ class Recipes extends React.Component<any, any>{
                                             >
                                                 <InputBase
                                                     placeholder={"Search recipes"}
-                                                    onChange={(data) => {this.setState({searchValue: data.target.value})}}
+                                                    onChange={(data) => {this.setState({searchValueTmp: data.target.value})}}
                                                 />
                                                 <Divider orientation={"vertical"}/>
                                                 <IconButton
                                                     color="primary"
-                                                    onClick={this.getRecipesByName.bind(this)}
+                                                    onClick={this.getRecipesChangeField.bind(this)}
                                                 >
                                                     <SearchIcon/>
                                                 </IconButton>
@@ -237,12 +251,21 @@ class Recipes extends React.Component<any, any>{
                                             size={"large"}
                                         >
                                             <Button
-                                                onClick={this.getRecipes.bind(this, this.state.page - 1)}
+                                                onClick={() => {
+                                                    this.setState({pageTmp: this.state.pageTmp - 1}, () => {
+                                                        this.getRecipesNextPage().then(()=>{});
+                                                    });
+                                                }
+                                                }
                                             >
                                                 Previous
                                             </Button>
                                             <Button
-                                                onClick={this.getRecipes.bind(this, this.state.page + 1)}
+                                                onClick={() => {
+                                                    this.setState({pageTmp: this.state.pageTmp + 1}, () => {
+                                                        this.getRecipesNextPage().then(()=>{});
+                                                    });
+                                                }}
                                             >
                                                 Next
                                             </Button>
@@ -268,10 +291,14 @@ class Recipes extends React.Component<any, any>{
                                                         onClick={ () => this.props.history.push(`/recipe/${value.id}`)}
                                                     >
                                                         <CardMedia
-                                                            src={`http://localhost:2025/api/backend/nutrition/image/${value.images.length !==1 ? value.images[3].imagePath : value.images[0].imagePath}`}
+                                                            src={`${WebInfo.HOST_IMAGE}${value.images.length !==1 ? value.images[3].imagePath : value.images[0].imagePath}`}
                                                             title={"Title"}
                                                             component={"img"}
                                                             alt={"Recipe image"}
+                                                            style={{
+                                                                height: 300,
+                                                                width: 500
+                                                            }}
                                                         />
                                                         <Typography
                                                             variant="h4"

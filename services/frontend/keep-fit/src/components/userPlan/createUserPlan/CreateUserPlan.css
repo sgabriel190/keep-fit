@@ -1,0 +1,20 @@
+.container-create-user-plan{
+    padding: 2em 2em;
+    min-height: auto;
+    min-width: auto;
+    width: 60%;
+}
+
+.card-custom{
+    padding: 2em 0;
+}
+
+.grid-input{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.text-field{
+    width: 50%;
+}

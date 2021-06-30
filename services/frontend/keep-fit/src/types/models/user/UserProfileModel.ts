@@ -1,4 +1,4 @@
-import UserDetailsModel from "./UserDetailsModel";
+import UserDetailsModel from "../nutrition/UserDetailsModel";
 
 type UserProfileModel = {
     id: number;
