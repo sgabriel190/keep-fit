@@ -20,6 +20,10 @@ public class MealRecipeEntityPK implements Serializable {
         this.meal = meal;
     }
 
+    public MealEntity getMeal() {
+        return this.meal;
+    }
+
     public Integer getIdRecipe() {
         return idRecipe;
     }
