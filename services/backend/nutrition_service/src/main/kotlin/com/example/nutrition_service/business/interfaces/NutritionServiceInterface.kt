@@ -12,6 +12,7 @@ interface NutritionServiceInterface {
     fun getRecipes(pag: Int = 1, items: Int = 10): Response<List<RecipeLiteModel>>
     fun getRecipeByCategoryId(idCategory: Int, pag: Int, items: Int): Response<List<RecipeLiteModel>>
     fun getRecipeByName(recipeName: String, pag: Int, items: Int): Response<List<RecipeLiteModel>>
+    fun getRecipeByNameAndCategory(recipeName: String, categoryName: String, pag: Int, items: Int): Response<List<RecipeLiteModel>>
     fun getRecipeByCategoryName(nameCategory: String, pag: Int, items: Int): Response<List<RecipeLiteModel>>
 
     // Images CRUD operations
