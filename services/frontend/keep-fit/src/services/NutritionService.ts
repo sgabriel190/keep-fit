@@ -129,6 +129,25 @@ class NutritionService{
             );
     }
 
+    postUserDetails(body: object){
+        return WebInfo.httpClient.post(
+            `/nutrition/userDetails`,
+            body)
+            .then(
+                response => {
+                    return response.data
+                }
+            )
+            .catch(
+                error => {
+                    if (error.response){
+                        return error.response.data;
+                    }
+                    console.log(error);
+                }
+            );
+    }
+
     patchUserDetails(body: object){
         return WebInfo.httpClient.patch(
             `/nutrition/userDetails/user`,

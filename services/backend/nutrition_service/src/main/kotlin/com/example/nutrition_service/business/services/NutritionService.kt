@@ -20,6 +20,19 @@ class NutritionService: NutritionServiceInterface {
     @Autowired
     lateinit var nutritionDAO: NutritionDAOInterface
 
+    private fun buildLike(text: String): String {
+        val terms = text.split(" ")
+        return if (terms.size == 1){
+            "%${terms[0]}%"
+        } else {
+            "%" + terms.map{
+                it.lowercase()
+            }.reduce{
+                    a, b -> "$a%$b%"
+            }
+        }
+    }
+
     // Recipes CRUD operations
     override fun getRecipe(id: Int): Response<RecipeModel> {
         try {
@@ -117,13 +130,34 @@ class NutritionService: NutritionServiceInterface {
     override fun getRecipeByName(recipeName: String, pag: Int, items: Int): Response<List<RecipeLiteModel>> {
         return try {
             val result = nutritionDAO.executeQuery {
-                val regex = "%" + recipeName.split(" ").map{
-                    it.lowercase()
-                }.reduce{
-                    a, b -> "$a%$b%"
-                }
+                val regex = this.buildLike(recipeName)
                 Recipe.find { Recipes.name.lowerCase().like(regex) or( Recipes.keywords.lowerCase().like(regex)) }
                     .limit(items, ((pag - 1)  * items).toLong())
+                    .map {
+                        it.toRecipeLiteModel()
+                    }
+            }
+            Response(successfulOperation = true, code = 200, data = result)
+        } catch (t: Throwable){
+            Response(successfulOperation = false, data = null, code = 400, error = t.toString())
+        }
+    }
+
+    override fun getRecipeByNameAndCategory(
+        recipeName: String,
+        categoryName: String,
+        pag: Int,
+        items: Int
+    ): Response<List<RecipeLiteModel>> {
+        return try {
+            val result = nutritionDAO.executeQuery {
+                val regex = this.buildLike(recipeName)
+                Recipes.innerJoin(RecipeToCategories)
+                    .innerJoin(Categories)
+                    .select { (Recipes.name.lowerCase().like(regex) or( Recipes.keywords.lowerCase().like(regex))) and
+                            (RecipeToCategories.idCategory eq Categories.id and(Categories.category eq categoryName)) }
+                    .limit(items, ((pag - 1)  * items).toLong())
+                    .let { Recipe.wrapRows(it) }
                     .map {
                         it.toRecipeLiteModel()
                     }

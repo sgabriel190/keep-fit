@@ -88,7 +88,11 @@ class NutritionController {
             nutritionService.getRecipeByCalories(calories, pagSize ?: 10)
         } else {
             if(recipeName != null){
-                nutritionService.getRecipeByName(recipeName, pag = pagNumber ?: 1, items = pagSize ?: 10)
+                if(categoryName !== null){
+                    nutritionService.getRecipeByNameAndCategory(recipeName, categoryName, pag = pagNumber ?: 1, items = pagSize ?: 10)
+                } else {
+                    nutritionService.getRecipeByName(recipeName, pag = pagNumber ?: 1, items = pagSize ?: 10)
+                }
             } else {
                 if (categoryId != null) {
                     nutritionService.getRecipeByCategoryId(categoryId, pag = pagNumber ?: 1, items = pagSize ?: 10)

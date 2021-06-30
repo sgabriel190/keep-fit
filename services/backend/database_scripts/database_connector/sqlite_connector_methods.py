@@ -2,10 +2,15 @@ from sqlite3 import Connection
 from typing import List, Dict
 
 import isodate
+from bs4 import BeautifulSoup
 
 from Logger import Logger
 
 logger = Logger()
+
+
+def remove_html_tags(text: str) -> str:
+    return BeautifulSoup(text, "lxml").text
 
 
 def execute_script_on_table(connection: Connection, input_file: str) -> None:
@@ -50,11 +55,8 @@ def create_genders(connection: Connection) -> None:
 def insert_data(connection: Connection, data: List[Dict]) -> None:
     logger.log('Insert data into tables.')
     idx = 1
-    count = 0
     list_categories = []
     for item in data:
-        if item["name"] == "Chicken schnitzel with brown butter & capers":
-            count += 1
         ok_time = True
         # Create queries
         query_list = [idx]
@@ -115,14 +117,20 @@ def insert_data(connection: Connection, data: List[Dict]) -> None:
         # Recipes TABLE
         if ok_time:
             tmp = item['name'].replace("&amp;", "&")
+            tmpName = remove_html_tags(tmp)
+            tmpDesc = remove_html_tags(item['description'])
+            tmpKeywords = remove_html_tags(item['keywords'])
             sql_query_recipes = 'INSERT INTO recipes(ID, ID_nutrients, ID_time_total, name, description, keywords) ' \
                                 'VALUES(?, ?, ?, ?, ?, ?)'
-            sql_parameters_recipes = (idx, idx, idx, tmp, item['description'], item['keywords'])
+            sql_parameters_recipes = (idx, idx, idx, tmpName, tmpDesc, tmpKeywords)
         else:
             tmp = item['name'].replace("&amp;", "&")
+            tmp = remove_html_tags(tmp)
+            tmpDesc = remove_html_tags(item['description'])
+            tmpKeywords = remove_html_tags(item['keywords'])
             sql_query_recipes = 'INSERT INTO recipes(ID, ID_nutrients, name, description, keywords) ' \
                                 'VALUES(?, ?, ?, ?, ?, ?)'
-            sql_parameters_recipes = (idx, idx, tmp, item['description'], item['keywords'])
+            sql_parameters_recipes = (idx, idx, tmp, tmpDesc, tmpKeywords)
 
         # Execute queries
         if ok_time:
@@ -142,6 +150,7 @@ def insert_data(connection: Connection, data: List[Dict]) -> None:
         # Ingredients TABLE
         for token in item['recipeIngredient']:
             tmp = token.replace("&amp;", "&")
+            tmp = remove_html_tags(tmp)
             sql_query_ingredients = 'INSERT INTO ingredients(name, ID_recipe) ' \
                                     'VALUES(?, ?)'
             sql_parameters_ingredients = (tmp, idx)
@@ -149,9 +158,10 @@ def insert_data(connection: Connection, data: List[Dict]) -> None:
 
         # Instructions TABLE
         for token in item['recipeInstructions']:
+            tmp = remove_html_tags(token)
             sql_query_instruction = 'INSERT INTO instructions(instruction, ID_recipe) ' \
                                     'VALUES(?, ?)'
-            sql_parameters_instruction = (token, idx)
+            sql_parameters_instruction = (tmp, idx)
             connection.execute(sql_query_instruction, sql_parameters_instruction)
 
         # Categories TABLE
@@ -174,5 +184,4 @@ def insert_data(connection: Connection, data: List[Dict]) -> None:
             connection.execute(sql_query_recipe_to_cat, sql_parameters_recipe_to_cat)
 
         idx += 1
-    print(count)
     connection.commit()

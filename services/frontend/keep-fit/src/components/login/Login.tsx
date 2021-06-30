@@ -5,7 +5,7 @@ import '../../shared/styles/autentication/styles-authentication.css';
 import {Link} from 'react-router-dom';
 import { motion } from "framer-motion"
 import ResponseData from "../../types/http/ResponseData";
-import AuthModel from "../../types/models/AuthModel";
+import AuthModel from "../../types/models/user/AuthModel";
 import UserService from '../../services/UserService';
 import {toast} from "react-hot-toast";
 import MyError from "../../types/http/MyError";
@@ -70,7 +70,7 @@ class Login extends React.Component<any, any>{
             this.props.history.push("/");
         }
         catch (e) {
-            toast.error(`Login failed!\n${e}`)
+            toast.error(`Login failed!`)
         }
     }
 

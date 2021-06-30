@@ -19,7 +19,7 @@ public class MenuEntity {
     @JoinColumn(name = "ID_plan")
     private PlanEntity plan;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "menu")
+    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY,  mappedBy = "menu")
     private final List<MealEntity> meals = new ArrayList<>();
 
     @Column(name = "day")
