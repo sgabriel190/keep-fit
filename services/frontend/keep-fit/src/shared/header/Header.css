@@ -2,6 +2,8 @@
     text-decoration: none !important;
     color: rgba(255,255,255, .8) !important;
     transition: 0.3s;
+    outline-style: none;
+    border-style: none;
 }
 
 .text-link-decoration:hover {
@@ -18,5 +20,7 @@
     color: #FFFFFF;
     font-size: 40px;
     margin-right: 5px;
+    outline-style: none;
+    border-style: none;
 }
 
