@@ -53,8 +53,8 @@ class Header extends React.Component<any, any>{
             <Navbar bg={"dark"} variant={"dark"} className={"sticky-top header-custom py-0"}>
                 <Navbar.Brand className={"px-0 py-0 mx-0"}>
                     <Link
-                        className={"mx-1"}
                         to={"/"}
+                        className={"mx-1 no-outline"}
                     >
                         <img
                             alt="logo"
