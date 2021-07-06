@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.stereotype.Component
 import java.util.*
 import javax.annotation.PostConstruct
+import javax.naming.AuthenticationException
 import javax.servlet.http.HttpServletRequest
 
 @Component
@@ -73,9 +74,9 @@ class JwtTokenProvider {
             val claims: Jws<Claims> = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token)
             !claims.body.expiration.before(Date())
         } catch (e: JwtException) {
-            throw InvalidJwtAuthenticationException("Expired or invalid JWT token")
+            throw AuthenticationException("Expired or invalid JWT token")
         } catch (e: IllegalArgumentException) {
-            throw InvalidJwtAuthenticationException("Expired or invalid JWT token")
+            throw AuthenticationException("Expired or invalid JWT token")
         }
     }
 }
