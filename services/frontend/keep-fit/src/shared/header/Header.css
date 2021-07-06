@@ -6,6 +6,11 @@
     border-style: none;
 }
 
+.no-outline{
+    outline-style: none;
+    border-style: none;
+}
+
 .text-link-decoration:hover {
     color: rgba(255,255,255, 1) !important;
     border-radius: 10px;
