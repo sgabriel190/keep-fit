@@ -4,7 +4,7 @@ import {
     Backdrop,
     Button, ButtonBase,
     ButtonGroup,
-    Card, CardActionArea,
+    Card,
     CardMedia,
     CircularProgress,
     Grid,

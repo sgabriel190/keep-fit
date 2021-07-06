@@ -1,20 +1,38 @@
-version: "3.9"  # optional since v1.27.0
+version: "3"
 services:
   user-service:
-    image: keep-fit/user:1.9.0
+    image: keep-fit/user:2.0.0
     container_name: user-service
     ports:
       - "2022:8080"
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 3s
+        max_attempts: 5
+        window: 30s
   plan-service:
-    image: keep-fit/plan:1.9.0
+    image: keep-fit/plan:2.0.0
     container_name: plan-service
     ports:
       - "2021:8080"
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 3s
+        max_attempts: 5
+        window: 30s
   nutrition-service:
     image: keep-fit/nutrition:1.9.2
     container_name: nutrition-service
     ports:
       - "2020:8080"
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 3s
+        max_attempts: 5
+        window: 30s
   notification-service:
     image: keep-fit/notification:1.4.0
     container_name: notification-service
@@ -23,8 +41,14 @@ services:
       - EMAIL_PASSWORD
     ports:
       - "2030:5000"
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 3s
+        max_attempts: 5
+        window: 30s
   orchestrator-service:
-    image: keep-fit/orchestrator:1.7.2
+    image: keep-fit/orchestrator:2.0.0
     container_name: orchestrator-service
     environment:
       - HOST_USER
@@ -33,8 +57,20 @@ services:
       - HOST_NOTIFICATION
     ports:
       - "2025:8080"
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 3s
+        max_attempts: 5
+        window: 30s
   frontend-service:
-    image: keep-fit/frontend:1.0.0
+    image: keep-fit/frontend:1.1.0
     container_name: frontend-service
     ports:
-      - "3000:3000"
+      - "3001:3000"
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 3s
+        max_attempts: 5
+        window: 30s

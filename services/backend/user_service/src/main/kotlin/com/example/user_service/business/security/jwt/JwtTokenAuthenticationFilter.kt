@@ -5,6 +5,7 @@ import com.google.gson.Gson
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.filter.GenericFilterBean
 import java.io.IOException
+import javax.naming.AuthenticationException
 import javax.servlet.FilterChain
 import javax.servlet.ServletException
 import javax.servlet.ServletRequest
@@ -22,7 +23,7 @@ class JwtTokenAuthenticationFilter(private val jwtTokenProvider: JwtTokenProvide
                 SecurityContextHolder.getContext().authentication = auth
             }
             filterChain.doFilter(req, res)
-        } catch (e: InvalidJwtAuthenticationException){
+        } catch (e: AuthenticationException){
             val resp = res as HttpServletResponse
             resp.contentType = "application/json"
             resp.characterEncoding = "UTF-8"

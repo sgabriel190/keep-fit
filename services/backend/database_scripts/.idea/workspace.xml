@@ -2,60 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2980abcb-0aa4-4b9d-b9c8-c6433d4e5abf" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/components/userPlan/MealPlan.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/components/userPlan/createUserPlan/CreateUserPlan.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/components/userPlan/createUserPlan/CreateUserPlan.test.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/components/userPlan/createUserPlan/CreateUserPlan.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/exceptions/NoUserDetails.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/exceptions/NoUserPlan.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/services/PlanService.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/types/models/plan/MealModel.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/types/models/plan/MealRecipeModel.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/types/models/plan/MenuModel.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/types/models/plan/PlanModel.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../documentation/keep-fit-diagrams.drawio" beforeDir="false" afterPath="$PROJECT_DIR$/../../../documentation/keep-fit-diagrams.drawio" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../documentation/postman/Keep fit.postman_collection.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../../documentation/postman/Keep fit.postman_collection.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database_connector/sqlite_connector_methods.py" beforeDir="false" afterPath="$PROJECT_DIR$/database_connector/sqlite_connector_methods.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logger/log.info" beforeDir="false" afterPath="$PROJECT_DIR$/logger/log.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nutrition.db" beforeDir="false" afterPath="$PROJECT_DIR$/nutrition.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plan.db" beforeDir="false" afterPath="$PROJECT_DIR$/plan.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user.db" beforeDir="false" afterPath="$PROJECT_DIR$/user.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/business/services/NutritionService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/business/services/NutritionService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/business/services/PlanService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/business/services/PlanService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/business/services/UserService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/business/services/UserService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plan_service/plan.db" beforeDir="false" afterPath="$PROJECT_DIR$/../plan_service/plan.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plan_service/src/main/java/com/example/plan_service/persistence/entities/MealEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../plan_service/src/main/java/com/example/plan_service/persistence/entities/MealEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plan_service/src/main/java/com/example/plan_service/persistence/entities/MealRecipeEntityPK.java" beforeDir="false" afterPath="$PROJECT_DIR$/../plan_service/src/main/java/com/example/plan_service/persistence/entities/MealRecipeEntityPK.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plan_service/src/main/java/com/example/plan_service/persistence/entities/MenuEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../plan_service/src/main/java/com/example/plan_service/persistence/entities/MenuEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plan_service/src/main/java/com/example/plan_service/persistence/entities/PlanEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../plan_service/src/main/java/com/example/plan_service/persistence/entities/PlanEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/keep-fit/src/components/login/Login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/components/login/Login.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/keep-fit/src/components/mealplan/MealPlan.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/components/userPlan/MealPlan.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/keep-fit/src/components/mealplan/MealPlan.test.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/components/userPlan/MealPlan.test.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/keep-fit/src/components/mealplan/MealPlan.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/keep-fit/src/components/notfound/NotFound.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/components/notfound/NotFound.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/keep-fit/src/components/profile/Profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/components/profile/Profile.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/keep-fit/src/components/recipes/Recipe/Recipe.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/components/recipes/Recipe/Recipe.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/keep-fit/src/components/recipes/Recipes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/components/recipes/Recipes.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/keep-fit/src/components/user-details/UserDetails.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/components/user-details/UserDetails.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/keep-fit/src/routes/routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/routes/routes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/keep-fit/src/services/NutritionService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/services/NutritionService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/keep-fit/src/types/models/ActivityTypeModel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/types/models/nutrition/ActivityTypeModel.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/keep-fit/src/types/models/AuthModel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/types/models/user/AuthModel.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/keep-fit/src/types/models/CategoryModel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/types/models/nutrition/CategoryModel.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/keep-fit/src/types/models/DietTypeModel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/types/models/nutrition/DietTypeModel.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/keep-fit/src/types/models/GenderModel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/types/models/nutrition/GenderModel.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/keep-fit/src/types/models/ImagesModel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/types/models/nutrition/ImagesModel.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/keep-fit/src/types/models/IngredientModel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/types/models/nutrition/IngredientModel.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/keep-fit/src/types/models/InstructionModel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/types/models/nutrition/InstructionModel.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/keep-fit/src/types/models/LoginModel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/types/models/user/LoginModel.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/keep-fit/src/types/models/MacronutrientModel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/types/models/nutrition/MacronutrientModel.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/keep-fit/src/types/models/NutrientModel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/types/models/nutrition/NutrientModel.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/keep-fit/src/types/models/RecipeLiteModel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/types/models/nutrition/RecipeLiteModel.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/keep-fit/src/types/models/RecipeModel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/types/models/nutrition/RecipeModel.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/keep-fit/src/types/models/RegisterModel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/types/models/user/RegisterModel.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/keep-fit/src/types/models/TimeTotalModel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/types/models/nutrition/TimeTotalModel.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/keep-fit/src/types/models/UserDetailsModel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/types/models/nutrition/UserDetailsModel.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/keep-fit/src/types/models/UserProfileModel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/types/models/user/UserProfileModel.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/keep-fit/src/components/recipes/Recipe/Recipe.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/components/recipes/Recipe/Recipe.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/keep-fit/src/components/recipes/Recipes.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/components/recipes/Recipes.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/keep-fit/src/components/userPlan/MealPlan.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/components/userPlan/MealPlan.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/keep-fit/src/components/userPlan/MealPlan.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/components/userPlan/MealPlan.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/keep-fit/src/shared/header/Header.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/shared/header/Header.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -166,6 +122,7 @@
       <workItem from="1624833699135" duration="2153000" />
       <workItem from="1625062925089" duration="5000" />
       <workItem from="1625063118469" duration="843000" />
+      <workItem from="1625473735919" duration="1304000" />
     </task>
     <servers />
   </component>
