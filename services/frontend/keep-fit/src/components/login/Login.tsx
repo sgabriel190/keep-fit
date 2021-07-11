@@ -46,6 +46,7 @@ class Login extends React.Component<any, any>{
             password: null,
             isLoading: false
         };
+        UserService.logout();
     }
 
     async componentDidMount(){
