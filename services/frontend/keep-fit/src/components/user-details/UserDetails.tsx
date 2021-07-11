@@ -75,6 +75,7 @@ class UserDetails extends React.Component<any, any>{
                 this.setState({userDetails: response.data});
                 this.setState({userDetailsAux: response.data});
                 toast.success(`Updated user details!`);
+                console.log(this.state.userDetails);
             }
             else {
                 let data = {
@@ -92,6 +93,7 @@ class UserDetails extends React.Component<any, any>{
                 this.setState({userDetails: responseUserDetails.data});
                 this.setState({userDetailsAux: responseUserDetails.data});
                 toast.success(`Created user details!`);
+                console.log(this.state.userDetails);
             }
         }
         catch (e) {
@@ -143,16 +145,16 @@ class UserDetails extends React.Component<any, any>{
                     bmi: 0,
                     wnd: 0,
                     activityType: {
-                        id: -1,
+                        id: 1,
                         name: "",
                         calories: 0
                     },
                     gender: {
-                        id: -1,
+                        id: 1,
                         name: ""
                     },
                     dietType: {
-                        id: -1,
+                        id: 1,
                         name: "",
                         calories: 0
                     }
@@ -287,7 +289,7 @@ class UserDetails extends React.Component<any, any>{
                                                         <InputLabel>Activity type</InputLabel>
                                                         <Select
                                                             variant="filled"
-                                                            defaultValue={this.state.userDetails.activityType.id}
+                                                            defaultValue={this.state.userDetails.activityType.id ? this.state.userDetails.activityType.id : 1}
                                                             onChange={(event) =>
                                                             {
                                                                 let id = parseInt(event.target.value as string);
@@ -298,11 +300,12 @@ class UserDetails extends React.Component<any, any>{
                                                                 this.setState({userDetailsAux: temp});
                                                             }}
                                                         >
-                                                            <MenuItem value={-1}>None</MenuItem>
                                                             {
                                                                 this.state.activityTypes.map(
                                                                     (item: ActivityTypeModel) => (
-                                                                        <MenuItem value={item.id}>{item.name}</MenuItem>
+                                                                        <MenuItem
+                                                                            key={Math.random()}
+                                                                            value={item.id}>{item.name}</MenuItem>
                                                                     )
                                                                 )
                                                             }
@@ -316,7 +319,7 @@ class UserDetails extends React.Component<any, any>{
                                                         <InputLabel>Gender</InputLabel>
                                                         <Select
                                                             variant="filled"
-                                                            defaultValue={this.state.userDetails.gender.id}
+                                                            defaultValue={this.state.userDetails.gender.id ? this.state.userDetails.gender.id : 1}
                                                             onChange={(event) =>
                                                             {
                                                                 let id = parseInt(event.target.value as string);
@@ -327,11 +330,12 @@ class UserDetails extends React.Component<any, any>{
                                                                 this.setState({userDetailsAux: temp});
                                                             }}
                                                         >
-                                                            <MenuItem value={-1}>None</MenuItem>
                                                             {
                                                                 this.state.genders.map(
                                                                     (item: GenderModel) => (
-                                                                        <MenuItem value={item.id}>{item.name}</MenuItem>
+                                                                        <MenuItem
+                                                                            key={Math.random()}
+                                                                            value={item.id}>{item.name}</MenuItem>
                                                                     )
                                                                 )
                                                             }
@@ -345,7 +349,7 @@ class UserDetails extends React.Component<any, any>{
                                                         <InputLabel>Diet type</InputLabel>
                                                         <Select
                                                             variant="filled"
-                                                            defaultValue={this.state.userDetails.dietType.id}
+                                                            defaultValue={this.state.userDetails.dietType.id ? this.state.userDetails.dietType.id : 1}
                                                             onChange={(event) =>
                                                             {
                                                                 let id = parseInt(event.target.value as string);
@@ -356,11 +360,12 @@ class UserDetails extends React.Component<any, any>{
                                                                 this.setState({userDetailsAux: temp});
                                                             }}
                                                         >
-                                                            <MenuItem value={-1}>None</MenuItem>
                                                             {
                                                                 this.state.dietTypes.map(
                                                                     (item: DietTypeModel) => (
-                                                                        <MenuItem value={item.id}>{item.name}</MenuItem>
+                                                                        <MenuItem
+                                                                            key={Math.random()}
+                                                                            value={item.id}>{item.name}</MenuItem>
                                                                     )
                                                                 )
                                                             }
