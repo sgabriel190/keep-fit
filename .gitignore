@@ -19,3 +19,4 @@ __pycache__/
 urls_input*.txt
 services/backend/recipe_web_scraper/images/
 data_source/
+.idea/
