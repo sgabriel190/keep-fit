@@ -56,6 +56,7 @@ class Register extends React.Component<any, any>{
             email: null,
             isLoading: false
         };
+        UserService.logout();
     }
 
     async register() {
