@@ -1,7 +1,9 @@
 package com.example.orchestrator_service.business.services
 
 import com.example.orchestrator_service.business.config.Host
-import com.example.orchestrator_service.business.config.InvalidJwt
+import com.example.orchestrator_service.business.config.exceptions.InvalidJwt
+import com.example.orchestrator_service.business.config.exceptions.NoUserDetails
+import com.example.orchestrator_service.business.config.exceptions.NoUserPlan
 import com.example.orchestrator_service.business.config.setBodyJson
 import com.example.orchestrator_service.business.interfaces.HttpConsumerServiceInterface
 import com.example.orchestrator_service.business.interfaces.NutritionServiceInterface
@@ -55,12 +57,13 @@ class PlanService: PlanServiceInterface {
         try {
             checkToken(token)
             val user = userService.getUser(token)
+            user.data ?: throw Exception(user.error)
             val result: Response<PlanModelResponse> = httpConsumerService.executeRequest {
-                val response: HttpResponse = httpConsumerService.client.get("$host/plan/user/${user.data!!.id}")
+                val response: HttpResponse = httpConsumerService.client.get("$host/plan/user/${user.data.id}")
                 httpConsumerService.checkResponse(response)
                 response.receive()
             }
-            result.data ?: throw Exception("No user plan was found.")
+            result.data ?: throw NoUserPlan("No user plan was found.")
             val menus = result.data.menus.map { menu ->
                 val meals = mutableListOf<RecipeMenuRequest>()
                 menu.meals.forEach{ meal ->
@@ -81,6 +84,14 @@ class PlanService: PlanServiceInterface {
             }
             val data = PlanResponse(idUser = result.data.idUser, planDays = result.data.planDays, description = result.data.description, menus = menus)
             Response(successfulOperation = true, code = 200, data = data)
+        }
+        catch (e: NoUserPlan){
+            Response(
+                successfulOperation = false,
+                code = 404,
+                data = null,
+                error = e.message!!
+            )
         }
         catch (e: InvalidJwt){
             Response(
@@ -106,6 +117,7 @@ class PlanService: PlanServiceInterface {
             val user: UserModel = userResponse.data ?: throw Exception(userResponse.error)
             deleteUserPlan(token)
             val userDetailsResponse = nutritionService.getUserDetails(token)
+            if (userDetailsResponse.code == 404) throw NoUserDetails(userDetailsResponse.error)
             val userDetails: UserDetailResponse = userDetailsResponse.data ?: throw Exception(userDetailsResponse.error)
             val menus = mutableListOf<DailyMenuRequest>()
             for (day in 1..data.planDays) coroutineScope {
@@ -131,16 +143,21 @@ class PlanService: PlanServiceInterface {
                 response.receive()
             }
             result
-        }
-        catch (e: InvalidJwt){
+        } catch (e: NoUserDetails){
+            Response(
+                successfulOperation = false,
+                code = 404,
+                data = null,
+                error = e.message!!
+            )
+        } catch (e: InvalidJwt){
             Response(
                 successfulOperation = false,
                 code = 401,
                 data = null,
                 error = e.toString()
             )
-        }
-        catch (t: Throwable){
+        } catch (t: Throwable){
             Response(
                 successfulOperation = false,
                 code = 400,

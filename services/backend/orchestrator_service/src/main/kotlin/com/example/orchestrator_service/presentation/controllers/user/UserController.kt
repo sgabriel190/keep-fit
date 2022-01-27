@@ -44,7 +44,7 @@ class UserController {
     @ResponseBody
     @Async
     fun getUser(@RequestHeader(name="Authorization", required = false, defaultValue = "") token: String): ResponseEntity<Any> = runBlocking {
-        val result = userService.getUser(token)
+        val result = userService.getUserProfile(token)
         if (result.successfulOperation){
             ResponseEntity.status(result.code).body(result)
         } else {

@@ -1,7 +1,8 @@
 package com.example.orchestrator_service.business.services
 
 import com.example.orchestrator_service.business.config.Host
-import com.example.orchestrator_service.business.config.InvalidJwt
+import com.example.orchestrator_service.business.config.exceptions.InvalidJwt
+import com.example.orchestrator_service.business.config.exceptions.NoUserDetails
 import com.example.orchestrator_service.business.config.setBodyJson
 import com.example.orchestrator_service.business.config.setQueryParams
 import com.example.orchestrator_service.business.interfaces.HttpConsumerServiceInterface
@@ -13,13 +14,11 @@ import com.example.orchestrator_service.business.models.nutrition.request.Update
 import com.example.orchestrator_service.business.models.nutrition.request.UserDetailsRequest
 import com.example.orchestrator_service.business.models.nutrition.response.*
 import com.example.orchestrator_service.business.models.user.response.UserModel
-import com.example.orchestrator_service.presentation.http.MyError
 import com.example.orchestrator_service.presentation.http.Response
 import io.ktor.client.call.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.launch
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
@@ -45,9 +44,8 @@ class NutritionService: NutritionServiceInterface {
         }
     }
 
-    override suspend fun getImage(imagePath: String, token: String): Response<out Any> = coroutineScope{
+    override suspend fun getImage(imagePath: String): Response<out Any> = coroutineScope{
         try {
-            checkToken(token)
             val result = httpConsumerService.executeRequest {
                 val response: ByteArray = httpConsumerService.client.get("$host/image/$imagePath")
                 response
@@ -322,12 +320,20 @@ class NutritionService: NutritionServiceInterface {
         try {
             val userResponse = userService.getUser(token)
             val user: UserModel = userResponse.data ?: throw Exception(userResponse.error)
+            user.idUserDetails ?: throw NoUserDetails("No user details.")
             val result: Response<UserDetailResponse> = httpConsumerService.executeRequest {
                 val response: HttpResponse = httpConsumerService.client.get("$host/userDetails/${user.idUserDetails}")
                 httpConsumerService.checkResponse(response)
                 response.receive()
             }
             result
+        } catch (e: NoUserDetails){
+            Response(
+                successfulOperation = false,
+                code = 404,
+                data = null,
+                error = e.message!!
+            )
         } catch (e: InvalidJwt){
             Response(
                 successfulOperation = false,

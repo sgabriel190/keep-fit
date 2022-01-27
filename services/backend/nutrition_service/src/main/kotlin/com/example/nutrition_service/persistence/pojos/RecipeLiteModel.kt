@@ -6,5 +6,6 @@ data class RecipeLiteModel(
     val name: String,
     val description: String,
     val keywords: String,
-    val categories: List<CategoryModel>
+    val categories: List<CategoryModel>,
+    val images: List<ImageModel>
 )

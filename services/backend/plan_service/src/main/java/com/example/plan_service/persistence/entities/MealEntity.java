@@ -18,8 +18,7 @@ public class MealEntity {
     @Column(name = "time_of_day")
     private String timeOfDay;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ID_meal")
+    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "id.meal")
     private final List<MealRecipeEntity> recipes = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)

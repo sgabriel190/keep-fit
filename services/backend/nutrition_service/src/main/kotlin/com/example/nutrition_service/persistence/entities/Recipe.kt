@@ -32,12 +32,14 @@ fun Recipe.toRecipeModel(): RecipeModel{
 }
 
 fun Recipe.toRecipeLiteModel(): RecipeLiteModel {
+    val images = Image.find { Images.recipe eq id }.toList().map { image -> image.toImageModel() }
     return RecipeLiteModel(
         id = this.id.value,
         timeTotal = this.timeTotal.toTimeTotalModel(),
         name = this.name,
         description = this.description,
         keywords = this.keywords,
-        categories = this.categories.toList().map { it.toCategoryModel() }
+        categories = this.categories.toList().map { it.toCategoryModel() },
+        images = images
     )
 }

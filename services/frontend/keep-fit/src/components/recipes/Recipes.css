@@ -1,0 +1,23 @@
+.container-size{
+    padding: 2em 2em;
+    margin: 2em 0;
+}
+
+.container-recipes{
+    margin: 2em 0;
+    max-width: 80%;
+}
+
+.button-group-custom{
+    display: flex !important;
+}
+
+.select-width{
+    width: 20%;
+}
+
+.paper-search{
+    padding: 0.5em 0.5em;
+    display: flex;
+    align-items: center;
+}

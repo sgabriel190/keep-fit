@@ -2,20 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2980abcb-0aa4-4b9d-b9c8-c6433d4e5abf" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../plan_service/src/main/java/com/example/plan_service/presentation/controllers/HealthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../documentation/keep-fit-diagrams.drawio" beforeDir="false" afterPath="$PROJECT_DIR$/../../../documentation/keep-fit-diagrams.drawio" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../documentation/postman/Keep fit.postman_collection.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../../documentation/postman/Keep fit.postman_collection.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logger/log.info" beforeDir="false" afterPath="$PROJECT_DIR$/logger/log.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nutrition.db" beforeDir="false" afterPath="$PROJECT_DIR$/nutrition.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plan.db" beforeDir="false" afterPath="$PROJECT_DIR$/plan.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sql_scripts/plan/create_tables_plan.sql" beforeDir="false" afterPath="$PROJECT_DIR$/sql_scripts/plan/create_tables_plan.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user.db" beforeDir="false" afterPath="$PROJECT_DIR$/user.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/business/interfaces/PlanServiceInterface.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/business/interfaces/PlanServiceInterface.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/business/services/PlanService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/business/services/PlanService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/presentation/controllers/planning/PlanController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../orchestrator_service/src/main/kotlin/com/example/orchestrator_service/presentation/controllers/planning/PlanController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plan_service/plan.db" beforeDir="false" afterPath="$PROJECT_DIR$/../plan_service/plan.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plan_service/src/main/java/com/example/plan_service/business/interfaces/PlanServiceInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/../plan_service/src/main/java/com/example/plan_service/business/interfaces/PlanServiceInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plan_service/src/main/java/com/example/plan_service/business/services/PlanService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../plan_service/src/main/java/com/example/plan_service/business/services/PlanService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plan_service/src/main/java/com/example/plan_service/presentation/controllers/PlanController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../plan_service/src/main/java/com/example/plan_service/presentation/controllers/PlanController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/keep-fit/src/components/recipes/Recipe/Recipe.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/components/recipes/Recipe/Recipe.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/keep-fit/src/components/recipes/Recipes.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/components/recipes/Recipes.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/keep-fit/src/components/userPlan/MealPlan.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/components/userPlan/MealPlan.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/keep-fit/src/components/userPlan/MealPlan.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/components/userPlan/MealPlan.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/keep-fit/src/shared/header/Header.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/keep-fit/src/shared/header/Header.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,6 +117,12 @@
       <workItem from="1624201042231" duration="920000" />
       <workItem from="1624221672527" duration="105000" />
       <workItem from="1624291840770" duration="105000" />
+      <workItem from="1624823055259" duration="197000" />
+      <workItem from="1624824319295" duration="125000" />
+      <workItem from="1624833699135" duration="2153000" />
+      <workItem from="1625062925089" duration="5000" />
+      <workItem from="1625063118469" duration="843000" />
+      <workItem from="1625473735919" duration="1304000" />
     </task>
     <servers />
   </component>
@@ -148,7 +150,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/database_scripts$create_database.coverage" NAME="create-database Coverage Results" MODIFIED="1614776108029" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/database_scripts$create_databases.coverage" NAME="create-databases Coverage Results" MODIFIED="1624291876639" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/database_scripts$create_databases.coverage" NAME="create-databases Coverage Results" MODIFIED="1625063727715" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/database_scripts$create_database_nutrition.coverage" NAME="create-databases Coverage Results" MODIFIED="1616339618191" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

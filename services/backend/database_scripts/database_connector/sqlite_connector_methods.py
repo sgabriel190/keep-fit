@@ -2,10 +2,15 @@ from sqlite3 import Connection
 from typing import List, Dict
 
 import isodate
+from bs4 import BeautifulSoup
 
 from Logger import Logger
 
 logger = Logger()
+
+
+def remove_html_tags(text: str) -> str:
+    return BeautifulSoup(text, "lxml").text
 
 
 def execute_script_on_table(connection: Connection, input_file: str) -> None:
@@ -111,13 +116,21 @@ def insert_data(connection: Connection, data: List[Dict]) -> None:
 
         # Recipes TABLE
         if ok_time:
+            tmp = item['name'].replace("&amp;", "&")
+            tmpName = remove_html_tags(tmp)
+            tmpDesc = remove_html_tags(item['description'])
+            tmpKeywords = remove_html_tags(item['keywords'])
             sql_query_recipes = 'INSERT INTO recipes(ID, ID_nutrients, ID_time_total, name, description, keywords) ' \
                                 'VALUES(?, ?, ?, ?, ?, ?)'
-            sql_parameters_recipes = (idx, idx, idx, item['name'], item['description'], item['keywords'])
+            sql_parameters_recipes = (idx, idx, idx, tmpName, tmpDesc, tmpKeywords)
         else:
+            tmp = item['name'].replace("&amp;", "&")
+            tmp = remove_html_tags(tmp)
+            tmpDesc = remove_html_tags(item['description'])
+            tmpKeywords = remove_html_tags(item['keywords'])
             sql_query_recipes = 'INSERT INTO recipes(ID, ID_nutrients, name, description, keywords) ' \
                                 'VALUES(?, ?, ?, ?, ?, ?)'
-            sql_parameters_recipes = (idx, idx, item['name'], item['description'], item['keywords'])
+            sql_parameters_recipes = (idx, idx, tmp, tmpDesc, tmpKeywords)
 
         # Execute queries
         if ok_time:
@@ -128,24 +141,29 @@ def insert_data(connection: Connection, data: List[Dict]) -> None:
 
         # Images TABLE
         for token in item['image']:
+            tmp = item['name'].replace("&amp;", "&")
             sql_query_image = 'INSERT INTO images(image_path, ID_recipe) ' \
                               'VALUES(?, ?)'
-            sql_parameters_image = (item['name'] + "/" + token.split("/")[-1], idx)
+            sql_parameters_image = (tmp + "/" + token.split("/")[-1], idx)
             connection.execute(sql_query_image, sql_parameters_image)
 
-        # Images TABLE
+        # Ingredients TABLE
         for token in item['recipeIngredient']:
-            sql_query_image = 'INSERT INTO ingredients(name, ID_recipe) ' \
-                              'VALUES(?, ?)'
-            sql_parameters_image = (token, idx)
-            connection.execute(sql_query_image, sql_parameters_image)
+            tmp = token.replace("&amp;", "&")
+            tmp = remove_html_tags(tmp)
+            sql_query_ingredients = 'INSERT INTO ingredients(name, ID_recipe) ' \
+                                    'VALUES(?, ?)'
+            sql_parameters_ingredients = (tmp, idx)
+            connection.execute(sql_query_ingredients, sql_parameters_ingredients)
 
         # Instructions TABLE
         for token in item['recipeInstructions']:
+            tmp = remove_html_tags(token)
             sql_query_instruction = 'INSERT INTO instructions(instruction, ID_recipe) ' \
                                     'VALUES(?, ?)'
-            sql_parameters_instruction = (token, idx)
+            sql_parameters_instruction = (tmp, idx)
             connection.execute(sql_query_instruction, sql_parameters_instruction)
+
         # Categories TABLE
         if type(item['recipeCategory']) == list:
             tmp_cat = item['recipeCategory']

@@ -24,7 +24,7 @@ public class PlanEntity {
     @Column(name = "description")
     private String description;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "plan")
+    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "plan")
     private final List<MenuEntity> menus = new ArrayList<>();
 
     public Integer getId() {

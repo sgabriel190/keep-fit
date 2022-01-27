@@ -79,6 +79,7 @@ class NutritionController {
     @ResponseBody
     fun getRecipesByParam(@RequestParam(required = false) categoryId: Int?,
                           @RequestParam(required = false) categoryName: String?,
+                          @RequestParam(required = false) recipeName: String?,
                           @RequestParam(required = false) pagNumber: Int?,
                           @RequestParam(required = false) pagSize: Int?,
                           @RequestParam(required = false) calories: Int?): ResponseEntity<Any> {
@@ -86,13 +87,25 @@ class NutritionController {
         val response =  if (calories != null){
             nutritionService.getRecipeByCalories(calories, pagSize ?: 10)
         } else {
-            if (categoryId != null) {
-                nutritionService.getRecipeByCategoryId(categoryId, pag = pagNumber ?: 1, items = pagSize ?: 10)
-            } else {
-                if (categoryName != null) {
-                    nutritionService.getRecipeByCategoryName(categoryName, pag = pagNumber ?: 1, items = pagSize ?: 10)
+            if(recipeName != null){
+                if(categoryName !== null){
+                    nutritionService.getRecipeByNameAndCategory(recipeName, categoryName, pag = pagNumber ?: 1, items = pagSize ?: 10)
                 } else {
-                    nutritionService.getRecipes(pag = pagNumber ?: 1, items = pagSize ?: 10)
+                    nutritionService.getRecipeByName(recipeName, pag = pagNumber ?: 1, items = pagSize ?: 10)
+                }
+            } else {
+                if (categoryId != null) {
+                    nutritionService.getRecipeByCategoryId(categoryId, pag = pagNumber ?: 1, items = pagSize ?: 10)
+                } else {
+                    if (categoryName != null) {
+                        nutritionService.getRecipeByCategoryName(
+                            categoryName,
+                            pag = pagNumber ?: 1,
+                            items = pagSize ?: 10
+                        )
+                    } else {
+                        nutritionService.getRecipes(pag = pagNumber ?: 1, items = pagSize ?: 10)
+                    }
                 }
             }
         }

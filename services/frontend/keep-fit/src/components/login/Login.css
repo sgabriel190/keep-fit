@@ -18,7 +18,11 @@
 }
 
 .form-group{
-    width: 90%;
+    width: 60%;
+}
+
+.container-text-input{
+    width: 60%;
 }
 
 .container, .form-group{
@@ -28,6 +32,33 @@
     align-items: center;
 }
 
+.width-container{
+    width: 50%;
+    padding: 2em 0;
+}
+
 .form-check {
     margin: 10px 0;
+}
+
+.y-margin{
+    margin: 1em 0 !important;
+}
+
+.input-paper{
+    width: 70%;
+    padding: 2em 10px;
+    margin: 2em 0;
+}
+
+.error-text{
+    background: darkred;
+    padding: 10px 30px;
+    margin-top: 10px;
+    margin-bottom: 0;
+    border-radius: 15px;
+}
+
+.input-text{
+    width: 300px;
 }

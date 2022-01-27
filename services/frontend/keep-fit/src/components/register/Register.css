@@ -10,7 +10,33 @@
     align-items: center;
 }
 
-.form-group{
-    width: 90%;
+.y-margin{
+    margin: 1em 0;
+}
+
+.width-container{
+    width: 50%;
+    padding: 2em 0;
+}
+
+.rc-loading-content{
+    width: 100%;
+}
+
+.loading-class{
+    top: 30%;
+    color: #0d1b1e;
+}
+
+.input-text{
+    width: 300px;
+}
+
+.error-text{
+    background: darkred;
+    padding: 10px 30px;
+    margin-top: 10px;
+    margin-bottom: 0;
+    border-radius: 15px;
 }
 

@@ -1,0 +1,21 @@
+.container-user-details{
+    min-height: auto;
+    min-width: auto;
+    width: 60%;
+    padding: 2em 2em;
+    margin: 2em 0;
+}
+
+.grid-input{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-custom{
+    padding: 2em 0;
+}
+
+.text-field{
+    width: 70%;
+}
