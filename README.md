@@ -48,6 +48,8 @@ This implementation was developed based on __DDD(domain driven design)__ ideolog
 
 The above representation indicates the system domain bound contexts and their way of interaction.
 
+### Toolstack
+
 As programming languages used for developing this project, the stack is:
 
 * __Kotlin__ - developing backend services
@@ -57,7 +59,11 @@ As programming languages used for developing this project, the stack is:
 
 All the service stack is configured to run on Docker and Docker compose. This way it does not require any configuration on the local machine beside installing Docker and creating the Docker images from __Dockerfiles__.
 
-### How to run the project
+## Postman testing routes
+
+For testing the application there is a Postman collection created and stored as JSON file in the _Documentation_ folder
+
+## How to run the project
 
 * A local machine running whatever OS. (Linux/Windows/Mac OS)
 * Installing docker on the local machine.
@@ -65,7 +71,13 @@ All the service stack is configured to run on Docker and Docker compose. This wa
 * Run the Docker compose configuration for an easier management.
 * Access the app and test its features.
 
-### More details
+## Use case diagram
+
+The use case diagram contains a big picture about the application functionalities and general workflow.
+
+![Use case diagram](documentation/keep-fit-diagrams-use-case.png)
+
+## More details
 
 There will be included a README file for each service for a better understanding and representation of technical details.
 
